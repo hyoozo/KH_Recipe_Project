@@ -1,0 +1,112 @@
+@font-face {
+    font-family: 'BookkMyungjo-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+html, body, #app {
+    font-family: SF Pro KR,SF Pro Text;
+    height: 100%;
+    margin-bottom: 120px;
+} 
+body, ul, a, p {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    text-decoration: none;
+}
+/* header */
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+
+}
+.header-img {
+    top: 0;
+    width: 100%;
+    height: 120px;
+    background-image:url("/resources/image/salad-g6c1e33f99_1920.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+.header-img > div{
+    align-items: center;
+}
+.header-img > div > h1{
+    color: #fff;
+    font-family: 'BookkMyungjo-Bd';
+}
+.center {
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+}
+.nav{
+    height: 50px;
+    width: 100%;
+    border-bottom: 1px solid rgba(224, 224, 224, 0.5);
+    background-color: #fff;
+}
+.nav a {
+    color: black;
+}
+.nav a:hover {
+    color: peru;
+}
+.nav > div > ul:nth-child(1),
+.nav > div > ul:nth-child(2) {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+.nav > div > ul:nth-child(1) > li {
+    margin-right: 30px;
+}
+.nav > div > ul:nth-child(2){
+    justify-content: flex-end;
+}
+.nav > div > ul:nth-child(2) > li {
+    margin-left: 30px;
+}
+/* main */
+.wrapper {
+    padding-top: 180px;
+    width: 100%;
+    /* height: auto; */
+    /* min-height: 100%; */
+    /* padding-bottom: 100px; */
+}
+.section-1 {
+    height: 200px;
+}
+.section-1 > div {
+    width: 300px; 
+    height: 300px; 
+    background-color: antiquewhite;
+    border: 1px solid red;
+}
+/* footer */
+.footer-container{
+    border-top: 1px solid rgb(158, 158, 158);
+    background-color: #fff;
+    height: 100px;
+    position : relative;
+}
+.f-box {
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+}
+.f-box > p{
+    padding-top: 10px;
+    color:dimgray;
+    font-size: small;
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.client.recipe.dao.RecipeDao1">
+	<select id="recipeList" resultType="recipe">
+		SELECT rcp_seq, rcp_nm, info_eng, att_file_no_mk
+		FROM recipe
+		ORDER BY rcp_seq desc
+	</select>
+</mapper>

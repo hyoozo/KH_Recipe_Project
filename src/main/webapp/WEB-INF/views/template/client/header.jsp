@@ -15,7 +15,7 @@
                     <ul>
                         <li><a href="#">냉장고관리</a></li>
                         <li><a href="#">스토어</a></li>
-                        <li><a href="#">레시피</a></li>
+                        <li><a href="/recipe/recipeList">레시피</a></li>
                         <li><a href="#">커뮤니티</a></li>
                     </ul>
                     <ul>

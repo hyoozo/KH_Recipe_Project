@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RecipeVO {
 	int rcp_seq;
-	String rcp_nm;
-	String rcp_pat2;
-	double info_eng;
-	String att_file_no_mk;
-	String rcp_parts_dtls;
+	String rcp_nm;			// 메뉴명
+	String rcp_pat2;		// 분류
+	double info_eng;		// 칼로리
+	String att_file_no_mk;	// 이미지
+	String rcp_parts_dtls;	// 재료
 }

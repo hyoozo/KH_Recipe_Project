@@ -21,9 +21,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/recipe/*")
+@Slf4j
 public class RecipeController {
 	
 	@Setter(onMethod_ = @Autowired)
@@ -166,4 +168,5 @@ public class RecipeController {
 		
 		return "redirect:/recipe/list";
 	}
+	
 }

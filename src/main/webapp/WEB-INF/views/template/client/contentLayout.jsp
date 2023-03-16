@@ -32,35 +32,13 @@
 
      <div id="app">
         <header class="header-container">
-    		<tiles:insertAttribute namae="header"/>
+    		<tiles:insertAttribute name="header"/>
         </header>
 
         <main class="wrapper">
-            <section class="section-1 center">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+            <section class="center">
+                <tiles:insertAttribute name="body" />
             </section>
-            <section class="section-1 center">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </section>
-            <section class="section-1 center">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </section>
-            <section class="section-1 center">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </section>
-
         </main>
     </div>
 
