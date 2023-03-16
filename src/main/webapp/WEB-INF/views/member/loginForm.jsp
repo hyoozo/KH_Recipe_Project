@@ -1,23 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title> <tiles:getAsString name="title"/> </title>
-
     <!-- Custom styles for this template -->
     <link href="/resources/include/css/index.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="/resources/include/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -25,25 +25,25 @@
     <![endif]-->
     
     <script src="/resources/include/js/jquery-1.12.4.min.js"></script>
-    
-  </head>
+</head>
+<body>
+	
 
-  <body>
+	<div>
+		<div>
+			<h3>회원가입</h3>
+		</div>
+		<hr>
+		<div>
+			<div><label>아이디</label></div>
+			<div><input type="text"></div>
+			
+			<div><label>비밀번호</label></div>
+			<div><input type="password"></div>
+		</div>
+	</div>
+	
 
-     <div id="app">
-        <header class="header-container">
-    		<tiles:insertAttribute name="header"/>
-        </header>
 
-        <main class="wrapper">
-            <section class="center">
-            	<tiles:insertAttribute name="body" />
-            </section>
-		</main>
-    </div>
-
-    <footer class="footer-container">
-		<tiles:insertAttribute name="footer"/>
-    </footer>
-  </body>
+</body>
 </html>
