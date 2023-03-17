@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boot.store.items.dao.ItemsDao">
+
+	
 	
 	<insert id="insertItems" parameterType="items">
 		<selectKey keyProperty="i_num" resultType="int" order="BEFORE">
@@ -8,6 +10,6 @@
 		</selectKey>
 		
 		insert into items
-		values(#{i_num}, #{i_parts}, #{i_name}, #{i_price}, #{i_quan}, #{i_img})
+		values(#{i_num}, #{i_parts}, #{i_name}, nvl(#{i_price}, 0), #{i_quan}, #{i_img})
 	</insert>
 </mapper>
