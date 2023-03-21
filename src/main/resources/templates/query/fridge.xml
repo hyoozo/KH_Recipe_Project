@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.client.refrigerator.dao.FridgeDAO">
+
+	<select id="recommendRecipe" parameterType="String" resultType="String">
+		select r.rcp_nm
+		from recipe r
+		    inner join main_ingredient m
+		    on r.rcp_seq = m.rcp_seq
+		    inner join ingredient i
+		    on m.igr_num = i.igr_num
+		where i.igr_name = ${igr_name}
+	</select>
+	
+	<sql id="igrSearch">
+		<if test="search == 'igr_name' ">
+			<![CDATA[ igr_name LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+	</sql>
+	
+	<select id="igrList" resultType="ingredient" parameterType="ingredient">
+		select igr_num, igr_name
+		from ingredient
+ 		<!-- <where>
+			<include refid="igrSearch"></include>
+		</where> -->
+		order by igr_name
+	</select>
+</mapper>

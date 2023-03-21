@@ -1,0 +1,155 @@
+button {
+	background-color : transparent;
+    border : none;
+    cursor: pointer;
+}
+.wrapper > h2 {
+    font-size: 30px;
+    margin-left: 50px;
+}
+.refrigerator-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 80px;
+    grid-column-gap: 10px;
+    justify-items: center;
+    margin-top: 50px;
+}
+.refrigerator-card {
+    position: relative;
+    width: 500px;
+    height: 600px;
+    /* border: #2C3E50 1px solid; */
+    padding: 0 25px 25px 25px;
+    background-color: #ffffff;
+
+}
+.refrigerator-card > h3 {
+    margin: 20px 20px 20px 50px; 
+    font-size: 25px;
+    font-weight: normal;
+}
+.content-container {
+    width: 450px;
+    height: 500px;
+    /* border: #a35e1a9b 1px solid; */
+    border-radius: 30px;
+    /* box-shadow : 0 0 10px 1px rgba(136, 93, 19, 0.502) inset; */
+    /* box-shadow : 5px 5px 5px 1px rgba(136, 93, 19, 0.502) inset; */
+    background-color: rgba(231, 197, 93, 0.301);
+    /* padding-top:50px; */
+}
+.pTop {
+	padding-top: 50px;
+}
+#content-list > li {
+    margin-bottom: 10px;
+}
+#content-list > li::before{
+    content: "\f2e7";
+    font-family: "FontAwesome";
+    margin-right: 1em;
+    /* margin-left: -1.5em; */
+}
+#content-list > li > a{
+    color: black;
+    font-size: 20px;
+}
+#content-list > li > a:hover{
+    color : rgb(249, 97, 2);
+    font-size: 23px;
+}
+
+label {
+    font-size: 20px;
+}
+.food-container {
+    overflow: scroll;
+    height: 400px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.food-container > div {
+    margin: 5px 0 5px 0;
+}
+.searchBox {
+	display: flex;
+	justify-content: end;
+	padding: 10px 0 10px 0;
+}
+.searchBox #searchInput {
+	width: 200px;
+	height: 50px;
+	border-radius: 30px;
+	padding: 0 1em; 
+  	border: 1px solid sandybrown;
+  	outline: none;
+  	font-size: 15px;
+}
+
+.searchBox #searchBtn {
+    margin-top: 15px;
+}
+
+.searchBox #searchBtn::before{
+	content: "\f002";
+    font-family: "FontAwesome";
+    font-size: 25px;
+}
+
+.content-memo {
+    border: none;
+    resize: none;
+    width: 350px;
+    height: 450px;
+    border-radius: 5px;
+    padding : 0px;
+    margin-left:50px;
+    font-size: 20px;
+}
+.content-memo:focus {
+    outline: none;
+}
+.recipeList {
+	margin-left: 50px;
+	overflow: scroll;
+    height: 400px;
+}
+#item-template{
+	display:none;
+}
+#addTemplate{
+	display:none;
+}
+#content-list {
+	display:none;
+}
+#msg {
+	font-size: 15px;
+	color: gray;
+	margin-left: 10px;
+	display: block;
+}
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.container > div {
+    width: 400px;
+    height: 500px;
+    border: 1px solid black;
+    text-align: center;
+    overflow: auto;
+}
+.igrBtn {
+    background-color : transparent;
+    border : none;
+    height: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size : 20px;
+}
+.igrBtn:hover {
+    color: orange;
+}

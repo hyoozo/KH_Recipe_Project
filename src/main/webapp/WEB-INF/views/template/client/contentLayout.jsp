@@ -26,6 +26,7 @@
     <![endif]-->
 
     <script src="/resources/include/js/jquery-1.12.4.min.js"></script>
+    <script src="/resources/include/js/jquery-3.6.0.min.js"></script>
     
   </head>
 

@@ -23,7 +23,7 @@ import com.google.gson.JsonObject;
 import lombok.Setter;
 
 @Controller
-@RequestMapping("/recipe/*")
+@RequestMapping("/recipe/json/*")
 public class RecipeController {
 	
 	@Setter(onMethod_ = @Autowired)
@@ -164,6 +164,6 @@ public class RecipeController {
 		}
 		
 		
-		return "redirect:/recipe/list";
+		return "redirect:/recipe/json/list";
 	}
 }
