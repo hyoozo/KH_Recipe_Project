@@ -1,5 +1,6 @@
 package com.boot.client.refrigerator.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +27,16 @@ public class FridgeServiceImpl implements FridgeService {
 
 	@Override
 	public List<IngredientVO> igrList() {
-		List<IngredientVO> list = null;
+		List<IngredientVO> list = new ArrayList<>();;
 		list = friDao.igrList();
 		return list;
 	}
 	
-//	@Override
-//	public List<IngredientVO> igrList(IngredientVO igr_name) {
-//		List<IngredientVO> list = null;
-//		list = friDao.igrList(igr_name);
-//		return list;
-//	}
+	@Override
+	public List<IngredientVO> searchIgr(String igr_name) {
+		List<IngredientVO> list = null;
+		list = friDao.searchIgr(igr_name);
+		return list;
+	}
 	
 }

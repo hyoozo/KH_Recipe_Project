@@ -3,6 +3,7 @@
 <mapper namespace="com.boot.client.refrigerator.dao.FridgeDAO">
 
 	<select id="recommendRecipe" parameterType="String" resultType="String">
+	/* 재료에 따른 레시피 리스트 */
 		select r.rcp_nm
 		from recipe r
 		    inner join main_ingredient m
@@ -12,18 +13,46 @@
 		where i.igr_name = ${igr_name}
 	</select>
 	
-	<sql id="igrSearch">
+	<select id="igrList" resultType="ingredient" parameterType="ingredient">
+	/* 재료 리스트 */
+		select igr_num, igr_name
+		from ingredient
+		order by igr_name
+	</select>
+
+	<!-- <sql id="igrSearch">
 		<if test="search == 'igr_name' ">
 			<![CDATA[ igr_name LIKE '%' || #{keyword} || '%' ]]>
 		</if>
-	</sql>
+	</sql> -->
 	
-	<select id="igrList" resultType="ingredient" parameterType="ingredient">
+	<select id="searchIgr" resultType="ingredient" parameterType="ingredient">
+	/* 재료 검색 */
 		select igr_num, igr_name
 		from ingredient
  		<!-- <where>
 			<include refid="igrSearch"></include>
 		</where> -->
+		where igr_name LIKE '%' || ${igr_name} || '%'
 		order by igr_name
 	</select>
+	
+	<!-- <insert id="fridge_igrList" parameterType="number">
+		insert into fridge (fridge_num, m_num, igr_num)
+		values (SEQ_FRIDGE.nextval, #{m_num}, #{igr_num});
+	</insert> -->
+	
+	<!-- useGeneratedKeys = "true"(기본값 false), keyColumn = [PK 컬럼명], keyProperty = [매핑할 변수명] -->
+	<!-- <insert id="insertSomething" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+		insert into fridge (fridge_num, m_num, igr_num)
+		values 
+			 <foreach item="item" index="index" collection="list" separator=",">
+				(SEQ_FRIDGE.nextval, #{m_num}, #{igr_num});
+			 </foreach>
+		
+	   <selectKey keyProperty="lastPk" resultType="Integer" order="AFTER">
+		SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert> -->
+	
 </mapper>

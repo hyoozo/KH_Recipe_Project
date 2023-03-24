@@ -65,7 +65,7 @@ label {
 }
 .food-container {
     overflow: scroll;
-    height: 400px;
+    max-height: 400px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
@@ -142,7 +142,7 @@ label {
     text-align: center;
     overflow: auto;
 }
-.igrBtn {
+.igrBtn, .rfgBtn {
     background-color : transparent;
     border : none;
     height: 30px;
@@ -150,6 +150,13 @@ label {
     transition: all 0.3s;
     font-size : 20px;
 }
-.igrBtn:hover {
+.igrBtn:hover , .rfgBtn:hover{
     color: orange;
+}
+
+.removeBtn {
+	color:Orange;
+	text-decoration:line-through;
+	text-decoration-color:red;
+	text-decoration-thickness:3px;
 }

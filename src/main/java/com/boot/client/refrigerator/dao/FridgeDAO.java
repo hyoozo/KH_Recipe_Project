@@ -12,7 +12,8 @@ public interface FridgeDAO {
 	public List<IngredientVO> recommendRecipe(String igr_name)throws Exception;
 	
 	public List<IngredientVO> igrList();
-	//public List<IngredientVO> igrList(IngredientVO igr_name);
+	public List<IngredientVO> searchIgr(String igr_name);
 	
-
+	//public int fridge_igrList(int m_num, int igr_num);
+	
 }
