@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.store.orderList.dao.OrderListDao">
+	
+	<insert id="addOrderList" parameterType="orderList">
+		<selectKey keyColumn="ol_num,o_num" keyProperty="ol_num,o_num" resultType="int" order="BEFORE">
+			select seq_order_list.nextval as ol_num, seq_orders.currval as o_num from dual
+		</selectKey>
+		insert into order_list
+		values(#{ol_num}, #{o_num}, #{m_num}, #{i_num}, #{ol_quan})
+	</insert>
+</mapper>

@@ -35,7 +35,7 @@ public class LoggerAdvice {
 		log.info("BoardVO 타입의 bvo 파라미터 값 : " + bvo);
 	}*/
 	
-	@Before("execution(* com.spring..*Impl.*(..))")
+	@Before("execution(* com.boot..*Impl.*(..))")
 	public void printLogging(JoinPoint jp) {
 		log.info("--------------------------------");
 		log.info("[공통 로그 Log] 비즈니스 로직 수행 전 동작");
@@ -46,7 +46,7 @@ public class LoggerAdvice {
 		log.info("--------------------------------");
 	}
 	
-	@AfterThrowing(pointcut="execution(* com.spring..*Impl.*(..))", throwing="exception")
+	@AfterThrowing(pointcut="execution(* com.boot..*Impl.*(..))", throwing="exception")
 	public void printLogging(JoinPoint jp, Throwable exception) {
 		log.info("-------------------------------------");
 		log.info("[예외발생] ");
@@ -66,7 +66,7 @@ public class LoggerAdvice {
 		log.info("---------------------------------");
 	}*/
 	
-	@Around("execution(* com.spring..*Impl.*(..))")
+	@Around("execution(* com.boot..*Impl.*(..))")
 	public Object timeLogging(ProceedingJoinPoint pjp) throws Throwable{
 		log.info("--------------------------------");
 		log.info("[공통 로그 Log] 비즈니스 로직 수행 전 동작");

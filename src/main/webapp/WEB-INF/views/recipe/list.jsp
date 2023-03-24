@@ -1,25 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-   <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-      <title>레시피 리스트</title>
-      
-      <link rel="shortcut icon" href="/resources/static/image/icon.png" />
-      <link rel="apple-touch-icon" href="/resources/static/image/icon.png" />
-      
-      <!--[if lt IE 9]>
-      <script src="../js/html5shiv.js"></script>
-      <![endif]-->
+	
+	<script type="text/javascript">
+		$(function(){
+			$("#search").click(function(){
+				$("#searchRecipe").attr({
+					"method": "get",
+					"action": "/recipe/list"
+				});
+				
+				$("#searchRecipe").submit();
+			});
+		});
+	</script>
    </head>
    <body>
       <div class="contentContainer container">
-      	<div>
-      		<a href="/recipe/insert">DB저장</a>
-      	</div>
+      
+      	<form id="searchRecipe">
+      		<input type="text" name="ingred1"/>
+      		<input type="text" name="ingred2"/>
+      		<input type="text" name="ingred3"/>
+      		<button type="button" id="search">검색</button>
+      	</form>
+      	
       	<div id="boardList" class="table-height">
 			<table summary="레시피 리스트" class="table table-striped" >
 				<thead>
@@ -34,8 +39,8 @@
 		 		<tbody id="list" class="table-striped" >
 					<!-- 데이터 출력 -->
 					<c:choose>
-						<c:when test="${not empty rvo}" >
-							<c:forEach var="rvo" items="${rvo}" varStatus="status">
+						<c:when test="${not empty recipe}" >
+							<c:forEach var="rvo" items="${recipe}" varStatus="status">
 								<tr class="text-center" data-num="${rvo.rcp_seq}">
 									<td>${rvo.rcp_seq}</td>
 									<td class="goDetail text-left over">
