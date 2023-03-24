@@ -19,8 +19,14 @@
                         <li><a href="#">커뮤니티</a></li>
                     </ul>
                     <ul>
-                        <li><a href="#">회원가입</a></li>
-                        <li><a href="#">로그인</a></li>
+                    	<c:if test="${login == null}">
+                        <li><a href="/member/joinForm">회원가입</a></li>
+                        <li><a href="/member/loginForm">로그인</a></li>
+                        </c:if>
+                        <c:if test="${login != null}">
+                        <li><a href="/member/myPage">마이페이지</a></li>
+                        <li><a href="/member/logout">로그아웃</a></li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
