@@ -10,6 +10,8 @@ import com.boot.client.member.vo.MemberVO;
 public interface MemberDao {
 	public MemberVO loginProcess(MemberVO mvo);
 	
+	public int idChk(MemberVO mvo);
+	
 	public int joinProcess(MemberVO mvo);
 	
 	public MemberVO myPage(MemberVO mvo);

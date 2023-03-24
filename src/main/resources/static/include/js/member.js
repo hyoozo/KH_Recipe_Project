@@ -22,7 +22,7 @@ $(function() {
 		location.href = "/member/joinForm";
 	})
 	
-
+	
 	//가입 후
 	$("#join").click(function() {
 

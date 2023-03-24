@@ -9,6 +9,40 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<!-- <script type="text/javascript">
+$(function() {
+$("input[name='m_id']").change(function() {
+	let insertUrl = "/member/idChk";
+
+	let value = JSON.stringify({
+		m_id : $("input[name='m_id").val(),
+	});
+	
+	$.ajax({
+		url : insertUrl,
+		type : "post",
+		headers : {
+			"Content-Type":"application/json"
+		},
+		dataType : "text",
+		data : value,
+		error : function(){
+			alert("시스템 오류 입니다.");
+		},
+		success : function(result) {
+			if (result == "실패") {
+				$("#join_id").css("color","red");
+				dataReset();
+			} else if(result == "성공") {
+				$("#join_id").css("color","green");
+			}
+		}
+		
+	})
+})
+})
+</script> -->
+
 <script>
 function sample6_execDaumPostcode() {
 	new daum.Postcode({
