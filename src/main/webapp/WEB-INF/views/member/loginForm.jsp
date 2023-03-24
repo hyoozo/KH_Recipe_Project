@@ -1,49 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<link href="/resources/include/css/member.css" rel="stylesheet">
+<script src="/resources/include/js/member.js"></script>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<script type="text/javascript">
+	$(function() {
+		let loginError = "${loginError}";
+		if (loginError == "로그인실패") {
+			alert("아이디와 비밀번호를 확인해주세요");
+			loginError = "";
+		};
+	})
+</script>
 
-    <!-- Custom styles for this template -->
-    <link href="/resources/include/css/index.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="/resources/include/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-    <script src="/resources/include/js/jquery-1.12.4.min.js"></script>
-</head>
 <body>
 	
+	<form id="loginForm">
+	<div class="login-container">
+		<div class="login-inner">
+			<div class="login-top center">
+				<h3 class="h3">로그인</h3>
+			</div>
 
-	<div>
-		<div>
-			<h3>회원가입</h3>
-		</div>
-		<hr>
-		<div>
-			<div><label>아이디</label></div>
-			<div><input type="text"></div>
-			
-			<div><label>비밀번호</label></div>
-			<div><input type="password"></div>
+			<div class="login-middle">
+				<div><input type="text" id="m_id" name="m_id" class="login-input bor-rad3" placeholder="아이디를 입력해주세요"></div>
+				<div><input type="password" id="m_pwd" name="m_pwd" class="login-input m_pwd bor-rad3" placeholder="비밀번호를 입력해주세요"></div>
+				<button type="button" id="login" class="login bor-rad3 btnGreen">로그인</button>
+				<input type="button" id="login_join" class="login_join bor-rad3" value="회원가입" />
+			</div>
 		</div>
 	</div>
+	</form>
 	
-
-
 </body>
 </html>

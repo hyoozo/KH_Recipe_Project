@@ -10,6 +10,7 @@ public class MemberVO {
 	private String m_pwd; // 비밀번호
 	private String m_phone; // 전화번호
 	private String m_email; // 이메일
+	private String m_zip;	//우편번호
 	private String m_address; // 주소
 	private String m_reg_day; // 등록일
 	private String m_rec_day; // 최근로그인
