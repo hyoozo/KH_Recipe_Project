@@ -15,12 +15,12 @@
                     <ul>
                         <li><a href="/refrigerator/refrigeratorView">냉장고관리</a></li>
                         <li><a href="#">스토어</a></li>
-                        <li><a href="#">레시피</a></li>
+                        <li><a href="/recipe/recipeList">레시피</a></li>
                         <li><a href="#">커뮤니티</a></li>
                     </ul>
                     <ul>
                         <li><a href="#">회원가입</a></li>
-                        <li><a href="#">로그인</a></li>
+                        <li><a href="/member/loginForm">로그인</a></li>
                     </ul>
                 </div>
             </div>
