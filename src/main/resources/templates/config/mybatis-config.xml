@@ -6,5 +6,8 @@
 		<typeAlias type="com.boot.recipe.info.vo.RecipeVO" alias="recipe"/>
 		<typeAlias type="com.boot.recipe.manual.vo.RecipeManualVO" alias="manual"/>
 		<typeAlias type="com.boot.recipe.ingredient.vo.IngredientVO" alias="ingredient"/>
+		<typeAlias type="com.boot.store.bascket.vo.BascketVO" alias="bascket"/>
+		<typeAlias type="com.boot.store.order.vo.OrderVO" alias="order"/>
+		<typeAlias type="com.boot.store.orderList.vo.OrderListVO" alias="orderList"/>
 	</typeAliases>
 </configuration>

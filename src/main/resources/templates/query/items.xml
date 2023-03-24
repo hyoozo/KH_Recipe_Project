@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boot.store.items.dao.ItemsDao">
 
+	<sql id="itemsSearch">
+		<if test="search=='i_name'">
+			<![CDATA[i_name LIKE '%' || #{keyword} || '%']]>
+		</if>
+		<if test="search=='i_parts'">
+			<![CDATA[i_parts LIKE '%' || #{keyword} || '%']]>
+		</if>
+	</sql>
+
+	<select id="itemsList" parameterType="items" resultType="items">
+		select i_num, i_parts, i_name, i_price, i_quan, i_img
+		from (select /*+ index_desc(items PK_ITEMS) */ 
+				rownum as rnum, i_num, i_parts, i_name, i_price, i_quan, i_img
+      		  from items
+      		  where
+      	<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+			<include refid="itemsSearch"></include>
+		</trim>
+		<![CDATA[ rownum <= #{pageNum} * #{amount}
+				) itemsList
+		where rnum > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
 	
 	
 	<insert id="insertItems" parameterType="items">
@@ -12,4 +35,10 @@
 		insert into items
 		values(#{i_num}, #{i_parts}, #{i_name}, nvl(#{i_price}, 0), #{i_quan}, #{i_img})
 	</insert>
+	
+	<select id="itemsDetail" parameterType="items" resultType="items">
+		select i_num, i_parts, i_name, i_price, i_quan, i_img
+		from items
+		where i_num = #{i_num}
+	</select>
 </mapper>

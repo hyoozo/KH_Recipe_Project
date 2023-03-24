@@ -79,7 +79,7 @@ public class RecipeParsingController {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("rvo", list);
+		model.addAttribute("recipe", list);
 		
 		return "recipe/list";
 	}
@@ -159,6 +159,6 @@ public class RecipeParsingController {
 		}
 		
 		
-		return "redirect:/recipe/list";
+		return "redirect:/recipe/json/list";
 	}
 }
