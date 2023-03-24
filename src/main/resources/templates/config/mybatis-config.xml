@@ -5,5 +5,7 @@
 		<typeAlias type="com.boot.store.items.vo.ItemsVO" alias="items"/>		
 		<typeAlias type="com.boot.recipe.info.vo.RecipeVO" alias="recipe"/>
 		<typeAlias type="com.boot.recipe.manual.vo.RecipeManualVO" alias="manual"/>
+		<typeAlias type="com.boot.client.member.vo.MemberVO" alias="member"/>
+		<typeAlias type="com.boot.recipe.like.vo.RecLikeVO" alias="like"/>
 	</typeAliases>
 </configuration>
