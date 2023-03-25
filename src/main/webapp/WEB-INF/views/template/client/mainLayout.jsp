@@ -39,7 +39,7 @@
         </header>
 
         <main class="wrapper">
-            <section class="section-1 center">
+            <section class="center">
                 <div></div>
                 <div></div>
                 <div></div>

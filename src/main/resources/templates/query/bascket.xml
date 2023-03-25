@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.store.bascket.dao.BascketDao">
+	
+	<select id="bascketList" parameterType="bascket" resultType="bascket">
+		select b_num, m_num, i.i_num, i_name, i_parts, i_price, i_img
+		from bascket b
+		inner join items i
+		on b.i_num = i.i_num
+		where m_num = #{m_num}
+	</select>
+	
+	<insert id="insertBascket" parameterType="bascket">
+		<selectKey keyProperty="b_num" resultType="int" order="BEFORE">
+			select seq_bascket.nextval from dual
+		</selectKey>
+		
+		insert into bascket
+		values(#{b_num}, #{m_num}, #{i_num})
+	</insert>
+	
+	
+</mapper>

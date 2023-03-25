@@ -25,8 +25,32 @@
 		<put-attribute name="title" value="" /> 
 		<put-attribute name="body" value="/WEB-INF/views/refrigerator/{1}.jsp" />
 	</definition>
-
 	
+	<definition name="member/*" extends="content">
+		<put-attribute name="title" value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp" />
+	</definition>
+	
+	<definition name="community/*" extends="content">
+		<put-attribute name="title" value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/community{1}.jsp" />
+	</definition>
+	
+	<definition name="recipe/*" extends="content">
+		<put-attribute name="title" value="레시피" /> 
+		<put-attribute name="body" value="/WEB-INF/views/recipe/{1}.jsp" />
+	</definition>
+	
+	<definition name="store/*" extends="content">
+		<put-attribute name="title" value="스토어" /> 
+		<put-attribute name="body" value="/WEB-INF/views/store/{1}.jsp" />
+	</definition>
+	
+	<definition name="craw/*" extends="content">
+		<put-attribute name="title" value="크롤링" /> 
+		<put-attribute name="body" value="/WEB-INF/views/craw/{1}.jsp" />
+	</definition>
+
 	<!-- 메뉴가 추가될때 마다 위의 내용을 정의한다 -->
 	
 </tiles-definitions>
