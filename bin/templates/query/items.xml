@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.store.items.dao.ItemsDao">
+	
+	<insert id="insertItems" parameterType="items">
+		<selectKey keyProperty="i_num" resultType="int" order="BEFORE">
+			select seq_items.nextval from dual
+		</selectKey>
+		
+		insert into items
+		values(#{i_num}, #{i_parts}, #{i_name}, #{i_price}, #{i_quan}, #{i_img})
+	</insert>
+</mapper>
