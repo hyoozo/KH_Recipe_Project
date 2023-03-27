@@ -18,7 +18,7 @@ import com.boot.store.orderList.vo.OrderListVO;
 
 import lombok.Setter;
 
-@SessionAttributes("")
+@SessionAttributes("login")
 @Controller
 @RequestMapping("/order/*")
 public class OrderController {
@@ -59,16 +59,30 @@ public class OrderController {
 		return url;
 	}
 	
-	@PostMapping("/addOrders")
+	@PostMapping("/addOrder")
 	@ResponseBody
-	public String addOrder(@ModelAttribute OrderListVO olvo) {
+	public String addOrder(@ModelAttribute OrderVO vo) {
 		String str = "";
 		
-		OrderVO ovo = new OrderVO();
-		ovo.setM_num(olvo.getM_num());
+		int result = 0;
+		
+		result += orderService.addOrder(vo);
+		
+		if(result != 0) {
+			str = "성공";
+		} else if(result == 0) {
+			str = "실패";
+		}
+		
+		return str;
+	}
+	
+	@PostMapping("/addOrders")
+	@ResponseBody
+	public String addOrders(@ModelAttribute OrderListVO olvo) {
+		String str = "";
 		
 		int result = 0;
-		result = orderService.addOrder(ovo);
 		
 		result += orderListService.addOrderList(olvo);
 		

@@ -6,6 +6,9 @@
 		.info{
 			height: 100px;
 		}
+		.notGoDetail > .info {
+			background-color: #808080;
+		}
 	</style>
 	
 	<script type="text/javascript">
@@ -23,13 +26,18 @@
 						console.log(data); */
 						$(data).each(function(){
 							// console.log(this);
-							let $div = $("<div class='col-md-4 goDetail item' data-num='" + this.i_num + "'>");
-							$div.append($("<img style='width:350px; height:350px;'>").attr("src", this.i_img));
-							let $info = $("<div class='info'>");
-							$info.append($("<p>").append(this.i_name));
-							$info.append($("<p>").append(this.i_price));
 							
-							$("#itemsList").append($div.append($info));
+							if(Number(this.i_quan) > 0){
+								//console.log(1);
+								let $div = $("<div class='col-md-4 goDetail item' data-num='" + this.i_num + "'>");
+								$div.append($("<img style='width:350px; height:350px;'>").attr("src", this.i_img));
+								let $info = $("<div class='info'>");
+								$info.append($("<p>").append(this.i_name));
+								$info.append($("<p>").append(this.i_price));
+								
+								$("#itemsList").append($div.append($info));
+							} 
+							
 						});	
 					} else {
 						alert("시스템 오류가 발생했습니다.")
@@ -94,6 +102,13 @@
 				let i_num = $(this).attr("data-num");
 				
 				location.href="/store/itemsDetail?i_num="+i_num;
+				
+			});
+			
+			$(document).on("click", ".notGoDetail", function(){
+				//console.log($(this).attr("data-num"));
+				
+				alert("재고가 소진되어 주문할 수 없습니다.");
 				
 			});
 			

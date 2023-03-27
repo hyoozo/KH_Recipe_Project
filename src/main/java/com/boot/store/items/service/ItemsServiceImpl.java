@@ -31,4 +31,12 @@ public class ItemsServiceImpl implements ItemsService {
 		
 		return detail;
 	}
+	
+	@Override
+	public int updateItemsQuan(ItemsVO vo) {
+		int result = 0;
+		result = itemsDao.updateItemsQuan(vo);
+		return result;
+	}
+	
 }

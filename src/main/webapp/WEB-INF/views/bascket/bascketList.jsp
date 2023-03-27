@@ -5,8 +5,16 @@
 		
 		
 		<style>
-			#pay{
-				position: fixed;
+			#requestPay{
+				background-color: #81c147;
+				color: white;
+			}
+			img{
+				width: 250px;
+				height: 250px;
+			}
+			.itemList{
+				margin-bottom: 10px;
 			}
 		</style>
 		
@@ -14,92 +22,172 @@
 			$(function(){
 				function allPrice(){
 					let allPrice = 0;
-					$(".price").each(function(){
-						allPrice += $(this).html().replace(/,/g, "");
+					$(".allPrice").each(function(){
+						console.log($(this).html());
+						allPrice = Number(allPrice) + Number($(this).html().replace(/,/g, ""));
 					});
 					
 					$("#allPay").html(allPrice.toLocaleString('ko-KR'));
 				}
 				
 				allPrice();
-			
-				#("#bascketList").change(function(){
-					allPrice();
-				});
 				
 				$("#requestPay").click(function(){
-			    	
-					   var IMP = window.IMP; 
-					   IMP.init("imp30735743"); 
-					    
-					   IMP.request_pay({
-				            pg : 'kcp',
-				            pay_method : 'card',
-				            merchant_uid: "${user}" + new Date().getTime(), 
-				            amount : allPrice,
-				            buyer_email : 'Iamport@chai.finance',
-				            buyer_name : '포트원 기술지원팀',
-				            buyer_tel : '010-1234-5678',
-				            buyer_addr : '서울특별시 강남구 삼성동',
-				            buyer_postcode : '123-456'
-				        }, function (rsp) { // callback
-				            if (rsp.success) {
-				               // console.log(rsp);
-				               $("#bascketList > div.itemList").each(function(){
-				            	   let i_num = $(this).find("div > p.num").html();
-				            	   let m_num = sessionStorage.getItem("loginUser");
-				            	   let ol_quan = $(this).find("div > p.name > span.cnt").html();
-				            	   
-				            	   let OrderListVO = {
-				            			   i_num : i_num,
-				            			   m_num : m_num,
-				            			   ol_quan : ol_quan
-				            	   }
-				            	   
-				            	   $.ajax({
-				            		   url : "order/addOrders",
-				            		   type: "post",
-				            		   data : OrderListVO,
-				            		   dataType : "text",
-				            		   success : function(data){
-				            			   console.log(data);
-				            		   }
-				            	   });
-				               });
-				               location.href="/";
-				            } else {
-				                //console.log(rsp);
-				                alert("결제에 실패했습니다.");
-				            }
-				        });
+			       let name = "";
+			       
+			       $("p.name").each(function(){
+			    	   console.log($(this).html());
+			    	   name += "_" + $(this).html();
+			       });
+			       
+			       let o_num = ${login.m_num} + "_" + new Date().getTime();
+			       console.log(typeof o_num);
+			       
+			       var IMP = window.IMP; 
+			       IMP.init("imp30735743"); 
+				   
+				   
+				   IMP.request_pay({
+			            pg : 'kakaopay',
+			            pay_method : 'card',
+			            merchant_uid: o_num,
+			            name : name,
+			            amount : $("#allPay").html(),
+			            buyer_email : '${login.m_email}',
+			            buyer_name : '${login.m_name}',
+			            buyer_tel : '${login.m_phone}',
+			            buyer_addr : '${login.m_address}',
+			            buyer_postcode : '${login.m_zip}'
+			        }, function (rsp) { // callback
+			        	console.log(rsp);
+			            if (rsp.success) {
+			               
+			               $.ajax({
+		            		   url : "/order/addOrder",
+		            		   type: "post",
+		            		   data : '${login.m_num}',
+		            		   dataType : "text",
+		            		   success : function(data){
+		            			   console.log(data);
+		            		   }
+		            	   });
+			               
+			               $("#bascketList > div.itemList").each(function(){
+			            	   let b_num = $(this).attr("data-num");
+			            	   let i_num = $(this).find("div > p.num").html();
+			            	   let ol_quan = Number($(this).find("div > p.name > span.cnt").html());
+			            	   
+			            	   let OrderListVO = {
+			            			   i_num : i_num,
+			            			   m_num : ${login.m_num},
+			            			   ol_quan : ol_quan
+			            	   }
+			            	   
+			            	   $.ajax({
+			            		   url : "/store/updateItemQuan",
+			            		   type: "post",
+			            		   data : {
+			 						   i_num: i_num,
+			 						   i_quan: ol_quan
+			            		   },
+			            		   dataType : "text",
+			            		   success : function(data){
+			            			   console.log(data);
+			            			   
+			            		   }
+			            	   });
+			            	   
+			            	   $.ajax({
+			            		   url : "/bascket/deleteItem",
+			            		   type: "post",
+			            		   data : {
+			            			   b_num: b_num,
+			 						   i_num: i_num,
+			 						   m_num: ${login.m_num}
+			            		   },
+			            		   dataType : "text",
+			            		   success : function(data){
+			            			   console.log(data);
+			            		   }
+			            	   });
+			            	   
+			            	   $.ajax({
+			            		   url : "/order/addOrders",
+			            		   type: "post",
+			            		   data : OrderListVO,
+			            		   dataType : "text",
+			            		   success : function(data){
+			            			   console.log(data);
+			            			   location.href="/";
+			            		   }
+			            	   });
+			            	   
+			            	   
+			               });
+			            } else {
+			                //console.log(rsp);
+			                alert("결제에 실패했습니다.");
+			            }
+			        });
 				 });
 				
 				$(".cntUp").click(function(){
-				   let cnt = $(this).parent().prev().children("p.name > span.cnt").html();
+				   let cnt = $(this).parent().prev().children("p.name").children("span.cnt").html();
 				   
+				   //console.log($(this).parent().prev().children("p.name").children("span.cnt").html());
+				   const price = $(this).parent().prev().children("p.price").html().replace(/,/g, "");
 				   if(cnt<10){
 					   cnt++;
-					   $(this).parent().prev().children("p.name > span.cnt").html(cnt);
-					   var price = $(this).parent().prev().children("p.price").html.replace(/,/g, "")
+					   $(this).parent().prev().children("p.name").children("span.cnt").html(cnt);
+					   console.log("price: " + price + " cnt : " + cnt);
 					   var result = Number(price) * Number(cnt);
-					   $(this).parent().prev().children("p.price").html(result.toLocaleString('ko-KR'));
+					   $(this).parent().prev().children("p.allPrice").html(result.toLocaleString('ko-KR'));
+					   allPrice();
 				   } else {
 					   alert("최대 10개까지 구매 가능합니다.");
 				   }
 			   });
 			   
 			   $(".cntDown").click(function(){
-				   let cnt = $(this).parent().prev().children("p.name > span.cnt").html();
-				   
+				   let cnt = $(this).parent().prev().children("p.name").children("span.cnt").html();
+				   const price = $(this).parent().prev().children("p.price").html().replace(/,/g, "");
 				   if(cnt>1){
 					   cnt--;
-					   $(this).parent().prev().children("p.name > span.cnt").html(cnt);
-					   var price = $(this).parent().prev().children("p.price").html.replace(/,/g, "")
+					   $(this).parent().prev().children("p.name").children("span.cnt").html(cnt);
+					   console.log("price: " + price + " cnt : " + cnt);
 					   var result = Number(price) * Number(cnt);
-					   $(this).parent().prev().children("p.price").html(result.toLocaleString('ko-KR'));
+					   $(this).parent().prev().children("p.allPrice").html(result.toLocaleString('ko-KR'));
+					   allPrice();
 				   } else {
 					   alert("1개 이상 구매 가능합니다.");
 				   }
+			   });
+			   
+			   $(".deleteBtn").click(function(){
+				   let b_num = $(this).parent().parent().attr("data-num");
+				   //console.log(b_num);
+				   let i_num = $(this).parent().prev().prev().children("p.num").html();
+				   //console.log( $(this).parent().prev().prev().children("p.num"));
+				   $.ajax({
+					  url: "/bascket/deleteItem",
+					  type: "post",
+					  data: {
+						  b_num: b_num,
+						  i_num: i_num,
+						  m_num: ${login.m_num}
+					  },
+					  dataType: "text",
+					  success: function(data){
+						  //console.log(data);
+						  if(data=="성공"){
+							  alert("삭제되었습니다.");
+							  location.href="/bascket/bascketList";
+						  } else {
+							  alert("시스템 오류가 발생했습니다.");
+						  }
+					  }
+				   });
+				   
 			   });
 			   
 			});
@@ -109,58 +197,66 @@
 		<div class="container">
 			<h2 class="text-center">장바구니</h2>
 			<c:choose>
-				<c:when test="${not empty loginUser }">
+				<c:when test="${not empty login }">
 					<c:choose>
 						<c:when test="${not empty bascket}">
-							<div class="col-md-8" id="bascketList">
-								<c:forEach var="list" items="${bascket }">
-									<div class="itemList">
-										<div class="col-md-4">
+							<div id="bascketList">
+								<c:forEach var="bascket" items="${bascket }">
+									<div class="itemList container" data-num="${bascket.b_num }">
+										<div class="col-md-4 item">
 											<img src="${bascket.i_img }"/>
 										</div>
-										<div class="col-md-4 text-center">
-											<p style="display:none;" class="num">${detail.i_num }</p>
+										<div class="col-md-4 text-center item">
+											<p style="display:none;" class="num">${bascket.i_num }</p>
 											<p class="name">${bascket.i_name } x <span class="cnt">1</span></p>
-											<p class="price">${bascket.i_price }</p>
+											<p class="price" style="display: none;">${bascket.i_price }</p>
+											<p class="allPrice">${bascket.i_price }</p>
 										</div>
-										<div class="col0md-2 text-center">
+										<div class="col-md-2 text-center item">
 											<button type="button" class="cntUp">+</button>
 											<button type="button" class="cntDown">-</button>
 										</div>
-										<div class="col0md-2 text-center">
-											<button type="button" >삭제</button>
+										<div class="col-md-2 text-center item">
+											<button type="button" class="deleteBtn">삭제</button>
 										</div>
 									</div>
-								</c:forEach>	
+								</c:forEach>
 							</div>
-								
-							<div class="col-md-4" id="pay">
-								<table>
+							<div id="pay">
+								<table class="table table-bordered">
 									<tr>	
-										<td>결제</td>
+										<th colspan="2" class="text-center">결제</th>
+									</tr>
+									<tr class="text-center">
+										<td class="col-md-4">총 주문 금액 </td>
+										<td class="col-md-8" id="allPay"></td>
 									</tr>
 									<tr>
-										<td>총 주문 금액</td>
-										<td id="allPay"></td>
-									</tr>
-									<tr>
-										<td>주문하기</td>
+										<td colspan="2" id="requestPay" class="text-center">
+											주문하기
+										</td>
 									</tr>
 								</table>
-							</div>
+							</div>	
 						</c:when>
 						<c:otherwise>
-							<div>
-								장바구니를 등록하세요.
-							</div>
-							<div>
-								<button type="button">스토어로 이동</button>
+							<hr>
+							<div class="text-center">
+								<p>장바구니를 등록하세요.</p>
+								
+								<button type="button" class="btn btn-primary" onclick="location.href='/store/itemsList'">스토어로 이동</button>
 							</div>
 						</c:otherwise>
 					</c:choose>
 				</c:when>
 				<c:otherwise>
-					<button type="button" onclick="location.href=''">로그인 페이지 이동</button>
+					<hr>
+					<div class="text-center">
+						<p>
+							로그인 후 이용 가능한 서비스 입니다. 
+						</p>
+						<button type="button" class="btn btn-primary" onclick="location.href='/member/loginForm'">로그인 페이지 이동</button>
+					</div>
 				</c:otherwise>
 			</c:choose>
 		</div>
