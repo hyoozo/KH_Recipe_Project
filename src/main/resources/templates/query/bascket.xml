@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boot.store.bascket.dao.BascketDao">
 	
-	<select id="bascketList" parameterType="bascket" resultType="bascket">
-		select b_num, m_num, i.i_num, i_name, i_parts, i_price, i_img
+	<select id="bascketList" parameterType="MemberVO" resultType="bascket">
+		select b_num, m_num, i.i_num, i.i_name, i.i_parts, i.i_price, i.i_img
 		from bascket b
 		inner join items i
 		on b.i_num = i.i_num
@@ -19,5 +19,8 @@
 		values(#{b_num}, #{m_num}, #{i_num})
 	</insert>
 	
-	
+	<delete id="deleteBascket" parameterType="bascket">
+		delete from bascket 
+		where b_num = #{b_num} and m_num = #{m_num} and i_num = #{i_num}
+	</delete>
 </mapper>

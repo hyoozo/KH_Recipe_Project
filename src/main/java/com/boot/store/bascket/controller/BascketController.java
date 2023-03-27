@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.boot.client.member.vo.MemberVO;
 import com.boot.store.bascket.service.BascketService;
 import com.boot.store.bascket.vo.BascketVO;
+import com.boot.store.items.vo.ItemsVO;
 
 import lombok.Setter;
 
@@ -25,14 +26,15 @@ public class BascketController {
 	@Setter(onMethod_ = @Autowired)
 	private BascketService bascketService;
 	
-	@GetMapping
-	public String BascketList(@ModelAttribute BascketVO bvo, @SessionAttribute(name="", required=false) MemberVO mvo,Model model) {
+	
+	@GetMapping("/bascketList")
+	public String BascketList(@SessionAttribute(name="login", required=false) MemberVO mvo, Model model) {
 		
-		bvo.setM_num(mvo.getM_num());
-		
-		List<BascketVO> bascket = bascketService.bascketList(bvo);
-		
-		model.addAttribute("bascket", bascket);
+		if(mvo != null) {
+			List<BascketVO> bascket = bascketService.bascketList(mvo);
+			
+			model.addAttribute("bascket", bascket);
+		}
 		
 		return "bascket/bascketList";
 	}
@@ -41,9 +43,11 @@ public class BascketController {
 	@PostMapping("/insertItem")
 	public String BascketInsert(@ModelAttribute BascketVO vo) {
 		
-		String str = "";
+		String str = "성공";
 		int result = 0;
-		result = bascketService.insertBascket(vo);
+		if(vo!=null) {
+			result = bascketService.insertBascket(vo);
+		}
 		
 		if(result != 0) {
 			str = "성공";
@@ -55,12 +59,23 @@ public class BascketController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/bascketPay")
-	public String BascketPay() {
-		String str = "";
+	@PostMapping("/deleteItem")
+	public String BascketDelete(@ModelAttribute BascketVO vo, @SessionAttribute(name="login", required=false) MemberVO mvo,	 Model model) {
 		
+		String str = "성공";
+		int result = 0;
+		if(vo!=null) {
+			result = bascketService.deleteBascket(vo);
+		}
+		
+		if(result != 0) {
+			str = "성공";
+		} else {
+			str = "실패";
+		}
 		
 		
 		return str;
 	}
+	
 }

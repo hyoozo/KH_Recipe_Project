@@ -9,6 +9,7 @@ import com.boot.store.items.vo.ItemsVO;
 public interface ItemsDao {
 	public List<ItemsVO> itemsList(ItemsVO vo);
 	public int insertItems(ItemsVO vo);
-	
 	public ItemsVO itemsDetail(ItemsVO vo); 
+	public int updateItemsQuan(ItemsVO vo);
+	
 }

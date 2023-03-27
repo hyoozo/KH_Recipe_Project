@@ -30,7 +30,7 @@
 					   let amount=$("#payPrice").html();
 					    
 					   IMP.request_pay({
-				            pg : 'kakaopay',
+				            pg : 'kcp',
 				            pay_method : 'card',
 				            merchant_uid: "57008833-3300422" + new Date().getTime(), 
 				            name : i_name,
@@ -55,24 +55,28 @@
 			   });
 			   
 			   $("#goBascket").click(function(){
-				  if($("#loginUser").val()!= ""){
+				  if($("#loginUser").val() != ""){
 					  $.ajax({
 						url: "/bascket/insertItem",
 						type: "post",
-						dataType: "json",
+						dataType: "text",
 						data: $("#inputBascket").serialize(),
 						success: function(data){
+							console.log(data);
 							if(data=="성공"){
-								if(comfirm("장바구니로 이동하겠습니까?")){
+								if(confirm("장바구니로 이동하겠습니까?")){
 									location.href="/bascket/bascketList";
 								}
 							} else{
 								alert("시스템 오류가 발생했습니다. 잠시 후 이용해 주세요.");
 							}
+						},
+						error : function(){
+							alert("오류 발생");
 						}
 					  });
 					  
-				  } else{
+				  } else {
 					  alert("로그인 후 이용 가능합니다.");
 					  location.href="#";
 				  }
@@ -107,7 +111,7 @@
 			   });
 			   
 			   function payPrice(){
-				   var payPrice = $("#i_price").html().replace(/,/g, "");
+				   const payPrice = $("#i_price").html().replace(/,/g, "");
 				   var cnt = $("#cnt").html().replace(/,/g, "");;
 				   
 				   var result = Number(payPrice) * Number(cnt);
@@ -123,7 +127,7 @@
 		<div class="container">
 			<form id="inputBascket">
 				<input type="hidden" name="i_num" value="${detail.i_num }"/>
-				<input type="hidden" name="m_num" id="loginUser" value="${loginUser.m_num}"/>
+				<input type="hidden" name="m_num" id="loginUser" value="${login.m_num}"/>
 			</form>
 			<div class="col-md-6">
 				<img src="${detail.i_img }">
