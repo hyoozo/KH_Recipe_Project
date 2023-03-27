@@ -19,9 +19,9 @@ public class CommunityServiceImpl implements CommunityService {
 	private CommunityDao communityDao;
 
 	@Override
-	public List<CommunityVO> postList() {
+	public List<CommunityVO> postList(CommunityVO cvo) {
 		List<CommunityVO> list = null;
-		list = communityDao.postList();
+		list = communityDao.postList(cvo);
 		return list;
 	}
 

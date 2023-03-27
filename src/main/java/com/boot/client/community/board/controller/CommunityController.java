@@ -31,10 +31,10 @@ public class CommunityController {
 	private CommunityService communityService;
 	
 	@GetMapping("/postList")
-	public String postList(Model model) {
+	public String postList(@ModelAttribute CommunityVO cvo,Model model) {
 		log.info("list 호출 성공");
 		
-		List<CommunityVO> resultList = communityService.postList();
+		List<CommunityVO> resultList = communityService.postList(cvo);
 		model.addAttribute("postList", resultList);
 		
 		log.info("resultList:" + resultList);
@@ -135,4 +135,5 @@ public class CommunityController {
 		
 		return "redirect:" + path;
 	}	
+	
 }

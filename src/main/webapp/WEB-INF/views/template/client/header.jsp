@@ -22,15 +22,8 @@
                          </c:if>
                         <!--  <li><a href="/refrigerator/refrigeratorView">냉장고관리</a></li> -->
                         <li><a href="#">스토어</a></li>
-                        <li><a href="#">레시피</a></li>
-                        <li><a href="/community/postList">커뮤니티</a></li>
-                    </ul>
-                    <ul>
-                    	<c:if test="${login == null}">
-                        	<li><a href="/member/joinForm">회원가입</a></li>
-                        	<li><a href="/member/loginForm">로그인</a></li>
                         <li><a href="/recipe/recipeList">레시피</a></li>
-                        <li><a href="#">커뮤니티</a></li>
+                        <li><a href="/community/postList">커뮤니티</a></li>
                     </ul>
                     <ul>
                        <c:if test="${login == null}">

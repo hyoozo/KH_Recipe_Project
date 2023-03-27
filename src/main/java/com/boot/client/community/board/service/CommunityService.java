@@ -6,7 +6,7 @@ import com.boot.client.community.board.vo.CommunityVO;
 import com.boot.client.member.vo.MemberVO;
 
 public interface CommunityService {
-	public List<CommunityVO> postList();
+	public List<CommunityVO> postList(CommunityVO cvo);
 	
 	public CommunityVO postDetail(CommunityVO cvo);
 	

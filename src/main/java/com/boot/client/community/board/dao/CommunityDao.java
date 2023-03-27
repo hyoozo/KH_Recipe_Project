@@ -9,7 +9,7 @@ import com.boot.client.member.vo.MemberVO;
 
 @Mapper
 public interface CommunityDao {
-	public List<CommunityVO> postList();
+	public List<CommunityVO> postList(CommunityVO cvo);
 	
 	public CommunityVO postDetail(CommunityVO cvo);
 	

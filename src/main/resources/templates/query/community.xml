@@ -5,6 +5,17 @@
 	<select id="postList" resultType="comVO" parameterType="comVO">
 		SELECT /*+ index_desc(community PK_COMMUNITY) */ *
 		FROM community
+		<where>
+			<if test="search=='c_title'">
+				<![CDATA[c_title LIKE '%' || #{keyword} || '%']]>
+			</if>
+			<if test="search=='c_writer'">
+				<![CDATA[c_writer LIKE '%' || #{keyword} || '%']]>
+			</if>
+			<if test="search=='c_comment'">
+				<![CDATA[c_comment LIKE '%' || #{keyword} || '%']]>
+			</if>
+		</where>
 	</select>
 	
 	<select id="postDetail" resultType="comVO" parameterType="comVO">

@@ -2,10 +2,14 @@ package com.boot.client.community.board.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.Data;
+import com.boot.client.refrigerator.vo.CommonVO;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = false)
 @Data
-public class CommunityVO {
+public class CommunityVO extends CommonVO{
 	private int c_no; // 게시글 번호
 	private String c_title; // 제목
 	private String c_category; // 카테고리

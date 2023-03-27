@@ -36,7 +36,10 @@
 			} else {
 				return;
 			}
-		} 
+		}
+		
+		
+		
 	});
 </script>
 
@@ -98,6 +101,22 @@
 
 				</tbody>
 			</table>
+		</div>
+		
+		<div>
+			<form>
+				<div>
+					<label>검색조건</label>
+					<select name="search">
+						<option value="all">전체</option>
+						<option value="c_title">제목</option>
+						<option value="c_writer">작성자</option>
+						<option value="c_comment">내용</option>
+					</select>
+					<input type="text" name="keyword" placeholder="검색어를 입력하세요" />
+					<button type="button">검색</button>
+				</div>
+			</form>
 		</div>
 		
 		<div>
