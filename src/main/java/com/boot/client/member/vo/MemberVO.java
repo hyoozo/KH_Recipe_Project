@@ -1,8 +1,12 @@
 package com.boot.client.member.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberVO {
 	private int m_num; // 회원번호
 	private String m_name; // 이름

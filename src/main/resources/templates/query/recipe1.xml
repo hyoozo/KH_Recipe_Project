@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.client.recipe.dao.RecipeDao1">
+	<!--<select id="recipeList" parameterType="recipe" resultType="recipe">
+		SELECT rcp_seq, rcp_nm, info_eng, att_file_no_mk
+		FROM recipe
+		<where>
+			<if test="search=='rcp_nm'">
+				<![CDATA[ rcp_nm LIKE '%'|| #{keyword} || '%' ]]>
+			</if>
+			<if test="search=='info_eng'">
+				<![CDATA[ info_eng <= #{keyword} ]]>
+			</if>
+		</where>
+		ORDER BY rcp_seq
+	</select> -->
+	
+	<sql id="recipeSearch">
+		<if test="search=='rcp_nm'">
+			<![CDATA[ rcp_nm LIKE '%'|| #{keyword} || '%' ]]>
+		</if>
+		<if test="search=='info_eng'">
+			<![CDATA[ info_eng <= #{keyword} ]]>
+		</if>
+	</sql>
+	
+	<select id="recipeCnt" parameterType="recipe" resultType="int">
+		SELECT count(*) FROM recipe
+		<trim prefix=" where(" suffix=")">
+			<include refid="recipeSearch"></include>
+		</trim>
+	</select>
+	
+	<select id="recipeList" parameterType="recipe" resultType="recipe">
+	<![CDATA[
+		SELECT rcp_seq, rcp_nm, info_eng, att_file_no_mk
+		FROM (
+			SELECT /*+ INDEX_DESC(recipe pk_recipe) */
+			rownum as rnum, rcp_seq, rcp_nm, info_eng, att_file_no_mk
+			FROM recipe
+			WHERE ]]>
+				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+					<include refid="recipeSearch"></include>
+				</trim>
+			<![CDATA[ rownum <= #{pageNum} * #{amount}
+				) recipelist
+				WHERE rnum > (#{pageNum}-1) * #{amount}
+			]]>
+	</select>
+	
+	<select id="recipeDetail" parameterType="recipe" resultType="recipe">
+		SELECT *
+		FROM recipe_manual
+		INNER JOIN recipe
+		ON recipe_manual.rcp_seq = recipe.rcp_seq
+		WHERE recipe_manual.rcp_seq = #{rcp_seq}
+	</select>
+	
+	<select id="findLike" resultType="like">
+		SELECT rcplike_status
+		FROM rcp_like
+		WHERE rcp_seq = #{rcp_seq} AND m_num = #{m_num}
+	</select>
+	
+	<insert id="insertLike" parameterType="like">
+		INSERT INTO rcp_like(rcplike_id, rcp_seq, m_num)
+		VALUES(seq_rcp_like.nextval, #{rcp_seq}, #{m_num})
+	</insert>
+	
+	<update id="updateLike" parameterType="like">
+		UPDATE rcp_like
+		SET rcplike_status = rcplike_status +1
+		WHERE m_num = #{m_num} AND rcp_seq = #{rcp_seq}
+	</update>
+	
+	<update id="cancleLike" parameterType="like">
+		UPDATE rcp_like
+		SET rcplike_status = 0
+		WHERE m_num = #{m_num} AND rcp_seq = #{rcp_seq}
+	</update>
+	
+	<select id="likeCnt" parameterType="recipe" resultType="int">
+		SELECT COUNT(*)
+		FROM rcp_like
+		WHERE rcp_seq = #{rcp_seq} AND rcplike_status = 1
+	</select>
+</mapper>

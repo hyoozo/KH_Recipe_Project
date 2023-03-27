@@ -2,12 +2,20 @@ package com.boot.store.items.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.boot.common.vo.CommonVO;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-public class ItemsVO {
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+public class ItemsVO extends CommonVO {
 	private int i_num; // 제품번호
 	private String i_parts; // 제품분류
 	private String i_name; // 제품명
