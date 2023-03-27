@@ -38,15 +38,19 @@
 			       $("p.name").each(function(){
 			    	   console.log($(this).html());
 			    	   name += "_" + $(this).html();
-			       })
+			       });
 			       
-				   var IMP = window.IMP; 
-				   IMP.init("imp30735743"); 
+			       let o_num = ${login.m_num} + "_" + new Date().getTime();
+			       console.log(typeof o_num);
+			       
+			       var IMP = window.IMP; 
+			       IMP.init("imp30735743"); 
+				   
 				   
 				   IMP.request_pay({
 			            pg : 'kakaopay',
 			            pay_method : 'card',
-			            merchant_uid: "${login.m_num}" + "_" + new Date().getTime(),
+			            merchant_uid: o_num,
 			            name : name,
 			            amount : $("#allPay").html(),
 			            buyer_email : '${login.m_email}',
@@ -55,8 +59,8 @@
 			            buyer_addr : '${login.m_address}',
 			            buyer_postcode : '${login.m_zip}'
 			        }, function (rsp) { // callback
+			        	console.log(rsp);
 			            if (rsp.success) {
-			               // console.log(rsp);
 			               
 			               $.ajax({
 		            		   url : "/order/addOrder",

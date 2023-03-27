@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.boot.client.member.vo.MemberVO;
 import com.boot.store.bascket.service.BascketService;
 import com.boot.store.bascket.vo.BascketVO;
-import com.boot.store.items.vo.ItemsVO;
 
 import lombok.Setter;
 
