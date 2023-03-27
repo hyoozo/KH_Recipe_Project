@@ -16,7 +16,7 @@
     font-weight: normal;
     font-style: normal;
 }
-html, body {
+html, body, button {
     /* font-family: SF Pro KR,SF Pro Text; */
     font-family: 'Cafe24Ssurround';
     min-height: 100%;
