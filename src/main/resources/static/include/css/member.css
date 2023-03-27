@@ -21,10 +21,18 @@
 		
 		border-color:#00AE68;
 		color:white;
+		border: 1px solid
 	}
 	
 	.float-r {
 		float:right;
+	}
+	
+	.btnWhite {
+		background-color: white;
+		
+		border-color:white;
+		color: black;
 	}
 	
 	.input-font14 {
@@ -222,7 +230,7 @@
 	}
 	
 	.updatePwdChk-top {
-		margin-left:300px;
+		margin-left:400px;
 	}
 	
 	.updatePwdChk-inner {
@@ -272,9 +280,7 @@
 		color:white;
 		
 		border-color: rgba(0,0,0,.15);
-
 	}
-	
 	
 	.update-container {
 		height:900px;	
@@ -362,4 +368,24 @@
 		margin-left:37px;
 		
 		float: left;
+	}
+	
+	.msg {
+		display: block;
+   		margin-top: 20px;
+   		
+   		font-family: "Open Sans", sans-serif;
+		font-weight: 550;
+	}
+	
+	.delBtn {
+		float: right;
+   	 	margin-right: 350px;
+    	width: 120px;
+    	height: 30px;
+    	border: white;
+    	font-weight: 800;
+    	font-size:16px;
+    	
+    	cursor:pointer;
 	}

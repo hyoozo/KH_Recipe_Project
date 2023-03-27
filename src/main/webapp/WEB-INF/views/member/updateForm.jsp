@@ -25,7 +25,7 @@
 		
 		
 		
-		$("form[name='updateForm']").hide();
+		//$("form[name='updateForm']").hide();
 		
 		$(document).on("click", "#updatePwdBtn", function() {
 			
@@ -49,7 +49,6 @@
 						if(resultData == 0){
 							msg.addClass("msg_error");
 							msg.text("비밀번호가 일치하지 않습니다.");
-							m_pwd.select();
 						}else if(resultData == 1){
 							$("form[name='updateForm']").show();
 							$("form[name='updatePwdChk']").hide();
@@ -132,6 +131,20 @@
 			}),
 			$("#updateForm").submit();
 		})
+		
+		$(".delBtn").click(function() {
+			if(confirm("회원 정보가 삭제됩니다. 그래도 하시겠습니까 ?") == true){
+				$("#updateForm").attr({
+					"method":"get",
+					"action":"/member/memberDelete"
+				}),
+				$("#updateForm").submit();
+		    } else {
+		    	return;
+		    }
+		})
+		
+		
 	
 		function chkPwd(item2, msg) {
 			if(regPwd.test(item2.val())) {
@@ -231,7 +244,7 @@ function sample6_execDaumPostcode() {
 			</div>
 			<button type="button" id="updatePwdBtn" class="upPwdBtn bor-rad4">확인</button>
 			<button type="button" id="updatePwdBtn-cancel" class="upPwdBtn bor-rad4">취소</button>
-			<span class="msg"></span>
+			<span class="msg input-font14"></span>
 		</div>
 	</form>
 
@@ -244,6 +257,7 @@ function sample6_execDaumPostcode() {
 		<div class="update-container-inner">
 			<div class="update-container-top">
 				<h2>개인 정보 수정</h2>
+				<button type="button" class="delBtn btnWhite">회원 탈퇴 ></button>
 				<a class="float-r">* 빈 칸 입력시 기존 정보로 저장됩니다.</a>
 			</div>
 			<div>
@@ -295,7 +309,7 @@ function sample6_execDaumPostcode() {
 			</div>
 		</div>
 	</div>
-	</form>
+</form>
 </body>
 
 

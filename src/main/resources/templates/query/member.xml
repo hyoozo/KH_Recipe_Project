@@ -45,5 +45,10 @@
 		where m_num = #{m_num}
 	</update>
 	
+	<delete id="memberDelete" parameterType="MemberVO">
+		delete from member
+		where m_num = #{m_num}
+	</delete>
+	
 	
 </mapper>

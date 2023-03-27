@@ -15,4 +15,8 @@ public interface MemberService {
 	public int updatePwdConfirm(MemberVO mvo);
 	
 	public int memberUpdate(MemberVO mvo);
+	
+	public int memberDelete(MemberVO mvo);
+	
+	public int insertForm(MemberVO mvo);
 }

@@ -4,6 +4,7 @@ package com.boot.client.member.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.boot.client.community.board.vo.CommunityVO;
 import com.boot.client.member.vo.MemberVO;
 
 @Mapper
@@ -19,5 +20,7 @@ public interface MemberDao {
 	public int updatePwdConfirm(MemberVO mvo);
 	
 	public int memberUpdate(MemberVO mvo);
+	
+	public int memberDelete(MemberVO mvo);
 
 }

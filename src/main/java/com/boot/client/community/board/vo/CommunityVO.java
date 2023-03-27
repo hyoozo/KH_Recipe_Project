@@ -15,4 +15,5 @@ public class CommunityVO {
 	private String c_img; // 이미지
 	private String c_readcnt; // 조회수
 	private String c_reg_date; // 등록일자
+	private int m_num; //회원번호
 }

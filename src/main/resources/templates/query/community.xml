@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.client.community.board.dao.CommunityDao">
+
+	<select id="postList" resultType="comVO" parameterType="comVO">
+		SELECT /*+ index_desc(community PK_COMMUNITY) */ *
+		FROM community
+	</select>
+	
+	<select id="postDetail" resultType="comVO" parameterType="comVO">
+		SELECT c_no, c_title, c_category, c_writer, c_comment, c_img, c_readcnt, to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date
+		FROM COMMUNITY
+		where c_no = #{c_no}
+	</select>
+	
+	<select id="updateForm" resultType="comVO" parameterType="comVO">
+		SELECT c_no, c_title, c_category, c_writer, c_comment, c_img, c_readcnt, to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date
+		FROM COMMUNITY
+		where c_no = #{c_no}
+	</select>
+	
+	<update id="postUpdate" parameterType="comVO">
+		UPDATE COMMUNITY
+		SET c_title = #{c_title},
+			c_category = #{c_category},
+			c_img = #{c_img},
+			c_comment = #{c_comment}, 
+			c_reg_date = to_date(sysdate,'yyyy-mm-dd')
+		WHERE m_num = #{m_num}	
+	</update>
+	
+	<delete id="postDelete" parameterType="comVO">
+		DELETE FROM COMMUNITY
+		WHERE c_no = #{c_no}
+	</delete>
+	
+	<insert id="postInsert" parameterType="comVO">
+		insert into COMMUNITY (c_no,c_title,c_category,c_writer,c_comment,c_img,c_readcnt,c_reg_date,m_num)
+		values(SEQ_COMMUNITY.nextval,#{c_title},#{c_category},#{c_writer},#{c_comment},#{c_img},1,to_date(sysdate,'yyyy.mm.dd'),#{m_num})
+		
+	</insert>
+
+
+</mapper>
