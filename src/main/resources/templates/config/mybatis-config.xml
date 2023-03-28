@@ -11,5 +11,6 @@
 		<typeAlias type="com.boot.store.order.vo.OrderVO" alias="order"/>
 		<typeAlias type="com.boot.store.orderList.vo.OrderListVO" alias="orderList"/>
 		<typeAlias type="com.boot.recipe.like.vo.RecLikeVO" alias="like"/>
+		<typeAlias type="com.boot.client.refrigerator.vo.FridgeVO" alias="fridge"/>
 	</typeAliases>
 </configuration>

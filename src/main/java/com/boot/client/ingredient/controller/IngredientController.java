@@ -26,9 +26,6 @@ import lombok.extern.slf4j.Slf4j;
 public class IngredientController {
 	@Setter(onMethod_=@Autowired)
 	private FridgeService fridgeService;
-	
-	@Setter(onMethod_=@Autowired)
-	private FridgeDAO friDao;
 
 	/* 추천 레시피 검색 후 리스트 호출 */
 	@GetMapping(value = "/rcpList/{igr_name}" )
@@ -44,14 +41,6 @@ public class IngredientController {
 	public List<IngredientVO> igrList(){
 		log.info("igrList()호출");
 		List<IngredientVO> ingredient = fridgeService.igrList();
-		
-//		MemberVO membervo = new MemberVO();
-//		IngredientVO igrvo = new IngredientVO();
-//		
-//		int m_num = membervo.getM_num();
-//		int igr_num = igrvo.getIgr_num();
-//		friDao.fridge_igrList(m_num, igr_num);
-		
 		return ingredient;
 	}
 	

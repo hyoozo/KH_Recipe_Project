@@ -8,16 +8,22 @@
     <script src="https://kit.fontawesome.com/ccd4ff9cee.js" crossorigin="anonymous"></script>
 </head>
 <body>
-     
+    <input type='hidden' id="sessionId" value="${login.m_num}">
 	<h2>${login.m_name}의 냉장고</h2>
 		<section class="refrigerator-container center">
-		    <div class="refrigerator-card">
-		        <h3>나의 냉장고</h3>
-		        <div class="content-container">
-		        	<div class="food-container rfg-container pTop">
-		        	</div>
-       			</div>
-		    </div>
+			    <div class="refrigerator-card">
+			        <h3>나의 냉장고</h3>
+			        <div class="content-container">
+			        	<div class="food-container rfg-container pTop">
+			        		<%-- <c:if test="${igrList != null}">
+			        		<c:forEach items="igrList" var="igrList">
+			        			<button value="${igrList.igr_num}" id="ref-btn-${igrList.igr_num}" class="rfgBtn">${igrList.igr_name}</button>
+			        		</c:forEach>
+			        		</c:if> --%>
+			        	</div>
+	       			</div>
+			    </div>
+			   <!--  <input type="button" id="recom-recipe" value="추천 레시피 보기"/> -->
 		    
 		    <div class="refrigerator-card">
 		        <h3>재료 리스트</h3>
