@@ -59,7 +59,7 @@ public class BascketController {
 	
 	@ResponseBody
 	@PostMapping("/deleteItem")
-	public String BascketDelete(@ModelAttribute BascketVO vo, @SessionAttribute(name="login", required=false) MemberVO mvo,	 Model model) {
+	public String BascketDelete(@ModelAttribute BascketVO vo, Model model) {
 		
 		String str = "성공";
 		int result = 0;

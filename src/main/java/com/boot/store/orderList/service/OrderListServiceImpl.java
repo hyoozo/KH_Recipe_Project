@@ -1,8 +1,11 @@
 package com.boot.store.orderList.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boot.client.member.vo.MemberVO;
 import com.boot.store.orderList.dao.OrderListDao;
 import com.boot.store.orderList.vo.OrderListVO;
 
@@ -23,5 +26,17 @@ public class OrderListServiceImpl implements OrderListService {
 		
 		return result;
 	}
-
+	
+	@Override
+	public int maxOrderNum(MemberVO mvo) {
+		int result = 0;
+		result = orderListDao.maxOrderNum(mvo);
+		return result;
+	}
+	
+	@Override
+	public List<OrderListVO> orderList(MemberVO mvo){
+		
+		return orderListDao.orderList(mvo);
+	}
 }

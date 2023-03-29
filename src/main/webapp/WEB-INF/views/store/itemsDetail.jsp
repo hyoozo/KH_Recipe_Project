@@ -15,11 +15,11 @@
 		    $(function(){
 		       $("#payWindow").css("display", "none");
 		    	
-		       let i_num = $("#i_num").html();
+		       let i_num = $("#i_num").val();
 		       let i_name = $("#i_name").html();
 			       
 			   $("#requestPay").click(function(){
-			       
+				   console.log(i_num);
 				   if($("#loginUser").val()== ""){
 					   alert("로그인 후 이용 가능합니다.");
 					   location.href="#";
@@ -30,7 +30,7 @@
 					   let amount=$("#payPrice").html();
 					    
 					   IMP.request_pay({
-				            pg : 'kcp',
+				            pg : 'kakaopay',
 				            pay_method : 'card',
 				            merchant_uid: "57008833-3300422" + new Date().getTime(), 
 				            name : i_name,
@@ -44,7 +44,7 @@
 				            if (rsp.success) {
 				               // console.log(rsp);
 				               alert("결제에 성공했습니다.");
-				               location.href="/order/addOneOrder?i_num="+i_num+"&ol_quan="+$("#cnt");
+				               location.href="/order/addOneOrder?ivo.i_num="+i_num+"&ol_quan="+$("#cnt").html();
 				            } else {
 				                //console.log(rsp);
 				                alert("결제에 실패했습니다.");
@@ -126,8 +126,8 @@
 	<body>
 		<div class="container">
 			<form id="inputBascket">
-				<input type="hidden" name="i_num" value="${detail.i_num }"/>
-				<input type="hidden" name="m_num" id="loginUser" value="${login.m_num}"/>
+				<input type="hidden" name="ivo.i_num" id="i_num" value="${detail.i_num }"/>
+				<input type="hidden" name="mvo.m_num" id="loginUser" value="${login.m_num}"/>
 			</form>
 			<div class="col-md-6">
 				<img src="${detail.i_img }">

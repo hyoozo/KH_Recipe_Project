@@ -2,11 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boot.store.orderList.dao.OrderListDao">
 	
+	<select id="maxOrderNum" parameterType="MemberVO" resultType="int">
+		select max(o_num) as o_no from orders
+		where m_num = #{m_num}
+	</select>
+	
 	<insert id="addOrderList" parameterType="orderList">
-		<selectKey keyProperty="o_num" resultType="int" order="BEFORE">
-			select max(o_num) as o_num from orders
-		</selectKey>
 		insert into order_list
-		values(SEQ_ORDER_LIST.nextval, #{o_num}, #{m_num}, #{i_num}, #{ol_quan})
+		values(SEQ_ORDER_LIST.nextval, #{ovo.o_num}, #{mvo.m_num}, #{ivo.i_num}, #{ol_quan})
 	</insert>
+	
+	<resultMap type="orderList" id="orderListMap">
+		<id property="ol_num" column="ol_num" />
+		<id property="ol_quan" column="ol_quan" />
+		<id property="ivo.i_num" column="i_num" />
+		<id property="ivo.i_name" column="i_name" />
+		<id property="ivo.i_price" column="i_price" />
+		<id property="ivo.i_img" column="i_img" />
+		<id property="ovo.o_num" column="o_num" />
+		<id property="ovo.order_day" column="order_day" />
+		<id property="ovo.o_state" column="o_state" />
+	</resultMap>
+	
+	<select id="orderList" parameterType="MemberVO" resultMap="orderListMap">
+		select ol.ol_num as ol_num, ol.ol_quan as ol_quan,
+		ol.m_num as m_num, 
+		i.i_num as i_num, i.i_name as i_name, i.i_price as i_price, i.i_img as i_img,
+		o.o_num as o_num, order_day, o_state
+		from order_list ol 
+		inner join orders o 
+		on ol.o_num = o.o_num
+		inner join items i
+		on ol.i_num = i.i_num
+		where ol.m_num = #{m_num}
+	</select>
 </mapper>

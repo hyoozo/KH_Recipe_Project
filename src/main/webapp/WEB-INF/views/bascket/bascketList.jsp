@@ -36,8 +36,9 @@
 			       let name = "";
 			       
 			       $("p.name").each(function(){
-			    	   console.log($(this).html());
-			    	   name += "_" + $(this).html();
+			    	   let str = $(this).html().split("x")
+			    	   console.log(str[0]);
+			    	   name += "_" + str[0];
 			       });
 			       
 			       let o_num = ${login.m_num} + "_" + new Date().getTime();
@@ -65,7 +66,7 @@
 			               $.ajax({
 		            		   url : "/order/addOrder",
 		            		   type: "post",
-		            		   data : '${login.m_num}',
+		            		   data : JSON.stringify({m_num: ${login.m_num}}),
 		            		   dataType : "text",
 		            		   success : function(data){
 		            			   console.log(data);
@@ -76,12 +77,6 @@
 			            	   let b_num = $(this).attr("data-num");
 			            	   let i_num = $(this).find("div > p.num").html();
 			            	   let ol_quan = Number($(this).find("div > p.name > span.cnt").html());
-			            	   
-			            	   let OrderListVO = {
-			            			   i_num : i_num,
-			            			   m_num : ${login.m_num},
-			            			   ol_quan : ol_quan
-			            	   }
 			            	   
 			            	   $.ajax({
 			            		   url : "/store/updateItemQuan",
@@ -101,9 +96,7 @@
 			            		   url : "/bascket/deleteItem",
 			            		   type: "post",
 			            		   data : {
-			            			   b_num: b_num,
-			 						   i_num: i_num,
-			 						   m_num: ${login.m_num}
+			            			   b_num: b_num
 			            		   },
 			            		   dataType : "text",
 			            		   success : function(data){
@@ -114,7 +107,11 @@
 			            	   $.ajax({
 			            		   url : "/order/addOrders",
 			            		   type: "post",
-			            		   data : OrderListVO,
+			            		   data : JSON.stringify({
+			            			   ivo: {i_num : i_num},
+			            			   mvo: {m_num : ${login.m_num} },
+			            			   ol_quan : ol_quan
+			            	  	   }),
 			            		   dataType : "text",
 			            		   success : function(data){
 			            			   console.log(data);
@@ -172,9 +169,7 @@
 					  url: "/bascket/deleteItem",
 					  type: "post",
 					  data: {
-						  b_num: b_num,
-						  i_num: i_num,
-						  m_num: ${login.m_num}
+						  b_num: b_num
 					  },
 					  dataType: "text",
 					  success: function(data){
@@ -204,13 +199,13 @@
 								<c:forEach var="bascket" items="${bascket }">
 									<div class="itemList container" data-num="${bascket.b_num }">
 										<div class="col-md-4 item">
-											<img src="${bascket.i_img }"/>
+											<img src="${bascket.ivo.i_img }"/>
 										</div>
 										<div class="col-md-4 text-center item">
-											<p style="display:none;" class="num">${bascket.i_num }</p>
-											<p class="name">${bascket.i_name } x <span class="cnt">1</span></p>
-											<p class="price" style="display: none;">${bascket.i_price }</p>
-											<p class="allPrice">${bascket.i_price }</p>
+											<p style="display:none;" class="num">${bascket.ivo.i_num }</p>
+											<p class="name">${bascket.ivo.i_name } x <span class="cnt">1</span></p>
+											<p class="price" style="display: none;">${bascket.ivo.i_price }</p>
+											<p class="allPrice">${bascket.ivo.i_price }</p>
 										</div>
 										<div class="col-md-2 text-center item">
 											<button type="button" class="cntUp">+</button>

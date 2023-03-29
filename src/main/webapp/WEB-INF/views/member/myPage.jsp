@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <link href="/resources/include/css/member.css" rel="stylesheet">
-
+<%@ include file="/WEB-INF/views/common/common.jspf" %>
 
 <style type="text/css">
 	.page1 {
@@ -55,7 +55,6 @@
 		height:23px;
 	}
 </style>
-
 <body>
 	<div class="myPage-container">
 		<div class="myPage-top1">
@@ -68,7 +67,7 @@
 				<div class="reciGood" style="background-color:blue;">레시피 좋아요</div>
 				<div class="storeGood" style="background-color:yellow;">스토어 좋아요</div>
 				<div class="comGood" style="background-color:green;">커뮤니티 좋아요</div>
-				<div class="orderList" style="background-color:pink;">주문 내역</div>
+				<div style="background-color:pink;" onclick="location.href='/order/orderList'">주문 내역</div>
 				<div class="insertList" style="background-color:#92B3B7;">작성한 글 조회</div>
 			</div>
 		</div>
