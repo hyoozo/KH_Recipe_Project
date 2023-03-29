@@ -10,6 +10,7 @@ import com.boot.client.member.vo.MemberVO;
 import com.boot.client.refrigerator.dao.FridgeDAO;
 import com.boot.client.refrigerator.vo.FridgeVO;
 import com.boot.client.refrigerator.vo.IngredientVO;
+import com.boot.recipe.info.vo.RecipeVO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -58,18 +59,29 @@ public class FridgeServiceImpl implements FridgeService {
 	}
 
 	@Override
-	public int memberIgrDelete(int fridge_num) {
+	public int memberIgrDelete(int igr_num, int m_num) {
 		int result = 0;
-		result = friDao.memberIgrDelete(fridge_num);
+		result = friDao.memberIgrDelete(igr_num, m_num);
 		return result;
 	}
 
 	@Override
-	public int fridgeSelect(FridgeVO fridge) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int fridgeSelect(int igr_num, int m_num) {
+		System.out.println("service구현"+igr_num+":"+m_num);
+		int result = 0;
+		result = friDao.fridgeSelect(igr_num, m_num);
+		System.out.println("service구현 result:"+result);
+		return result;
 	}
 
+	@Override
+	public List<RecipeVO> selectRecommend(List<String> igr_num ) {
+		System.out.println("service구현==>"+igr_num);
+		List<RecipeVO> list = friDao.selectRecommend(igr_num);
+        return list;
+	}
+
+	
 	
 
 	

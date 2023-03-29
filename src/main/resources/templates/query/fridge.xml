@@ -7,6 +7,10 @@
 		<id property="m_num.m_num" column="m_num"/>
 		<id property="igr_num.igr_num" column="igr_num"/>
 		<id property="igr_num.igr_name" column="igr_name"/>
+		
+		<id property="rcp_seq.rcp_seq" column="rcp_seq"/>
+		<id property="rcp_name.rcp_name" column="rcp_name"/>
+		<id property="manual_img01.manual_img01" column="manual_img01"/>
 	</resultMap>
 	
 	<select id="recommendRecipe" parameterType="String" resultType="String">
@@ -51,14 +55,26 @@
 	<delete id="memberIgrDelete" parameterType="int">
 		DELETE FROM fridge
 		WHERE
-		fridge_num = #{fridge_num}
+		igr_num = #{igr_num} and m_num = #{m_num}
 	</delete>
 	
-	<!-- <select id="fridgeSelect" resultType="int" parameterType="fridge">
-		select count(*)
+	<select id="fridgeSelect" resultType="int" parameterType="int">
+		select count(*) as count
 		from fridge f
 		inner join ingredient i
 		on f.igr_num = i.igr_num
-		where f.igr_num = #{igr_num} and f.m_num = #{m_num};
-	</select> -->
+		where f.igr_num = #{igr_num} and f.m_num = #{m_num}
+	</select>
+	
+	<select id="selectRecommend" parameterType="hashmap" resultType="recipe">
+		select r.rcp_seq as rcp_seq , r.rcp_nm as rep_nm, r.att_file_no_mk
+		from recipe r
+	    	inner join main_ingredient m
+	    		on r.rcp_seq = m.rcp_seq
+	    where
+		<foreach collection="list" item="item" open="(" close=")" separator="OR">
+			 m.igr_num = #{item.igr_num}
+		</foreach>
+			
+	</select>
 </mapper>

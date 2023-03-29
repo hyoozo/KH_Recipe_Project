@@ -6,6 +6,7 @@ import com.boot.client.member.vo.MemberVO;
 import com.boot.client.refrigerator.vo.FridgeVO;
 import com.boot.client.refrigerator.vo.IngredientVO;
 import com.boot.client.refrigerator.vo.Main_ingredientVO;
+import com.boot.recipe.info.vo.RecipeVO;
 
 public interface FridgeService {
 	public List<IngredientVO> recommendRecipe(String igr_name) throws Exception;
@@ -13,6 +14,7 @@ public interface FridgeService {
 	public List<IngredientVO> searchIgr(String igr_name);
 	public List<FridgeVO> memberIgrList(MemberVO member);
 	public int fridgeIgrInsert(int m_num,int igr_num);
-	public int memberIgrDelete(int fridge_num);
-	public int fridgeSelect(FridgeVO fridge);
+	public int memberIgrDelete(int igr_num, int m_num);
+	public int fridgeSelect(int igr_num, int m_num);
+	public List<RecipeVO> selectRecommend(List<String> igr_num);
 }
