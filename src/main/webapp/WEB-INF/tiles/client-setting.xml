@@ -16,9 +16,9 @@
 		<put-attribute name="footer" value="/WEB-INF/views/template/client/footer.jsp" />
 	</definition>
 	
-	<definition name="recipe/*" extends="content">
-		<put-attribute name="title" value="레시피" /> 
-		<put-attribute name="body" value="/WEB-INF/views/recipe/{1}.jsp" />
+	<definition name="client/*" extends="content">
+		<put-attribute name="title" value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/client/board/{1}.jsp" />
 	</definition>
 	
 	<definition name="refrigerator/*" extends="content">
@@ -29,6 +29,11 @@
 	<definition name="craw/*" extends="content">
 		<put-attribute name="title" value="크롤링" /> 
 		<put-attribute name="body" value="/WEB-INF/views/craw/{1}.jsp" />
+	</definition>
+	
+	<definition name="recipe/*" extends="content">
+		<put-attribute name="title" value="레시피" /> 
+		<put-attribute name="body" value="/WEB-INF/views/recipe/{1}.jsp" />
 	</definition>
 	
 	<definition name="store/*" extends="content">
