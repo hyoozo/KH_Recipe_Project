@@ -66,14 +66,14 @@
 		where f.igr_num = #{igr_num} and f.m_num = #{m_num}
 	</select>
 	
-	<select id="selectRecommend" parameterType="hashmap" resultType="recipe">
-		select r.rcp_seq as rcp_seq , r.rcp_nm as rep_nm, r.att_file_no_mk
+	<select id="selectRecommend" resultType="String">
+		select r.rcp_seq as rcp_seq , r.rcp_nm as rcp_nm, r.att_file_no_mk
 		from recipe r
 	    	inner join main_ingredient m
 	    		on r.rcp_seq = m.rcp_seq
 	    where
 		<foreach collection="list" item="item" open="(" close=")" separator="OR">
-			 m.igr_num = #{item.igr_num}
+			 m.igr_num = #{item}
 		</foreach>
 			
 	</select>

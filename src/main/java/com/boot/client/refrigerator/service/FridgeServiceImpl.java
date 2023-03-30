@@ -73,13 +73,22 @@ public class FridgeServiceImpl implements FridgeService {
 		System.out.println("service구현 result:"+result);
 		return result;
 	}
+	
+	
 
 	@Override
-	public List<RecipeVO> selectRecommend(List<String> igr_num ) {
-		System.out.println("service구현==>"+igr_num);
-		List<RecipeVO> list = friDao.selectRecommend(igr_num);
+	public List<RecipeVO> selectRecommend(ArrayList<Integer> array) {
+		System.out.println("service구현==>"+array);
+		List<RecipeVO> list = friDao.selectRecommend(array);
         return list;
 	}
+
+//	@Override
+//	public RecipeVO recommendDetail(RecipeVO rvo) {
+//		RecipeVO detail = null;
+//		detail = friDao.recommendDetail(rvo);
+//		return detail;
+//	}
 
 	
 	

@@ -31,8 +31,8 @@
 			    <div class="refrigerator-card">
 			    	<div class="display-Box">
 					        <h3 class="h3-Box">나의 냉장고</h3>
-			    		<form id="igrForm" action="/refrigerator/recomRecipe" method="post">
-					        <input type="hidden" name="list_igrNum" id="list_igrNum"/>
+			    		<form id="igrForm">
+					        <input type="hidden" name="listIgrNum" id="igr_num"/>
 					        <input type="button" id="recommedRecipeBtn" value="레시피 추천 받기"/>
 			    		</form>
 			    	</div>

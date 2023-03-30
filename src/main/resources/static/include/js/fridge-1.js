@@ -58,19 +58,47 @@ $(function(){
 	
 	//레시피 추천받기 버튼 클릭시 
 	$("#recommedRecipeBtn").on("click", function(){
-		console.log("recommedRecipeBtn클릭~~");
-			let list_igrNum = [];
-			
-		//냉장고안 버튼의 value를 (igr_num)을 모두 가져와서 배열에 담는다.
+		
+		let list_igrNum = [];
+		//let $ul = document.querySelector('#content-list');
+		
 		$('.rfg-container > button').each(function(){
 			list_igrNum.push($(this).val());
 		})
-			console.log(list_igrNum); //배열에 잘 담김.post로 전달하기
-		let arrlist = $('#list_igrNum').val(list_igrNum);
-		// 배열에 담은 값을 select 쿼리로 보낸다.
-		// *** 발생되는 오류 xml 쿼리문에서 array가 null이다..
-		//$('#igrForm').submit();
-		 rcpRecomment(arrlist)
+	
+		$("#igr_num").val(list_igrNum);
+		console.log(list_igrNum) //배열 type object
+		console.log($("#igr_num").val()) //배열 type object
+					
+		$("#igrForm").attr({ "method":"post",
+							 "action":"/refrigerator/recomView"
+						});
+		$("#igrForm").submit();
+		
+		/*$.ajax({
+			url: "/refrigerator/selectRecommend",
+			traditional: true, 
+			data: {arr : list_igrNum},
+			type: "post",
+			dataType:"json",
+			async:false,
+			success: function(data){
+				console.log('성공쓰.>>>>'+data[0].rcp_seq+":"+data[0].rcp_nm);
+				for(let i = 0; i < data; i++){
+					let $li = $('<li><a href="/recipe/recipeDetail?rcp_seq='+data[i].rcp_seq+'>'+data[i].rcp_nm+'</a></li>');
+					$ul.append($li);
+				}
+				/*$(data).each(function(){
+					//ul.append('<li><a href="/recipe/recipeDetail?rcp_seq='+this.rcp_seq+'>'+this.rcp_nm+'</a></li>');
+				});
+				'<li><a href="/recipe/recipeDetail?rcp_seq='+data[i].rcp_seq+'>'+data[i].rcp_nm+'</a></li>';
+				
+				$ul.style.display='block';
+			},
+			error: function(){
+				$ul.html("리스트 실패..");
+			}
+		})*/
 		
 	});
 
@@ -96,15 +124,15 @@ function rcpRecomment(value){
 }
 
 //추천 레시피 템플릿
-/*function add_recommendTemp(igr_name,igr_num){
+function add_recommendTemp(igr_name,igr_num){
 	let arrName = igr_name;
 	let ul = document.querySelector('#content-list');
 	//a.href="#";
 	for(let i in arrName){
-		ul.innerHTML += '<li><a href="/recipe/recipeDetail?">'+arrName[i]+'</a></li>';
+		ul.innerHTML += '<li><a href="/recipe/recipeDetail?'+igr_num+'>'+arrName[i]+'</a></li>';
 	}
 	ul.style.display='block';
-}*/
+}
 function remove_recommendTemp(){
 	let ul = document.querySelector('#content-list');
 	ul.replaceChildren(); //* 에러잡기! 모든 li가 삭제 됨. 해당되는 데이터만 삭제할 수 있도록 하기.

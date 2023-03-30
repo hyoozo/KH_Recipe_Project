@@ -1,6 +1,14 @@
 package com.boot.client.refrigerator.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +17,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.client.member.vo.MemberVO;
 import com.boot.client.refrigerator.service.FridgeService;
 import com.boot.client.refrigerator.vo.FridgeVO;
+import com.boot.client.refrigerator.vo.IgrNumVO;
 import com.boot.recipe.info.vo.RecipeVO;
 
 import lombok.Setter;
@@ -76,22 +88,38 @@ public class RefrigeratorController {
 		return result;
 	}
 	
-//	@PostMapping("/recomRecipe")
-//	public String recomRecipe(String igrString, Model model) {
-//		log.info("recomRecipe 화면 호출");
-//		String[] arr = igrString.split(",");
-//		List<RecipeVO> list = fridgeService.selectRecommend(arr);
-//		model.addAttribute("igrlist", list);
-//		
-//		return "refrigerator/refrigerator_recipe"; 
-//	}
+	@PostMapping("/recomView")
+	public String recomView(Model model, IgrNumVO listIgrNum) {
+		log.info("--->"+listIgrNum.getListIgrNum());
+		log.info("recomView 화면 호출");
+		
+		model.addAttribute("detail", listIgrNum);
+		
+		return "refrigerator/refrigerator_recipe"; 
+	}
 	
-//	@PostMapping("/selectRecommend")
-//	public List<RecipeVO> selectRecommend(@Param("list_igrNum")String[] list_igrNum) { 
-//		System.out.println("selectRecommend 컨트롤러 실행 =================");
-//		
-//		List<RecipeVO> list = fridgeService.selectRecommend(list_igrNum);
-//        
-//		return list;
-//	}
+	/* 서버(Controller)단 : 뷰단에서 넘어온 데이터를 Controller에서 받기위해
+	 * HttpServletRequest의 getParameterValues로 선언한 값 받기.
+	 * */
+	@ResponseBody
+	@RequestMapping(value = "selectRecommend", method = RequestMethod.POST)
+	//public List<RecipeVO> selectRecommend(@RequestParam(value="arr") String[] array) {
+	public List<RecipeVO> selectRecommend(@RequestParam(value="arr") String[] arr, Model model){
+		System.out.println("selectRecommend 컨트롤러 실행 =========");
+		
+		//ArrayList<String> stringArr = igrlist.getListIgrNum();
+		//log.info("recomView 화면 호출 후 =>"+stringArr);
+		ArrayList<Integer> integetArr = new ArrayList<>();
+		
+		for(int i = 0; i < arr.length; i++) {
+			integetArr.add(Integer.parseInt(arr[i]));
+		}
+		System.out.println(integetArr);
+		
+		List<RecipeVO> list = fridgeService.selectRecommend(integetArr);
+		model.addAttribute("list", list);
+		
+		System.out.println("selectRecommend 컨트롤러 실행 후 =========>>>");
+		return list;
+	}
 }

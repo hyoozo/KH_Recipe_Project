@@ -1,5 +1,6 @@
 package com.boot.client.refrigerator.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -18,5 +19,5 @@ public interface FridgeDAO {
 	public int fridgeIgrInsert(int m_num, int igr_num);
 	public int memberIgrDelete(int igr_num, int m_num);
 	public int fridgeSelect(int igr_num, int m_num);
-	public List<RecipeVO> selectRecommend(List<String>igr_num);
+	public List<RecipeVO> selectRecommend(ArrayList<Integer> array);
 }

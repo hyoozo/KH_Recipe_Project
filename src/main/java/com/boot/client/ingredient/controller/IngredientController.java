@@ -31,15 +31,15 @@ public class IngredientController {
 	private FridgeService fridgeService;
 
 	/* 추천 레시피 검색 후 리스트 호출 */
-	@GetMapping(value = "/rcpList" )
-	public List<RecipeVO> rcpList(@RequestParam(value="arr[]") List<String> arr ) throws Exception{
-		log.info("rcpList()호출");
-		
-		
-		//String[] arr = igr_name.split(",");
-		List<RecipeVO> list = fridgeService.selectRecommend(arr);
-		return list;
-	}
+//	@GetMapping(value = "/rcpList" )
+//	public List<RecipeVO> rcpList(@RequestParam(value="arr[]") List<String> arr ) throws Exception{
+//		log.info("rcpList()호출");
+//		
+//		
+//		//String[] arr = igr_name.split(",");
+//		//List<RecipeVO> list = fridgeService.selectRecommend(arr);
+//		return null;
+//	}
 
 	
 	/* 재료 리스트 호출 */
