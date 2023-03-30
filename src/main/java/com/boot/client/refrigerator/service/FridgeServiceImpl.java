@@ -79,8 +79,7 @@ public class FridgeServiceImpl implements FridgeService {
 	@Override
 	public List<RecipeVO> selectRecommend(ArrayList<Integer> array) {
 		System.out.println("service구현==>"+array);
-		List<RecipeVO> list = friDao.selectRecommend(array);
-        return list;
+		return friDao.selectRecommend(array);
 	}
 
 //	@Override

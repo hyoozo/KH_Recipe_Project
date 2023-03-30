@@ -64,15 +64,18 @@ public class RefrigeratorController {
 
 	@GetMapping("/memberIgrList")
 	@ResponseBody
-	public List<FridgeVO> memberIgrList(MemberVO member) {
+	public List<FridgeVO> memberIgrList(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("login");
 		List<FridgeVO> list = null;
-		list = fridgeService.memberIgrList(member);
+		list = fridgeService.memberIgrList(memberVO);
 		return list;
 	}
+
 	
 	@GetMapping("/memberIgrDelete")
 	@ResponseBody
-	public int memberIgrList(int igr_num, int m_num) {
+	public int memberIgrDelete(int igr_num, int m_num) {
 		int result = 0;
 		result = fridgeService.memberIgrDelete(igr_num, m_num);
 		return result;
@@ -88,38 +91,19 @@ public class RefrigeratorController {
 		return result;
 	}
 	
-	@PostMapping("/recomView")
-	public String recomView(Model model, IgrNumVO listIgrNum) {
-		log.info("--->"+listIgrNum.getListIgrNum());
+	@GetMapping("/recomView")
+	public String recomView(Model model) {
 		log.info("recomView 화면 호출");
-		
-		model.addAttribute("detail", listIgrNum);
 		
 		return "refrigerator/refrigerator_recipe"; 
 	}
-	
-	/* 서버(Controller)단 : 뷰단에서 넘어온 데이터를 Controller에서 받기위해
-	 * HttpServletRequest의 getParameterValues로 선언한 값 받기.
-	 * */
+
 	@ResponseBody
 	@RequestMapping(value = "selectRecommend", method = RequestMethod.POST)
 	//public List<RecipeVO> selectRecommend(@RequestParam(value="arr") String[] array) {
-	public List<RecipeVO> selectRecommend(@RequestParam(value="arr") String[] arr, Model model){
+	public List<RecipeVO> selectRecommend(@RequestParam(value="arr") ArrayList<Integer> arr){
 		System.out.println("selectRecommend 컨트롤러 실행 =========");
-		
-		//ArrayList<String> stringArr = igrlist.getListIgrNum();
-		//log.info("recomView 화면 호출 후 =>"+stringArr);
-		ArrayList<Integer> integetArr = new ArrayList<>();
-		
-		for(int i = 0; i < arr.length; i++) {
-			integetArr.add(Integer.parseInt(arr[i]));
-		}
-		System.out.println(integetArr);
-		
-		List<RecipeVO> list = fridgeService.selectRecommend(integetArr);
-		model.addAttribute("list", list);
-		
-		System.out.println("selectRecommend 컨트롤러 실행 후 =========>>>");
+		List<RecipeVO> list = fridgeService.selectRecommend(arr);
 		return list;
 	}
 }

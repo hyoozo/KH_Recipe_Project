@@ -58,26 +58,27 @@ $(function(){
 	
 	//레시피 추천받기 버튼 클릭시 
 	$("#recommedRecipeBtn").on("click", function(){
-		
-		let list_igrNum = [];
-		//let $ul = document.querySelector('#content-list');
-		
-		$('.rfg-container > button').each(function(){
-			list_igrNum.push($(this).val());
-		})
+		location.href = `/refrigerator/recomView`;
+
+		// let list_igrNum = [];
+		// //let $ul = document.querySelector('#content-list');
+		//
+		// $('.rfg-container > button').each(function(){
+		// 	list_igrNum.push($(this).val());
+		// })
 	
-		$("#igr_num").val(list_igrNum);
-		console.log(list_igrNum) //배열 type object
-		console.log($("#igr_num").val()) //배열 type object
-					
-		$("#igrForm").attr({ "method":"post",
-							 "action":"/refrigerator/recomView"
-						});
-		$("#igrForm").submit();
-		
+		// $("#igr_num").val(list_igrNum);
+		// console.log(list_igrNum) //배열 type object
+		// console.log($("#igr_num").val()) //배열 type object
+
+		// $("#igrForm").attr({ "method":"post",
+		// 					 "action":"/refrigerator/recomView"
+		// 				});
+		// $("#igrForm").submit();
+
 		/*$.ajax({
 			url: "/refrigerator/selectRecommend",
-			traditional: true, 
+			traditional: true,
 			data: {arr : list_igrNum},
 			type: "post",
 			dataType:"json",
@@ -92,14 +93,14 @@ $(function(){
 					//ul.append('<li><a href="/recipe/recipeDetail?rcp_seq='+this.rcp_seq+'>'+this.rcp_nm+'</a></li>');
 				});
 				'<li><a href="/recipe/recipeDetail?rcp_seq='+data[i].rcp_seq+'>'+data[i].rcp_nm+'</a></li>';
-				
+
 				$ul.style.display='block';
 			},
 			error: function(){
 				$ul.html("리스트 실패..");
 			}
 		})*/
-		
+
 	});
 
 }); /** *************상당 function 종료 *************** **/
@@ -177,7 +178,6 @@ function deleteIgrList(memberNum,igr_num){
 function memberIgrList(memberNum){
 	$.ajax({
 		url: "/refrigerator/memberIgrList",
-		data: {m_num:memberNum},
 		type: "get",
 		dataType: "json",
 		error: function(){

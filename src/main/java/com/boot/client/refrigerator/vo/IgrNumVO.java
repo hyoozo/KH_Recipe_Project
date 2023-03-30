@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class IgrNumVO {
 	
-	private ArrayList<String> listIgrNum;
+	private ArrayList<Integer> listIgrNum;
 
 	/*@Override
 	public String toString() {
