@@ -1,0 +1,78 @@
+.wrapper > h2 {
+    font-size: 30px;
+    margin-left: 50px;
+}
+.refrigerator-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 80px;
+    grid-column-gap: 10px;
+    justify-items: center;
+    margin-top: 50px;
+}
+.refrigerator-card {
+    position: relative;
+    width: 500px;
+    height: 600px;
+    /* border: #2C3E50 1px solid; */
+    padding: 0 25px 25px 25px;
+    background-color: #ffffff;
+
+}
+.refrigerator-card > h3 {
+    margin: 20px 20px 20px 50px; 
+    font-size: 25px;
+    font-weight: normal;
+}
+.content-container {
+    width: 450px;
+    height: 500px;
+    /* border: #a35e1a9b 1px solid; */
+    border-radius: 30px;
+    /* box-shadow : 0 0 10px 1px rgba(136, 93, 19, 0.502) inset; */
+    /* box-shadow : 5px 5px 5px 1px rgba(136, 93, 19, 0.502) inset; */
+    background-color: rgba(231, 197, 93, 0.301);
+    padding: 50px 0 0 50px;
+  
+}
+.content-list > li {
+    margin-bottom: 10px;
+}
+.content-list > li::before{
+    content: "\f2e7";
+    font-family: "FontAwesome";
+    margin-right: 0.5em;
+    /* margin-left: -1.5em; */
+}
+.content-list > li > a{
+    color: black;
+    font-size: 25px;
+}
+.content-list > li > a:hover{
+    color : rgb(249, 97, 2);
+    font-size: 27px;
+}
+
+label {
+    font-size: 20px;
+}
+.food-container {
+    overflow: scroll;
+    height: 450px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.food-container > div {
+    margin: 5px 0 5px 0;
+}
+.content-memo {
+    border: none;
+    resize: none;
+    width: 400px;
+    height: 450px;
+    border-radius: 5px;
+}
+.content-memo:focus {
+    outline: none;
+
+}
