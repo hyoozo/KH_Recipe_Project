@@ -5,12 +5,14 @@ import java.nio.file.Path;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -141,7 +143,7 @@ class MemberController {
 	}
 	
 	
-	/*
+	
 	@PostMapping(value = "/joinProcess",consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String joinProess(@RequestBody MemberVO mvo) {
 		log.info("회원가입성공");
@@ -153,7 +155,7 @@ class MemberController {
 		
 		return (result == 1) ? "SUCCESS": "FAILURE";
 	}
-	*/
+	
 
 }
 

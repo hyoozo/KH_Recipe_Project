@@ -1,9 +1,11 @@
 package com.boot.client.recipe.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.boot.recipe.info.vo.RecipeVO;
 import com.boot.recipe.like.vo.RecLikeVO;
+import com.boot.recipe.manual.vo.RecipeManualVO;
 
 public interface RecipeService1 {
 	public List<RecipeVO> recipeList(RecipeVO rvo);
@@ -19,6 +21,8 @@ public interface RecipeService1 {
 	
 	//public RecLikeVO getLike();
 	
-	
+	public int recipeInsert(RecipeVO rvo, RecipeManualVO cvo) throws Exception;
+	public int recipeUpdate(RecipeVO rvo, RecipeManualVO cvo) throws Exception;
+	public int recipeDelete(RecipeVO rvo, RecipeManualVO cvo) throws Exception;
 	
 }

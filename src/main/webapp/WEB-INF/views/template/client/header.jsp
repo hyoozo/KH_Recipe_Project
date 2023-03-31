@@ -19,7 +19,7 @@
                         <li><a href="#">커뮤니티</a></li>
                     </ul>
                     <ul>
-                        <li><a href="#">회원가입</a></li>
+                        <li><a href="/member/joinForm">회원가입</a></li>
                         <li><a href="/member/loginForm">로그인</a></li>
                     </ul>
                 </div>

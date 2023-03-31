@@ -9,5 +9,9 @@
 		<typeAlias type="com.boot.store.bascket.vo.BascketVO" alias="bascket"/>
 		<typeAlias type="com.boot.store.order.vo.OrderVO" alias="order"/>
 		<typeAlias type="com.boot.store.orderList.vo.OrderListVO" alias="orderList"/>
+		<typeAlias type="com.boot.client.member.vo.MemberVO" alias="memberVO"/>
+		<typeAlias type="com.boot.recipe.like.vo.RecLikeVO" alias="like"/>
+		<typeAlias type="com.boot.recipe.manual.vo.RecipeManualVO" alias="manual"/>
+		<typeAlias type="com.boot.admin.vo.ManagerVO" alias="admin"/>
 	</typeAliases>
 </configuration>

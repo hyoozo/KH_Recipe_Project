@@ -1,5 +1,7 @@
 package com.boot.recipe.info.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.boot.common.vo.CommonVO;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +20,9 @@ public class RecipeVO extends CommonVO{
 	double info_eng;		// 칼로리
 	String att_file_no_mk;	// 이미지
 	String rcp_parts_dtls;	// 재료
+	
+	private MultipartFile file; // 파일 업로드
+	
 	
 	private String manual01;
 	private String manual_img01;
