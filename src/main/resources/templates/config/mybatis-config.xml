@@ -13,5 +13,6 @@
 		<typeAlias type="com.boot.store.orderList.vo.OrderListVO" alias="orderList"/>
 		<typeAlias type="com.boot.recipe.like.vo.RecLikeVO" alias="like"/>
 		<typeAlias type="com.boot.client.community.board.vo.CommunityVO" alias="comVO"/>
+		<typeAlias type="com.boot.client.community.reply.vo.ReplyVO" alias="reply"/>
 	</typeAliases>
 </configuration>

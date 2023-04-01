@@ -30,13 +30,14 @@
 				return;
 			}
 		});
+		
 	})
 </script>
 
 <body>
 	커뮤니티 디테일
 	<form id="detailSubmit">
-		<input type="hidden" name="c_no" value="${postDetail.c_no}" />
+		<input type="hidden" id="c_no" name="c_no" value="${postDetail.c_no}" />
 		<input type="hidden" name="m_num" value="${login.m_num}" />
 	</form>
 	
@@ -63,5 +64,8 @@
 			<input type="button" id="detail-list" value="목록">
 		</div>
 	</div>
+	
+	<jsp:include page="reply.jsp" />
+	
 </body>
 </html>

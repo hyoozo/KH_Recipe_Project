@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.boot.client.community.board.dao.CommunityDao;
 import com.boot.client.community.board.vo.CommunityVO;
-import com.boot.client.member.dao.MemberDao;
 import com.boot.client.member.vo.MemberVO;
 
 import lombok.Setter;
@@ -28,6 +27,8 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public CommunityVO postDetail(CommunityVO cvo) {
 		CommunityVO detail = null;
+		
+		communityDao.c_readcnt(cvo);
 
 		detail = communityDao.postDetail(cvo);
 		if (detail != null) {
@@ -81,5 +82,15 @@ public class CommunityServiceImpl implements CommunityService {
 	
 		return insert;
 	}
+
+	@Override
+	public int comListCnt(CommunityVO cvo) {
+		int listCnt = 0;
+		
+		listCnt = communityDao.comListCnt(cvo);
+		
+		return listCnt;
+	}
+	
 	
 }

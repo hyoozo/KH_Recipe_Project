@@ -1,5 +1,6 @@
 package com.boot.client.community.board.controller;
 
+import java.io.Console;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.boot.client.community.board.service.CommunityService;
 import com.boot.client.community.board.vo.CommunityVO;
 import com.boot.client.member.vo.MemberVO;
+import com.boot.common.vo.PageDTO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -32,12 +34,13 @@ public class CommunityController {
 	
 	@GetMapping("/postList")
 	public String postList(@ModelAttribute CommunityVO cvo,Model model) {
-		log.info("list 호출 성공");
 		
 		List<CommunityVO> resultList = communityService.postList(cvo);
 		model.addAttribute("postList", resultList);
 		
-		log.info("resultList:" + resultList);
+		int total = communityService.comListCnt(cvo);
+		model.addAttribute("pageMaker",new PageDTO(cvo,total));
+		log.info("짜잔:" + cvo );
 		
 		return "community/postList";
 	}

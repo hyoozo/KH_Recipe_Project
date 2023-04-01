@@ -1,22 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boot.client.community.board.dao.CommunityDao">
-
+	
+	<!-- 게시판 리스트와 페이징 -->
+	<!--
 	<select id="postList" resultType="comVO" parameterType="comVO">
+	<![CDATA[
+		SELECT *
+		FROM (
+			select /*+ index_desc(community PK_COMMUNITY) */
+			rownum as rn, c_no, c_title, c_category, c_writer, c_comment, c_img, c_readcnt,, to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date
+			FROM community
+			where ]]>
+			<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+				<if test="search=='c_title'">
+					<![CDATA[c_title LIKE '%' || #{keyword} || '%']]>
+				</if>
+				<if test="search=='c_writer'">
+					<![CDATA[c_writer LIKE '%' || #{keyword} || '%']]>
+				</if>
+				<if test="search=='c_comment'">
+					<![CDATA[c_comment LIKE '%' || #{keyword} || '%']]>
+				</if>
+			</trim>
+ 				<![CDATA[ rownum <= #{pageNum} * #{amount}
+ 					) postList
+ 					WHERE rn > (#{pageNum} - 1) * #{amount}
+ 				]]>
+	</select>
+	 -->
+	 
+	 <select id="postList" resultType="comVO" parameterType="comVO">
 		SELECT /*+ index_desc(community PK_COMMUNITY) */ *
 		FROM community
-		<where>
-			<if test="search=='c_title'">
-				<![CDATA[c_title LIKE '%' || #{keyword} || '%']]>
-			</if>
-			<if test="search=='c_writer'">
-				<![CDATA[c_writer LIKE '%' || #{keyword} || '%']]>
-			</if>
-			<if test="search=='c_comment'">
-				<![CDATA[c_comment LIKE '%' || #{keyword} || '%']]>
-			</if>
-		</where>
+			<where>
+				<if test="search=='c_title'">
+					<![CDATA[c_title LIKE '%' || #{keyword} || '%']]>
+				</if>
+				<if test="search=='c_writer'">
+					<![CDATA[c_writer LIKE '%' || #{keyword} || '%']]>
+				</if>
+				<if test="search=='c_comment'">
+					<![CDATA[c_comment LIKE '%' || #{keyword} || '%']]>
+				</if>
+			</where>
 	</select>
+	
+	<select id="comListCnt" parameterType="comVO" resultType="int">
+	 	select count(*) from community
+	 	<trim prefix="where (" suffix= ")" >
+	 		<include refid = "comSearch"></include>
+	 	</trim>
+	</select>
+	 
+	<sql id="comSearch">
+		<if test="search=='c_title'">
+			<![CDATA[c_title LIKE '%' || #{keyword} || '%']]>
+		</if>
+		<if test="search=='c_writer'">
+			<![CDATA[c_writer LIKE '%' || #{keyword} || '%']]>
+		</if>
+		<if test="search=='c_comment'">
+			<![CDATA[c_comment LIKE '%' || #{keyword} || '%']]>
+		</if>
+	</sql>
+	
 	
 	<select id="postDetail" resultType="comVO" parameterType="comVO">
 		SELECT c_no, c_title, c_category, c_writer, c_comment, c_img, c_readcnt, to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date
@@ -24,11 +72,13 @@
 		where c_no = #{c_no}
 	</select>
 	
+	
 	<select id="updateForm" resultType="comVO" parameterType="comVO">
 		SELECT c_no, c_title, c_category, c_writer, c_comment, c_img, c_readcnt, to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date
 		FROM COMMUNITY
 		where c_no = #{c_no}
 	</select>
+	
 	
 	<update id="postUpdate" parameterType="comVO">
 		UPDATE COMMUNITY
@@ -40,16 +90,24 @@
 		WHERE m_num = #{m_num}	
 	</update>
 	
+	
 	<delete id="postDelete" parameterType="comVO">
 		DELETE FROM COMMUNITY
 		WHERE c_no = #{c_no}
 	</delete>
 	
+	
 	<insert id="postInsert" parameterType="comVO">
 		insert into COMMUNITY (c_no,c_title,c_category,c_writer,c_comment,c_img,c_readcnt,c_reg_date,m_num)
 		values(SEQ_COMMUNITY.nextval,#{c_title},#{c_category},#{c_writer},#{c_comment},#{c_img},1,to_date(sysdate,'yyyy.mm.dd'),#{m_num})
-		
 	</insert>
+	
+	
+	<update id="c_readcnt" parameterType="comVO">
+		UPDATE COMMUNITY
+		SET c_readcnt = c_readcnt + 1
+		WHERE c_no = #{c_no}
+	</update>
 
 
 </mapper>

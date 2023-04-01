@@ -85,7 +85,7 @@ public class ItemsCrawlingServiceImpl implements ItemsCrawlingService {
 				
 				ItemsVO vo = ItemsVO.builder()
 						.i_name(element.select("div.desc > p.name").text())
-						.i_parts("프라이팬·냄비")
+						.i_parts("가전제품")
 						.i_price(element.select("div.desc > p.origin_price").text())
 						.i_img(element.select("div.main_image > img").attr("abs:src"))
 						.i_quan(100)

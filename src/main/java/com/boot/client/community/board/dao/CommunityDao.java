@@ -22,5 +22,9 @@ public interface CommunityDao {
 	public MemberVO insertForm(MemberVO mvo);
 	
 	public int postInsert(CommunityVO cvo);
+	
+	public int c_readcnt(CommunityVO cvo);
+	
+	public int comListCnt(CommunityVO cvo);
 
 }

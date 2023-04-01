@@ -41,7 +41,7 @@
 			       });
 			       
 			       let o_num = ${login.m_num} + "_" + new Date().getTime();
-			       console.log(typeof o_num);
+			       console.log(o_num);
 			       
 			       var IMP = window.IMP; 
 			       IMP.init("imp30735743"); 
