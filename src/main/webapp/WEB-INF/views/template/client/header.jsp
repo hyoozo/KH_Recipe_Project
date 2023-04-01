@@ -7,7 +7,7 @@
         <header class="header-container">
             <div class="header-img">
                 <div class="center">
-                    <h1>냉장고 레시피</h1>
+                    <h1 class="headerH1">냉장고 레시피</h1>
                 </div>
             </div>
             <div class="nav">

@@ -1,6 +1,5 @@
 $(function(){
 	let ingredientData = []; // 재료 
-	let refrigerator = [];  // 냉장고재료
 	let memberNum = Number($("#sessionId").val());
 	
 	console.log("page1 실행=");
@@ -34,25 +33,15 @@ $(function(){
 		    deleteIgrList(memberNum,igr_num);
 		});
 		
-		// 검색 버튼 클릭시
-		$("#searchBtn").on("click", function(){
-			console.log("#검색버튼 클릭됨.");
-			const inputvalue = $("#searchInput").val();
-			console.log(inputvalue);
-		});
-		
 		/*회원에 맞는 냉장고 테이블 재료 뿌리기 */
 		memberIgrList(ingredientData);
 		
 		/*메모 뿌리기*/
 		memoSelect();
-		
 	
 	}).fail(function(err){
 		console.error(err);
 	});/** 상당 getJSON 종료 */
-	
-
 	
 	$('#content-memo').on('change',function(){
 		const memo_content = $('#content-memo').val();
@@ -69,8 +58,35 @@ $(function(){
 			},
 		})
 	})
+	
+	let input = document.getElementById("searchInput");
+	let button = document.getElementById('searchBtn');
+	input.focus()
+	input.addEventListener('keydown',function(e){
+	    if(e.key === "Enter"){
+	      filter();
+	    }
+	})
+	button.addEventListener('click', filter());
+
 }); /** *************상당 function 종료 *************** **/
 
+function filter(){
+	const item = document.getElementsByClassName('igrBtn');
+	const input = document.getElementById('searchInput').value.toUpperCase();
+	const select = document.getElementsByClassName('removeBtn');
+	let name;
+	for(let i=0; i < item.length; i++){
+		name = item[i].innerHTML;
+		if(name.indexOf(input) > -1){
+			item[i].style.display = 'grid';
+		}else{
+			item[i].style.display = 'none';
+		}
+	}	
+	
+}       
+		
 function insertRefridge(sessionId, igr_num) {
 	let requestData = {
 		m_num : sessionId,
@@ -99,7 +115,8 @@ function deleteIgrList(memberNum,igr_num){
 			alert("재료를 삭제할 수 없습니다. 관리자에게 문의하세요.")
 		},
 		success: function(){
-			$(`#ingr-btn-${igr_num}`).attr('class','clearBtn')
+			$(`#ingr-btn-${igr_num}`).addClass('clearBtn')
+			 $(`#ingr-btn-${igr_num}`).removeClass('removeBtn')
 	        $(`#ref-btn-${igr_num}`).remove();
 		}
 	})
@@ -118,7 +135,7 @@ function memberIgrList(){
 			$(data).each(function(){
 				 const $button = $("<button value=" + this.igr_num.igr_num + " id=ref-btn-"+this.igr_num.igr_num +" class='rfgBtn'>"+this.igr_num.igr_name+"</button>");
 				 $('.rfg-container').append($button)
-				 $(`#ingr-btn-${this.igr_num.igr_num}`).attr('class','removeBtn');
+				 $(`#ingr-btn-${this.igr_num.igr_num}`).addClass('removeBtn');
 			})
 		}
 	})
@@ -139,14 +156,16 @@ function fridgeSelect(igr_num,memberNum,igr_name){
 			if(resultData == 0){
 				let sessionId = $(`#sessionId`).val();
 		        // 해당 재료 버튼 css
-		        $(`#ingr-btn-${igr_num}`).attr('class','removeBtn');
+		        $(`#ingr-btn-${igr_num}`).addClass('removeBtn');
+		        $(`#ingr-btn-${igr_num}`).removeClass('clearBtn')
 		        // 냉장고 화면에 추가할 버튼 생성
 		        const $button = $(`<button value="${igr_num}" id="ref-btn-${igr_num}" class="rfgBtn">${igr_name}</button>`);
 		        // 냉장고 화면에 버튼 추가
 		        $('.rfg-container').append($button)
 				insertRefridge(sessionId, igr_num);
 			}else {
-		        $(`#ingr-btn-${igr_num}`).attr('class','clearBtn')
+		        $(`#ingr-btn-${igr_num}`).addClass('clearBtn')
+		        $(`#ingr-btn-${igr_num}`).removeClass('removeBtn')
 		        $(`#ref-btn-${igr_num}`).remove();
 		        deleteIgrList(memberNum,igr_num);
 			}

@@ -15,7 +15,7 @@
 		        <h3>재료 리스트</h3>
 		        <div class="content-container">
 			        	<div class="searchBox">
-			        		<input id="searchInput" type="text" placeholder="재료를 검색하세요."/>
+			        		<input onkeyup="filter()" type="text" id="searchInput" type="text" placeholder="재료를 검색하세요."/>
 			        		<button id="searchBtn"></button>
 			        	</div>
 		        	<div class="food-container ingredient-container ">
