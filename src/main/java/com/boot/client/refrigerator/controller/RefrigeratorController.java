@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.boot.client.member.vo.MemberVO;
+import com.boot.client.refrigerator.memo.Memo;
 import com.boot.client.refrigerator.service.FridgeService;
 import com.boot.client.refrigerator.vo.FridgeVO;
 import com.boot.client.refrigerator.vo.IgrNumVO;
@@ -49,16 +51,11 @@ public class RefrigeratorController {
 	@PostMapping("/insert")
 	@ResponseBody
 	public ResponseEntity<String> fridgeIgrInsert(@Param("m_num")int m_num, @Param("igr_num") int igr_num) {
-		
 		ResponseEntity<String> entity = null;
 		int result = 0;
 		result = fridgeService.fridgeIgrInsert(m_num, igr_num);
-		
 		log.info("fridgeIgrInsert result======" + result);
-		
-		
 		entity = new ResponseEntity<String>(String.valueOf(result), HttpStatus.OK);
-		
 		return entity;
 	}
 
@@ -72,7 +69,6 @@ public class RefrigeratorController {
 		return list;
 	}
 
-	
 	@GetMapping("/memberIgrDelete")
 	@ResponseBody
 	public int memberIgrDelete(int igr_num, int m_num) {
@@ -87,23 +83,47 @@ public class RefrigeratorController {
 		System.out.println("fridgeSelect 호출 m_num ="+ m_num);
 		int result = 0;
 		result = fridgeService.fridgeSelect(igr_num, m_num);
-		System.out.println("fridgeSelect 호출 ="+ result);
 		return result;
 	}
 	
 	@GetMapping("/recomView")
 	public String recomView(Model model) {
 		log.info("recomView 화면 호출");
-		
 		return "refrigerator/refrigerator_recipe"; 
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "selectRecommend", method = RequestMethod.POST)
-	//public List<RecipeVO> selectRecommend(@RequestParam(value="arr") String[] array) {
 	public List<RecipeVO> selectRecommend(@RequestParam(value="arr") ArrayList<Integer> arr){
 		System.out.println("selectRecommend 컨트롤러 실행 =========");
 		List<RecipeVO> list = fridgeService.selectRecommend(arr);
 		return list;
 	}
+	
+	@PostMapping("/memoUpdate")
+	@ResponseBody
+	public String memoUpdate(Memo memo, @SessionAttribute("login")  MemberVO member) {
+		System.out.println("===========MEMO 컨트롤러 실행 =========");
+		memo.setMember(member);
+		memo.getMember().setM_num(member.getM_num());
+		
+		//memo.setM_num(member.getM_num());
+		
+		// 쿼리 실행 실패시 0 , 성공시 1 반환됨
+		fridgeService.memoUpdate(memo);
+		
+		return memo.getMemo_content();
+	}
+	
+	@GetMapping("/memoSelect")
+	@ResponseBody
+	public Memo meemoSelect(Memo memo, @SessionAttribute("login")  MemberVO member) {
+		memo.setMember(member);
+		memo.getMember().setM_num(member.getM_num());
+		
+		memo = fridgeService.memoSelect(memo);
+		
+		return memo;
+	}
+	
 }
