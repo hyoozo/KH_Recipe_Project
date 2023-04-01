@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 <link href="/resources/include/css/member.css" rel="stylesheet">
 <script src="/resources/include/js/member.js"></script>
 

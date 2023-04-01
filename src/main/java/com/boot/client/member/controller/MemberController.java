@@ -180,6 +180,7 @@ class MemberController {
 	
 	
 	
+	
 	@PostMapping(value = "/joinProcess",consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String joinProess(@RequestBody MemberVO mvo) {
 		log.info("회원가입성공");
@@ -192,6 +193,7 @@ class MemberController {
 		return (result == 1) ? "SUCCESS": "FAILURE";
 	}
 	
+
 }
 
 		

@@ -1,10 +1,18 @@
 package com.boot.admin.vo;
 
+import com.boot.common.vo.CommonVO;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
-public class ManagerVO {
-	private int mng_no; // 관리자 번호
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper=false)
+public class ManagerVO extends CommonVO{
+	private int mng_num; // 관리자 번호
 	private String mng_id; // 관리자 아이디
 	private String mng_pwd; // 관리자 비밀번호
 	private String mng_name; // 관리자 이름
