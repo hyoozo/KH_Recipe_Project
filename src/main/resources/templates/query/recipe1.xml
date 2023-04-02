@@ -33,10 +33,10 @@
 	
 	<select id="recipeList" parameterType="recipe" resultType="recipe">
 	<![CDATA[
-		SELECT rcp_seq, rcp_nm, info_eng, att_file_no_mk
+		SELECT rcp_seq, rcp_nm, info_eng, rcp_pat2, rcp_parts_dtls, att_file_no_mk
 		FROM (
 			SELECT /*+ INDEX_DESC(recipe pk_recipe) */
-			rownum as rnum, rcp_seq, rcp_nm, info_eng, att_file_no_mk
+			rownum as rnum, rcp_seq, rcp_nm, info_eng, rcp_pat2, rcp_parts_dtls, att_file_no_mk
 			FROM recipe
 			WHERE ]]>
 				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
@@ -84,4 +84,61 @@
 		FROM rcp_like
 		WHERE rcp_seq = #{rcp_seq} AND rcplike_status = 1
 	</select>
+	
+	<insert id="recipeInsert" parameterType="recipe">
+		INSERT INTO recipe(rcp_seq, rcp_nm, rcp_pat2, info_eng, att_file_no_mk, rcp_parts_dtls)
+		VALUES (seq_rcp.nextval, #{rcp_nm}, #{rcp_pat2}, #{info_eng}, #{att_file_no_mk}, #{rcp_parts_dtls})
+	</insert>
+	
+	<insert id="recipeManualInsert" parameterType="manual">
+		INSERT INTO recipe_manual(rcp_seq, manual01, manual_img01, manual02, manual_img02, manual03, manual_img03, manual04, manual_img04, manual05, manual_img05, manual06, manual_img06)
+		VALUES (seq_rcp.currval, #{manual01, jdbcType=VARCHAR}, #{manual_img01, jdbcType=VARCHAR}, #{manual02, jdbcType=VARCHAR}, #{manual_img02, jdbcType=VARCHAR}, #{manual03, jdbcType=VARCHAR}, #{manual_img03, jdbcType=VARCHAR}, #{manual04, jdbcType=VARCHAR}, #{manual_img04, jdbcType=VARCHAR}, #{manual05, jdbcType=VARCHAR}, #{manual_img05, jdbcType=VARCHAR}, #{manual06, jdbcType=VARCHAR}, #{manual_img06, jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="recipeUpdate" parameterType="recipe">
+		UPDATE recipe
+		SET att_file_no_mk = COALESCE(#{att_file_no_mk}, att_file_no_mk)
+		<if test="rcp_nm != '' ">
+			, rcp_nm = #{rcp_nm}
+		</if>
+		<if test="rcp_pat2 != '분류'">
+			, rcp_pat2 = #{rcp_pat2}
+		</if>
+		<if test="rcp_parts_dtls != ''">
+			, rcp_parts_dtls = #{rcp_parts_dtls}
+		</if>
+		,info_eng = #{info_eng}
+		WHERE rcp_seq = #{rcp_seq}
+	</update>
+	
+	<update id="recipeManualUpdate" parameterType="manual">
+		UPDATE recipe_manual
+		SET
+			manual01 = COALESCE(#{manual01}, manual01),
+    		manual_img01 = COALESCE(#{manual_img01, jdbcType=VARCHAR}, manual_img01),
+    		manual02 = COALESCE(#{manual02}, manual02),
+   			manual_img02 = COALESCE(#{manual_img02, jdbcType=VARCHAR}, manual_img02),
+    		manual03 = COALESCE(#{manual03}, manual03),
+    		manual_img03 = COALESCE(#{manual_img03, jdbcType=VARCHAR}, manual_img03),
+    		manual04 = COALESCE(#{manual04}, manual04),
+    		manual_img04 = COALESCE(#{manual_img04, jdbcType=VARCHAR}, manual_img04),
+    		manual05 = COALESCE(#{manual05}, manual05),
+    		manual_img05 = COALESCE(#{manual_img05, jdbcType=VARCHAR}, manual_img05),
+   			manual06 = COALESCE(#{manual06}, manual06),
+    		manual_img06 = COALESCE(#{manual_img06, jdbcType=VARCHAR}, manual_img06)
+		WHERE rcp_seq = #{rcp_seq}
+	</update>
+	
+	<delete id="recipeManualDelete" parameterType="manual">
+		DELETE FROM recipe_manual WHERE rcp_seq = #{rcp_seq}
+	</delete>
+	
+	<delete id="recipeDelete" parameterType="recipe">
+		DELETE FROM recipe WHERE rcp_seq = #{rcp_seq}
+	</delete>
+	
+	<delete id="recipeLikeDelete" parameterType="recipe">
+		DELETE FROM rcp_like WHERE rcp_seq = #{rcp_seq}
+	</delete>
+	
 </mapper>

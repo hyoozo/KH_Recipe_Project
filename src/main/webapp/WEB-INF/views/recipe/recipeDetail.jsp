@@ -62,7 +62,7 @@
 	<script type="text/javascript">
 	
 		function like_up(){
-			var m_num = "${memberLogin.m_num}"
+			var m_num = "${login.m_num}"
 			var rcp_seq = $(".image-box").attr("data-num");
 			var sl = $(".sl");
 			let likecheck = "${likecheck}"
@@ -106,11 +106,16 @@
 		<h3>${detail.rcp_nm} 만들기</h3>
 		<div class="contentContainer container">
 			<div class="image-box" data-num="${detail.rcp_seq}">
-				<img src="${detail.att_file_no_mk}" class="image-thumbnail"/>
+				<c:if test="${fn:contains(detail.att_file_no_mk, 'foodsafetykorea')}">
+					<img src="${detail.att_file_no_mk}" class="image-thumbnail"/>
+				</c:if>
+				<c:if test="${not fn:contains(detail.att_file_no_mk, 'foodsafetykorea')}">
+					<img src="/resources/recipe/${detail.att_file_no_mk}"  class="image-thumbnail"/>
+				</c:if>
 				<div id="recipenm" class="text-info">${detail.rcp_nm}
 					<c:choose>
 						<%-- 회원 --%>
-						<c:when test="${not empty memberLogin}">
+						<c:when test="${not empty login}">
 							<c:choose>
 								<c:when test="${likecheck == 0}">
 									<a href="javascript: like_up();"><img src="/resources/image/heart2.png" class="sl"/></a>
@@ -121,7 +126,7 @@
 							</c:choose>
 						</c:when>
 					</c:choose>
-					<c:if test="${empty memberLogin}">
+					<c:if test="${empty login}">
 						<a href="javascript: login_need();"><img src="/resources/image/heart2.png" class="sl"/></a>
 					</c:if>
 				</div>	
@@ -134,7 +139,12 @@
 					<c:when test="${not empty detail}">
 						<c:if test="${not empty detail.manual_img01}">
 							<article>
-								<img src="${detail.manual_img01}" class="recipe-thumbnail" />
+								<c:if test="${fn:contains(detail.manual_img01, 'foodsafetykorea')}">
+									<img src="${detail.manual_img01}" class="recipe-thumbnail"/>
+								</c:if>
+								<c:if test="${not fn:contains(detail.manual_img01, 'foodsafetykorea')}">
+									<img src="/resources/manual/${detail.manual_img01}"  class="recipe-thumbnail"/>
+								</c:if>
 							</article>
 							<hgroup class="main-articles">
 								<h4>&nbsp;&nbsp;Step1</h4>
@@ -147,7 +157,12 @@
 						</c:if>
 						<c:if test="${not empty detail.manual_img02}">
 							<article>
-								<img src="${detail.manual_img02}" class="recipe-thumbnail" />
+								<c:if test="${fn:contains(detail.manual_img02, 'foodsafetykorea')}">
+									<img src="${detail.manual_img02}" class="recipe-thumbnail"/>
+								</c:if>
+								<c:if test="${not fn:contains(detail.manual_img02, 'foodsafetykorea')}">
+									<img src="/resources/manual/${detail.manual_img02}"  class="recipe-thumbnail"/>
+								</c:if>
 							</article>
 							<hgroup class="main-articles">
 								<h4>&nbsp;&nbsp;Step2</h4>
@@ -160,7 +175,12 @@
 						</c:if>
 						<c:if test="${not empty detail.manual_img03}">
 							<article>
-								<img src="${detail.manual_img03}" class="recipe-thumbnail" />
+								<c:if test="${fn:contains(detail.manual_img03, 'foodsafetykorea')}">
+									<img src="${detail.manual_img03}" class="recipe-thumbnail"/>
+								</c:if>
+								<c:if test="${not fn:contains(detail.manual_img03, 'foodsafetykorea')}">
+									<img src="/resources/manual/${detail.manual_img03}"  class="recipe-thumbnail"/>
+								</c:if>
 							</article>
 							<hgroup class="main-articles">
 								<h4>&nbsp;&nbsp;Step3</h4>
@@ -173,7 +193,12 @@
 						</c:if>
 						<c:if test="${not empty detail.manual_img04}">
 							<article>
-								<img src="${detail.manual_img04}" class="recipe-thumbnail" />
+								<c:if test="${fn:contains(detail.manual_img04, 'foodsafetykorea')}">
+									<img src="${detail.manual_img04}" class="recipe-thumbnail"/>
+								</c:if>
+								<c:if test="${not fn:contains(detail.manual_img04, 'foodsafetykorea')}">
+									<img src="/resources/manual/${detail.manual_img04}"  class="recipe-thumbnail"/>
+								</c:if>
 							</article>
 							<hgroup class="main-articles">
 								<h4>&nbsp;&nbsp;Step4</h4>
@@ -186,7 +211,12 @@
 						</c:if>
 						<c:if test="${not empty detail.manual_img05}">
 							<article>
-								<img src="${detail.manual_img05}" class="recipe-thumbnail" />
+								<c:if test="${fn:contains(detail.manual_img05, 'foodsafetykorea')}">
+									<img src="${detail.manual_img05}" class="recipe-thumbnail"/>
+								</c:if>
+								<c:if test="${not fn:contains(detail.manual_img05, 'foodsafetykorea')}">
+									<img src="/resources/manual/${detail.manual_img05}"  class="recipe-thumbnail"/>
+								</c:if>
 							</article>
 							<hgroup class="main-articles">
 								<h4>&nbsp;&nbsp;Step5</h4>
@@ -199,7 +229,12 @@
 						</c:if>
 						<c:if test="${not empty detail.manual_img06}">
 							<article>
-								<img src="${detail.manual_img06}" class="recipe-thumbnail" />
+								<c:if test="${fn:contains(detail.manual_img06, 'foodsafetykorea')}">
+									<img src="${detail.manual_img06}" class="recipe-thumbnail"/>
+								</c:if>
+								<c:if test="${not fn:contains(detail.manual_img06, 'foodsafetykorea')}">
+									<img src="/resources/manual/${detail.manual_img06}"  class="recipe-thumbnail"/>
+								</c:if>
 							</article>
 							<hgroup class="main-articles">
 								<h4>&nbsp;&nbsp;Step6</h4>
