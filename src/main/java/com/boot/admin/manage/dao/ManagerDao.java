@@ -8,7 +8,8 @@ import com.boot.admin.vo.ManagerVO;
 
 @Mapper
 public interface ManagerDao {
-
+	public ManagerVO loginProcess(ManagerVO login);
+	
 	public List<ManagerVO> adminList(ManagerVO mvo);
 	public int adminCnt(ManagerVO mvo);
 }

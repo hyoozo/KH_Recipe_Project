@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boot.admin.manage.dao.ManagerDao">
+
+	<select id="loginProcess" parameterType="admin" resultType="admin">
+		SELECT *
+		FROM manager
+		WHERE mng_id = #{mng_id} AND mng_pwd = #{mng_pwd}
+	</select>
+
+
 	<sql id="adminSearch">
 		<if test="search=='mng_name'">
 			<![CDATA[ mng_name LIKE '%'|| #{keyword} || '%' ]]>

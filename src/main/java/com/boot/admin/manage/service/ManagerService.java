@@ -6,6 +6,8 @@ import com.boot.admin.vo.ManagerVO;
 
 public interface ManagerService {
 
+	public ManagerVO loginProcess(ManagerVO login);
+	
 	public List<ManagerVO> adminList(ManagerVO mvo);
 
 	public int adminCnt(ManagerVO mvo);

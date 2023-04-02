@@ -17,6 +17,12 @@ public class ManagerServiceImpl implements ManagerService {
 	private ManagerDao managerDao;
 	
 	@Override
+	public ManagerVO loginProcess(ManagerVO login) {
+		ManagerVO adminLogin = managerDao.loginProcess(login);
+		return adminLogin;
+	}
+	
+	@Override
 	public List<ManagerVO> adminList(ManagerVO mvo) {
 		List<ManagerVO> list = null;
 		list = managerDao.adminList(mvo);
@@ -28,6 +34,4 @@ public class ManagerServiceImpl implements ManagerService {
 		return managerDao.adminCnt(mvo);
 	}
 
-	
-	
 }
