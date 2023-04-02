@@ -3,10 +3,15 @@
 <mapper namespace="com.boot.store.order.dao.OrderDao">
 	
 	<insert id="addOrder" parameterType="order">
-		<selectKey keyProperty="o_num" resultType="int" order="BEFORE">
-			select seq_orders.nextval from dual
-		</selectKey>
-		insert into orders(o_num, m_num, o_state)
-		values(#{o_num}, #{mvo.m_num}, 'T')
+		insert into orders
+		values(#{imp_uid}, #{pay_method}, #{merchant_uid}, #{name},
+				#{amount}, sysdate, #{mvo.m_num}
+				)
 	</insert>
+	
+	<select id="getItemPrice" parameterType="items" resultType="String">
+		select replace(i_price, ',') as i_price
+		from items
+		where i_num = #{i_num}
+	</select>
 </mapper>

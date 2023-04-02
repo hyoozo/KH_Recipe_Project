@@ -35,8 +35,24 @@ public class OrderListServiceImpl implements OrderListService {
 	}
 	
 	@Override
-	public List<OrderListVO> orderList(MemberVO mvo){
+	public List<OrderListVO> orderList(OrderListVO olvo){
 		
-		return orderListDao.orderList(mvo);
+		return orderListDao.orderList(olvo);
+	}
+	
+	@Override
+	public int orderListCnt(MemberVO mvo) {
+		int result = 0;
+		result = orderListDao.orderListCnt(mvo);
+		
+		return result;
+	}
+	
+	@Override
+	public int updateState(OrderListVO olvo) {
+		int result = 0;
+		result = orderListDao.updateState(olvo);
+		
+		return result;
 	}
 }

@@ -33,6 +33,7 @@ public class FridgeServiceImpl implements FridgeService {
 	public List<IngredientVO> igrList() {
 		List<IngredientVO> list = new ArrayList<>();
 		list = friDao.igrList();
+		//log.info(list.toString());
 		return list;
 	}
 	

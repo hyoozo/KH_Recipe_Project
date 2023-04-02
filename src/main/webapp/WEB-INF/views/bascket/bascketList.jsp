@@ -62,65 +62,63 @@
 			        }, function (rsp) { // callback
 			        	console.log(rsp);
 			            if (rsp.success) {
-			               
-			               $.ajax({
-		            		   url : "/order/addOrder",
-		            		   type: "post",
-		            		   data : JSON.stringify({m_num: ${login.m_num}}),
-		            		   dataType : "text",
-		            		   success : function(data){
-		            			   console.log(data);
-		            		   }
+			            	$.when(addOrder(rsp)).done(function(result){
+				            	   //console.log(result);
+				            	   if(result == '성공'){
+				            		   $("#bascketList > div.itemList").each(function(){
+						            	   let b_num = $(this).attr("data-num");
+						            	   let i_num = $(this).find("div > p.num").html();
+						            	   let ol_quan = Number($(this).find("div > p.name > span.cnt").html());
+						            	   
+						            	   $.ajax({
+						            		   url : "/order/addOrders",
+						            		   type: "post",
+						            		   data : {
+						            			   "imp_uid": rsp.imp_uid,
+						            			   "pay_method": rsp.pay_method,
+						            			   "merchant_uid": rsp.merchant_uid,
+						            			   "name": rsp.name,
+						            			   "amount": rsp.paid_amount,
+						            			   
+						            			   i_num : i_num,
+					            				   i_quan: ol_quan,
+					            				   ol_quan : ol_quan,  
+						            			   b_num: b_num
+						            	  	   },
+						            		   dataType : "text",
+						            		   success : function(data){
+						            			   alert("결제 완료되었습니다.");
+						            			   console.log(data);
+
+							            		   location.href="/";
+						            		   },
+						            		   error: function(){
+						            			   alert("결제 실패했습니다.");
+						            		   }
+						            	   });
+						               });
+				            	   } else {
+				            		   $.ajax({
+							            	 url: "/order/paymentCancel" ,
+							            	 type: "post",
+							            	 data: {
+							            		imp_uid: rsp.imp_uid,
+							            		amount: rsp.paid_amount
+							            	 },
+							            	 dataType: "text",
+							            	 success: function(data){
+							            		 console.log(data);
+							            		 if(data == "결제 취소"){
+							            			 alert("결제가 취소되었습니다."); 
+							            		 } else {
+							            			 alert("시스템 오류가 발생");
+							            		 }
+							            		 
+							            	 }
+							              });
+				            	   }
 		            	   });
 			               
-			               $("#bascketList > div.itemList").each(function(){
-			            	   let b_num = $(this).attr("data-num");
-			            	   let i_num = $(this).find("div > p.num").html();
-			            	   let ol_quan = Number($(this).find("div > p.name > span.cnt").html());
-			            	   
-			            	   $.ajax({
-			            		   url : "/store/updateItemQuan",
-			            		   type: "post",
-			            		   data : {
-			 						   i_num: i_num,
-			 						   i_quan: ol_quan
-			            		   },
-			            		   dataType : "text",
-			            		   success : function(data){
-			            			   console.log(data);
-			            			   
-			            		   }
-			            	   });
-			            	   
-			            	   $.ajax({
-			            		   url : "/bascket/deleteItem",
-			            		   type: "post",
-			            		   data : {
-			            			   b_num: b_num
-			            		   },
-			            		   dataType : "text",
-			            		   success : function(data){
-			            			   console.log(data);
-			            		   }
-			            	   });
-			            	   
-			            	   $.ajax({
-			            		   url : "/order/addOrders",
-			            		   type: "post",
-			            		   data : JSON.stringify({
-			            			   ivo: {i_num : i_num},
-			            			   mvo: {m_num : ${login.m_num} },
-			            			   ol_quan : ol_quan
-			            	  	   }),
-			            		   dataType : "text",
-			            		   success : function(data){
-			            			   console.log(data);
-			            			   location.href="/";
-			            		   }
-			            	   });
-			            	   
-			            	   
-			               });
 			            } else {
 			                //console.log(rsp);
 			                alert("결제에 실패했습니다.");
@@ -184,6 +182,31 @@
 				   });
 				   
 			   });
+			   
+			   function addOrder(rsp){
+				   //console.log(rsp.imp_uid);
+				   var def = new $.Deferred();
+				   $.ajax({
+            		   url : "/order/addOrder",
+            		   type: "post",
+            		   data : {
+            			   "imp_uid": rsp.imp_uid,
+            			   "pay_method": rsp.pay_method,
+            			   "merchant_uid": rsp.merchant_uid,
+            			   "name": rsp.name,
+            			   "amount": rsp.paid_amount
+            		   },
+            		   dataType : "text",
+            		   success : function(data){
+            			   console.log(data);
+            			   def.resolve(data);
+            		   },
+            		   error: function(){
+            			   def.reject("실패");
+            		   }
+            	   });
+				   return def.promise();
+			   }
 			   
 			});
 		</script>

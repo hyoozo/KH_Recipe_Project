@@ -11,5 +11,7 @@ import com.boot.store.orderList.vo.OrderListVO;
 public interface OrderListDao {
 	public int addOrderList(OrderListVO olvo);
 	public int maxOrderNum(MemberVO mvo);
-	public List<OrderListVO> orderList(MemberVO mvo);
+	public List<OrderListVO> orderList(OrderListVO olvo);
+	public int orderListCnt(MemberVO mvo);
+	public int updateState(OrderListVO olvo);
 }

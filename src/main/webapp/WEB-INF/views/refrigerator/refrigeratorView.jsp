@@ -6,6 +6,7 @@
  	<link href="/resources/include/css/fridge-1.css" rel="stylesheet">
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/ccd4ff9cee.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/resources/include/js/fridge-1.js"></script>
 </head>
 <body>
     <input type='hidden' id="sessionId" value="${login.m_num}">
@@ -65,6 +66,5 @@
 		    </div>
 		    
 		</section>
-		 <script type="text/javascript" src="/resources/include/js/fridge-1.js"></script>
 	</body>
 </html>

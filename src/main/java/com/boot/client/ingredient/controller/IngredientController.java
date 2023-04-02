@@ -47,6 +47,7 @@ public class IngredientController {
 	public List<IngredientVO> igrList(){
 		log.info("igrList()호출");
 		List<IngredientVO> ingredient = fridgeService.igrList();
+		log.info(ingredient.toString());
 		return ingredient;
 	}
 	

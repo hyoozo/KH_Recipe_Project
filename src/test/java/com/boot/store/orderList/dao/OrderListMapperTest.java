@@ -26,7 +26,7 @@ public class OrderListMapperTest {
 		MemberVO mvo = new MemberVO();
 		mvo.setM_num(1);
 		
-		list = orderListDao.orderList(mvo);
+		//list = orderListDao.orderList(mvo);
 		
 		log.info(list.toString());
 	}
