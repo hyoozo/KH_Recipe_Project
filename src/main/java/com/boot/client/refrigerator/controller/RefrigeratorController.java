@@ -126,4 +126,15 @@ public class RefrigeratorController {
 		return memo;
 	}
 	
+	@PostMapping("/memoInsert")
+	@ResponseBody
+	public Memo memoInsert(Memo memo, @SessionAttribute("login")  MemberVO member) {
+		memo.setMember(member);
+		memo.getMember().setM_num(member.getM_num());
+		
+		memo = fridgeService.memoInsert(memo);
+		
+		return memo;
+	}
+	
 }

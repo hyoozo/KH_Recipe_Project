@@ -89,4 +89,11 @@ public class FridgeServiceImpl implements FridgeService {
 		return fridgeDAO.memoSelect(memo);
 	}
 
+	@Override
+	public Memo memoInsert(Memo memo) {
+		return fridgeDAO.memoInsert(memo);
+	}
+	
+	
+
 }

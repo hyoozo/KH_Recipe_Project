@@ -87,4 +87,9 @@
 		select memo_content from memo
 		where m_num = #{member.m_num}
 	</select>
+	
+	<insert id="memoInsert" parameterType="memo">
+		insert into MEMO (memo_num, memo_content, m_num)
+		values (SEQ_MEMO.nextval, #{memo_content}, #{member.m_num})
+	</insert>
 </mapper>

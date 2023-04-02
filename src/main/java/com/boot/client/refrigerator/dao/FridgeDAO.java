@@ -24,4 +24,5 @@ public interface FridgeDAO {
 	public List<RecipeVO> selectRecommend(ArrayList<Integer> array);
 	public int memoUpdate(Memo memo);
 	public Memo memoSelect(Memo memo);
+	public Memo memoInsert(Memo memo);
 }

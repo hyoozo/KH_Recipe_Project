@@ -126,6 +126,19 @@ label {
 .content-memo:focus {
     outline: none;
 }
+
+.memo-bg {
+	background-color: rgba(0,0,0,0);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: background-color 0.3s;
+}
+.memo-bg:hover .memo-bg {
+    background-color: rgba(0,0,0,0.2);
+}
 .recipeList {
 	margin-left: 50px;
 	overflow: scroll;
