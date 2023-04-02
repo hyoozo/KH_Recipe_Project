@@ -89,13 +89,15 @@
 			var con	=	'<div id="replyInner">'+
 							'<div id="par">' + 
 								'<div>'+
-									'<h3>'+
+									'<h4>'+
 										'<input type="hidden" id="reListM_num" value="' + m_num + '" />' + 
 										'<input type="hidden" id="reListCr_no" value="' + cr_no + '" />' + 
-										'<span id="reListCr_wr">' + cr_writer + '</span>' +
-										'<button type="button" id="reUpdateBtn">수정하기</button>'+
-										'<button type="button" id="reDeleteBtn">삭제하기</button>'+
-									'</h3>' +
+										'<span id="reListCr_wr"> <i class="fa-solid fa-reply fa-rotate-180"></i>' + cr_writer + '</span>' +
+									'</h4>' +
+									'<div class="parBtn-box">' +
+										'<button type="button" id="reUpdateBtn">수정</button>'+
+										'<button type="button" id="reDeleteBtn">삭제</button>'+
+									'</div>' +
 								'</div>' +
 								'<div id="reListCr_co">' + cr_content + '</div>' +
 							'</div>' +
@@ -154,7 +156,7 @@
 												'<input type="text" value="' + writer + '" readonly/>' +
 											'</td>' +
 											'<td>' +
-												'<button type="button" id="updateBtn">댓글 수정</button>' +
+												'<button type="button" id="updateBtn">수정</button>' +
 											'</td>' +
 										'</tr>' +
 										'<tr>' +
@@ -256,7 +258,7 @@
 			
 			//취소 버튼 -> 수정하기 버튼
 			$(this).attr('id','reUpdateBtn');
-			$(this).html('수정하기');
+			$(this).html('수정');
 			
 			//리셋
 			$("#replyList").each(function(){
@@ -296,29 +298,27 @@
 </script>
 
 <body>
+<h3>댓글</h3>
 <div id="replyContainer">
 	<form id="replyForm" class="replyForm">
-
 		<div>
-		
 			<input type="hidden" id="replyM_num" value="${login.m_num}"/>
-			
 			<table>
 				<tbody>
-					
 					<tr>
-						<td>작성자</td>
+						<!-- <td>작성자</td> -->
 						<td>
-							<input type="text" name="cr_writer" id="insertWriter" />
-						</td>
-						<td>
-							<button type="button" id="replyInsertBtn">댓글 입력</button>
+							<input type="text" name="cr_writer" id="insertWriter" value="${login.m_name}" readonly/>
+							<!-- readonly로 이름 변경 안되게 막아놨지만 form 전송은 됨. -->
 						</td>
 					</tr>
 					<tr>
-						<td>댓글 내용</td>
+				<!-- 		<td>댓글 내용</td> -->
 						<td>
-							<input type="text" name="cr_content" id="insertContent" />
+							<input type="text" name="cr_content" id="insertContent" placeholder="댓글을 남겨보세요."/>
+						</td>
+						<td>
+							<button type="button" id="replyInsertBtn">댓글 입력</button>
 						</td>
 					</tr>	
 				</tbody>
