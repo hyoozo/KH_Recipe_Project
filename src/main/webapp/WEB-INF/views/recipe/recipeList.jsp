@@ -77,12 +77,49 @@
 						
 					}
 				})
+				updateLikeCount();
 			
-			$(".paginate_button a").click(function(e) {
+			/*$(".paginate_button a").click(function(e) {
 				e.preventDefault();
 				$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
 				goPage();
-			});
+			});*/
+            let pageNum=2;
+			
+			$(window).scroll(function(){
+				let scrollTop = $(window).scrollTop();
+				let windowHeight = $(window).height();
+				let documentHeight = $(document).height();
+				let isBottom = scrollTop + windowHeight + 10 >= documentHeight;
+				
+				if(isBottom) {
+					//console.log($("#keyword").val());
+					$.ajax({
+						url : "/recipe/scroll",
+						type : "get",
+						data : {
+							"pageNum" : pageNum,
+							"search" : $('#search').val(),
+							"keyword" : $('#keyword').val(),
+						},
+						error : function(){
+							alert('시스템 오류. 관리자에게 문의하세요.');
+						},
+						success : function(data){
+							//console.log(data);
+							appendRecipeList(data);
+							updateLikeCount();
+							pageNum++;
+							//console.log(pageNum);
+							
+							if (data.length === 0) {
+						        $(window).off('scroll'); // 더이상 받아온 데이터가 없으면 스크롤 이벤트 제거.
+						        return;
+						    }
+						 }
+					});
+				}
+			})
 			
 			let word="<c:out value='${recipeVO.keyword}' />";
 			let value="";
@@ -123,7 +160,7 @@
 				goPage();
 			});
 			
-			$(".recipeImg").click(function(){
+			$(document).on("click", ".recipeImg", function() {
 				let rcp_seq = $(this).parents(".recipeList").attr("data-num");
 				console.log(rcp_seq);
 				$("#rcp_seq").val(rcp_seq);
@@ -148,6 +185,49 @@
 			});
 			$("#f_search").submit();
 		}
+		function updateLikeCount() {
+		    let rcp_seq_arr = [];
+		    $(".recipeList").each(function(){
+		        rcp_seq_arr.push($(this).attr("data-num"));
+		    });
+		    
+		    $.ajax({
+		        url :"/recipe/likeCnt",
+		        type : "POST",
+		        data : JSON.stringify(rcp_seq_arr),
+		        contentType: "application/json",
+		        error : function(){
+		            alert('시스템 오류. 관리자에게 문의하세요.');
+		        },
+		        success : function(data){
+		            for(let i=0; i<data.length; i++){
+		                let rcp_seq = rcp_seq_arr[i];
+		                let likeCnt = data[i];
+		                $(".recipeList[data-num='" + rcp_seq + "'] .likeCnt").html(likeCnt);
+		            }
+		        }
+		    });
+		}
+
+		
+		function appendRecipeList(data) {
+			  let html = "";
+			  $.each(data, function(idx, recipe) {
+			    html += '<div class="recipeList" data-num="' + recipe.rcp_seq + '">';
+			    html += '<div>';
+			    html += '<div class="image-box">';
+			    html += '<img src="' + recipe.att_file_no_mk + '" class="recipeImg" />';
+			    html += '</div>';
+			    html += '<div>';
+			    html += '<h4 class="recipeText name">' + recipe.rcp_nm + '</h4>';
+			    html += '<p class="recipeText kcal">' + recipe.info_eng + ' kcal<img src="/resources/image/heart.png" class="sl"/><span class="likeCnt"></span></p>';
+			    html += '</div>';
+			    html += '</div>';
+			    html += '</div>';
+			  });
+			  $(".recipeListContainer").append(html);
+			}
+		
 	</script>
 	</head>
 	<body>
@@ -179,13 +259,19 @@
 			
 			
 			<%-- 리스트 --%>
+			<div class="recipeListContainer">
 			<c:choose>
 				<c:when test="${not empty recipeList}">
 					<c:forEach var="recipe" items="${recipeList}" varStatus="status">
 						<div class="recipeList" data-num="${recipe.rcp_seq}">
 							<div>
 								<div class="image-box">
-									<img src="${recipe.att_file_no_mk}" class="recipeImg" />
+									<c:if test="${fn:contains(recipe.att_file_no_mk, 'foodsafetykorea')}">
+										<img src="${recipe.att_file_no_mk}" class="recipeImg"/>
+									</c:if>
+									<c:if test="${not fn:contains(recipe.att_file_no_mk, 'foodsafetykorea')}">
+										<img src="/resources/recipe/${recipe.att_file_no_mk}"  class="recipeImg"/>
+									</c:if>
 								</div>
 								<div>
 									<h4 class="recipeText name">${recipe.rcp_nm}</h4>
@@ -199,8 +285,9 @@
 					<p>레시피가 존재하지 않습니다.</p>
 				</c:otherwise>
 			</c:choose>
+			</div>
 			
-			<%-- 페이징 처리 --%>
+			<%-- 페이징 처리
 			<div class="text-center">
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev}">
@@ -219,7 +306,7 @@
 						</li>
 					</c:if>
 				</ul>
-			</div>
+			</div> --%>
 			
 		</div>
 	</body>

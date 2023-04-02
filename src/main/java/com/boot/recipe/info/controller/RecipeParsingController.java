@@ -132,10 +132,7 @@ public class RecipeParsingController {
 				rmvo.setManual04((String)recipe.get("MANUAL04"));
 				rmvo.setManual05((String)recipe.get("MANUAL05"));
 				rmvo.setManual06((String)recipe.get("MANUAL06"));
-				rmvo.setManual07((String)recipe.get("MANUAL07"));
-				rmvo.setManual08((String)recipe.get("MANUAL08"));
-				rmvo.setManual09((String)recipe.get("MANUAL09"));
-				rmvo.setManual10((String)recipe.get("MANUAL10"));
+
 				
 				rmvo.setManual_img01((String)recipe.get("MANUAL_IMG01"));
 				rmvo.setManual_img02((String)recipe.get("MANUAL_IMG02"));
@@ -143,10 +140,7 @@ public class RecipeParsingController {
 				rmvo.setManual_img04((String)recipe.get("MANUAL_IMG04"));
 				rmvo.setManual_img05((String)recipe.get("MANUAL_IMG05"));
 				rmvo.setManual_img06((String)recipe.get("MANUAL_IMG06"));
-				rmvo.setManual_img07((String)recipe.get("MANUAL_IMG07"));
-				rmvo.setManual_img08((String)recipe.get("MANUAL_IMG08"));
-				rmvo.setManual_img09((String)recipe.get("MANUAL_IMG09"));
-				rmvo.setManual_img10((String)recipe.get("MANUAL_IMG10"));
+
 				
 				recipeDao.insertRecipeInfo(rvo);
 				recipeDao.insertRecipeManual(rmvo);
