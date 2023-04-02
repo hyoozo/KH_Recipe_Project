@@ -52,14 +52,14 @@
 	
 	
 	<select id="postDetail" resultType="comVO" parameterType="comVO">
-		SELECT c_no, c_title, c_category, c_writer, c_comment, c_img, c_readcnt, to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date
+		SELECT c_no, c_title, c_category, c_writer, c_comment, c_img, c_readcnt, to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date,m_num
 		FROM COMMUNITY
 		where c_no = #{c_no}
 	</select>
 	
 	
 	<select id="updateForm" resultType="comVO" parameterType="comVO">
-		SELECT c_no, c_title, c_category, c_writer, c_comment, c_img, c_readcnt, to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date
+		SELECT c_no, c_title, c_category, c_writer, c_comment, c_img, c_readcnt, to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date,m_num
 		FROM COMMUNITY
 		where c_no = #{c_no}
 	</select>
@@ -93,6 +93,5 @@
 		SET c_readcnt = c_readcnt + 1
 		WHERE c_no = #{c_no}
 	</update>
-
-
+	
 </mapper>

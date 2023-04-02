@@ -106,3 +106,7 @@
 #reListCr_co {
 	margin-left: 30px;
 }
+
+.reBtnHide {
+	display : hidden;
+}

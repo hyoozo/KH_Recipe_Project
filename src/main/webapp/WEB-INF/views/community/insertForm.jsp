@@ -45,7 +45,8 @@
 			</tr>
 			<tr>
 				<td>이미지 : </td>
-				<td><input type="text" name="c_img"></td>
+				<td><input type="file" name="c_img" multiple="multiple"/>
+    			<input type="submit" id="submit" value="전송"/></td>
 			</tr>
 		</tbody>
 	</table>

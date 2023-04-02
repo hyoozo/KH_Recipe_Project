@@ -95,8 +95,8 @@
 										'<span id="reListCr_wr"> <i class="fa-solid fa-reply fa-rotate-180"></i>' + cr_writer + '</span>' +
 									'</h4>' +
 									'<div class="parBtn-box">' +
-										'<button type="button" id="reUpdateBtn">수정</button>'+
-										'<button type="button" id="reDeleteBtn">삭제</button>'+
+										'<button type="button" id="reUpdateBtn" class="reBtnHide">수정</button>'+
+										'<button type="button" id="reDeleteBtn" class="reBtnHide">삭제</button>'+
 									'</div>' +
 								'</div>' +
 								'<div id="reListCr_co">' + cr_content + '</div>' +
@@ -104,10 +104,22 @@
 							'<div id="replyInnerAdd"></div>' +
 						'</div>';
 			var div = $("<div />").html(con);
-			
-			$(".reCancelBtn").hide();
-			
+
 			$div.append(div);
+			
+			replyHide();			
+		}
+		
+		function replyHide() {
+			let comNum = $("#reListM_num").val();
+			
+			let memNum = $("input[name=m_num]").val();
+			
+			$(".reBtnHide").hide();
+			
+			if(comNum == memNum) {
+				$(".reBtnHide").show();
+			}
 		}
 		
 		function reset(set) {
@@ -117,8 +129,8 @@
 		//삭제버튼 클릭
 		$(document).on("click","#reDeleteBtn",function() {
 			let c_no = $("#c_no").val();
-			let par = $(this).siblings("#reListCr_no");
-			let cr_no = par.val();
+			let parCr = $(this).parents("#par").find("#reListCr_no");
+			let cr_no = parCr.val();
 			deleteBtn(cr_no,c_no);
 		})
 		
@@ -134,10 +146,13 @@
 			let add = par.siblings("#replyInnerAdd");
 			
 			//작성자이름 불러오기
-			let name = $(this).siblings("#reListCr_wr");
-			let writer = name.html();
+			let name = par.find("#reListCr_wr");
+			let writer = name.text();
+			
+			console.log("writer:" + writer);
 			
 			//수정하기 버튼 -> 취소 버튼
+			$(this).removeAttr('id','reUpdateBtn');
 			$(this).attr('id','reCancelBtn');
 			$(this).html('취소');
 		
@@ -145,7 +160,7 @@
 		})
 		
 		function replyUpdate(add,writer) {
-			console.log(writer);
+			
 			var conu = 	'<form>' +
 							'<div>' +		
 								'<table>' +
@@ -162,7 +177,7 @@
 										'<tr>' +
 											'<td>댓글 내용</td>' +
 											'<td>' +
-											'<input type="text" />' +
+											'<input type="text" id="insertContent" />' +
 											'</td>' +
 										'</tr>' +
 									'</tbody>' +
@@ -293,6 +308,7 @@
 				return;
 			}
 		}
+		
 
 	})
 </script>

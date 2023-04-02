@@ -21,4 +21,5 @@ public interface CommunityService {
 	public int postInsert(CommunityVO cvo);
 	
 	public int comListCnt(CommunityVO cvo);
+
 }

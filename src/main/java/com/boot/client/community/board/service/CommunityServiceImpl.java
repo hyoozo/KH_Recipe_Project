@@ -92,5 +92,5 @@ public class CommunityServiceImpl implements CommunityService {
 		return listCnt;
 	}
 	
-	
+
 }
