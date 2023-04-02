@@ -15,11 +15,35 @@
 		    $(function(){
 		       $("#payWindow").css("display", "none");
 		    	
-		       let i_num = $("#i_num").html();
+		       let i_num = $("#i_num").val();
 		       let i_name = $("#i_name").html();
+		       
+		       function verifiaction(imp_uid){
+	                var def = new $.Deferred();
+	                $.ajax({
+	                      url: "/order/paymentVerification" ,
+	                      type: "post",
+	                      data: {
+	                        imp_uid: imp_uid,
+	                        i_num: i_num,
+	                        cnt: $("#cnt").html()
+	                      },
+	                      dataType: "text",
+	                      success: function(data){
+	                         console.log(data);
+	                         def.resolve(data);
+	                      }, error: function(){
+	                         def.reject("실패");
+	                      }
+	                });
+	                
+	                return def.promise();
+	             };
+		       
 			       
 			   $("#requestPay").click(function(){
-			       
+				   
+				   console.log(i_num);
 				   if($("#loginUser").val()== ""){
 					   alert("로그인 후 이용 가능합니다.");
 					   location.href="#";
@@ -32,19 +56,60 @@
 					   IMP.request_pay({
 				            pg : 'kakaopay',
 				            pay_method : 'card',
-				            merchant_uid: "57008833-3300422" + new Date().getTime(), 
+				            merchant_uid: ${login.m_num} + "_" + new Date().getTime(), 
 				            name : i_name,
 				            amount : amount,
-				            buyer_email : 'Iamport@chai.finance',
-				            buyer_name : '포트원 기술지원팀',
-				            buyer_tel : '010-1234-5678',
-				            buyer_addr : '서울특별시 강남구 삼성동',
-				            buyer_postcode : '123-456'
+				            buyer_email : "${login.m_email}",
+				            buyer_name : "${login.m_name}",
+				            buyer_tel : "${login.m_phone}",
+				            buyer_addr : "${login.m_address}",
+				            buyer_postcode : "${login.m_zip}"
 				        }, function (rsp) { // callback
 				            if (rsp.success) {
-				               // console.log(rsp);
-				               alert("결제에 성공했습니다.");
-				               location.href="/order/addOneOrder?i_num="+i_num+"&ol_quan="+$("#cnt");
+				              console.log(rsp);
+				             
+				              $.when(verifiaction(rsp.imp_uid)).done(function(result){
+
+					              console.log(result);
+				            	  if(result == '성공'){
+					            	  alert("결제에 성공했습니다.");
+					            	  
+					            	  $("#imp_uid").val(rsp.imp_uid);
+						              $("#pay_method").val(rsp.pay_method);
+						              $("#merchant_uid").val(rsp.merchant_uid);
+						              $("#name").val(rsp.name);
+						              $("#amount").val(rsp.paid_amount);
+						              $("#ol_quan").val($("#cnt").html()); 
+						              
+						              $("#addOrder").attr({
+						            	  "method":"post",
+						            	  "action": "/order/addOneOrder"
+						              })
+						              
+						              $("#addOrder").submit();
+					              } else {
+					            	  
+					            	  $.ajax({
+						            	 url: "/order/paymentCancel" ,
+						            	 type: "post",
+						            	 data: {
+						            		imp_uid: rsp.imp_uid,
+						            		amount: rsp.paid_amount
+						            	 },
+						            	 dataType: "text",
+						            	 success: function(data){
+						            		 console.log(data);
+						            		 if(data == "결제 취소"){
+						            			 alert("결제가 취소되었습니다."); 
+						            		 } else {
+						            			 alert("시스템 오류가 발생");
+						            		 }
+						            		 
+						            	 }
+						              });
+					              }
+				              });
+				               
 				            } else {
 				                //console.log(rsp);
 				                alert("결제에 실패했습니다.");
@@ -55,24 +120,28 @@
 			   });
 			   
 			   $("#goBascket").click(function(){
-				  if($("#loginUser").val()!= ""){
+				  if($("#loginUser").val() != ""){
 					  $.ajax({
 						url: "/bascket/insertItem",
 						type: "post",
-						dataType: "json",
+						dataType: "text",
 						data: $("#inputBascket").serialize(),
 						success: function(data){
+							console.log(data);
 							if(data=="성공"){
-								if(comfirm("장바구니로 이동하겠습니까?")){
+								if(confirm("장바구니로 이동하겠습니까?")){
 									location.href="/bascket/bascketList";
 								}
 							} else{
 								alert("시스템 오류가 발생했습니다. 잠시 후 이용해 주세요.");
 							}
+						},
+						error : function(){
+							alert("오류 발생");
 						}
 					  });
 					  
-				  } else{
+				  } else {
 					  alert("로그인 후 이용 가능합니다.");
 					  location.href="#";
 				  }
@@ -107,7 +176,7 @@
 			   });
 			   
 			   function payPrice(){
-				   var payPrice = $("#i_price").html().replace(/,/g, "");
+				   const payPrice = $("#i_price").html().replace(/,/g, "");
 				   var cnt = $("#cnt").html().replace(/,/g, "");;
 				   
 				   var result = Number(payPrice) * Number(cnt);
@@ -121,9 +190,21 @@
 	</head>
 	<body>
 		<div class="container">
+			<form id="addOrder">
+				<input type="hidden" name="ovo.imp_uid" id="imp_uid" value=""/>
+				<input type="hidden" name="ovo.pay_method" id="pay_method" value=""/>
+				<input type="hidden" name="ovo.merchant_uid" id="merchant_uid" value=""/>
+				<input type="hidden" name="ovo.name" id="name" value=""/>
+				<input type="hidden" name="ovo.amount" id="amount" value=""/>
+				<input type="hidden" name="mvo.m_num" value="${login.m_num}"/>
+				
+				<input type="hidden" name="ivo.i_num" value="${detail.i_num }"/>
+				<input type="hidden" name="ol_quan" id="ol_quan" value=""/>
+			</form>
+		
 			<form id="inputBascket">
-				<input type="hidden" name="i_num" value="${detail.i_num }"/>
-				<input type="hidden" name="m_num" id="loginUser" value="${loginUser.m_num}"/>
+				<input type="hidden" name="ivo.i_num" id="i_num" value="${detail.i_num }"/>
+				<input type="hidden" name="mvo.m_num" id="loginUser" value="${login.m_num}"/>
 			</form>
 			<div class="col-md-6">
 				<img src="${detail.i_img }">

@@ -24,7 +24,7 @@ public class PageDTO {
 		this.startPage = this.endPage - 9;
 		
 		// 끝 페이지 구하기
-		int realEnd = (int)(Math.ceil(total * 1.0) / cvo.getAmount());
+		int realEnd = (int)(Math.ceil( total * 1.0 / cvo.getAmount())  );
 		
 		if(realEnd <= this.endPage) {
 			this.endPage = realEnd;

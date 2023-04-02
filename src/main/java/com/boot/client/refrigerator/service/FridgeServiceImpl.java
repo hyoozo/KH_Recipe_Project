@@ -19,12 +19,12 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class FridgeServiceImpl implements FridgeService {
-	
-	@Setter(onMethod_=@Autowired)
+
+	@Setter(onMethod_ = @Autowired)
 	private FridgeDAO fridgeDAO;
 
 	@Override
-	public List<IngredientVO> recommendRecipe(String igr_name)throws Exception {
+	public List<IngredientVO> recommendRecipe(String igr_name) throws Exception {
 		List<IngredientVO> list = new ArrayList<>();
 		list = fridgeDAO.recommendRecipe(igr_name);
 		return list;
@@ -36,15 +36,13 @@ public class FridgeServiceImpl implements FridgeService {
 		list = fridgeDAO.igrList();
 		return list;
 	}
-	
+
 	@Override
 	public List<IngredientVO> searchIgr(String igr_name) {
 		List<IngredientVO> list = new ArrayList<>();
 		list = fridgeDAO.searchIgr(igr_name);
 		return list;
 	}
-	
-	
 
 	@Override
 	public int fridgeIgrInsert(int m_num, int igr_num) {
@@ -55,7 +53,7 @@ public class FridgeServiceImpl implements FridgeService {
 
 	@Override
 	public List<FridgeVO> memberIgrList(MemberVO member) {
-		
+
 		return fridgeDAO.memberIgrList(member);
 	}
 
@@ -68,18 +66,16 @@ public class FridgeServiceImpl implements FridgeService {
 
 	@Override
 	public int fridgeSelect(int igr_num, int m_num) {
-		System.out.println("service구현"+igr_num+":"+m_num);
+		System.out.println("service구현" + igr_num + ":" + m_num);
 		int result = 0;
 		result = fridgeDAO.fridgeSelect(igr_num, m_num);
-		System.out.println("service구현 result:"+result);
+		System.out.println("service구현 result:" + result);
 		return result;
 	}
-	
-	
 
 	@Override
 	public List<RecipeVO> selectRecommend(ArrayList<Integer> array) {
-		System.out.println("service구현==>"+array);
+		System.out.println("service구현==>" + array);
 		return fridgeDAO.selectRecommend(array);
 	}
 
@@ -92,13 +88,5 @@ public class FridgeServiceImpl implements FridgeService {
 	public Memo memoSelect(Memo memo) {
 		return fridgeDAO.memoSelect(memo);
 	}
-	
 
-
-
-	
-	
-
-	
-	
 }

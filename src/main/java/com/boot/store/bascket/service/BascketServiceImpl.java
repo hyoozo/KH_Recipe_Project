@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boot.client.member.vo.MemberVO;
 import com.boot.store.bascket.dao.BascketDao;
 import com.boot.store.bascket.vo.BascketVO;
 
@@ -17,7 +18,7 @@ public class BascketServiceImpl implements BascketService {
 	private BascketDao bascketDao;
 	
 	@Override
-	public List<BascketVO> bascketList(BascketVO vo) {
+	public List<BascketVO> bascketList(MemberVO vo) {
 		List<BascketVO> list = bascketDao.bascketList(vo);
 		
 		return list;
@@ -27,6 +28,13 @@ public class BascketServiceImpl implements BascketService {
 	public int insertBascket(BascketVO vo) {
 		int result = 0;
 		result = bascketDao.insertBascket(vo);
+		return result;
+	}
+	
+	@Override
+	public int deleteBascket(BascketVO vo) {
+		int result = 0;
+		result = bascketDao.deleteBascket(vo);
 		return result;
 	}
 

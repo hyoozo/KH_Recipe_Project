@@ -3,10 +3,54 @@
 <mapper namespace="com.boot.store.orderList.dao.OrderListDao">
 	
 	<insert id="addOrderList" parameterType="orderList">
-		<selectKey keyColumn="ol_num,o_num" keyProperty="ol_num,o_num" resultType="int" order="BEFORE">
-			select seq_order_list.nextval as ol_num, seq_orders.currval as o_num from dual
-		</selectKey>
 		insert into order_list
-		values(#{ol_num}, #{o_num}, #{m_num}, #{i_num}, #{ol_quan})
+		values(SEQ_ORDER_LIST.nextval, #{ovo.imp_uid}, #{mvo.m_num}, 
+			#{ivo.i_num}, #{ol_quan}, '결제 완료')
 	</insert>
+	
+	<resultMap type="orderList" id="orderListMap">
+		<id property="ol_num" column="ol_num"/>
+		<id property="ol_state" column="ol_state"/>
+		<id property="ol_quan" column="ol_quan"/>
+		
+		<id property="ovo.imp_uid" column="imp_uid"/>
+		<id property="ovo.order_day" column="order_day"/>
+		
+		<id property="ivo.i_num" column="i_num"/>
+		<id property="ivo.i_name" column="i_name"/>
+		<id property="ivo.i_price" column="i_price"/>
+		<id property="ivo.i_img" column="i_img"/>
+	</resultMap>
+	
+	<select id="orderList" parameterType="orderList" resultMap="orderListMap">
+		select ol_num, imp_uid, i_num, i_name, i_price, i_img, ol_quan, ol_state, order_day
+		from  ( select /*+ index_desc(order_list PK_ORDER_LIST) */ 
+		        rownum as rnum, ol.ol_num as ol_num, o.imp_uid as imp_uid,
+		        i.i_num as i_num, i.i_name as i_name, replace(i_price, ',') as i_price, i_img,
+		        ol.ol_quan as ol_quan, ol_state,
+		        ol.m_num as m_num, to_char(o.order_day, 'YYYY-MM-DD') as order_day
+		        from order_list ol 
+		        inner join orders o 
+		        on ol.imp_uid = o.imp_uid
+		        inner join items i
+		        on ol.i_num = i.i_num
+		        where
+		        <![CDATA[ rownum <= #{pageNum} * #{amount}
+				) orderList
+		where rnum > (#{pageNum}-1) * #{amount}
+		]]>
+		and m_num = #{mvo.m_num}
+	</select>
+	
+	<select id="orderListCnt" parameterType="MemberVO" resultType="int">
+		select count(*)
+		from order_list
+		where m_num = #{m_num}
+	</select>
+	
+	<update id="updateState" parameterType="orderList">
+		update order_list
+		set ol_state = '결제 취소'
+		where ol_num = #{ol_num}
+	</update>
 </mapper>

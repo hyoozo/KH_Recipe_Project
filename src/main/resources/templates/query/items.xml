@@ -41,4 +41,18 @@
 		from items
 		where i_num = #{i_num}
 	</select>
+	
+	<update id="updateItemsQuan" parameterType="items">
+		<selectKey keyProperty="i_quan" resultType="int" order="BEFORE">
+			select i_quan - #{i_quan}
+			from items
+			where i_num = #{i_num}
+		</selectKey>
+		
+		update items
+		set i_quan = #{i_quan}
+		where i_num = #{i_num}
+	</update>
+	
+	
 </mapper>

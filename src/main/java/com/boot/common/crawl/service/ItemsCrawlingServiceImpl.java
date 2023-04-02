@@ -25,7 +25,7 @@ public class ItemsCrawlingServiceImpl implements ItemsCrawlingService {
 	@Override
 	public List<ItemsVO> getItemList(String id) {
 		List<ItemsVO> list = null;
-		
+		System.out.println("서비스 getItemList");
 		try {
 			list = new ArrayList<>();
 			
