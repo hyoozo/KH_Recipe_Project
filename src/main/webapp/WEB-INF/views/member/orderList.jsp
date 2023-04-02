@@ -19,20 +19,37 @@
 			$(".price").each(function(){
 				//console.log($(this).html());
 				let price = Number($(this).html());
+				
+				let cnt = Number($(this).prev().children(".cnt").html());
+				//console.log(cnt);
+				price = price * cnt;
+				
 				$(this).html(price.toLocaleString("ko-KR"));
 			});
 			
 			$(".cancelPay").click(function(){
-				let ol_num = $(this).parent().parent().children(".num").html();
-				let imp_uid = $(this).parent().parent().children(".num").children(".imp_uid").html();
-				//console.log(imp_uid);
+				let ol_num = $(this).parent().parent().children(".order_num").children(".num").html();
+				console.log(ol_num);
+				let imp_uid = $(this).parent().parent().children(".order_num").children(".imp_uid").html();
+				console.log(imp_uid);
 				let amount = $(this).parent().parent().children(".price").html().replace(/,/g, "");
-				//console.log(amount);
+				console.log(amount);
 				
-				cancelPay(imp_uid, amount, ol_num);
+				 $.when(cancelPay(imp_uid, amount)).done(function(result){
+					 if(result == '성공'){
+						console.log(result);
+						
+						location.href = "/order/updateState?ol_num="+ol_num;
+						
+						alert("환불 처리 되었습니다.");
+					 } else {
+						 alert("시스템 에러가 발생했습니다.");
+					 }
+				 });
 			});
 			
-			function cancelPay(imp_uid, amount, ol_num){
+			function cancelPay(imp_uid, amount){
+				var def = new $.Deferred();
 				$.ajax({
 					url: "/order/paymentCancel",
 					type: "post",
@@ -43,13 +60,14 @@
 					dataType: "text",
 					success: function(data){
 						if(data=='결제 취소'){
-							alert("환불 처리 되었습니다.");
-							location.href="/order/updateState?ol_num="+ol_num;
+							def.resolve("성공");
 						} else {
-							alert("시스템 에러가 발생했습니다.");
+							def.reject("실패");
 						}
 					}
 				});
+				
+				return def.promise();
 			}
 			
 			$(".paginate_button a").click(function(e) {
@@ -70,6 +88,9 @@
 	</script>
 	</head>
 	<body>
+		<form id="updateState"> 
+			<input type="hidden" name="ol_num" id="ol_num" value=""/>
+		</form>
 		<div class="container">
 			<h2>주문 내역</h2>
 			<hr>
@@ -97,15 +118,17 @@
 								<c:when test="${not empty order }">
 									<c:forEach var="order" items="${order }">
 										<tr class="text-center">
-											<td class="num">
-												${order.ol_num }
+											<td class="order_num">
+												<span class="num">${order.ol_num }</span>
 												<span class="imp_uid">${order.ovo.imp_uid }</span>
 											</td>
 											<td>
 												<img src="${order.ivo.i_img }"/>
 											</td>
-											<td>${order.ivo.i_name }</td>
-											<td class="price">${order.ivo.i_price }</td>
+											<td>
+												${order.ivo.i_name } x <span class="cnt">${order.ol_quan }</span>
+											</td>
+											<td class="price">${order.ivo.i_price}</td>
 											<td>${order.ovo.order_day }</td>
 											<td class="state">
 												${order.ol_state }

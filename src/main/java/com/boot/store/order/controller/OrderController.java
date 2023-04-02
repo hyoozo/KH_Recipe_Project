@@ -63,42 +63,43 @@ public class OrderController {
 	public String paymentVerification(String imp_uid, ItemsVO ivo, int cnt) throws Exception {
 		String line = "";
 		String result = "";
-
+		
 		String token = orderService.getToken();
-
-		URL url = new URL("https://api.iamport.kr/payments/" + imp_uid + "?_token=" + token);
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
-
-		while ((line = br.readLine()) != null) {
+		
+		URL url = new URL("https://api.iamport.kr/payments/" + imp_uid + "?_token="+token);
+		
+		BufferedReader br = 
+				new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+		
+		while((line = br.readLine()) != null) {
 			result = result.concat(line);
 		}
-
+		
 		JSONParser jsonParser = new JSONParser();
-
-		JSONObject obj = (JSONObject) jsonParser.parse(result);
-
-		JSONObject response = (JSONObject) obj.get("response");
-
+		
+		JSONObject obj = (JSONObject)jsonParser.parse(result);
+		
+		JSONObject response = (JSONObject)obj.get("response");
+		
 		String amount = String.valueOf(response.get("amount"));
-
+		
 		int pay = Integer.parseInt(amount);
-
+		
 		int i_price = Integer.parseInt(orderService.getItemPrice(ivo));
-
+		
 		i_price = i_price * cnt;
-
+		
 		log.info(amount);
 		log.info(String.valueOf(i_price));
-
+		
 		String verification = "111";
-
-		if (pay == i_price) {
+		
+		if(pay == i_price) {
 			verification = "성공";
 		} else {
 			verification = "실패";
 		}
-
+		
 		return verification;
 	}
 	
@@ -237,7 +238,6 @@ public class OrderController {
 	
 	@GetMapping("/updateState")
 	public String updateState(OrderListVO olvo) {
-		System.out.println("updateState 실행함 ~");
 		String url = "";
 		
 		int result = 0;
