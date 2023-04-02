@@ -15,56 +15,34 @@
 			<div class="refrigerator-card">
 		        <h3>재료 리스트</h3>
 		        <div class="content-container">
-		        	<!-- <form id="form_search"> -->
 			        	<div class="searchBox">
-			        		<input id="searchInput" type="text" placeholder="재료를 검색하세요."/>
+			        		<input onkeyup="filter()" type="text" id="searchInput" type="text" placeholder="재료를 검색하세요."/>
 			        		<button id="searchBtn"></button>
 			        	</div>
-		        	<!-- </form> -->
-		        	
 		        	<div class="food-container ingredient-container ">
 		        		
 		        	</div>
         		</div>
 		    </div>
-		
-		
-			    <div class="refrigerator-card">
-			    	<div class="display-Box">
-					        <h3 class="h3-Box">나의 냉장고</h3>
-			    		<form id="igrForm" action="/refrigerator/recomRecipe" method="post">
-					        <input type="hidden" name="list_igrNum" id="list_igrNum"/>
-					        <input type="button" id="recommedRecipeBtn" value="레시피 추천 받기"/>
-			    		</form>
-			    	</div>
-			        <div class="content-container">
-			        	<div class="food-container rfg-container pTop">
-			        	</div>
-	       			</div>
-			    </div>
-			   <!--  <input type="button" id="recom-recipe" value="추천 레시피 보기"/> -->
-		    
-	
-		    
+		    <div class="refrigerator-card">
+		    	<div class="display-Box">
+				        <h3 class="h3-Box">나의 냉장고</h3>
+		    		<form id="igrForm">
+				        <input type="hidden" name="listIgrNum" id="igr_num"/>
+				        <input type="button" id="recommedRecipeBtn" value="레시피 추천 받기" onclick="location.href='/refrigerator/recomView';"/>
+		    		</form>
+		    	</div>
+		        <div class="content-container">
+		        	<div class="food-container rfg-container pTop">
+		        	</div>
+       			</div>
+		    </div>
 		    <div class="refrigerator-card">
 		        <h3>메모장</h3>
 		        <div class="content-container pBox">
-		            <textarea class="content-memo"></textarea>
+		            <textarea class="content-memo" id="content-memo"></textarea>
 		        </div>
 		    </div>
-		    
-		    <div class="refrigerator-card">
-		        <h3>추천 레시피</h3>
-		        <div class="content-container">
-		            <div class="recipeList pTop">
-		            	<div class="recipeTemp">
-			                <ul id="content-list">
-			                </ul>
-		            	</div>
-		            </div>
-		        </div>
-		    </div>
-		    
 		</section>
 	</body>
 </html>

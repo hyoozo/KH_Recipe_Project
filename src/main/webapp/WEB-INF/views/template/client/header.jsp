@@ -24,7 +24,7 @@
                                 <li><a href="/store/itemsList">스토어</a></li>
                                 <li><a href="/recipe/recipeList">레시피</a></li>
                                 <li><a href="#">커뮤니티</a></li>
-                              
+
                             </ul>
                             <ul>
                                 <li>
