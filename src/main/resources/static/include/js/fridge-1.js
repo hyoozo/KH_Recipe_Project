@@ -74,7 +74,6 @@ $(function(){
 function filter(){
 	const item = document.getElementsByClassName('igrBtn');
 	const input = document.getElementById('searchInput').value.toUpperCase();
-	const select = document.getElementsByClassName('removeBtn');
 	let name;
 	for(let i=0; i < item.length; i++){
 		name = item[i].innerHTML;
