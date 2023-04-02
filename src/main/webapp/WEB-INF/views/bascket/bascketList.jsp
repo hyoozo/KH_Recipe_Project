@@ -89,7 +89,7 @@
 						            	  	   },
 						            		   dataType : "text",
 						            		   success : function(data){
-						            			   alert("결제 완료되었습니다.");
+						            			   //alert("결제 완료되었습니다.");
 						            			   console.log(data);
 
 							            		   location.href="/";

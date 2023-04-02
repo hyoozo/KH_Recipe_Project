@@ -24,7 +24,7 @@
 	
 	<select id="orderList" parameterType="orderList" resultMap="orderListMap">
 		select ol_num, imp_uid, i_num, i_name, i_price, i_img, ol_quan, ol_state, order_day
-		from  ( select /*+ index_desc(order_list PK_ORDER_LIST) */ 
+		from  ( select /*+ index_desc(ol PK_ORDER_LIST) */ 
 		        rownum as rnum, ol.ol_num as ol_num, o.imp_uid as imp_uid,
 		        i.i_num as i_num, i.i_name as i_name, replace(i_price, ',') as i_price, i_img,
 		        ol.ol_quan as ol_quan, ol_state,
