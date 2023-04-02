@@ -20,6 +20,8 @@
 		
 		<script type="text/javascript">
 			$(function(){
+				
+				
 				function allPrice(){
 					let allPrice = 0;
 					$(".allPrice").each(function(){
@@ -126,6 +128,8 @@
 			        });
 				 });
 				
+				
+				
 				$(".cntUp").click(function(){
 				   let cnt = $(this).parent().prev().children("p.name").children("span.cnt").html();
 				   
@@ -208,6 +212,19 @@
 				   return def.promise();
 			   }
 			   
+			   function bascketCnt(){
+				   $(".itemList").each(function(){
+					   let cnt = $(this).children(".info").children(".name").children(".cnt").html();
+					   console.log(cnt);
+					   let price = $(this).children(".info").children(".price").html().replace(/,/g, "");
+					   console.log(price);
+					   var result = Number(cnt) * Number(price);
+					   console.log(result);
+					   
+					   $(this).children(".info").children(".allPrice").html(result.toLocaleString('ko-KR'))
+				   });
+			   }
+			   bascketCnt();
 			});
 		</script>
 	</head>
@@ -224,9 +241,9 @@
 										<div class="col-md-4 item">
 											<img src="${bascket.ivo.i_img }"/>
 										</div>
-										<div class="col-md-4 text-center item">
+										<div class="col-md-4 text-center item info">
 											<p style="display:none;" class="num">${bascket.ivo.i_num }</p>
-											<p class="name">${bascket.ivo.i_name } x <span class="cnt">1</span></p>
+											<p class="name">${bascket.ivo.i_name } x <span class="cnt">${bascket.b_quan }</span></p>
 											<p class="price" style="display: none;">${bascket.ivo.i_price }</p>
 											<p class="allPrice">${bascket.ivo.i_price }</p>
 										</div>

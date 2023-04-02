@@ -120,6 +120,15 @@
 			   });
 			   
 			   $("#goBascket").click(function(){
+				  let b_quan = prompt('수량을 입력해 주세요.', 1);
+				  //console.log(b_quan);
+				  if(b_quan>10){
+					  alert("10개 이하로 입력해 주세요.");
+					  return;
+				  } else {
+					  $("#b_quan").val(b_quan);
+				  }
+				  
 				  if($("#loginUser").val() != ""){
 					  $.ajax({
 						url: "/bascket/insertItem",
@@ -205,7 +214,7 @@
 			<form id="inputBascket">
 				<input type="hidden" name="ivo.i_num" id="i_num" value="${detail.i_num }"/>
 				<input type="hidden" name="mvo.m_num" id="loginUser" value="${login.m_num}"/>
-				<input type="hidden" name="b_quan" id="loginUser" value=""/>
+				<input type="hidden" name="b_quan" id="b_quan" value=""/>
 			</form>
 			<div class="col-md-6">
 				<img src="${detail.i_img }">
