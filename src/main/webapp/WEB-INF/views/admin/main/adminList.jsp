@@ -142,7 +142,7 @@
 					</div>
 				</form>
 			</div>
-			<c:if test="${adminLogin.mng_name eq '마스터'}">
+			<c:if test="${adminLogin.mng_lev eq '마스터'}">
 				<div id="insertManager">
 					<button type="button" id="insertManager" class="issc">레시피등록</button>
 				</div>
@@ -179,7 +179,7 @@
 										<td>${admin.mng_phone}
 										<td class="lev">${admin.mng_lev}</td>
 										<td>${admin.mng_email}</td>
-										<c:if test="${adminLogin.mng_name eq '마스터'}">
+										<c:if test="${adminLogin.mng_lev eq '마스터'}">
 										<td><input type="button" id="deleteManager" value="삭제" class="issc"></td>
 										</c:if>
 									</tr>
