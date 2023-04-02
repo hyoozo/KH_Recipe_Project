@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boot.store.bascket.dao.BascketDao">
+	<resultMap type="bascket" id="bascketMap">
+		<id property="b_num" column="b_num" />
+		<id property="b_quan" column="b_quan" />
+		<id property="mvo.m_num" column="m_num" />
+		<id property="ivo.i_num" column="i_num" />
+		<id property="ivo.i_parts" column="i_parts" />
+		<id property="ivo.i_name" column="i_name" />
+		<id property="ivo.i_price" column="i_price" />
+		<id property="ivo.i_quan" column="i_quan" />
+		<id property="ivo.i_img" column="i_img" />
+	</resultMap>
 	
-	<select id="bascketList" parameterType="MemberVO" resultType="bascket">
-		select b_num, m_num, i.i_num, i.i_name, i.i_parts, i.i_price, i.i_img
+	<select id="bascketList" parameterType="MemberVO" resultMap="bascketMap">
+		select b_num, b_quan, m_num, i.i_num as i_num, i_name, i_parts, i_price, i_quan, i_img
 		from bascket b
 		inner join items i
 		on b.i_num = i.i_num
-		where m_num = #{m_num}
+		where b.m_num = #{m_num}
 	</select>
 	
 	<insert id="insertBascket" parameterType="bascket">
@@ -16,11 +27,11 @@
 		</selectKey>
 		
 		insert into bascket
-		values(#{b_num}, #{m_num}, #{i_num})
+		values(#{b_num}, #{mvo.m_num}, #{ivo.i_num}, #{b_quan})
 	</insert>
 	
 	<delete id="deleteBascket" parameterType="bascket">
 		delete from bascket 
-		where b_num = #{b_num} and m_num = #{m_num} and i_num = #{i_num}
+		where b_num = #{b_num}
 	</delete>
 </mapper>

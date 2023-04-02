@@ -3,14 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+	<link href="/resources/include/css/index.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.min.css" />
 	<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 	<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/resources/include/js/common.js"></script>
 	<script type="text/javascript" src="/resources/include/dist/js/cookie.js"></script>
-	<link href="/resources/include/css/index.css" rel="stylesheet">
-	
 	<style type="text/css">
 		.recipeList{
 			display: inline-block;
@@ -55,17 +54,37 @@
 	
 	<script type="text/javascript">
 		$(function(){
-			updateLikeCount();
+			let rcp_seq_arr = [];
+			$(".recipeList").each(function(){
+				rcp_seq_arr.push($(this).attr("data-num"));
+			}); // 1페이지의 12개 레시피 번호를 배열로 저장.
 			
-			// 페이징처리
+			$.ajax({
+				url :"/recipe/likeCnt",
+				type : "POST",
+				data : JSON.stringify(rcp_seq_arr), // 서버에 전송하는 속성 객체
+				contentType: "application/json",	// json형식으로 보냄
+				error : function(){
+					alert('시스템 오류. 관리자에게 문의하세요.');
+				},
+				success : function(data){
+					//console.log(data);
+					for(let i=0; i<data.length; i++){	// 12개의 좋아요 개수를 가져옴
+						let rcp_seq = rcp_seq_arr[i];	// 12개의 레시피 번호를 0인덱스부터 11인덱스까지 순차적으로 대입.
+						let likeCnt = data[i];			// 12개의 좋아요 개수를 서버로부터 배열로 받아와 0인덱스부터 11인덱스까지 순차적으로 대입.
+						$(".recipeList[data-num='" + rcp_seq + "'] .likeCnt").html(likeCnt);	// ex) rcp_seq[0~11]번 레시피 번호를 가진요소중 likeCnt class를 찾아 data[0~11]을 대입.
+					}
+						
+					}
+				})
+				updateLikeCount();
+			
 			/*$(".paginate_button a").click(function(e) {
 				e.preventDefault();
 				$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
 				goPage();
 			});*/
-			
-			// 무한스크롤
-			let pageNum=2;
+            let pageNum=2;
 			
 			$(window).scroll(function(){
 				let scrollTop = $(window).scrollTop();
@@ -74,7 +93,7 @@
 				let isBottom = scrollTop + windowHeight + 10 >= documentHeight;
 				
 				if(isBottom) {
-					console.log($("#keyword").val());
+					//console.log($("#keyword").val());
 					$.ajax({
 						url : "/recipe/scroll",
 						type : "get",
@@ -91,7 +110,7 @@
 							appendRecipeList(data);
 							updateLikeCount();
 							pageNum++;
-							console.log(pageNum);
+							//console.log(pageNum);
 							
 							if (data.length === 0) {
 						        $(window).off('scroll'); // 더이상 받아온 데이터가 없으면 스크롤 이벤트 제거.
@@ -102,7 +121,6 @@
 				}
 			})
 			
-			// 검색
 			let word="<c:out value='${recipeVO.keyword}' />";
 			let value="";
 			
@@ -142,23 +160,19 @@
 				goPage();
 			});
 			
-			$(document).on("click", ".recipeImg", function() { // 동적 쿼리를 통해 리스트 가져와서 $(".recipeImg").click(function(){}) 에서 변경
+			$(document).on("click", ".recipeImg", function() {
 				let rcp_seq = $(this).parents(".recipeList").attr("data-num");
 				console.log(rcp_seq);
 				$("#rcp_seq").val(rcp_seq);
-
+				
 				$("#detailForm").attr({
-				  "method" : "get",
-				  "action" : "/recipe/recipeDetail"
+					"method" : "get",
+					"action" : "/recipe/recipeDetail"
 				});
 				$("#detailForm").submit();
-			});
+			})
 			
 		}); // $ 종료
-		
-		var search = "";
-		var keyword = "";
-		
 		
 		function goPage(){
 			if($("#search").val()=="all"){
@@ -171,7 +185,6 @@
 			});
 			$("#f_search").submit();
 		}
-		
 		function updateLikeCount() {
 		    let rcp_seq_arr = [];
 		    $(".recipeList").each(function(){
@@ -228,6 +241,8 @@
 			<%-- 검색기능 --%>
 			<div id="recipeSearch" class="text-right">
 				<form id="f_search" name="f_search" class="form-inline">
+					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
+					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
 					<div class="from-group">
 						<label>검색조건</label>
 						<select id="search" name="search" class="form-control">
@@ -235,7 +250,7 @@
 								<option value="rcp_nm">메뉴명</option>
 								<option value="info_eng">칼로리</option>
 						</select>
-						<input type="text" name="keyword" id="keyword" class="form-control" value="전체 레시피를 조회합니다." />
+						<input type="text" name="keyword" id="keyword" value="전체 레시피를 조회합니다." class="form-control" />
 						<button type="button" id="searchData" class="btn btn-success">검색</button>
 					</div>
 				</form>
@@ -272,7 +287,7 @@
 			</c:choose>
 			</div>
 			
-			<%--
+			<%-- 페이징 처리
 			<div class="text-center">
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev}">

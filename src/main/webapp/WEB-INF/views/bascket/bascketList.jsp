@@ -20,6 +20,8 @@
 		
 		<script type="text/javascript">
 			$(function(){
+				
+				
 				function allPrice(){
 					let allPrice = 0;
 					$(".allPrice").each(function(){
@@ -36,8 +38,9 @@
 			       let name = "";
 			       
 			       $("p.name").each(function(){
-			    	   console.log($(this).html());
-			    	   name += "_" + $(this).html();
+			    	   let str = $(this).html().split("x")
+			    	   console.log(str[0]);
+			    	   name += "_" + str[0];
 			       });
 			       
 			       let o_num = ${login.m_num} + "_" + new Date().getTime();
@@ -61,75 +64,71 @@
 			        }, function (rsp) { // callback
 			        	console.log(rsp);
 			            if (rsp.success) {
-			               
-			               $.ajax({
-		            		   url : "/order/addOrder",
-		            		   type: "post",
-		            		   data : '${login.m_num}',
-		            		   dataType : "text",
-		            		   success : function(data){
-		            			   console.log(data);
-		            		   }
+			            	$.when(addOrder(rsp)).done(function(result){
+				            	   //console.log(result);
+				            	   if(result == '성공'){
+				            		   $("#bascketList > div.itemList").each(function(){
+						            	   let b_num = $(this).attr("data-num");
+						            	   let i_num = $(this).find("div > p.num").html();
+						            	   let ol_quan = Number($(this).find("div > p.name > span.cnt").html());
+						            	   
+						            	   $.ajax({
+						            		   url : "/order/addOrders",
+						            		   type: "post",
+						            		   data : {
+						            			   "imp_uid": rsp.imp_uid,
+						            			   "pay_method": rsp.pay_method,
+						            			   "merchant_uid": rsp.merchant_uid,
+						            			   "name": rsp.name,
+						            			   "amount": rsp.paid_amount,
+						            			   
+						            			   i_num : i_num,
+					            				   i_quan: ol_quan,
+					            				   ol_quan : ol_quan,  
+						            			   b_num: b_num
+						            	  	   },
+						            		   dataType : "text",
+						            		   success : function(data){
+						            			   //alert("결제 완료되었습니다.");
+						            			   console.log(data);
+
+							            		   location.href="/";
+						            		   },
+						            		   error: function(){
+						            			   alert("결제 실패했습니다.");
+						            		   }
+						            	   });
+						               });
+				            	   } else {
+				            		   $.ajax({
+							            	 url: "/order/paymentCancel" ,
+							            	 type: "post",
+							            	 data: {
+							            		imp_uid: rsp.imp_uid,
+							            		amount: rsp.paid_amount
+							            	 },
+							            	 dataType: "text",
+							            	 success: function(data){
+							            		 console.log(data);
+							            		 if(data == "결제 취소"){
+							            			 alert("결제가 취소되었습니다."); 
+							            		 } else {
+							            			 alert("시스템 오류가 발생");
+							            		 }
+							            		 
+							            	 }
+							              });
+				            	   }
 		            	   });
 			               
-			               $("#bascketList > div.itemList").each(function(){
-			            	   let b_num = $(this).attr("data-num");
-			            	   let i_num = $(this).find("div > p.num").html();
-			            	   let ol_quan = Number($(this).find("div > p.name > span.cnt").html());
-			            	   
-			            	   let OrderListVO = {
-			            			   i_num : i_num,
-			            			   m_num : ${login.m_num},
-			            			   ol_quan : ol_quan
-			            	   }
-			            	   
-			            	   $.ajax({
-			            		   url : "/store/updateItemQuan",
-			            		   type: "post",
-			            		   data : {
-			 						   i_num: i_num,
-			 						   i_quan: ol_quan
-			            		   },
-			            		   dataType : "text",
-			            		   success : function(data){
-			            			   console.log(data);
-			            			   
-			            		   }
-			            	   });
-			            	   
-			            	   $.ajax({
-			            		   url : "/bascket/deleteItem",
-			            		   type: "post",
-			            		   data : {
-			            			   b_num: b_num,
-			 						   i_num: i_num,
-			 						   m_num: ${login.m_num}
-			            		   },
-			            		   dataType : "text",
-			            		   success : function(data){
-			            			   console.log(data);
-			            		   }
-			            	   });
-			            	   
-			            	   $.ajax({
-			            		   url : "/order/addOrders",
-			            		   type: "post",
-			            		   data : OrderListVO,
-			            		   dataType : "text",
-			            		   success : function(data){
-			            			   console.log(data);
-			            			   location.href="/";
-			            		   }
-			            	   });
-			            	   
-			            	   
-			               });
 			            } else {
 			                //console.log(rsp);
 			                alert("결제에 실패했습니다.");
 			            }
 			        });
 				 });
+				
+				
 				
 				$(".cntUp").click(function(){
 				   let cnt = $(this).parent().prev().children("p.name").children("span.cnt").html();
@@ -172,9 +171,7 @@
 					  url: "/bascket/deleteItem",
 					  type: "post",
 					  data: {
-						  b_num: b_num,
-						  i_num: i_num,
-						  m_num: ${login.m_num}
+						  b_num: b_num
 					  },
 					  dataType: "text",
 					  success: function(data){
@@ -190,6 +187,44 @@
 				   
 			   });
 			   
+			   function addOrder(rsp){
+				   //console.log(rsp.imp_uid);
+				   var def = new $.Deferred();
+				   $.ajax({
+            		   url : "/order/addOrder",
+            		   type: "post",
+            		   data : {
+            			   "imp_uid": rsp.imp_uid,
+            			   "pay_method": rsp.pay_method,
+            			   "merchant_uid": rsp.merchant_uid,
+            			   "name": rsp.name,
+            			   "amount": rsp.paid_amount
+            		   },
+            		   dataType : "text",
+            		   success : function(data){
+            			   console.log(data);
+            			   def.resolve(data);
+            		   },
+            		   error: function(){
+            			   def.reject("실패");
+            		   }
+            	   });
+				   return def.promise();
+			   }
+			   
+			   function bascketCnt(){
+				   $(".itemList").each(function(){
+					   let cnt = $(this).children(".info").children(".name").children(".cnt").html();
+					   console.log(cnt);
+					   let price = $(this).children(".info").children(".price").html().replace(/,/g, "");
+					   console.log(price);
+					   var result = Number(cnt) * Number(price);
+					   console.log(result);
+					   
+					   $(this).children(".info").children(".allPrice").html(result.toLocaleString('ko-KR'))
+				   });
+			   }
+			   bascketCnt();
 			});
 		</script>
 	</head>
@@ -204,13 +239,13 @@
 								<c:forEach var="bascket" items="${bascket }">
 									<div class="itemList container" data-num="${bascket.b_num }">
 										<div class="col-md-4 item">
-											<img src="${bascket.i_img }"/>
+											<img src="${bascket.ivo.i_img }"/>
 										</div>
-										<div class="col-md-4 text-center item">
-											<p style="display:none;" class="num">${bascket.i_num }</p>
-											<p class="name">${bascket.i_name } x <span class="cnt">1</span></p>
-											<p class="price" style="display: none;">${bascket.i_price }</p>
-											<p class="allPrice">${bascket.i_price }</p>
+										<div class="col-md-4 text-center item info">
+											<p style="display:none;" class="num">${bascket.ivo.i_num }</p>
+											<p class="name">${bascket.ivo.i_name } x <span class="cnt">${bascket.b_quan }</span></p>
+											<p class="price" style="display: none;">${bascket.ivo.i_price }</p>
+											<p class="allPrice">${bascket.ivo.i_price }</p>
 										</div>
 										<div class="col-md-2 text-center item">
 											<button type="button" class="cntUp">+</button>
