@@ -1,10 +1,7 @@
 package com.boot.client.member.dao;
 
-
-
 import org.apache.ibatis.annotations.Mapper;
 
-import com.boot.client.community.board.vo.CommunityVO;
 import com.boot.client.member.vo.MemberVO;
 
 @Mapper

@@ -22,10 +22,12 @@ $(function() {
 		location.href = "/member/joinForm";
 	})
 	
+	//아이디 중복체크
+	
+	
 	
 	//가입 후
 	$("#join").click(function() {
-
 		if (!chkId($("#join_id"),"아이디를"))  return;
 		else if (!chkPwd($("#join_pwd"),"비밀번호를")) return;
 		else if (!chkRemain($("#join_name"),"이름을")) return;
@@ -70,34 +72,34 @@ $(function() {
 	$(".myPage-update").click(function() {
 		location.href = "/member/updateForm";
 	})
-	
-	
-	
-		$("#update").click(function() {
-			if (!chkId($("#update_id"),"아이디를")) return;
-			else if (!chkPwd($("#join_pwd"),"비밀번호를")) return;
-			else if (!chkRemain($("#join_name"),"이름을")) return;
-			else if (!chkRemain($("#join_phone"),"전화번호를")) return;
-			else if (!chkRemain($("#join_email"),"이메일을")) return;
-			else if (!chkRemain($(".zip"),"우편번호를")) return;
-			if($("#update_pwd").val() != $("#update_pwdConfirm").val()) {
-				$("#update_pwd").val("");
-				$("#update_pwdConfirm").val("");
-				return alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-			}
 
-			var add1 = $(".address1").val();
-			
-			var add2 = $(".address2").val();
-			
-			$(".address3").val(add1 + " " + add2);
-			
-			$("#updateForm").attr({
-				"method":"post",
-				"action":"/member/memberUpdate"
-			}),
+
+	//수정 버튼
+	$("#update").click(function() {
+		if (!chkId($("#update_id"), "아이디를")) return;
+		else if (!chkPwd($("#join_pwd"), "비밀번호를")) return;
+		else if (!chkRemain($("#join_name"), "이름을")) return;
+		else if (!chkRemain($("#join_phone"), "전화번호를")) return;
+		else if (!chkRemain($("#join_email"), "이메일을")) return;
+		else if (!chkRemain($(".zip"), "우편번호를")) return;
+		if ($("#update_pwd").val() != $("#update_pwdConfirm").val()) {
+			$("#update_pwd").val("");
+			$("#update_pwdConfirm").val("");
+			return alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+		}
+
+		var add1 = $(".address1").val();
+
+		var add2 = $(".address2").val();
+
+		$(".address3").val(add1 + " " + add2);
+
+		$("#updateForm").attr({
+			"method": "post",
+			"action": "/member/memberUpdate"
+		}),
 			$("#updateForm").submit();
-		})
+	})
 
 
 	/*

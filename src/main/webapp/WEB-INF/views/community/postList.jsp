@@ -124,7 +124,9 @@
 		}
 		
 		console.log("야호!:" + ${pageMaker.prev} );
-
+		console.log("pageNum:" + ${pageMaker.cvo.pageNum} );
+		console.log("amount:" + ${pageMaker.cvo.amount} );
+		console.log("endPage:" + ${pageMaker.endPage} );
 	});
 </script>
 
@@ -196,22 +198,21 @@
 			<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
 			<c:if test="${pageMaker.prev}">
 				<li class="paginateBtn">
-					<a href="${pageMaker.startPage -1}">Previous</a>
+					<a href="${pageMaker.startPage-1}">Previous</a>
 				</li>
 			</c:if>
 
 			<!-- 바로가기 번호 출력 -->
-			<c:forEach var="num" begin="${pageMaker.startPage}"
-				end="${pageMaker.endPage}">
+			<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 				<li class="paginateBtn ${pageMaker.cvo.pageNum == num ?'active':''}">
 					<a href="${num}">${num}</a>
 				</li>
 			</c:forEach>
 
 			<!-- 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인 -->
-			<c:if test="${pageMaker.next }">
+			<c:if test="${pageMaker.next}">
 				<li class="paginateBtn">
-					<a href="${pageMaker.endPage + 1 }">Next</a>
+					<a href="${pageMaker.endPage+1}">Next</a>
 				</li>
 			</c:if>
 		</ul>

@@ -14,7 +14,7 @@
 	</insert>
 	
 	<select id="idChk" resultType="int" parameterType="MemberVO">
-		select *
+		select count(*)
 		from MEMBER
 		where m_id=#{m_id}
 	</select>

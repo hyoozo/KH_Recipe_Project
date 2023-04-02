@@ -3,15 +3,17 @@
 <mapper namespace="com.boot.client.community.board.dao.CommunityDao">
 	
 	<!-- 게시판 리스트와 페이징 -->
-	<!--
 	<select id="postList" resultType="comVO" parameterType="comVO">
-	<![CDATA[
-		SELECT *
-		FROM (
-			select /*+ index_desc(community PK_COMMUNITY) */
-			rownum as rn, c_no, c_title, c_category, c_writer, c_comment, c_img, c_readcnt,, to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date
-			FROM community
-			where ]]>
+		<![CDATA[
+			SELECT *
+			FROM (
+				select
+					rownum as rnum, c_no, c_title, c_category, c_writer, c_comment, c_img, c_readcnt, to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date
+				FROM (
+					select *
+					FROM community
+					order by c_no desc)
+				where ]]>
 			<trim prefix="(" suffix=") AND " prefixOverrides="AND">
 				<if test="search=='c_title'">
 					<![CDATA[c_title LIKE '%' || #{keyword} || '%']]>
@@ -23,28 +25,11 @@
 					<![CDATA[c_comment LIKE '%' || #{keyword} || '%']]>
 				</if>
 			</trim>
- 				<![CDATA[ rownum <= #{pageNum} * #{amount}
- 					) postList
- 					WHERE rn > (#{pageNum} - 1) * #{amount}
+ 				<![CDATA[ rownum <= #{pageNum} * #{amount})
  				]]>
-	</select>
-	 -->
-	 
-	 <select id="postList" resultType="comVO" parameterType="comVO">
-		SELECT /*+ index_desc(community PK_COMMUNITY) */ *
-		FROM community
-			<where>
-				<if test="search=='c_title'">
-					<![CDATA[c_title LIKE '%' || #{keyword} || '%']]>
-				</if>
-				<if test="search=='c_writer'">
-					<![CDATA[c_writer LIKE '%' || #{keyword} || '%']]>
-				</if>
-				<if test="search=='c_comment'">
-					<![CDATA[c_comment LIKE '%' || #{keyword} || '%']]>
-				</if>
-			</where>
-	</select>
+ 			WHERE rnum > (#{pageNum} - 1) * #{amount}	
+
+	</select> 
 	
 	<select id="comListCnt" parameterType="comVO" resultType="int">
 	 	select count(*) from community

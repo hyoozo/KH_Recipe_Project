@@ -65,7 +65,6 @@ public class ComReplyController {
 		
 		log.info("후 : " + result);
 		
-		
 		return (result == 1) ? "SUCCESS": "FAILURE";
 	}
 	

@@ -24,7 +24,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @SessionAttributes("login")
-@RequestMapping("/member/*")
+@RequestMapping("/member")
 @Slf4j
 @Controller
 class MemberController {
@@ -141,23 +141,23 @@ class MemberController {
 		return "redirect:" + path;
 	}
 	
-	@ResponseBody
-	@PostMapping("/idChk")
-	public String idChk(MemberVO mvo) {
+	/*
+	@PostMapping(value="/idChk", consumes = "application/json")
+	public String idChk(@RequestBody MemberVO mvo) {
+		int result = 0;
+		try {
 		log.info("아이디 중복체크 확인");
 		
-		int result = 0;
 		result = memberService.idChk(mvo);
-		String path = "";
 		
-		if(result == 0 ) {
-			path = "실패";
-		} else {
-			path = "성공";
+		log.info("result : " + result);
+		
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-		
-		return path;
+		return (result == 0) ? "SUCCESS": "FAILURE";
 	}
+	*/
 	
 	@GetMapping("/memberDelete")
 	public String memberDelete(SessionStatus sessionStatus, MemberVO mvo) {

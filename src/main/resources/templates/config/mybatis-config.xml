@@ -14,5 +14,6 @@
 		<typeAlias type="com.boot.client.community.board.vo.CommunityVO" alias="comVO"/>
 		<typeAlias type="com.boot.client.community.reply.vo.ReplyVO" alias="reply"/>
 		<typeAlias type="com.boot.client.member.vo.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.boot.admin.vo.ManagerVO" alias="admin"/>
 	</typeAliases>
 </configuration>

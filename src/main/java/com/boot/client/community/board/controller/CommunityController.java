@@ -1,6 +1,5 @@
 package com.boot.client.community.board.controller;
 
-import java.io.Console;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
