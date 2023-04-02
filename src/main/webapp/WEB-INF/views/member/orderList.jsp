@@ -29,7 +29,7 @@
 				let amount = $(this).parent().parent().children(".price").html().replace(/,/g, "");
 				//console.log(amount);
 				
-				cacelPay(imp_uid, amount, ol_num);
+				cancelPay(imp_uid, amount, ol_num);
 			});
 			
 			function cancelPay(imp_uid, amount, ol_num){
@@ -44,7 +44,7 @@
 					success: function(data){
 						if(data=='결제 취소'){
 							alert("환불 처리 되었습니다.");
-							location.href="/order/updateState?ol_num"+ol_num;
+							location.href="/order/updateState?ol_num="+ol_num;
 						} else {
 							alert("시스템 에러가 발생했습니다.");
 						}

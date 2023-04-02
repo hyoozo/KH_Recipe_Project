@@ -27,20 +27,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "/igr")
 @Slf4j
 public class IngredientController {
+	
 	@Setter(onMethod_=@Autowired)
 	private FridgeService fridgeService;
-
-	/* 추천 레시피 검색 후 리스트 호출 */
-//	@GetMapping(value = "/rcpList" )
-//	public List<RecipeVO> rcpList(@RequestParam(value="arr[]") List<String> arr ) throws Exception{
-//		log.info("rcpList()호출");
-//		
-//		
-//		//String[] arr = igr_name.split(",");
-//		//List<RecipeVO> list = fridgeService.selectRecommend(arr);
-//		return null;
-//	}
-
 	
 	/* 재료 리스트 호출 */
 	@GetMapping(value = "/igrList", produces=MediaType.APPLICATION_JSON_VALUE)

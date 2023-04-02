@@ -25,7 +25,7 @@ public class ItemsCrawlingServiceImpl implements ItemsCrawlingService {
 	@Override
 	public List<ItemsVO> getItemList(String id) {
 		List<ItemsVO> list = null;
-		
+		System.out.println("서비스 getItemList");
 		try {
 			list = new ArrayList<>();
 			
@@ -85,7 +85,7 @@ public class ItemsCrawlingServiceImpl implements ItemsCrawlingService {
 				
 				ItemsVO vo = ItemsVO.builder()
 						.i_name(element.select("div.desc > p.name").text())
-						.i_parts("욕실·세제·청소")
+						.i_parts("프라이팬·냄비")
 						.i_price(element.select("div.desc > p.origin_price").text())
 						.i_img(element.select("div.main_image > img").attr("abs:src"))
 						.i_quan(100)

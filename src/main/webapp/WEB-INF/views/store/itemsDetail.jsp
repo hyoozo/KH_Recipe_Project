@@ -19,25 +19,26 @@
 		       let i_name = $("#i_name").html();
 		       
 		       function verifiaction(imp_uid){
-		    	   var def = new $.Deferred();
-		    	   $.ajax({
-		            	 url: "/order/paymentVerification" ,
-		            	 type: "post",
-		            	 data: {
-		            		imp_uid: imp_uid,
-		            		i_num: i_num
-		            	 },
-		            	 dataType: "text",
-		            	 success: function(data){
-		            		 console.log(data);
-		            		 def.resolve(data);
-		            	 }, error: function(){
-		            		 def.reject("실패");
-		            	 }
-		    	   });
-		    	   
-		    	   return def.promise();
-		       };
+	                var def = new $.Deferred();
+	                $.ajax({
+	                      url: "/order/paymentVerification" ,
+	                      type: "post",
+	                      data: {
+	                        imp_uid: imp_uid,
+	                        i_num: i_num,
+	                        cnt: $("#cnt").html()
+	                      },
+	                      dataType: "text",
+	                      success: function(data){
+	                         console.log(data);
+	                         def.resolve(data);
+	                      }, error: function(){
+	                         def.reject("실패");
+	                      }
+	                });
+	                
+	                return def.promise();
+	             };
 		       
 			       
 			   $("#requestPay").click(function(){
