@@ -3,9 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-
-<script src="/resources/include/js/community.js"></script>
+<!-- fontawesome -->
+<script src="https://kit.fontawesome.com/ccd4ff9cee.js" crossorigin="anonymous"></script>
+<link href="/resources/include/css/postList-1.css" rel="stylesheet">
 <link href="/resources/include/css/community.css" rel="stylesheet">
+<script src="/resources/include/js/community.js"></script>
 
 <script type="text/javascript">
 	$(function() {
@@ -129,115 +131,127 @@
 		console.log("endPage:" + ${pageMaker.endPage} );
 	});
 </script>
-
+</head>
 <body>
-	커뮤니티게시판
-
-	<form id="detailForm">
-		<input type="hidden" id="c_no" name="c_no">
-	</form>
-
 	<div>
-		<div>
-			<iframe width="280" height="157.5"
-				src="https://www.youtube.com/embed/87zznFb0-us?autoplay=1&mute=1"
-				title="YouTube video player"></iframe>
-			<iframe width="280" height="157.5"
-				src="https://www.youtube.com/embed/t4Es8mwdYlE"
-				title="YouTube video player"></iframe>
-			<iframe width="280" height="157.5"
-				src="https://www.youtube.com/embed/pTvMsM2v1tg"
-				title="YouTube video player"></iframe>
-		</div>
-	</div>
+		<h2 class="headerH2">커뮤니티 게시판</h2>
 
-	<div>
-		<table>
-			<thead>
-				<tr>
-					<th>글 번호</th>
-					<th>이미지</th>
-					<th>제 목</th>
-					<th>작성자</th>
-					<th>카테고리</th>
-					<th>등록일</th>
-					<th>조회수</th>
-					<th>추천</th>
-				</tr>
-			</thead>
-
-			<tbody id="list">
-				<c:choose>
-					<c:when test="${not empty postList}">
-						<c:forEach var="postList" items="${postList}" varStatus="status">
-							<tr data-num="${postList.c_no}">
-								<td>${postList.c_no}</td>
-								<td>${postList.c_img}</td>
-								<td class="goDetail">${postList.c_title}</td>
-								<td class="listWriter">${postList.c_writer}</td>
-								<td>${postList.c_category}</td>
-								<td>${postList.c_reg_date}</td>
-								<td>${postList.c_readcnt}</td>
-								<td>추천</td>
-							</tr>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<td>더 이상 게시물이 없습니다.</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-
-			</tbody>
-		</table>
-	</div>
-
-	<div>
-		<ul>
-			<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
-			<c:if test="${pageMaker.prev}">
-				<li class="paginateBtn">
-					<a href="${pageMaker.startPage-1}">Previous</a>
-				</li>
-			</c:if>
-
-			<!-- 바로가기 번호 출력 -->
-			<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-				<li class="paginateBtn ${pageMaker.cvo.pageNum == num ?'active':''}">
-					<a href="${num}">${num}</a>
-				</li>
-			</c:forEach>
-
-			<!-- 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인 -->
-			<c:if test="${pageMaker.next}">
-				<li class="paginateBtn">
-					<a href="${pageMaker.endPage+1}">Next</a>
-				</li>
-			</c:if>
-		</ul>
-	</div>
-
-	<div>
-		<form id="c_search">
-			<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
-			<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
-			<div>
-				<select name="search" id="search">
-					<option value="all">전체</option>
-					<option value="c_title">제목</option>
-					<option value="c_writer">작성자</option>
-					<option value="c_comment">내용</option>
-				</select> <input type="text" name="keyword" id="keyword"
-					placeholder="검색어를 입력하세요" />
-				<button type="button" id="comSearchBtn">검색</button>
-			</div>
+		<form id="detailForm">
+			<input type="hidden" id="c_no" name="c_no">
 		</form>
+	
+		<div class="youtube-container">
+			<div class="youtube-section">
+		 		<div>
+					<iframe width="280" height="157.5"
+						src="https://www.youtube.com/embed/87zznFb0-us?autoplay=1&mute=1"
+						title="YouTube video player"></iframe>
+				</div>
+				<div>
+					<iframe width="280" height="157.5"
+						src="https://www.youtube.com/embed/t4Es8mwdYlE"
+						title="YouTube video player"></iframe>
+				</div>
+				<div>
+					<iframe width="280" height="157.5"
+						src="https://www.youtube.com/embed/pTvMsM2v1tg"
+						title="YouTube video player"></iframe>
+				</div>
+			</div>
+		</div>
+		
+		<div class="search-box">
+			<form id="c_search">
+				<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
+				<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
+				<div class="inline-box">
+					<select name="search" id="search">
+						<option value="all">전체</option>
+						<option value="c_title">제목</option>
+						<option value="c_writer">작성자</option>
+						<option value="c_comment">내용</option>
+					</select> 
+					<input type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요" />
+					<button type="button" id="comSearchBtn"></button>
+				</div>
+			</form>
+		</div>
+	
+		
+	
+		<div class="board-container">
+			<table class="board-table">
+				<thead>
+					<tr>
+						<th id="b_num">글 번호</th>
+						<th id="b_img">이미지</th>
+						<th id="b_title">제 목</th>
+						<th id="b_writer">작성자</th>
+						<th id="b_categori">카테고리</th>
+						<th id="b_date">등록일</th>
+						<th id="b_views">조회수</th>
+						<th id="b_rek">추천</th>
+					</tr>
+				</thead>
+	
+				<tbody id="list">
+					<c:choose>
+						<c:when test="${not empty postList}">
+							<c:forEach var="postList" items="${postList}" varStatus="status">
+								<tr data-num="${postList.c_no}">
+									<td>${postList.c_no}</td>
+									<td>${postList.c_img}</td>
+									<td class="goDetail">${postList.c_title}</td>
+									<td class="listWriter">${postList.c_writer}</td>
+									<td>${postList.c_category}</td>
+									<td>${postList.c_reg_date}</td>
+									<td>${postList.c_readcnt}</td>
+									<td>추천</td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td>더 이상 게시물이 없습니다.</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+	
+				</tbody>
+			</table>
+		</div>
+	
+		<div>
+			<ul>
+				<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
+				<c:if test="${pageMaker.prev}">
+					<li class="paginateBtn">
+						<a href="${pageMaker.startPage-1}">Previous</a>
+					</li>
+				</c:if>
+	
+				<!-- 바로가기 번호 출력 -->
+				<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+					<li class="paginateBtn ${pageMaker.cvo.pageNum == num ?'active':''}">
+						<a href="${num}">${num}</a>
+					</li>
+				</c:forEach>
+	
+				<!-- 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인 -->
+				<c:if test="${pageMaker.next}">
+					<li class="paginateBtn">
+						<a href="${pageMaker.endPage+1}">Next</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+		<div class="writh-box">
+			<input type="button" id="postList-insert" value="글쓰기">
+		</div>
+	
+		
 	</div>
-
-	<div>
-		<input type="button" id="postList-insert" value="글쓰기">
-	</div>
+	
 
 </body>
 </html>
