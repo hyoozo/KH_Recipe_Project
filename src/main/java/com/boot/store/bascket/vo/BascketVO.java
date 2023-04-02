@@ -14,4 +14,5 @@ public class BascketVO{
 	private int b_num; // 장바구니 번호
 	private MemberVO mvo; // 회원번호
 	private ItemsVO ivo; // 제품 번호
+	private int b_quan; // 수량
 }
