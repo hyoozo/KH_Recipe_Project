@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
+    
 <script src="/resources/include/js/member.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -10,7 +9,41 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-<script>
+<script type="text/javascript">
+$(function() {
+	/*
+	$("#join_id").on("focusout",function() {
+
+		$.ajax({
+			url : "/member/idChk",
+			type : "post",
+			data:JSON.stringify({
+				m_id : $("#join_id").val(),
+			}),
+			dataType:"text",
+			contentType: 'application/json; charset=utf-8',
+			error:function(request,status,error){
+		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+			},
+			success : function(result){
+				consol.log("result : " + result);
+				if(result == "SUCCESS"){
+					console.log("여기까지");
+					$("#join_id").css("border-color","green");
+					$("#joinIdSpan").val("사용가능한 아이디입니다.");
+				} else {
+					$("#join_id").css("border-color","red");
+					$("#joinIdSpan").val("사용불가능한 아이디입니다.");
+					$("#join_id").focus();
+					return;
+				}
+			}
+		})
+		
+	})
+	*/
+})
+
 function sample6_execDaumPostcode() {
 	new daum.Postcode({
 		oncomplete: function(data) {
@@ -69,6 +102,7 @@ function sample6_execDaumPostcode() {
 					<div class="join-label"><label>아이디</label></div><br/>
 					<input type="text" id="join_id" class="join-input bor-rad2" name="m_id"
 					placeholder="6자이상 10자이하의 영문과 숫자를 조합해서 입력해주세요." />
+					<span id="joinIdSpan"></span>
 				</div>
 				<div class="join-div">
 					<div class="join-label"><label>이름</label></div><br/>

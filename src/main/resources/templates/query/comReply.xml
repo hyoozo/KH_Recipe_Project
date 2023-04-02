@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.client.community.board.dao.ComReplyDao">
+	
+	<select id="replyList" resultType="reply" parameterType="reply">
+		SELECT *
+		FROM COMMNITY_REPLY
+		where c_no = #{c_no}
+		order by cr_no desc
+	</select>
+	
+	<insert id="replyInsert"  parameterType="reply">
+		insert into COMMNITY_REPLY
+		values(SEQ_COMMU_REPLY.nextval,#{cr_writer},#{cr_content},#{c_no},#{m_num})
+	</insert>
+	
+	<update id="replyUpdate" parameterType="reply">
+		UPDATE COMMNITY_REPLY
+		SET cr_content = #{cr_content}
+		WHERE cr_no = #{cr_no} and c_no = #{c_no} and m_num = #{m_num}
+	</update>
+	
+	<delete id="replyDelete" parameterType="reply"> 
+		delete from COMMNITY_REPLY where cr_no = #{cr_no}
+	</delete>
+	
+</mapper>

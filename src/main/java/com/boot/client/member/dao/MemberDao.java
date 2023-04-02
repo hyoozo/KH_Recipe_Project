@@ -1,7 +1,5 @@
 package com.boot.client.member.dao;
 
-
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.boot.client.member.vo.MemberVO;
@@ -10,6 +8,8 @@ import com.boot.client.member.vo.MemberVO;
 public interface MemberDao {
 	public MemberVO loginProcess(MemberVO mvo);
 	
+	public int idChk(MemberVO mvo);
+	
 	public int joinProcess(MemberVO mvo);
 	
 	public MemberVO myPage(MemberVO mvo);
@@ -17,5 +17,7 @@ public interface MemberDao {
 	public int updatePwdConfirm(MemberVO mvo);
 	
 	public int memberUpdate(MemberVO mvo);
+	
+	public int memberDelete(MemberVO mvo);
 
 }

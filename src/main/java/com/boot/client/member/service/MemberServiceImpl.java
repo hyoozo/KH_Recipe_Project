@@ -48,6 +48,27 @@ public class MemberServiceImpl implements MemberService {
 		result = memberDao.memberUpdate(mvo);
 		return result;
 	}
+
+	@Override
+	public int idChk(MemberVO mvo) {
+		int result = 0;
+		result = memberDao.idChk(mvo);
+		return result;
+	}
+
+	@Override
+	public int memberDelete(MemberVO mvo) {
+		int result = 0;
+		result = memberDao.memberDelete(mvo);
+		return result;
+	}
+
+	@Override
+	public int insertForm(MemberVO mvo) {
+		int result = 0;
+		result = memberDao.memberDelete(mvo);
+		return result;
+	}
 	
 	
 }

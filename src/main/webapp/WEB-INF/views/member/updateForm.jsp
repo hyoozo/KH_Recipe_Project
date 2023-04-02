@@ -9,7 +9,23 @@
 
 <script type="text/javascript">
 	$(function() {
-		$("form[name='updateForm']").hide();
+		
+		let name = "${login.m_name}";
+		let pwd = "${login.m_pwd}";
+		let m_phone = "${login.m_phone}";
+		let m_email = "${login.m_email}";
+		let m_zip = "${login.m_zip}";
+		let m_address = "${login.m_address}";
+		console.log("name : " + name);
+		console.log("pwd : " + pwd);
+		console.log("m_phone : " + m_phone);
+		console.log("m_email : " + m_email);
+		console.log("m_zip : " + m_zip);
+		console.log("m_address : " + m_address);
+		
+		
+		
+		//$("form[name='updateForm']").hide();
 		
 		$(document).on("click", "#updatePwdBtn", function() {
 			
@@ -33,7 +49,6 @@
 						if(resultData == 0){
 							msg.addClass("msg_error");
 							msg.text("비밀번호가 일치하지 않습니다.");
-							m_pwd.select();
 						}else if(resultData == 1){
 							$("form[name='updateForm']").show();
 							$("form[name='updatePwdChk']").hide();
@@ -60,18 +75,35 @@
 		})
 		
 		$("#update").click(function() {
+			console.log($("input[name='m_phone']").val().length);
 			
 			if($("input[name='m_name']").val().length == 0) {		
-				let name = "${login.m_name}";
+				
 				$("input[name='m_name']").val(name);
-			} else if($("input[name='m_pwd']").length == 0) {
-				let pwd = "${login.m_pwd}";
+				
+			}
+			if($("input[name='m_pwd']").val().length == 0) {
+				
 				$("input[name='m_pwd']").val(pwd);
-			} else if($("input[name='m_phone']").length == 0) {
-				let m_phone = "${login.m_phone}";
+				
+			}
+			if($("input[name='m_pwdConfirm']").val().length == 0) {
+				
+				$("input[name='m_pwdConfirm']").val(pwd);
+				
+			}
+			if($("input[name='m_phone']").val().length == 0) {
+				
 				$("input[name='m_phone']").val(m_phone);
-			} else if($("input[name='m_zip']").val().length == 0) {
-				let m_zip = "${login.m_zip}";
+				
+			}
+			if($("input[name='m_email']").val().length == 0) {
+				
+				$("input[name='m_email']").val(m_email);
+				
+			}
+			if($("input[name='m_zip']").val().length == 0) {
+				
 				$("input[name='m_zip']").val(m_zip);
 			}
 			
@@ -82,22 +114,16 @@
 				return alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 			}
 			
-			
-			var add1 = $("input[name=address]").val();
-			
-			var add2 = $(".address2").val();
-			
-			var address;
-		
-			if(add1 == "") {
-				address = add2;
-			} else if(add2 == "") {
-				address = add1;
-			} else if(add1 == "" || add2 == ""){
-				address = "${login.m_address}";
+
+			if($(".address1").val().length == 0 || $(".address2").val().length == 0) {
+				$("input[name='m_address']").val(m_address);
+				
+			} else if((".address1").val().length == 0){
+				return alert("주소를 입력해주세요.");
+			} else if((".address2").val().length == 0) {
+				return alert("상세주소를 입력해주세요.");
 			}
-			 
-			$("inpu[name='m_address']").val("address");
+
 			
 			$("#updateForm").attr({
 				"method":"post",
@@ -105,6 +131,20 @@
 			}),
 			$("#updateForm").submit();
 		})
+		
+		$(".delBtn").click(function() {
+			if(confirm("회원 정보가 삭제됩니다. 그래도 하시겠습니까 ?") == true){
+				$("#updateForm").attr({
+					"method":"get",
+					"action":"/member/memberDelete"
+				}),
+				$("#updateForm").submit();
+		    } else {
+		    	return;
+		    }
+		})
+		
+		
 	
 		function chkPwd(item2, msg) {
 			if(regPwd.test(item2.val())) {
@@ -128,7 +168,7 @@
 		
 		var regId = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{6,10}$/;
 		var regPwd = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+|<>?:{}])[A-Za-z\d~!@#$%^&*()_+|<>?:{}]{8,13}$/;
-	})
+	});
 </script>
 	
 <script>
@@ -204,7 +244,7 @@ function sample6_execDaumPostcode() {
 			</div>
 			<button type="button" id="updatePwdBtn" class="upPwdBtn bor-rad4">확인</button>
 			<button type="button" id="updatePwdBtn-cancel" class="upPwdBtn bor-rad4">취소</button>
-			<span class="msg"></span>
+			<span class="msg input-font14"></span>
 		</div>
 	</form>
 
@@ -217,6 +257,7 @@ function sample6_execDaumPostcode() {
 		<div class="update-container-inner">
 			<div class="update-container-top">
 				<h2>개인 정보 수정</h2>
+				<button type="button" class="delBtn btnWhite">회원 탈퇴 ></button>
 				<a class="float-r">* 빈 칸 입력시 기존 정보로 저장됩니다.</a>
 			</div>
 			<div>
@@ -224,7 +265,7 @@ function sample6_execDaumPostcode() {
 					<input type="text" class="update-num" name="m_num" value="${login.m_num}">
 					<div class="update-label"><label>아이디</label></div>
 					<input type="text" id="update_id" class="update-input input-font14 join-input bor-rad2" name="m_id"
-					placeholder="${login.m_id}" /> <!-- disabled -->
+					placeholder="${login.m_id}" disabled/>
 				</div>
 				<div class="update-div">
 					<div class="update-label"><label>이름</label></div>
@@ -253,7 +294,7 @@ function sample6_execDaumPostcode() {
 				</div>
 				<div class="update-div">
 				<div class="update-label"></div>
-					<input type="text" name="address"  class="address1 update-input-address bor-rad2"  id="sample6_address" placeholder="주소">
+					<input type="text" name="address"  class="address1 update-input-address bor-rad2"  id="sample6_address" placeholder="${login.m_address}">
 				</div>
 				<div class="update-div">
 				<div class="update-label"></div>
@@ -268,7 +309,7 @@ function sample6_execDaumPostcode() {
 			</div>
 		</div>
 	</div>
-	</form>
+</form>
 </body>
 
 

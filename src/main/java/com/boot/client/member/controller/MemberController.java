@@ -1,7 +1,5 @@
 package com.boot.client.member.controller;
 
-import java.io.Console;
-import java.nio.file.Path;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,7 +24,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @SessionAttributes("login")
-@RequestMapping("/member/*")
+@RequestMapping("/member")
 @Slf4j
 @Controller
 class MemberController {
@@ -141,6 +140,44 @@ class MemberController {
 	
 		return "redirect:" + path;
 	}
+	
+	/*
+	@PostMapping(value="/idChk", consumes = "application/json")
+	public String idChk(@RequestBody MemberVO mvo) {
+		int result = 0;
+		try {
+		log.info("아이디 중복체크 확인");
+		
+		result = memberService.idChk(mvo);
+		
+		log.info("result : " + result);
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return (result == 0) ? "SUCCESS": "FAILURE";
+	}
+	*/
+	
+	@GetMapping("/memberDelete")
+	public String memberDelete(SessionStatus sessionStatus, MemberVO mvo) {
+		log.info("회원계정 삭제 호출");
+		
+		int result = 0;
+		result = memberService.memberDelete(mvo);
+		String path = "";
+		log.info("result:"+result);
+		
+		if(result == 1) {
+			sessionStatus.setComplete();
+			path = "/";
+		} else {
+			path = "/member/updateForm";
+		}
+		
+		return "redirect:" + path;
+	}
+	
 	
 	
 	

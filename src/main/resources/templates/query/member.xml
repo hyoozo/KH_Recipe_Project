@@ -13,6 +13,12 @@
 		values(SEQ_MEMBER.nextval,#{m_name},#{m_id},#{m_pwd},#{m_phone},#{m_email},#{m_zip},#{m_address},to_date(sysdate,'yyyy.mm.dd'),to_date(sysdate,'yyyy.mm.dd'))
 	</insert>
 	
+	<select id="idChk" resultType="int" parameterType="MemberVO">
+		select count(*)
+		from MEMBER
+		where m_id=#{m_id}
+	</select>
+	
 	<select id="myPage" resultType="MemberVO" parameterType="MemberVO">
 		select *
 		from MEMBER
@@ -38,6 +44,11 @@
 	 	m_address = #{m_address}
 		where m_num = #{m_num}
 	</update>
+	
+	<delete id="memberDelete" parameterType="MemberVO">
+		delete from member
+		where m_num = #{m_num}
+	</delete>
 	
 	
 </mapper>
