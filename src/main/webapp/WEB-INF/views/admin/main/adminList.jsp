@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	<script type="text/javascript" src="/resources/include/js/common.js"></script>
-		<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
+	<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 <style type="text/css">
 	h3{
 		margin: 0px 0px 50px 0px;
@@ -105,8 +105,13 @@
 			}
 			goPage();
 		});
+		
+		$("#insertManager").click(function(){
+			//console.log("!11")
+			location.href="/admin/admin/insertForm";
+		})
 
-	}) // $ 종료
+	}); // $ 종료
 	
 	function goPage(){
 		if($("#search").val()=="all"){
@@ -144,7 +149,7 @@
 			</div>
 			<c:if test="${adminLogin.mng_lev eq '마스터'}">
 				<div id="insertManager">
-					<button type="button" id="insertManager" class="issc">레시피등록</button>
+					<button type="button" id="insertManager" class="issc">관리자 추가</button>
 				</div>
 			</c:if>
 			

@@ -11,5 +11,7 @@ public interface ManagerService {
 	public List<ManagerVO> adminList(ManagerVO mvo);
 
 	public int adminCnt(ManagerVO mvo);
+	public ManagerVO idCheck(ManagerVO mvo);
+	public int insertAdmin(ManagerVO mvo);
 
 }

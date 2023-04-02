@@ -42,4 +42,15 @@
 			]]>
 	</select>
 	
+	<select id="idCheck" parameterType="admin" resultType="admin">
+		SELECT *
+		FROM manager
+		WHERE mng_id = #{mng_id}
+	</select>
+	
+	<insert id="insertAdmin" parameterType="admin">
+		INSERT INTO manager(mng_num, mng_id, mng_pwd, mng_name, mng_lev, mng_email, mng_phone)
+		VALUES(seq_manager.nextval, #{mng_id}, #{mng_pwd}, #{mng_name}, #{mng_lev}, #{mng_email}, #{mng_phone})
+	</insert>
+	
 </mapper>

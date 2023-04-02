@@ -13,6 +13,7 @@ import lombok.Setter;
 @Service
 public class ManagerServiceImpl implements ManagerService {
 
+
 	@Setter(onMethod_ = @Autowired)
 	private ManagerDao managerDao;
 	
@@ -33,5 +34,19 @@ public class ManagerServiceImpl implements ManagerService {
 	public int adminCnt(ManagerVO mvo) {
 		return managerDao.adminCnt(mvo);
 	}
+	
+	@Override
+	public ManagerVO idCheck(ManagerVO mvo) {
+		return managerDao.idCheck(mvo);
+	}
+
+	@Override
+	public int insertAdmin(ManagerVO mvo) {
+		int result = 0;
+		result = managerDao.insertAdmin(mvo);
+		return result;
+	}
+	
+	
 
 }
