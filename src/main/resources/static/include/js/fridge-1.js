@@ -46,17 +46,43 @@ $(function(){
 	$('#content-memo').on('change',function(){
 		const memo_content = $('#content-memo').val();
 		console.log("#content-memo 수정함>>>"+memo_content);
-		$.ajax({
-			url: "/refrigerator/memoUpdate",
-			type: "post",
-			data: {memo_content : memo_content},
-			success:function(data){
-				$('#content-memo').html(data);
-			},
-			error: function(){
-				$('#content-memo').html("저장에 실패하였습니다.");
-			},
-		})
+		/* 
+			한번도 내용을 작성하지 않았을때 insert
+			
+			내용을 작성하고 내용을 전부 삭제 했을때 update..
+			내용이 없는 상태에서 update..
+			
+			내용이 없을때 insert와 update 구분하기.
+		*/
+		if(memo_content == "") {
+			console.log("insert")
+			$.ajax({
+				url: "/refrigerator/memoInsert",
+				type: "post",
+				data: {memo_content : memo_content},
+				success:function(data){
+					$('#content-memo').html(data);
+				},
+				error: function(){
+					$('#content-memo').html("저장에 실패하였습니다.");
+				},
+			})
+		}else {
+			console.log("update")
+			$.ajax({
+				url: "/refrigerator/memoUpdate",
+				type: "post",
+				data: {memo_content : memo_content},
+				success:function(data){
+					$('#content-memo').html(data);
+				},
+				error: function(){
+					$('#content-memo').html("수정에 실패하였습니다.");
+				},
+			})
+		}
+		
+		
 	})
 	
 	let input = document.getElementById("searchInput");

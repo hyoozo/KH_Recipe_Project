@@ -41,6 +41,7 @@
 		        <h3>메모장</h3>
 		        <div class="content-container pBox">
 		            <textarea class="content-memo" id="content-memo"></textarea>
+			        <div class="memo-bg"></div>
 		        </div>
 		    </div>
 		</section>
