@@ -25,7 +25,8 @@
 		            	 type: "post",
 		            	 data: {
 		            		imp_uid: imp_uid,
-		            		i_num: i_num
+		            		i_num: i_num,
+		            		cnt: $("#cnt").html()
 		            	 },
 		            	 dataType: "text",
 		            	 success: function(data){

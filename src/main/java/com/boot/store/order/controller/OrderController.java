@@ -60,7 +60,7 @@ public class OrderController {
 	
 	@PostMapping("/paymentVerification")
 	@ResponseBody
-	public String paymentVerification(String imp_uid, ItemsVO ivo) throws Exception {
+	public String paymentVerification(String imp_uid, ItemsVO ivo, int cnt) throws Exception {
 		String line = "";
 		String result = "";
 		
@@ -83,14 +83,18 @@ public class OrderController {
 		
 		String amount = String.valueOf(response.get("amount"));
 		
-		String i_price = orderService.getItemPrice(ivo);
+		int pay = Integer.parseInt(amount);
+		
+		int i_price = Integer.parseInt(orderService.getItemPrice(ivo));
+		
+		i_price = i_price * cnt;
 		
 		log.info(amount);
-		log.info(i_price);
+		log.info(String.valueOf(i_price));
 		
 		String verification = "111";
-		System.out.println(amount.equals(i_price));
-		if(amount.equals(i_price)) {
+		
+		if(pay == i_price) {
 			verification = "성공";
 		} else {
 			verification = "실패";
