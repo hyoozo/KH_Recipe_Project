@@ -8,20 +8,18 @@ button {
     margin-left: 50px;
 }
 .refrigerator-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: block;
+    grid-template-columns: repeat(5, 1fr);
     grid-row-gap: 80px;
     grid-column-gap: 10px;
     justify-items: center;
-    margin-top: 50px;
 }
 .refrigerator-card {
     position: relative;
-    width: 500px;
-    height: 600px;
-    /* border: #2C3E50 1px solid; */
+    width: 100%;
     padding: 0 25px 25px 25px;
     background-color: #ffffff;
+    margin-top: 50px;
 
 }
 .refrigerator-card > h3 {
@@ -30,14 +28,13 @@ button {
     font-weight: normal;
 }
 .content-container {
-    width: 450px;
-    height: 500px;
-    /* border: #a35e1a9b 1px solid; */
+    height: 400px;
     border-radius: 30px;
-    /* box-shadow : 0 0 10px 1px rgba(136, 93, 19, 0.502) inset; */
-    /* box-shadow : 5px 5px 5px 1px rgba(136, 93, 19, 0.502) inset; */
     background-color: rgba(231, 197, 93, 0.301);
-    /* padding-top:50px; */
+}
+.pBox {
+	padding-top: 50px;
+	padding-left: 70px;
 }
 .pTop {
 	padding-top: 50px;
@@ -65,9 +62,9 @@ label {
 }
 .food-container {
     overflow: scroll;
-    max-height: 400px;
+    max-height: 300px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 }
 .food-container > div {
     margin: 5px 0 5px 0;
@@ -96,15 +93,34 @@ label {
     font-family: "FontAwesome";
     font-size: 25px;
 }
-
-.content-memo {
+.display-Box {
+	display: flex;
+    justify-content: space-between;
+    padding-right: 50px;
+}
+.h3-Box {
+    margin: 20px 20px 20px 50px;
+    font-size: 25px;
+    font-weight: normal;
+}
+#recommedRecipeBtn{
+	width: 200px;
+    height: 50px;
     border: none;
+    border-radius: 30px;
+    font-size: 20px;
+    font-family: Cafe24Ssurround;
+    color: coral;
+    background-color: #ffff;
+    border: 1px solid;
+    cursor: pointer;
+}
+.content-memo {
+	border: none;
     resize: none;
-    width: 350px;
-    height: 450px;
+    width: 1055px;
+    height: 350px;
     border-radius: 5px;
-    padding : 0px;
-    margin-left:50px;
     font-size: 20px;
 }
 .content-memo:focus {
@@ -155,8 +171,16 @@ label {
 }
 
 .removeBtn {
+	/* 선택된버튼 클래스*/
 	color:Orange;
 	text-decoration:line-through;
 	text-decoration-color:red;
 	text-decoration-thickness:3px;
+	font-size : 20px;
 }
+.clearBtn {
+	color: black;
+	text-decoration:none;
+	font-size : 20px;
+}
+

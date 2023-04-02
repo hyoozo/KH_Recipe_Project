@@ -2,13 +2,19 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.boot.store.items.vo.ItemsVO" alias="items"/>		
-		<typeAlias type="com.boot.recipe.info.vo.RecipeVO" alias="recipe"/>
-		<typeAlias type="com.boot.recipe.manual.vo.RecipeManualVO" alias="manual"/>
-		<typeAlias type="com.boot.recipe.ingredient.vo.IngredientVO" alias="ingredient"/>
+		<typeAlias type="com.boot.store.items.vo.ItemsVO" alias="items"/>	
 		<typeAlias type="com.boot.store.bascket.vo.BascketVO" alias="bascket"/>
 		<typeAlias type="com.boot.store.order.vo.OrderVO" alias="order"/>
 		<typeAlias type="com.boot.store.orderList.vo.OrderListVO" alias="orderList"/>
+			
+		<typeAlias type="com.boot.recipe.info.vo.RecipeVO" alias="recipe"/>
+		<typeAlias type="com.boot.recipe.manual.vo.RecipeManualVO" alias="manual"/>
+		
 		<typeAlias type="com.boot.client.member.vo.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.boot.recipe.like.vo.RecLikeVO" alias="like"/>
+		
+		<typeAlias type="com.boot.client.refrigerator.vo.IngredientVO" alias="ingredient"/>
+		<typeAlias type="com.boot.client.refrigerator.vo.FridgeVO" alias="fridge"/>
+		<typeAlias type="com.boot.client.refrigerator.memo.Memo" alias="memo"/>
 	</typeAliases>
 </configuration>

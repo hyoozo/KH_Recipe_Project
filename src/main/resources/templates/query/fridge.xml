@@ -2,57 +2,89 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boot.client.refrigerator.dao.FridgeDAO">
 
-	<select id="recommendRecipe" parameterType="String" resultType="String">
-	/* 재료에 따른 레시피 리스트 */
-		select r.rcp_nm
-		from recipe r
-		    inner join main_ingredient m
-		    on r.rcp_seq = m.rcp_seq
-		    inner join ingredient i
-		    on m.igr_num = i.igr_num
-		where i.igr_name = ${igr_name}
-	</select>
+	<resultMap type="fridge" id="fridgeMap">
+		<id property="fridge_num" column="fridge_num"/>
+		<id property="m_num.m_num" column="m_num"/>
+		<id property="igr_num.igr_num" column="igr_num"/>
+		<id property="igr_num.igr_name" column="igr_name"/>
+	</resultMap>
 	
-	<select id="igrList" resultType="ingredient" parameterType="ingredient">
+	<resultMap type="memo" id="memoMap">
+		<id property="memo_content" column="memo_content"/>
+		<id property="member.m_num" column="m_num"/>
+	</resultMap>
+	
+	
+	<select id="igrList" resultType="ingredient">
 	/* 재료 리스트 */
 		select igr_num, igr_name
 		from ingredient
 		order by igr_name
 	</select>
-
-	<!-- <sql id="igrSearch">
-		<if test="search == 'igr_name' ">
-			<![CDATA[ igr_name LIKE '%' || #{keyword} || '%' ]]>
-		</if>
-	</sql> -->
 	
 	<select id="searchIgr" resultType="ingredient" parameterType="ingredient">
 	/* 재료 검색 */
 		select igr_num, igr_name
 		from ingredient
- 		<!-- <where>
-			<include refid="igrSearch"></include>
-		</where> -->
 		where igr_name LIKE '%' || ${igr_name} || '%'
 		order by igr_name
 	</select>
 	
-	<!-- <insert id="fridge_igrList" parameterType="number">
+	<insert id="fridgeIgrInsert" parameterType="int">
+	/* 냉장고 재료 저장 */
 		insert into fridge (fridge_num, m_num, igr_num)
-		values (SEQ_FRIDGE.nextval, #{m_num}, #{igr_num});
-	</insert> -->
+		values (SEQ_FRIDGE.nextval, #{m_num}, #{igr_num})
+	</insert>
 	
-	<!-- useGeneratedKeys = "true"(기본값 false), keyColumn = [PK 컬럼명], keyProperty = [매핑할 변수명] -->
-	<!-- <insert id="insertSomething" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
-		insert into fridge (fridge_num, m_num, igr_num)
-		values 
-			 <foreach item="item" index="index" collection="list" separator=",">
-				(SEQ_FRIDGE.nextval, #{m_num}, #{igr_num});
-			 </foreach>
-		
-	   <selectKey keyProperty="lastPk" resultType="Integer" order="AFTER">
-		SELECT LAST_INSERT_ID()
-		</selectKey>
-	</insert> -->
+	<select id="memberIgrList" resultMap="fridgeMap" parameterType="MemberVO">
+	/* 회원 냉장고 재료 조회 */
+		select f.fridge_num as fridge_num, f.m_num as m_num, i.igr_name as igr_name, i.igr_num as igr_num
+		from fridge f
+		inner join ingredient i
+		on f.igr_num = i.igr_num
+		where f.m_num = #{m_num}	
+	</select> 
 	
+	<delete id="memberIgrDelete" parameterType="int">
+	/* 회원 냉장고 재료 삭제 */
+		DELETE FROM fridge
+		WHERE
+		igr_num = #{igr_num} and m_num = #{m_num}
+	</delete>
+	
+	<select id="fridgeSelect" resultType="int" parameterType="int">
+	/* 회원 냉장고 재료 중복 검사 */
+		select count(*) as count
+		from fridge f
+		inner join ingredient i
+		on f.igr_num = i.igr_num
+		where f.igr_num = #{igr_num} and f.m_num = #{m_num}
+	</select>
+	
+	<select id="selectRecommend" resultType="recipe">
+	/* 회원 냉장고 재료로 레시피 검색 (중복데이터 제거) */
+		select DISTINCT r.rcp_seq as rcp_seq , r.rcp_nm as rcp_nm, r.att_file_no_mk, r.info_eng, r.rcp_parts_dtls
+		from recipe r
+	    	inner join main_ingredient m
+	    		on r.rcp_seq = m.rcp_seq
+	    where
+		<foreach collection="list" item="item" open="(" close=")" separator="OR">
+			 m.igr_num = #{item}
+		</foreach>
+			
+	</select>
+	
+	<update id="memoUpdate" parameterType="memo" >
+	/* 회원 냉장고 메모 작성 */
+		update memo 
+		set
+		memo_content = #{memo_content}
+		where m_num = #{member.m_num}
+	</update>
+	
+	<select id="memoSelect" resultType="memo" parameterType="memo">
+	/* 회원 냉장고 메모 출력 */
+		select memo_content from memo
+		where m_num = #{member.m_num}
+	</select>
 </mapper>

@@ -7,7 +7,7 @@
         <header class="header-container">
             <div class="header-img">
                 <div class="center">
-                    <h1>냉장고 레시피</h1>
+                    <h1 class="headerH1">냉장고 레시피</h1>
                 </div>
             </div>
             <div class="nav">
@@ -24,7 +24,7 @@
                         <li><a href="/member/loginForm">로그인</a></li>
                         </c:if>
                         <c:if test="${login != null}">
-                        <li><a href="/member/myPage">마이페이지</a></li>
+                        <li><a href="/member/myPage">${login.m_name}님 마이페이지</a></li>
                         <li><a href="/member/logout">로그아웃</a></li>
                         </c:if>
                     </ul>
