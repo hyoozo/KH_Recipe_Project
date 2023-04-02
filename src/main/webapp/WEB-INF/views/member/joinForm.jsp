@@ -11,39 +11,50 @@
 
 <script type="text/javascript">
 $(function() {
-	/*
+	
 	$("#join_id").on("focusout",function() {
+		
+		let insertURL = "/member/idChk";
+		let inputM_id = $("input[name='m_id']");
 
 		$.ajax({
-			url : "/member/idChk",
-			type : "post",
+			url:insertURL,
+			type:'post',
 			data:JSON.stringify({
 				m_id : $("#join_id").val(),
 			}),
-			dataType:"text",
-			contentType: 'application/json; charset=utf-8',
+			dataType:'text',
+			headers : {
+				"Content-Type":"application/json"
+			},
 			error:function(request,status,error){
 		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
 			},
 			success : function(result){
-				consol.log("result : " + result);
-				if(result == "SUCCESS"){
-					console.log("여기까지");
-					$("#join_id").css("border-color","green");
-					$("#joinIdSpan").val("사용가능한 아이디입니다.");
-				} else {
-					$("#join_id").css("border-color","red");
-					$("#joinIdSpan").val("사용불가능한 아이디입니다.");
-					$("#join_id").focus();
+				if(inputM_id.val() == 0) {
+					inputM_id.css("background-color","white");
 					return;
+				} else {
+					if(result == "SUCCESS"){
+						inputM_id.css("background-color","#90fe6c");
+						return;
+					} else if(result == "FAILURE"){
+						inputM_id.val("");
+						inputM_id.css("background-color","red");
+						inputM_id.css("color","white");
+						inputM_id.addClass('placeColorW');
+						inputM_id.attr("placeholder","사용불가능한 아이디입니다");
+						return;
+					}
 				}
 			}
 		})
 		
 	})
-	*/
+	
 })
-
+</script>
+<script>
 function sample6_execDaumPostcode() {
 	new daum.Postcode({
 		oncomplete: function(data) {
@@ -102,7 +113,6 @@ function sample6_execDaumPostcode() {
 					<div class="join-label"><label>아이디</label></div><br/>
 					<input type="text" id="join_id" class="join-input bor-rad2" name="m_id"
 					placeholder="6자이상 10자이하의 영문과 숫자를 조합해서 입력해주세요." />
-					<span id="joinIdSpan"></span>
 				</div>
 				<div class="join-div">
 					<div class="join-label"><label>이름</label></div><br/>

@@ -25,7 +25,7 @@
 		
 		
 		
-		//$("form[name='updateForm']").hide();
+		$("form[name='updateForm']").hide();
 		
 		$(document).on("click", "#updatePwdBtn", function() {
 			
@@ -165,6 +165,7 @@
 				return false;
 			}
 		}
+		
 		
 		var regId = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{6,10}$/;
 		var regPwd = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+|<>?:{}])[A-Za-z\d~!@#$%^&*()_+|<>?:{}]{8,13}$/;

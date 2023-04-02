@@ -238,6 +238,6 @@
 	<div>
 		<input type="button" id="postList-insert" value="글쓰기">
 	</div>
-
+=
 </body>
 </html>
