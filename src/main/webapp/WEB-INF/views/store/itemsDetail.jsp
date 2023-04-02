@@ -205,6 +205,7 @@
 			<form id="inputBascket">
 				<input type="hidden" name="ivo.i_num" id="i_num" value="${detail.i_num }"/>
 				<input type="hidden" name="mvo.m_num" id="loginUser" value="${login.m_num}"/>
+				<input type="hidden" name="b_quan" id="loginUser" value=""/>
 			</form>
 			<div class="col-md-6">
 				<img src="${detail.i_img }">
