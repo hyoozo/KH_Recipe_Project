@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.boot.admin.manage.dao.ManagerDao;
 import com.boot.admin.vo.ManagerVO;
+import com.boot.client.member.vo.MemberVO;
 
 import lombok.Setter;
 
@@ -52,6 +53,18 @@ public class ManagerServiceImpl implements ManagerService {
 		int result = 0;
 		result = managerDao.adminDelete(mvo);
 		return result;
+	}
+
+	@Override
+	public List<MemberVO> userList(MemberVO mvo) {
+		List<MemberVO> list = null;
+		list = managerDao.userList(mvo);
+		return list;
+	}
+
+	@Override
+	public int memberCnt(MemberVO mvo) {
+		return managerDao.memberCnt(mvo);
 	}
 	
 	

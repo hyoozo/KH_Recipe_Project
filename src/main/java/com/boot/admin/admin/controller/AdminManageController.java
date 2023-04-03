@@ -35,7 +35,6 @@ public class AdminManageController {
 		model.addAttribute("adminList", adminList);
 		
 		int total = managerService.adminCnt(mvo);
-		log.info(Integer.toString(total));
 		model.addAttribute("pageMaker", new PageDTO(mvo, total));
 		
 		return "admin/main/adminList";

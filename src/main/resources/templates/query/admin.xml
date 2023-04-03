@@ -18,6 +18,18 @@
 		</if>
 	</sql>
 	
+	<sql id="memberSearch">
+		<if test="search=='m_name'">
+			<![CDATA[ m_name LIKE '%'|| #{keyword} || '%' ]]>
+		</if>
+		<if test="search=='m_email'">
+			<![CDATA[ m_email LIKE '%'|| #{keyword} || '%' ]]>
+		</if>
+		<if test="search=='m_id'">
+			<![CDATA[ m_id LIKE '%'|| #{keyword} || '%' ]]>
+		</if>
+	</sql>
+	
 	<select id="adminCnt" parameterType="admin" resultType="int">
 		SELECT count(*) FROM manager
 		<trim prefix=" where(" suffix=")">
@@ -29,7 +41,7 @@
 		<![CDATA[
 		SELECT mng_num, mng_id, mng_pwd, mng_name, mng_lev, mng_email, mng_phone
 		FROM (
-			SELECT /*+ INDEX_ASC(manager pk_manager) */
+			SELECT /*+ INDEX_DESC(manager pk_manager) */
 			rownum as rnum, mng_num, mng_id, mng_pwd, mng_name, mng_lev, mng_email, mng_phone
 			FROM manager
 			WHERE ]]>
@@ -57,4 +69,29 @@
 		DELETE FROM manager WHERE mng_num = #{mng_num}
 	</delete>
 	
+	
+	<select id="memberCnt" parameterType="MemberVO" resultType="int">
+		SELECT count(*) FROM member
+		<trim prefix=" where(" suffix=")">
+			<include refid="memberSearch"></include>
+		</trim>
+	</select>
+	
+	
+	<select id="userList" parameterType="MemberVO" resultType="MemberVO">
+		<![CDATA[
+		SELECT m_num, m_name, m_id, m_pwd, m_phone, m_email, m_address, to_char(m_reg_day, 'YYYY-MM-DD')AS m_reg_day, m_rec_day, m_zip
+		FROM (
+			SELECT /*+ INDEX_DESC(member pk_member) */
+			rownum as rnum, m_num, m_name, m_id, m_pwd, m_phone, m_email, m_address, m_reg_day, m_rec_day, m_zip
+			FROM member
+			WHERE ]]>
+				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+					<include refid="memberSearch"></include>
+				</trim>
+			<![CDATA[ rownum <= #{pageNum} * #{amount}
+				) userList
+				WHERE rnum > (#{pageNum}-1) * #{amount}
+			]]>
+	</select>
 </mapper>

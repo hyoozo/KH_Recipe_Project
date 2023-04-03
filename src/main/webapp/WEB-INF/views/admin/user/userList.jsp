@@ -58,25 +58,21 @@
 		border:1px solid #f40;
 		background-color:#f40;
 	}
-		
 </style>
 <script type="text/javascript">
 	$(function(){
-		$(".paginate_button a").click(function(e) {
-			 e.preventDefault();
-			 $("#m_search").find("input[name='pageNum']").val($(this).attr("href"));
-			 goPage();
-		});
 		
-		let word="<c:out value='${managerVO.keyword}' />";
+		let word="<c:out value='${memberVO.keyword}' />";
 		let value="";
 		if(word!=""){
-			$("#keyword").val("<c:out value='${managerVO.keyword}' />");
-			$("#search").val("<c:out value='${managerVO.search}' />");
+			$("#keyword").val("<c:out value='${memberVO.keyword}' />");
+			$("#search").val("<c:out value='${memberVO.search}' />");
 			
-			if($("#search").val()=='mng_name') {
+			if($("#search").val()=='m_name') {
 				value = ".table tbody tr td.name";
-			} else if ($("#search").val()=='mng_lev') value = ".table tbody tr td.lev";
+			} else if ($("#search").val()=='m_id') {
+				value = ".table tbody tr td.id";
+			} else if ($("#search").val()=='m_email') value = ".table tbody tr td.email";
 			
 			$(value+":contains('"+word+"')").each(function(){
 				let regex = new RegExp(word, 'gi');
@@ -92,7 +88,7 @@
 		
 		$("#search").change(function(){
 			if($("#search").val()=="all") {
-				$("#keyword").val("전체 관리자를 조회합니다.");
+				$("#keyword").val("전체 회원을 조회합니다.");
 			} else if($("#search").val()!="all"){
 				$("#keyword").val("");
 				$("#keyword").focus();
@@ -106,23 +102,6 @@
 			goPage();
 		});
 		
-		$("#insertManager").click(function(){
-			//console.log("!11")
-			location.href="/admin/admin/insertForm";
-		});
-		
-		$(".deleteManager").click(function(){
-			if(confirm("관리자를 정말 삭제하시겠습니까?\n삭제한 관리자는 복구할 수 없습니다.")){
-			let mng_num = $(this).parents("tr").attr("data-num");
-			$("#mng_num").val(mng_num);
-			$("#deleteMan").attr({
-				"method" : "get",
-				"action" : "/admin/admin/adminDelete"
-			});
-			$("#deleteMan").submit();
-			}
-		});
-
 	}); // $ 종료
 	
 	function goPage(){
@@ -132,7 +111,7 @@
 		
 		$("#m_search").attr({
 			"method" : "get",
-			"action" : "/admin/admin/adminList"
+			"action" : "/admin/user/userList"
 		});
 		$("#m_search").submit();
 	}
@@ -140,11 +119,7 @@
 	</head>
 	<body>
 		<div class="contentContainer container">
-			<h3>관리자 계정 관리</h3>
-			<form id="deleteMan">
-				<input type=hidden id="mng_num" name="mng_num" />
-			</form>
-				<%-- 검색기능 --%>
+			<h3>회원 계정 관리</h3>
 			<div id="wrapper2">
 			<div id="recipeSearch">
 				<form id="m_search" name="m_search" class="form-inline">
@@ -154,58 +129,52 @@
 						<label>검색조건</label>
 						<select id="search" name="search">
 							<option value="all">전체</option>
-							<option value="mng_name">관리자명</option>
-							<option value="mng_lev">등급</option>
+							<option value="m_name">회원명</option>
+							<option value="m_id">아이디</option>
+							<option value="m_email">이메일</option>
 						</select>
-						<input type="text" name="keyword" id="keyword" value="전체 관리자를 조회합니다."/>
+						<input type="text" name="keyword" id="keyword" value="전체 회원을 조회합니다."/>
 						<button type="button" id="searchData" class="issc">검색</button>
 					</div>
 				</form>
 			</div>
-			<c:if test="${adminLogin.mng_lev eq '마스터'}">
-				<div id="insertManager">
-					<button type="button" id="insertManager" class="issc">관리자 추가</button>
-				</div>
-			</c:if>
 			
-			<%-- 관리자 리스트 --%>
-			<div id="managerList">
-				<table summary="관리자 리스트" class="table">
+			<%-- 회원 리스트 --%>
+			<div id="memberList">
+				<table summary="회원 리스트" class="table">
 					<colgroup>
-						<col style="width:10%">
+						<col style="width:8%">
+						<col style="width:12%">
 						<col style="width:15%">
-						<col style="width:25%">
+						<col style="width:35%">
 						<col style="width:15%">
-						<col style="width:25%">
-						<col style="width:10%">
+						<col style="width:15%">
 					</colgroup>
 					<thead>
 						<tr>
 							<th>번호</th>
 							<th>이름</th>
-							<th>휴대폰 번호</th>
-							<th>등급</th>
+							<th>아이디</th>
 							<th>이메일</th>
-							<th>삭제</th>
+							<th>등록일</th>
+							<th>최근 로그인</th>
 						</tr>
 					</thead>
 					<tbody id="list">
 						<c:choose>
-							<c:when test="${not empty adminList}">
-								<c:forEach var="admin" items="${adminList}" varStatus="status">
-									<tr data-num="${admin.mng_num}">
-										<td>${admin.mng_num}</td>
-										<td class="name">${admin.mng_name}</td>
-										<td>${admin.mng_phone}
-										<td class="lev">${admin.mng_lev}</td>
-										<td>${admin.mng_email}</td>
-										<c:if test="${adminLogin.mng_lev eq '마스터'}">
-										<td><input type="button" class="deleteManager issc" value="삭제"></td>
-										</c:if>
+							<c:when test="${not empty memberList}" >
+								<c:forEach var="member" items="${memberList}" varStatus="status">
+									<tr data-num="${member.m_num}">
+										<td>${member.m_num}</td>
+										<td class="name">${member.m_name}</td>
+										<td class="id">${member.m_id}</td>
+										<td class="email">${member.m_email}</td>
+										<td>${member.m_reg_day}</td>
+										<td>${member.m_rec_day}</td>
 									</tr>
 								</c:forEach>
 							</c:when>
-						</c:choose>				
+						</c:choose>
 					</tbody>
 				</table>
 			</div>

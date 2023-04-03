@@ -61,7 +61,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 관리자 관리
                             </a>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="/admin/user/userList">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 회원 관리
                             </a>
