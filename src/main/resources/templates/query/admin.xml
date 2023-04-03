@@ -94,4 +94,8 @@
 				WHERE rnum > (#{pageNum}-1) * #{amount}
 			]]>
 	</select>
+	
+	<delete id="userDelete" parameterType="MemberVO">
+		DELETE FROM member where m_num = #{m_num}
+	</delete>
 </mapper>

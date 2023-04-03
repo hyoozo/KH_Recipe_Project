@@ -35,4 +35,18 @@ public class AdminUserManageController {
 		 
 		return "admin/user/userList";
 	}
+	
+	@GetMapping("userDelete")
+	public String userDelete(@ModelAttribute MemberVO mvo) {
+		
+		log.info("userDelete() 호출");
+		int result = 0;
+		String url = "";
+		result = managerService.userDelete(mvo);
+		
+		if(result >= 1) {
+			url = "/admin/user/userList";
+		}
+		return "redirect:"+url;
+	}
 }

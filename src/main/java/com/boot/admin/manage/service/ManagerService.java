@@ -18,7 +18,7 @@ public interface ManagerService {
 
 	public List<MemberVO> userList(MemberVO mvo);
 	public int memberCnt(MemberVO mvo);
-	
+	public int userDelete(MemberVO mvo);
 	
 
 }

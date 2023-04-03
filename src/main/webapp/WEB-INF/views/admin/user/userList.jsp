@@ -4,61 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	<script type="text/javascript" src="/resources/include/js/common.js"></script>
 	<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
-<style type="text/css">
-	h3{
-		margin: 0px 0px 50px 0px;
-	}
-	.textright{
-		text-align: right;
-		margin: 0px 0px 10px 0px;
-	}
-	#insertManager{
-		text-align: right;
-		margin: 0px 0px 20px 0px;
-	}
-	#keyword{
-		width: 250px;
-	}
-	#wrapper2{
-		width: 800px;
-	}
-	ul li a{
-		padding: 4px;
-		margin-right:3px;
-		margin-right:3px;
-		width:15px;
-		color:#000;
-		font:bold 12px tahoma;
-		font-size: 18px;
-		border:1px solid #eee;
-		text-align:center;
-		text-decoration:none;
-	}
-	ul li a:hover, ul li a:focus {
-		color:#fff;
-		border:1px solid #f40;
-		background-color:#f40;
-	}
-	div.tc{
-		margin: 30px 0px 30px 340px;
-	}
-	.issc{
-		border: 1px solid skyblue;
-		color:#000;
-		font:bold 12px tahoma;
-		font-size: 18px;
-		border:1px solid #eee;
-		text-decoration:none;
-		padding: 5px;
-		border-radius: 5px;
-	}
-	.issc:hover{
-		color:white;
-		color:#fff;
-		border:1px solid #f40;
-		background-color:#f40;
-	}
-</style>
+	<link href="/resources/include/css/AdminMemberList.css" rel="stylesheet">
+
 <script type="text/javascript">
 	$(function(){
 		
@@ -102,6 +49,18 @@
 			goPage();
 		});
 		
+		$(".deleteBtn").click(function(){
+			if(confirm("해당 회원을 삭제하시겠습니까?\n삭제한 회원은 복구할 수 없습니다.")){
+				let m_num = $(this).parents("tr").attr("data-num");
+				$("#m_num").val(m_num);
+				$("#deleteMember").attr({
+					"method" : "get",
+					"action" : "/admin/user/userDelete"
+				});
+				$("#deleteMember").submit();
+			}
+		})
+		
 	}); // $ 종료
 	
 	function goPage(){
@@ -120,6 +79,9 @@
 	<body>
 		<div class="contentContainer container">
 			<h3>회원 계정 관리</h3>
+			<form id="deleteMember">
+				<input type="hidden" id="m_num" name="m_num" />
+			</form>
 			<div id="wrapper2">
 			<div id="recipeSearch">
 				<form id="m_search" name="m_search" class="form-inline">
@@ -157,7 +119,7 @@
 							<th>아이디</th>
 							<th>이메일</th>
 							<th>등록일</th>
-							<th>최근 로그인</th>
+							<th>회원삭제</th>
 						</tr>
 					</thead>
 					<tbody id="list">
@@ -170,7 +132,7 @@
 										<td class="id">${member.m_id}</td>
 										<td class="email">${member.m_email}</td>
 										<td>${member.m_reg_day}</td>
-										<td>${member.m_rec_day}</td>
+										<td><input type="button" class="deleteBtn issc" value="삭제"/></td>
 									</tr>
 								</c:forEach>
 							</c:when>
