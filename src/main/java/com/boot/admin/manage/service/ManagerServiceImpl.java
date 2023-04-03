@@ -46,6 +46,13 @@ public class ManagerServiceImpl implements ManagerService {
 		result = managerDao.insertAdmin(mvo);
 		return result;
 	}
+
+	@Override
+	public int adminDelete(ManagerVO mvo) {
+		int result = 0;
+		result = managerDao.adminDelete(mvo);
+		return result;
+	}
 	
 	
 

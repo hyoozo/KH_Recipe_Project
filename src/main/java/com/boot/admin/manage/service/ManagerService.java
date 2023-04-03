@@ -14,4 +14,6 @@ public interface ManagerService {
 	public ManagerVO idCheck(ManagerVO mvo);
 	public int insertAdmin(ManagerVO mvo);
 
+	public int adminDelete(ManagerVO mvo);
+
 }

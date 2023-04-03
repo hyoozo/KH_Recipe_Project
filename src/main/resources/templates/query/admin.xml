@@ -53,4 +53,8 @@
 		VALUES(seq_manager.nextval, #{mng_id}, #{mng_pwd}, #{mng_name}, #{mng_lev}, #{mng_email}, #{mng_phone})
 	</insert>
 	
+	<delete id="adminDelete" parameterType="admin">
+		DELETE FROM manager WHERE mng_num = #{mng_num}
+	</delete>
+	
 </mapper>

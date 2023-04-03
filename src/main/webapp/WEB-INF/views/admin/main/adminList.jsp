@@ -109,7 +109,19 @@
 		$("#insertManager").click(function(){
 			//console.log("!11")
 			location.href="/admin/admin/insertForm";
-		})
+		});
+		
+		$(".deleteManager").click(function(){
+			if(confirm("관리자를 정말 삭제하시겠습니까?\n삭제한 관리자는 복구할 수 없습니다.")){
+			let mng_num = $(this).parents("tr").attr("data-num");
+			$("#mng_num").val(mng_num);
+			$("#deleteMan").attr({
+				"method" : "get",
+				"action" : "/admin/admin/adminDelete"
+			});
+			$("#deleteMan").submit();
+			}
+		});
 
 	}); // $ 종료
 	
@@ -129,6 +141,9 @@
 	<body>
 		<div class="contentContainer container">
 			<h3>관리자 계정 관리</h3>
+			<form id="deleteMan">
+				<input type=hidden id="mng_num" name="mng_num" />
+			</form>
 				<%-- 검색기능 --%>
 			<div id="wrapper2">
 			<div id="recipeSearch">
@@ -185,7 +200,7 @@
 										<td class="lev">${admin.mng_lev}</td>
 										<td>${admin.mng_email}</td>
 										<c:if test="${adminLogin.mng_lev eq '마스터'}">
-										<td><input type="button" id="deleteManager" value="삭제" class="issc"></td>
+										<td><input type="button" class="deleteManager issc" value="삭제"></td>
 										</c:if>
 									</tr>
 								</c:forEach>

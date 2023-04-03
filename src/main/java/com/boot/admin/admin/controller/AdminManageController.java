@@ -31,7 +31,7 @@ public class AdminManageController {
 		log.info("adminList() 호출");
 		
 		List<ManagerVO> adminList = managerService.adminList(mvo);
-		log.info(adminList.toString());
+		log.info("adminList 값 : " + adminList.toString());
 		model.addAttribute("adminList", adminList);
 		
 		int total = managerService.adminCnt(mvo);
@@ -70,6 +70,22 @@ public class AdminManageController {
 		} else {
 			url = "/admin/admin/adminInsert";
 		}
+		return "redirect:"+url;
+	}
+	
+	@GetMapping("adminDelete")
+	public String adminDelete(@ModelAttribute ManagerVO mvo) {
+		log.info("adminDelete() 호출");
+		
+		int result = 0;
+		
+		String url = "";
+		result = managerService.adminDelete(mvo);
+		
+		if(result >= 1) {
+			url = "/admin/admin/adminList";
+		}
+		
 		return "redirect:"+url;
 	}
 }
