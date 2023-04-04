@@ -15,4 +15,12 @@
 		<put-attribute name="main" value="/WEB-INF/views/admin/recipe/{1}.jsp" />
 	</definition>
 	
+	<definition name="admin/store/*" extends="basic">
+		<put-attribute name="main" value="/WEB-INF/views/admin/store/{1}.jsp" />
+	</definition>
+	
+	<definition name="admin/store/statistics/*" extends="basic">
+		<put-attribute name="main" value="/WEB-INF/views/admin/store/statistics/{1}.jsp" />
+	</definition>
+	
 </tiles-definitions>

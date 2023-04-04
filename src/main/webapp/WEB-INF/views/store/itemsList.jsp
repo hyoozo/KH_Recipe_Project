@@ -20,7 +20,8 @@
 				dataType:"json",
 				data : {pageNum : pageNum, search : search, keyword : keyword},
 				success: function(data){
-					if(data != null){
+					console.log(data.length);
+					if(data != 0){
 						/* console.log("성공");
 						console.log(pageNum);
 						console.log(data); */
@@ -39,8 +40,9 @@
 							} 
 							
 						});	
-					} else {
-						alert("시스템 오류가 발생했습니다.")
+					} else if(data.length == 0) {
+						alert("검색어가 부적합 합니다.")
+						location.href="/store/itemsList";
 					}
 				}
 			});
@@ -92,8 +94,33 @@
 			
 			$("#search").change(function(){
 				searchAll();
-				$("#keyword").val("");
-				$("#keyword").focus();
+				
+				//console.log($(this).val());
+				
+				if($(this).val() == 'i_parts'){
+					$("#keyword").remove();
+					
+					let $select = $("<select id='keyword' name='keyword' class='form-control'>");
+					
+					let $option1 = $("<option value='가전제품'>가전제품</option>");
+					let $option2 = $("<option value='간편식·조리식품'>간편식·조리식품</option>");
+					let $option3 = $("<option value='그릇·컵'>그릇·컵</option>");
+					let $option4 = $("<option value='수산·해산·건어물'>수산·해산·건어물</option>");
+					let $option5 = $("<option value='욕실·세제·청소'>욕실·세제·청소</option>");
+					
+					$select.append($option1).append($option2).append($option3).append($option4).append($option5);
+					
+					$("#keyInput").append($select);
+				} else if($(this).val() == 'i_name'){
+					$("#keyword").remove();
+					
+					let $input = $("<input type='text' class='form-control' id='keyword'>");
+					
+					$("#keyInput").append($input);
+					
+					$("#keyword").val("");
+					$("#keyword").focus();
+				}
 			});
 			
 			$(document).on("click", ".goDetail", function(){
@@ -129,14 +156,20 @@
       	<div class="text-right">
       		<form id="searchItems" class="form-inline">
 			  <div class="form-group">
-			    <select id="search" name="search" class="form-control">
-			    	<option value="all">전체</option>
-			    	<option value="i_name">제품명</option>
-			    	<option value="i_parts">제품분류</option>
-			    </select>
-			    <input type="text" class="form-control" id="keyword">
+			  	<div class="col-md-4">
+			  		<select id="search" name="search" class="form-control">
+				    	<option value="all">전체</option>
+				    	<option value="i_name">제품명</option>
+				    	<option value="i_parts">제품분류</option>
+				    </select>
+			  	</div>
+			  	<div class="col-md-4" id="keyInput">
+			  		<input type="text" class="form-control" id="keyword">
+			  	</div>
+			  	<div class="col-md-4">
+			  		<button type="button" class="btn btn-default" id="searchBtn">검색</button>
+			  	</div>
 			  </div>
-			  <button type="button" class="btn btn-default" id="searchBtn">검색</button>
 			</form>
       	</div>
       	
