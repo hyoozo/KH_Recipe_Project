@@ -21,6 +21,7 @@
 	
 	<definition name="admin/store/statistics/*" extends="basic">
 		<put-attribute name="main" value="/WEB-INF/views/admin/store/statistics/{1}.jsp" />
+	</definition>
 	<definition name="admin/user/*" extends="basic">
 		<put-attribute name="main" value="/WEB-INF/views/admin/user/{1}.jsp" />
 	</definition>

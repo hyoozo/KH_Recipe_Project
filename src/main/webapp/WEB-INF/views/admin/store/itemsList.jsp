@@ -158,7 +158,7 @@
 			</form>
 			
 			<c:choose>
-				<c:when test="${empty login }">
+				<c:when test="${not empty adminLogin }">
 					<div id="searchForm">
 			      		<form id="searchItems" class="form-inline">
 						  <div class="form-group">
