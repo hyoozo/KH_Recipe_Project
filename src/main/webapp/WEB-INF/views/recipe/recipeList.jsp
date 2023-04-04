@@ -4,13 +4,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 	<link href="/resources/include/css/index.css" rel="stylesheet">
+	<link href="/resources/include/css/clientRecipeList.css" rel="stylesheet">
+	
 	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.min.css" />
+	
 	<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 	<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/resources/include/js/common.js"></script>
 	<script type="text/javascript" src="/resources/include/dist/js/cookie.js"></script>
-	<link href="/resources/include/css/clientRecipeList.css" rel="stylesheet">
 	
 	<script type="text/javascript">
 		$(function(){

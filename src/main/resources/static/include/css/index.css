@@ -17,7 +17,7 @@ html, body, button {
     min-height: 100%;
     height: 100%;
 } 
-body, ul, a, p {
+body, ul,a, p {
     margin: 0;
     list-style: none;
     padding: 0;
@@ -132,3 +132,5 @@ body, ul, a, p {
     color:dimgray;
     font-size: small;
 }
+.f-box > p > a{color: dimgray; text-decoration: none;}
+.f-box > p > a:hover, .f-box > p > a:active {text-decoration: none; color:#000;}

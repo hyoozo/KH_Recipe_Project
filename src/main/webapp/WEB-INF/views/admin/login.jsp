@@ -13,6 +13,10 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
         <script type="text/javascript" src="/resources/include/js/common.js"></script>
+        <style type="text/css">
+        	a {color: #000; text-decoration: none; outline: none}
+			a:hover, a:active {text-decoration: none; color:#000;}
+        </style>
         <script type="text/javascript">
         	$(function(){
         		let errorMsg = "${errorMsg}";
@@ -70,7 +74,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div class="text-muted">Copyright <a href="/">&copy;</a> Your Website 2023</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
