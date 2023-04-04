@@ -53,6 +53,7 @@
 	<form id="detailSubmit">
 		<input type="hidden" id="c_no" name="c_no" value="${postDetail.c_no}" />
 		<input type="hidden" name="m_num" value="${login.m_num}" />
+		<input type="hidden" name="c_img" value="${postDetail.c_img}" />
 	</form>
 	
 	<div class="detail-bth">
@@ -82,10 +83,7 @@
 		
 		<div class="detail-content">
 			<div class="contentImg">
-				${postDetail.c_img}
-				<!--현재 이미지가 보이지 않아서 사이즈 조절 못함. 
-				     추후 이미지 등록 가능시 사이즈 조절하기. 
-				     이미지는 가운데 정렬.-->
+			<img src="/uploadStorage/board/${postDetail.c_img}" />
 			</div>
 			<div class="content-comment">
 				<p>${postDetail.c_comment}

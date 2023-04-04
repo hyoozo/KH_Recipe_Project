@@ -188,49 +188,7 @@
 						
 			add.append(divu);
 		}
-		
-		
-		/*
-		//수정폼출력
-		function replyUpdate(det) {
-			$("#replyForm").detach();
-			
-			//수정폼 버튼 속성 변경
-			$("#insertWriter").val(det.find("#reListCr_wr").html());
-			$("#insertWriter").prop("readonly", true);
-			
-			let content = det.find("#replyInnerAdd").html();
-			$("#insertContent").val(content);
-			
-			$("#replyForm button[type='button']").attr("id","replyUpdateBtn");
-			$("#replyForm button[type='button']").html("수정");
-			
-			let resetButton = $("<button type='button' id='resetBtn'>");
-			resetButton.html("취소");
-			$("#replyInnerAdd").after(resetButton);
-		};
-		
-		$(document).on("click", "#resetBtn", function(){ 
-			dataReset();
-		});
-		*/
-		
-		/*
-		//수정폼 원래대로
-		function replyUpdateReset() {
-			let detachReset = $("#replyForm").detach();
-			
-			//수정폼 버튼 속성 변경
-			$("#replyForm button[type='button']").attr("id","replyInsertBtn");
-			$("#replyForm button[type='button']").html("댓글 입력");
-			
-			//수정폼 취소버튼 삭제
-			$("#replyInner #reUpdateBtn").attr("id","cancelBtn");
-			$("#replyInner #cancelBtn").html("취소");
-			
-			$("#replyContainer").after(detachReset);		
-		}
-		*/
+
 		
 		//수정 ajax
 		$(document).on("click", "#updateBtn", function(){

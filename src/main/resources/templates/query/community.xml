@@ -69,10 +69,12 @@
 		UPDATE COMMUNITY
 		SET c_title = #{c_title},
 			c_category = #{c_category},
-			c_img = #{c_img},
-			c_comment = #{c_comment}, 
+			c_comment = #{c_comment},
+			<if test="c_img != ''">
+				c_img = #{c_img},
+			</if>
 			c_reg_date = to_date(sysdate,'yyyy-mm-dd')
-		WHERE m_num = #{m_num}	
+		WHERE c_no = #{c_no}	
 	</update>
 	
 	

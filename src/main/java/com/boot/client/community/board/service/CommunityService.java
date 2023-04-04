@@ -12,13 +12,13 @@ public interface CommunityService {
 	
 	public CommunityVO updateForm(CommunityVO cvo);
 	
-	public int postUpdate(CommunityVO cvo);
+	public int postUpdate(CommunityVO cvo) throws Exception;
 	
-	public int postDelete(CommunityVO cvo);
+	public int postDelete(CommunityVO cvo) throws Exception;
 	
 	public MemberVO insertForm(MemberVO mvo);
 	
-	public int postInsert(CommunityVO cvo);
+	public int postInsert(CommunityVO cvo) throws Exception;
 	
 	public int comListCnt(CommunityVO cvo);
 

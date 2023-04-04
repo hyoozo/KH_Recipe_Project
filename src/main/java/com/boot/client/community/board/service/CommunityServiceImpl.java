@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.boot.client.community.board.dao.CommunityDao;
 import com.boot.client.community.board.vo.CommunityVO;
 import com.boot.client.member.vo.MemberVO;
+import com.boot.common.file.FileUploadUtil;
 
 import lombok.Setter;
 
@@ -48,8 +49,17 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public int postUpdate(CommunityVO cvo) {
+	public int postUpdate(CommunityVO cvo) throws Exception {
 		int update = 0;
+		
+		if(!cvo.getFile().isEmpty()) { 
+			if(!cvo.getC_img().isEmpty()) {
+				FileUploadUtil.fileDelete(cvo.getC_img());
+			}
+			
+			String fileName = FileUploadUtil.fileUpload(cvo.getFile(), "board");
+			cvo.setC_img(fileName);
+		}
 
 		update = communityDao.postUpdate(cvo);
 
@@ -57,8 +67,12 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public int postDelete(CommunityVO cvo) {
+	public int postDelete(CommunityVO cvo) throws Exception {
 		int delete = 0;
+		
+		if(!cvo.getC_img().isEmpty()) {
+			FileUploadUtil.fileDelete(cvo.getC_img());
+		}
 
 		delete = communityDao.postDelete(cvo);
 
@@ -75,11 +89,16 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public int postInsert(CommunityVO cvo) {
+	public int postInsert(CommunityVO cvo) throws Exception{
 		int insert = 0;
+		
+		if(cvo.getFile().getSize() > 0){
+			String fileName = FileUploadUtil.fileUpload(cvo.getFile(), "board");
+			cvo.setC_img(fileName);
+		}
 	  
-		insert = communityDao.postInsert(cvo);
-	
+		insert = communityDao.postInsert(cvo);	
+		
 		return insert;
 	}
 

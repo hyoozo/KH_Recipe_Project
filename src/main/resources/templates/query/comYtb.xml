@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.client.community.board.dao.Commu_YtbDao">
+	
+	<select id="Ytb" resultType="comYtb" parameterType="comYtb">
+
+		select cy_ytb from  (select * from COMMU_YTB
+		order by dbms_random.value)
+		where rownum <![CDATA[<=]]> 3
+
+	</select>
+	
+</mapper>

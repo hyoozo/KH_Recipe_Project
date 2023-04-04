@@ -56,8 +56,7 @@ public class CommunityController {
 	
 	@GetMapping("/updateForm")
 	public String updateForm(@ModelAttribute CommunityVO cvo, Model model) {
-		log.info("updateForm 호출 성공, c_no : " + cvo.getC_no());
-		
+		log.info("updateForm 호출 성공, c_no : " + cvo.getC_no());		
 		
 		CommunityVO result = communityService.updateForm(cvo);
 		
@@ -67,7 +66,7 @@ public class CommunityController {
 	}
 	
 	@PostMapping("/postUpdate")
-	public String postUpdate(@ModelAttribute CommunityVO cvo, Model model) {
+	public String postUpdate(@ModelAttribute CommunityVO cvo, Model model) throws Exception{
 		log.info("postUpdate 호출 성공");
 		
 		int result = 0;
@@ -78,14 +77,14 @@ public class CommunityController {
 		if(result == 1) {
 			path = "/community/postDetail?c_no="+cvo.getC_no();
 		} else {
-			path = "/ommunity/updateForm?c_no="+cvo.getC_no();
+			path = "/community/updateForm?c_no="+cvo.getC_no();
 		}
 		
 		return "redirect:" + path;
 	}
 	
 	@GetMapping("/postDelete")
-	public String postDelete(@ModelAttribute CommunityVO cvo, Model model) {
+	public String postDelete(@ModelAttribute CommunityVO cvo, Model model) throws Exception {
 		log.info("postDelete 호출 성공");
 		
 		int result = 0;
@@ -119,15 +118,16 @@ public class CommunityController {
 	}
 	
 	@PostMapping("/postInsert")
-	public String postInsert(@ModelAttribute CommunityVO cvo) {
+	public String postInsert(@ModelAttribute CommunityVO cvo) throws Exception {
 		
 		int result = 0;
 		String path = "";
 		
 		log.info("cvo : " + cvo ); 
 		
-		
 		result = communityService.postInsert(cvo);
+		
+		log.info("result : " + result ); 
 		
 		if(result == 1) {
 			path = "/community/postList";

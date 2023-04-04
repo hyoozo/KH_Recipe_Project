@@ -71,6 +71,58 @@
 				<div class="insertList" style="background-color:#92B3B7;">작성한 글 조회</div>
 			</div>
 		</div>
+		
+		<div>
+		
+			<table>
+				<thead>
+					<tr>
+						<th>메뉴명</th>
+						<th>요리종류</th>
+						<th>열량</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th></th>
+						<th></th>
+						<th></th>					
+				</tbody>
+			</table>
+			
+			<table>
+				<thead>
+					<tr>
+						<th>메뉴명</th>
+						<th>요리종류</th>
+						<th>열량</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th></th>
+						<th></th>
+						<th></th>					
+				</tbody>
+			</table>
+			
+			<table>
+				<thead>
+					<tr>
+						<th>메뉴명</th>
+						<th>요리종류</th>
+						<th>열량</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th></th>
+						<th></th>
+						<th></th>					
+				</tbody>
+			</table>
+			
+		</div>
 	</div>
 </body>
 </html>

@@ -125,10 +125,28 @@
 			}
 		}
 		
-		console.log("야호!:" + ${pageMaker.prev} );
-		console.log("pageNum:" + ${pageMaker.cvo.pageNum} );
-		console.log("amount:" + ${pageMaker.cvo.amount} );
-		console.log("endPage:" + ${pageMaker.endPage} );
+		function ytbShow() {
+			
+			let url = "/ComYtb";
+			
+		}
+		
+		ytbShow();
+		
+		function ytbShow() {
+			console.log("확인1");
+			
+			let url = "/ComYtb";
+
+			$.getJSON(url, function(data) {	
+				
+				$("#ytb1").attr("src",data[0].cy_ytb);
+				$("#ytb2").attr("src",data[1].cy_ytb);
+				$("#ytb3").attr("src",data[2].cy_ytb);
+				
+			})
+		}
+
 	});
 </script>
 </head>
@@ -143,20 +161,15 @@
 		<div class="youtube-container">
 			<div class="youtube-section">
 		 		<div>
-					<iframe width="280" height="157.5"
-						src="https://www.youtube.com/embed/87zznFb0-us?autoplay=1&mute=1"
-						title="YouTube video player"></iframe>
+					<iframe width="280" height="157.5" id="ytb1" ></iframe>
 				</div>
 				<div>
-					<iframe width="280" height="157.5"
-						src="https://www.youtube.com/embed/t4Es8mwdYlE"
-						title="YouTube video player"></iframe>
+					<iframe width="280" height="157.5" id="ytb2"></iframe>
 				</div>
 				<div>
-					<iframe width="280" height="157.5"
-						src="https://www.youtube.com/embed/pTvMsM2v1tg"
-						title="YouTube video player"></iframe>
+					<iframe width="280" height="157.5" id="ytb3"></iframe>
 				</div>
+				 
 			</div>
 		</div>
 		
@@ -184,7 +197,6 @@
 				<thead>
 					<tr>
 						<th id="b_num">글 번호</th>
-						<th id="b_img">이미지</th>
 						<th id="b_title">제 목</th>
 						<th id="b_writer">작성자</th>
 						<th id="b_categori">카테고리</th>
@@ -200,7 +212,6 @@
 							<c:forEach var="postList" items="${postList}" varStatus="status">
 								<tr data-num="${postList.c_no}">
 									<td>${postList.c_no}</td>
-									<td>${postList.c_img}</td>
 									<td class="goDetail">${postList.c_title}</td>
 									<td class="listWriter">${postList.c_writer}</td>
 									<td>${postList.c_category}</td>

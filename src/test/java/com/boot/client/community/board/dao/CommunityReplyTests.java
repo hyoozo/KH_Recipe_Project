@@ -1,10 +1,13 @@
 package com.boot.client.community.board.dao;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.boot.client.community.reply.vo.ReplyVO;
+import com.boot.client.community.youtube.vo.Commu_YtbVO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +18,9 @@ public class CommunityReplyTests {
 	
 	@Setter(onMethod_ = @Autowired)
 	private ComReplyDao comReplyDao;
+	
+	@Setter(onMethod_ = @Autowired)
+	private Commu_YtbDao commu_YtbDao;
 	
 	/*
 	@Test
@@ -56,13 +62,22 @@ public class CommunityReplyTests {
 		log.info("수정:" + result);
 	}
 	
-	*/
-	
 	@Test
 	public void testReplyDelete() {
 
 		int result = comReplyDao.replyDelete(49);
 		
 		log.info("삭제:" + result);
+	}
+	
+	*/
+	
+	@Test
+	public void testYtb() {
+	
+		List<Commu_YtbVO> result1 = commu_YtbDao.Ytb();
+				
+		log.info(" 1 : " + result1);
+
 	}
 }

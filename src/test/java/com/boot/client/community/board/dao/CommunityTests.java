@@ -74,7 +74,6 @@ public class CommunityTests {
 		
 		log.info("삭제된 행:" + result);
 	}
-	*/
 	
 	
 	@Test
@@ -95,6 +94,8 @@ public class CommunityTests {
 		
 		log.info("입력된 행:" + result);
 	}
+	
+	*/
 
 	
 }

@@ -6,17 +6,41 @@
 
 <script type="text/javascript">
 	$(function() {
+		
+		
 		$("#insert-list").click(function() {
+			
+			if($("#file").val()!=""){ 
+				if (!chkFile($("#file"))) return;
+				
+			}
+		
 			$("#insertSubmit").attr({
 				"method":"post",
+				"enctype":"multipart/form-data",
 				"action":"/community/postInsert"
 			})
 			$("#insertSubmit").submit();
 		})
 		
+		
+		
 		$("#insertCancel").click(function() {
 			location.href="/community/postList";
 		});
+		
+		function chkFile(item){
+			let ext = item.val().split('.').pop().toLowerCase();
+			if(jQuery.inArray(ext, ['gif','png','jpg']) == -1) {
+				alert('gif, png, jpg 파일만 업로드 할 수 있습니다.');
+				item.val("");
+				return false;
+			}else {
+				return true;
+			}
+		}
+		
+		
 	})
 </script>
 
@@ -33,7 +57,13 @@
 			</tr>
 			<tr>
 				<td>카테고리 : </td>
-				<td><input type="text" name="c_category"></td>
+				<td>
+					<select name="c_category">
+     					<option value="잡담">잡담</option>
+     					<option value="레시피">레시피</option>
+     					<option value="요리이야기">요리이야기</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>작성자 : </td>
@@ -45,8 +75,7 @@
 			</tr>
 			<tr>
 				<td>이미지 : </td>
-				<td><input type="file" name="c_img" multiple="multiple"/>
-    			<input type="submit" id="submit" value="전송"/></td>
+				<td><input type="file" name="file" id="file" /></td>
 			</tr>
 		</tbody>
 	</table>
