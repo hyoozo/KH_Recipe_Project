@@ -1,0 +1,33 @@
+h3{
+		margin: 0px 0px 50px 0px;
+	}
+	.table{
+		width: 800px;
+	}
+	.recipeImg{
+		width: 220px;
+		height: 150px;
+	}
+	#btnList{
+		width: 800px;
+		text-align: right;
+		margin: 0px 0px 30px 0px;
+	}
+	.btnCss{
+		padding: 4px;
+		margin-right:3px;
+		margin-right:3px;
+		width:70px;
+		color:#000;
+		font:bold 12px tahoma;
+		font-size: 18px;
+		border:1px solid #eee;
+		text-align:center;
+		text-decoration:none;
+	}
+	
+	.btnCss:hover, .btnCss:focus{
+		color:#fff;
+		border:1px solid #f40;
+		background-color:#f40;
+	}

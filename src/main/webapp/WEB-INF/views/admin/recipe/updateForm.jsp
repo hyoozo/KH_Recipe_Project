@@ -5,26 +5,8 @@
 
 <script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
-<style type="text/css">
-	h3{
-		margin: 0px 0px 50px 0px;
-	}
-	.table{
-		width: 1000px;
-	}
-	.recipeImg{
-		width: 220px;
-		height: 150px;
-	}
-	#btnList{
-		width: 1000px;
-		text-align: right;
-		margin: 0px 0px 30px 0px;
-	}
-	.dataInput{
-		width: 400px;
-	}
-</style>
+<link href="/resources/include/css/updateForm.css" rel="stylesheet">
+
 <script type="text/javascript">
 	
 	$(function(){
@@ -261,9 +243,9 @@
 					</tbody>
 				</table>
 				<div id="btnList">
-					<input type="button" value="수정완료" id="updateBtn" />
-					<input type="button" value="취소" id="cancelBtn" />
-					<input type="button" value="목록" id="listBtn" />
+					<input type="button" value="수정완료" id="updateBtn" class="btnCss" />
+					<input type="button" value="취소" id="cancelBtn" class="btnCss" />
+					<input type="button" value="목록" id="listBtn" class="btnCss" />
 				</div>
 			</form>
 		</div>

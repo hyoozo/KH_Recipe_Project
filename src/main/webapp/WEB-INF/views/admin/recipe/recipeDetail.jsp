@@ -4,24 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
-
-<style type="text/css">
-	h3{
-		margin: 0px 0px 50px 0px;
-	}
-	.table{
-		width: 800px;
-	}
-	.recipeImg{
-		width: 220px;
-		height: 150px;
-	}
-	#btnList{
-		width: 800px;
-		text-align: right;
-		margin: 0px 0px 30px 0px;
-	}
-</style>
+<link href="/resources/include/css/adminRecipeDetail.css" rel="stylesheet">
 
 <script type="text/javascript">
 	$(function(){
@@ -202,8 +185,8 @@
 				</tbody>
 			</table>
 			<div id="btnList">
-				<input type="button" value="수정" id="updateBtn" />
-				<input type="button" value="삭제" id="deleteBtn" />
+				<input type="button" value="수정" id="updateBtn" class="btnCss"/>
+				<input type="button" value="삭제" id="deleteBtn" class="btnCss"/>
 			</div>
 		</div>
 	</body>
