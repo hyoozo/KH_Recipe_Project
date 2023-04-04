@@ -8,6 +8,7 @@
 
 <script type="text/javascript">
 	$(function(){
+		
 		$(".paginate_button a").click(function(e) {
 			 e.preventDefault();
 			 $("#m_search").find("input[name='pageNum']").val($(this).attr("href"));
@@ -58,14 +59,19 @@
 		});
 		
 		$(".deleteManager").click(function(){
+			let mng_lev = $(this).closest("tr").find(".lev").data("value");
 			if(confirm("관리자를 정말 삭제하시겠습니까?\n삭제한 관리자는 복구할 수 없습니다.")){
-			let mng_num = $(this).parents("tr").attr("data-num");
-			$("#mng_num").val(mng_num);
-			$("#deleteMan").attr({
-				"method" : "get",
-				"action" : "/admin/admin/adminDelete"
-			});
-			$("#deleteMan").submit();
+				if(mng_lev == '마스터'){
+					alert("마스터 계정은 삭제할 수 없습니다.")
+				} else {
+					let mng_num = $(this).parents("tr").attr("data-num");
+					$("#mng_num").val(mng_num);
+					$("#deleteMan").attr({
+						"method" : "get",
+						"action" : "/admin/admin/adminDelete"
+					});
+					$("#deleteMan").submit();
+				}
 			}
 		});
 
@@ -143,7 +149,7 @@
 										<td>${admin.mng_num}</td>
 										<td class="name">${admin.mng_name}</td>
 										<td>${admin.mng_phone}
-										<td class="lev">${admin.mng_lev}</td>
+										<td class="lev" data-value="${admin.mng_lev}">${admin.mng_lev}</td>
 										<td>${admin.mng_email}</td>
 										<c:if test="${adminLogin.mng_lev eq '마스터'}">
 										<td><input type="button" class="deleteManager issc" value="삭제"></td>
@@ -151,7 +157,7 @@
 									</tr>
 								</c:forEach>
 							</c:when>
-						</c:choose>				
+						</c:choose>		
 					</tbody>
 				</table>
 			</div>
