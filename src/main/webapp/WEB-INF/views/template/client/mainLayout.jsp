@@ -55,7 +55,7 @@
         	 	</div>
         	 </section>
         </main>
-        <section class="">
+        <section>
              <div class="search-container d-center">
              	<form id="f_search">
              		<input type="hidden" name="search" value="rcp_nm"/>
