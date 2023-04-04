@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ItemsVO extends CommonVO {
+	private int rnum; // 일련번호
 	private int i_num; // 제품번호
 	private String i_parts; // 제품분류
 	private String i_name; // 제품명

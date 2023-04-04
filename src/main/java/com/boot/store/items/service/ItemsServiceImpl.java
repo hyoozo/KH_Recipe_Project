@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boot.common.file.FileUploadUtil;
 import com.boot.store.items.dao.ItemsDao;
 import com.boot.store.items.vo.ItemsVO;
 
@@ -39,4 +40,51 @@ public class ItemsServiceImpl implements ItemsService {
 		return result;
 	}
 	
+	@Override
+	public int itemsCnt() {
+		int result = 0;
+		result = itemsDao.itemsCnt();
+		return result;
+	}
+	
+	@Override
+	public int insertItem(ItemsVO ivo) throws Exception {
+		int result = 0;
+		
+		if(ivo.getFile().getSize() > 0) {
+			String img = FileUploadUtil.fileUpload(ivo.getFile(), "item");
+			ivo.setI_img(img);
+		}
+		
+		result = itemsDao.insertItems(ivo);
+		
+		return result;
+	}
+	
+	@Override
+	public int updateItem(ItemsVO ivo) throws Exception {
+		int result = 0;
+		
+		if(!ivo.getFile().isEmpty()) {
+			if(!ivo.getI_img().isEmpty()) {
+				FileUploadUtil.fileDelete(ivo.getI_img());
+			}
+			String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "item");
+			ivo.setI_img(fileName);
+		}
+		
+		result = itemsDao.updateItem(ivo);
+		return result;
+	}
+	
+	@Override
+	public int deleteItem(ItemsVO ivo) throws Exception{
+		int result = 0;
+		if(!ivo.getI_img().isEmpty()) {
+			FileUploadUtil.fileDelete(ivo.getI_img());
+		}
+		
+		result = itemsDao.deleteItem(ivo);
+		return result;
+	}
 }
