@@ -14,13 +14,9 @@ $(function(){
 }); /** *************상당 function 종료 *************** **/
 
 async function init() {
-	/**
-	 * memberIgrList = [1,2,3,4];
-	 */
 	const memberIgrListPromise = await memberIgrList();
 	selectRecommend(memberIgrListPromise);
 }
-
 
 function memberIgrList(){
 	return new Promise((resolve, reject) => {

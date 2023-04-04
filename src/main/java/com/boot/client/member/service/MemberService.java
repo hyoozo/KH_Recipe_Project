@@ -6,6 +6,8 @@ import com.boot.client.member.vo.MemberVO;
 public interface MemberService {
 	public MemberVO loginProcess(MemberVO mvo);
 	
+	public int idChk(MemberVO mvo);
+	
 	public int joinProcess(MemberVO mvo);
 	
 	public MemberVO myPage(MemberVO mvo);
@@ -13,4 +15,8 @@ public interface MemberService {
 	public int updatePwdConfirm(MemberVO mvo);
 	
 	public int memberUpdate(MemberVO mvo);
+	
+	public int memberDelete(MemberVO mvo);
+	
+	public int insertForm(MemberVO mvo);
 }

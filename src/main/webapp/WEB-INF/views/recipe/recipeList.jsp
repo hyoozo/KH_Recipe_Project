@@ -4,53 +4,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 	<link href="/resources/include/css/index.css" rel="stylesheet">
+	<link href="/resources/include/css/clientRecipeList.css" rel="stylesheet">
+	
 	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.min.css" />
+	
 	<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 	<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/resources/include/js/common.js"></script>
 	<script type="text/javascript" src="/resources/include/dist/js/cookie.js"></script>
-	<style type="text/css">
-		.recipeList{
-			display: inline-block;
-			width: 370px;
-			height: 500px;
-			margin: 2px;
-			overflow: hidden;
-		}
-		
-		.image-box{
-			width:380px;
-			height:370px;
-			overflow: hidden;
-			margin:0 auto;
-		}
-		
-		.recipeImg{
-			display: inline-block;
-			width: 368px;
-			height: 100%;
-			overflow: hidden;
-			object-fit: cover;
-			border-radius: 5px;
-			cursor: pointer;
-		}
-		
-		.from-group{
-			margin: 0px 0px 20px 0px;
-		}
-		
-		.recipeText {
-			display: flex;
-			align-items: center;
-		}
-		.sl{
-			width:30px;
-			margin-left: 220px;
-		}
-		
-
-	</style>
 	
 	<script type="text/javascript">
 		$(function(){
@@ -185,6 +147,7 @@
 			});
 			$("#f_search").submit();
 		}
+		
 		function updateLikeCount() {
 		    let rcp_seq_arr = [];
 		    $(".recipeList").each(function(){
@@ -208,7 +171,6 @@
 		        }
 		    });
 		}
-
 		
 		function appendRecipeList(data) {
 			  let html = "";
@@ -286,28 +248,6 @@
 				</c:otherwise>
 			</c:choose>
 			</div>
-			
-			<%-- 페이징 처리
-			<div class="text-center">
-				<ul class="pagination">
-					<c:if test="${pageMaker.prev}">
-						<li class="paginate_button previous">
-							<a href="${pageMaker.startPage -1}">Previous</a>
-						</li>
-					</c:if>
-					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-					<li class="paginate_button ${pageMaker.cvo.pageNum == num ? 'active':''}">
-						<a href="${num}">${num}</a>
-					</li>
-					</c:forEach>
-					<c:if test="${pageMaker.next}">
-						<li class="paginate_button next">
-							<a href="${pageMaker.endPage +1}">Next</a>
-						</li>
-					</c:if>
-				</ul>
-			</div> --%>
-			
 		</div>
 	</body>
 </html>

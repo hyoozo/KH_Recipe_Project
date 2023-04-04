@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boot.admin.manage.dao.ManagerDao">
+
+	<select id="loginProcess" parameterType="admin" resultType="admin">
+		SELECT *
+		FROM manager
+		WHERE mng_id = #{mng_id} AND mng_pwd = #{mng_pwd}
+	</select>
+
+
 	<sql id="adminSearch">
 		<if test="search=='mng_name'">
 			<![CDATA[ mng_name LIKE '%'|| #{keyword} || '%' ]]>
 		</if>
 		<if test="search=='mng_lev'">
 			<![CDATA[ mng_lev LIKE '%'|| #{keyword} || '%' ]]>
+		</if>
+	</sql>
+	
+	<sql id="memberSearch">
+		<if test="search=='m_name'">
+			<![CDATA[ m_name LIKE '%'|| #{keyword} || '%' ]]>
+		</if>
+		<if test="search=='m_email'">
+			<![CDATA[ m_email LIKE '%'|| #{keyword} || '%' ]]>
+		</if>
+		<if test="search=='m_id'">
+			<![CDATA[ m_id LIKE '%'|| #{keyword} || '%' ]]>
 		</if>
 	</sql>
 	
@@ -21,7 +41,7 @@
 		<![CDATA[
 		SELECT mng_num, mng_id, mng_pwd, mng_name, mng_lev, mng_email, mng_phone
 		FROM (
-			SELECT /*+ INDEX_ASC(manager pk_manager) */
+			SELECT /*+ INDEX_DESC(manager pk_manager) */
 			rownum as rnum, mng_num, mng_id, mng_pwd, mng_name, mng_lev, mng_email, mng_phone
 			FROM manager
 			WHERE ]]>
@@ -34,4 +54,48 @@
 			]]>
 	</select>
 	
+	<select id="idCheck" parameterType="admin" resultType="admin">
+		SELECT *
+		FROM manager
+		WHERE mng_id = #{mng_id}
+	</select>
+	
+	<insert id="insertAdmin" parameterType="admin">
+		INSERT INTO manager(mng_num, mng_id, mng_pwd, mng_name, mng_lev, mng_email, mng_phone)
+		VALUES(seq_manager.nextval, #{mng_id}, #{mng_pwd}, #{mng_name}, #{mng_lev}, #{mng_email}, #{mng_phone})
+	</insert>
+	
+	<delete id="adminDelete" parameterType="admin">
+		DELETE FROM manager WHERE mng_num = #{mng_num}
+	</delete>
+	
+	
+	<select id="memberCnt" parameterType="MemberVO" resultType="int">
+		SELECT count(*) FROM member
+		<trim prefix=" where(" suffix=")">
+			<include refid="memberSearch"></include>
+		</trim>
+	</select>
+	
+	
+	<select id="userList" parameterType="MemberVO" resultType="MemberVO">
+		<![CDATA[
+		SELECT m_num, m_name, m_id, m_pwd, m_phone, m_email, m_address, to_char(m_reg_day, 'YYYY-MM-DD')AS m_reg_day, m_rec_day, m_zip
+		FROM (
+			SELECT /*+ INDEX_DESC(member pk_member) */
+			rownum as rnum, m_num, m_name, m_id, m_pwd, m_phone, m_email, m_address, m_reg_day, m_rec_day, m_zip
+			FROM member
+			WHERE ]]>
+				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+					<include refid="memberSearch"></include>
+				</trim>
+			<![CDATA[ rownum <= #{pageNum} * #{amount}
+				) userList
+				WHERE rnum > (#{pageNum}-1) * #{amount}
+			]]>
+	</select>
+	
+	<delete id="userDelete" parameterType="MemberVO">
+		DELETE FROM member where m_num = #{m_num}
+	</delete>
 </mapper>

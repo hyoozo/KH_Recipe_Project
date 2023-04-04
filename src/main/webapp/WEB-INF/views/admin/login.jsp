@@ -8,9 +8,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Login - SB Admin</title>
+        <title>관리자 로그인</title>
         <link href="/resources/include/dist/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
+        <script type="text/javascript" src="/resources/include/js/common.js"></script>
+        <style type="text/css">
+        	a {color: #000; text-decoration: none; outline: none}
+			a:hover, a:active {text-decoration: none; color:#000;}
+        </style>
+        <script type="text/javascript">
+        	$(function(){
+        		let errorMsg = "${errorMsg}";
+    			if(errorMsg!=""){
+    				alert(errorMsg);
+    				errorMsg = "";
+    			}
+    			
+    			$("#loginBtn").click(function(){
+    				if(!chkData("#mng_id","아이디를")) return;
+    				else if(!chkData("#mng_pwd","비밀번호를")) return;
+    				else {
+    					$("#loginForm").attr({
+    						"method" : "post",
+    						"action" : "/admin/login"
+    					});
+    					$("#loginForm").submit();
+    				}
+    			});
+        	});// $종료
+        </script>
     </head>
     <body class="bg-primary">
         <div id="layoutAuthentication">
@@ -22,22 +49,18 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">관리자 로그인</h3></div>
                                     <div class="card-body">
-                                        <form>
+                                        <form id="loginForm">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                                                <label for="inputEmail">Id</label>
+                                                <input class="form-control" type="text" id="mng_id" name="mng_id"/>
+                                                <label for="mng_id">Id</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
-                                                <label for="inputPassword">Password</label>
-                                            </div>
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
-                                                <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
+                                                <input class="form-control" type="password" id="mng_pwd" name="mng_pwd"/>
+                                                <label for="mng_pwd">Password</label>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="password.html"></a>
-                                                <a class="btn btn-primary" href="/admin/admin/adminList">Login</a>
+                                                <button class="btn btn-primary" type="button" id="loginBtn">Login</button>
                                             </div>
                                         </form>
                                     </div>
@@ -51,7 +74,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div class="text-muted">Copyright <a href="/">&copy;</a> Your Website 2023</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;

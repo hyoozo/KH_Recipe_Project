@@ -3,63 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	<script type="text/javascript" src="/resources/include/js/common.js"></script>
-		<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
-<style type="text/css">
-	h3{
-		margin: 0px 0px 50px 0px;
-	}
-	.textright{
-		text-align: right;
-		margin: 0px 0px 10px 0px;
-	}
-	#insertManager{
-			text-align: right;
-			margin: 0px 0px 20px 0px;
-		}
-	#keyword{
-			width: 250px;
-		}
-	#wrapper2{
-		width: 800px;
-	}
-	ul li a{
-			padding: 4px;
-			margin-right:3px;
-			margin-right:3px;
-			width:15px;
-			color:#000;
-			font:bold 12px tahoma;
-			font-size: 18px;
-			border:1px solid #eee;
-			text-align:center;
-			text-decoration:none;
-		}
-		ul li a:hover, ul li a:focus {
-			color:#fff;
-			border:1px solid #f40;
-			background-color:#f40;
-		}
-		div.tc{
-			margin: 30px 0px 30px 340px;
-		}
-		.issc{
-			border: 1px solid skyblue;
-			color:#000;
-			font:bold 12px tahoma;
-			font-size: 18px;
-			border:1px solid #eee;
-			text-decoration:none;
-			padding: 5px;
-			border-radius: 5px;
-		}
-		.issc:hover{
-			color:white;
-			color:#fff;
-			border:1px solid #f40;
-			background-color:#f40;
-		}
-		
-</style>
+	<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
+	<link href="/resources/include/css/AdminMemberList.css" rel="stylesheet">
+
 <script type="text/javascript">
 	$(function(){
 		$(".paginate_button a").click(function(e) {
@@ -92,7 +38,7 @@
 		
 		$("#search").change(function(){
 			if($("#search").val()=="all") {
-				$("#keyword").val("전체 레시피를 조회합니다.");
+				$("#keyword").val("전체 관리자를 조회합니다.");
 			} else if($("#search").val()!="all"){
 				$("#keyword").val("");
 				$("#keyword").focus();
@@ -105,8 +51,25 @@
 			}
 			goPage();
 		});
+		
+		$("#insertManager").click(function(){
+			//console.log("!11")
+			location.href="/admin/admin/insertForm";
+		});
+		
+		$(".deleteManager").click(function(){
+			if(confirm("관리자를 정말 삭제하시겠습니까?\n삭제한 관리자는 복구할 수 없습니다.")){
+			let mng_num = $(this).parents("tr").attr("data-num");
+			$("#mng_num").val(mng_num);
+			$("#deleteMan").attr({
+				"method" : "get",
+				"action" : "/admin/admin/adminDelete"
+			});
+			$("#deleteMan").submit();
+			}
+		});
 
-	}) // $ 종료
+	}); // $ 종료
 	
 	function goPage(){
 		if($("#search").val()=="all"){
@@ -124,6 +87,9 @@
 	<body>
 		<div class="contentContainer container">
 			<h3>관리자 계정 관리</h3>
+			<form id="deleteMan">
+				<input type=hidden id="mng_num" name="mng_num" />
+			</form>
 				<%-- 검색기능 --%>
 			<div id="wrapper2">
 			<div id="recipeSearch">
@@ -142,9 +108,9 @@
 					</div>
 				</form>
 			</div>
-			<c:if test="${adminLogin.mng_name eq '마스터'}">
+			<c:if test="${adminLogin.mng_lev eq '마스터'}">
 				<div id="insertManager">
-					<button type="button" id="insertManager" class="issc">레시피등록</button>
+					<button type="button" id="insertManager" class="issc">관리자 추가</button>
 				</div>
 			</c:if>
 			
@@ -179,8 +145,8 @@
 										<td>${admin.mng_phone}
 										<td class="lev">${admin.mng_lev}</td>
 										<td>${admin.mng_email}</td>
-										<c:if test="${adminLogin.mng_name eq '마스터'}">
-										<td><input type="button" id="deleteManager" value="삭제" class="issc"></td>
+										<c:if test="${adminLogin.mng_lev eq '마스터'}">
+										<td><input type="button" class="deleteManager issc" value="삭제"></td>
 										</c:if>
 									</tr>
 								</c:forEach>

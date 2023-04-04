@@ -1,13 +1,17 @@
 package com.boot.client.member.vo;
 
+import com.boot.common.vo.CommonVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberVO {
+@EqualsAndHashCode(callSuper=false)
+public class MemberVO extends CommonVO{
 	private int m_num; // 회원번호
 	private String m_name; // 이름
 	private String m_id; // 아이디

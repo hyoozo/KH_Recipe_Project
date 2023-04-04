@@ -17,6 +17,9 @@
 		<typeAlias type="com.boot.client.refrigerator.vo.FridgeVO" alias="fridge"/>
 		<typeAlias type="com.boot.client.refrigerator.memo.Memo" alias="memo"/>
 		
+		<typeAlias type="com.boot.client.community.board.vo.CommunityVO" alias="comVO"/>
+		<typeAlias type="com.boot.client.community.reply.vo.ReplyVO" alias="reply"/>
+		
 		<typeAlias type="com.boot.admin.vo.ManagerVO" alias="admin"/>
 	</typeAliases>
 </configuration>

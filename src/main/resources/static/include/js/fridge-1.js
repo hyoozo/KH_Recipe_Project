@@ -2,7 +2,7 @@ $(function(){
 	let ingredientData = []; // 재료 
 	let memberNum = Number($("#sessionId").val());
 	
-	console.log("page1 실행=");
+	memoSelect();
 	
 	$.getJSON("/igr/igrList", function(data){
 		ingredientData = data;   // 재료 리스트
@@ -36,54 +36,59 @@ $(function(){
 		/*회원에 맞는 냉장고 테이블 재료 뿌리기 */
 		memberIgrList(ingredientData);
 		
-		/*메모 뿌리기*/
-		memoSelect();
-	
-	}).fail(function(err){
-		console.error(err);
-	});/** 상당 getJSON 종료 */
-	
-	$('#content-memo').on('change',function(){
-		const memo_content = $('#content-memo').val();
-		console.log("#content-memo 수정함>>>"+memo_content);
-		/* 
-			한번도 내용을 작성하지 않았을때 insert
-			
-			내용을 작성하고 내용을 전부 삭제 했을때 update..
-			내용이 없는 상태에서 update..
-			
-			내용이 없을때 insert와 update 구분하기.
-		*/
-		if(memo_content == "") {
+		$('#memoBtn').on('click', function(){
+			$('.memo-bg').remove();
+			let memo_content = $('#content-memo').val();
 			console.log("insert")
 			$.ajax({
 				url: "/refrigerator/memoInsert",
 				type: "post",
 				data: {memo_content : memo_content},
 				success:function(data){
+					console.log(data)
 					$('#content-memo').html(data);
+					$('.memo-bg').addClass('memo-none');
 				},
 				error: function(){
 					$('#content-memo').html("저장에 실패하였습니다.");
 				},
 			})
-		}else {
-			console.log("update")
-			$.ajax({
-				url: "/refrigerator/memoUpdate",
-				type: "post",
-				data: {memo_content : memo_content},
-				success:function(data){
-					$('#content-memo').html(data);
-				},
-				error: function(){
-					$('#content-memo').html("수정에 실패하였습니다.");
-				},
-			})
-		}
-		
-		
-	})
+		})
+		$('#content-memo').on('change',function(){
+			const memo_content = $('#content-memo').val();
+			console.log("#content-memo 수정함>>>"+memo_content);
+			
+			if(memo_content == ""){
+				console.log("delete")
+				$.ajax({
+					url: "/refrigerator/memoDelete",
+					type: "post",
+					success:function(){
+						$('.memo-bg').removeClass('memo-none');
+					},
+					error: function(){
+						$('#content-memo').html("삭제에 실패하였습니다.");
+					},
+				})
+			}else if (memo_content != "") {
+				console.log("update")
+				$.ajax({
+					url: "/refrigerator/memoUpdate",
+					type: "post",
+					data: {memo_content : memo_content},
+					success:function(data){
+						$('#content-memo').html(data);
+						$('.memo-bg').addClass('memo-none');
+					},
+					error: function(){
+						$('#content-memo').html("수정에 실패하였습니다.");
+					},
+				})
+			}
+		})
+	}).fail(function(err){
+		console.error(err);
+	});/** 상당 getJSON 종료 */
 	
 	let input = document.getElementById("searchInput");
 	let button = document.getElementById('searchBtn');
@@ -205,8 +210,15 @@ function memoSelect(){
 			$('#content-memo').html("메모를 불러올 수 없습니다. 관리자에게 문의하세요.");
 		},
 		success: function(data){
-			$('#content-memo').html(data.memo_content);
+			console.log(data.memo_content+"?")
+			if(data.memo_content == null){
+				$('.memo-bg').removeClass('memo-none');
+			}else {
+				$('.memo-bg').addClass('memo-none');
+				$('#content-memo').html(data.memo_content);
+			}
 		}
 	})
+	
 }
 

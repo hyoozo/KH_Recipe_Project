@@ -20,7 +20,8 @@ public interface FridgeService {
 	public int fridgeSelect(int igr_num, int m_num);
 	//public RecipeVO recommendDetail(RecipeVO rvo);
 	public List<RecipeVO> selectRecommend(ArrayList<Integer> array);
-	public int memoUpdate(Memo memo);
 	public Memo memoSelect(Memo memo);
-	public Memo memoInsert(Memo memo);
+	public int memoUpdate(Memo memo);
+	public int memoInsert(Memo memo);
+	public int memoDelete(MemberVO vo);
 }

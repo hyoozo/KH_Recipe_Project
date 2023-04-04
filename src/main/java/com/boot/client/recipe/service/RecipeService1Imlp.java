@@ -64,7 +64,7 @@ public class RecipeService1Imlp implements RecipeService1 {
 	public int likeCnt(RecipeVO rvo) {
 		return recipeDao1.likeCnt(rvo);
 	}
-
+	
 	@Override
 	public int recipeInsert(RecipeVO rvo, RecipeManualVO cvo) throws Exception {
 		int result = 0;
@@ -182,9 +182,6 @@ public class RecipeService1Imlp implements RecipeService1 {
 		result += recipeDao1.recipeLikeDelete(rvo);
 		
 		return result ;
-	}
-	
-	
-	
+	}	
 	
 }

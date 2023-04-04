@@ -7,5 +7,6 @@ public class ReplyVO {
 	private int cr_no; // 게시글 댓글 번호
 	private String cr_writer; // 작성자
 	private String cr_content; // 내용
-	private String c_no; // 게시글 번호
+	private int c_no; // 게시글 번호
+	private int m_num;	//회원번호
 }

@@ -1,0 +1,138 @@
+@font-face {
+    font-family: 'TheJamsil5Bold';
+    
+}
+.d-center{
+	display: flex;
+	justify-content: center;
+}
+.title-box {
+	height: 500px;
+	text-align: center;
+	width: 100%;
+	
+	animation: fadein 3s;
+    -moz-animation: fadein 3s;
+    /* Firefox */
+    -webkit-animation: fadein 3s;
+    /* Safari and Chrome */
+    -o-animation: fadein 3s;
+    /* Opera */
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.title-box > h1 {
+    margin: 0;
+    padding-top: 92px;
+    font-size: 80px;
+    line-height: 1.5;
+    color: #ef151e;
+}
+.title-box > p, span {
+	margin-top: 40px;
+	font-family: 'Apple SD Gothic Neo', 'Montserrat', Arial, Helvetica, sans-serif;
+}
+
+.v-line {
+  border-left : 9px solid #ef151e;
+  height : 200px;
+  margin-left: 50%;
+  margin-top: 50px;
+}
+
+
+.search-container{
+	width: 100%;
+	height: 300px;
+	background-color: #aac6a0;
+
+}
+.search-box {
+	border-radius: 50px;
+	background-color: #d0f1cd;
+	width: 900px;
+	height: 80px;
+	position: relative;
+	top: 100px;
+}
+.mainTop-search {
+	border: none;
+	background: transparent;
+	font-size: 40px;
+	width: 850px;
+	margin-left: 45px;
+}
+.mainTop-search:focus {outline: none;} 
+.fa-solid {
+	position: relative;
+	top: 23px;
+	left: 30px;
+	font-size: 40px;
+	color: black;
+	z-index: 99;
+}
+.info-container {
+	margin-top: 60px;
+}
+.info-container > div{
+	margin: 30px;
+}
+.info-box {
+	width: 280px;
+	height: 280px;
+	background-color:#fbb642;
+	border-radius: 50%;
+}
+.info-box > p{
+	position: relative;
+	top: 106px;
+	font-size: 25px;
+	align-items: center;
+	text-align: center;
+}
+.info-t {
+	margin-top: 50px;
+}
+.info-t > p {
+	color: #000;
+	font-size: 40px;
+	padding: 30px;
+}
+.fa-angles-right {
+	position: relative;
+	top: 145px;
+	margin-right: 50px;
+}
+#search {
+	display: none;
+}
