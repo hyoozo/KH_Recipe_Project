@@ -39,13 +39,10 @@
         </script>
   </head>
   <body>
-	<!-- Begin page content -->
     <div id="app">
-	    <!-- Fixed navbar -->
         <header class="header-container">
     		<tiles:insertAttribute name="header"/>
         </header>
-
         <main class="wrapper">
         	 <section class="center">
         	 	<div class="title-box">
@@ -69,13 +66,9 @@
              	</form>
            	</div>
         </section>
-  
-        
          <section class="info-t d-center ">
          	<p class="">냉장고를 알차게 사용하는 방법 !</p>
          </section>
-        
-        
         <section class="center d-center info-container">
         	<div class="info-box">
         		<p> 회원가입 후 <br> 냉장고 관리탭을 클릭 </p>
@@ -88,11 +81,8 @@
         	<div class="info-box">
         		<p> 재료에 알맞는<br> 레시피 추천 받기</p>
         	</div>
-        	
         </section>
-        
     </div>
-	<!-- Fixed footer -->
     <footer class="footer-container">
 		<tiles:insertAttribute name="footer"/>
     </footer>

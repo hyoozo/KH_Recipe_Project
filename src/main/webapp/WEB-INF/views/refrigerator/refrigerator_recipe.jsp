@@ -28,7 +28,6 @@
 	      <div class="box">
 		      <button class="button button--pipaluk button--text-thick button--round-l" id="listBtn"> 냉장고 돌아가기 </button>
 	          <button class="button button--pipaluk button--text-thick button--round-l" id="rcpBtn"> 전체 레시피 보기 </button>
-	      
 	      </div>
 		 <script type="text/javascript" src="/resources/include/js/fridge-2.js"></script>
 	</body>

@@ -1,10 +1,6 @@
 $(function(){
 	let ingredientData = []; // 재료 
 	let memberNum = Number($("#sessionId").val());
-	let memoValue = $('#content-memo').val();
-	console.log("memoValue = " + memoValue);
-	
-	console.log("page1 실행=");
 	
 	memoSelect();
 	
@@ -40,8 +36,6 @@ $(function(){
 		/*회원에 맞는 냉장고 테이블 재료 뿌리기 */
 		memberIgrList(ingredientData);
 		
-		
-		
 		$('#memoBtn').on('click', function(){
 			$('.memo-bg').remove();
 			let memo_content = $('#content-memo').val();
@@ -70,7 +64,6 @@ $(function(){
 					url: "/refrigerator/memoDelete",
 					type: "post",
 					success:function(){
-						//$('.memo-bg').addClass('memo-none');
 						$('.memo-bg').removeClass('memo-none');
 					},
 					error: function(){
@@ -96,8 +89,6 @@ $(function(){
 	}).fail(function(err){
 		console.error(err);
 	});/** 상당 getJSON 종료 */
-	
-	
 	
 	let input = document.getElementById("searchInput");
 	let button = document.getElementById('searchBtn');
@@ -222,10 +213,7 @@ function memoSelect(){
 			console.log(data.memo_content+"?")
 			if(data.memo_content == null){
 				$('.memo-bg').removeClass('memo-none');
-				console.log("지어짐??")
 			}else {
-				// 데이터가 있을
-				//$('.memo-bg').remove();
 				$('.memo-bg').addClass('memo-none');
 				$('#content-memo').html(data.memo_content);
 			}

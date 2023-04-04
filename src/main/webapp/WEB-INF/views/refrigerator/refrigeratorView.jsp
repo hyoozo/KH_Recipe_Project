@@ -20,7 +20,6 @@
 			        		<button id="searchBtn"></button>
 			        	</div>
 		        	<div class="food-container ingredient-container ">
-		        		
 		        	</div>
         		</div>
 		    </div>
