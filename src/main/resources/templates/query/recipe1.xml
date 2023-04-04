@@ -24,6 +24,7 @@
 		</if>
 	</sql>
 	
+	
 	<select id="recipeCnt" parameterType="recipe" resultType="int">
 		SELECT count(*) FROM recipe
 		<trim prefix=" where(" suffix=")">

@@ -10,7 +10,7 @@
 	
 	<insert id="joinProcess" parameterType="MemberVO">
 		insert into MEMBER
-		values(SEQ_MEMBER.nextval,#{m_name},#{m_id},#{m_pwd},#{m_phone},#{m_email},#{m_zip},#{m_address},to_date(sysdate,'yyyy.mm.dd'),to_date(sysdate,'yyyy.mm.dd'))
+		values(SEQ_MEMBER.nextval,#{m_name},#{m_id},#{m_pwd},#{m_phone},#{m_email},#{m_zip},#{m_address},sysdate,sysdate)
 	</insert>
 	
 	<select id="idChk" resultType="int" parameterType="MemberVO">

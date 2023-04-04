@@ -20,14 +20,14 @@
 				$("#keyword").val("<c:out value='${recipeVO.keyword}' />");
 				$("#search").val("<c:out value='${recipeVO.search}' />");
 				
-				if($("#search").val()=='rcp_nm'){
+				if($("#search").val()=='rcp_nm') {
 					value=".table tbody tr td.name"
-					console.log($(value+":contains('"+word+"')").html());
-					$(value+":contains('"+word+"')").each(function(){
-						let regex = new RegExp(word,'gi');
-						$(this).html($(this).html().replace(regex, "<span class='required'>"+word+"</span>"));
-					});
 				}
+					$(value+":contains('"+word+"')").each(function(){
+					let regex = new RegExp(word,'gi');
+					$(this).html($(this).html().replace(regex, "<span class='required'>"+word+"</span>"));
+				});
+				
 			}
 			
 			$("#keyword").bind("keydown", function(event){
