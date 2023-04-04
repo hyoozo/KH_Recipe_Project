@@ -9,56 +9,8 @@
 	<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/resources/include/js/common.js"></script>
 	<script type="text/javascript" src="/resources/include/dist/js/cookie.js"></script>
-	<link href="/resources/include/css/index.css" rel="stylesheet">
-	<style type="text/css">
-		h3{
-			text-align: center;
-			margin: 50px 0px 50px 0px;
-		}
-		
-		.image-box{
-			text-align: center;
-		}
-		
-		.image-thumbnail{
-			width:700px;
-			height:380px;
-			border-radius: 5px;
-			margin: 0px 0px 20px 0px;
-		}
-		
-		hr{
-			border: 0;
-			height: 2px;
-			background: #ccc;
-		}
-		
-		.recipe-thumbnail{
-			float:left;
-			width: 50%;
-			height: 300px;
-			margin: 10px 0px 50px 0px;
-		}
-		
-		.clean{
-			clear:both;
-		}
-		
-		.like-image-none{
-			cursor:pointer;
-			width:30px;
-		}
-		
-		#recipenm{
-			font-size: 20px;
-		}
-		
-		.sl{
-			width:30px;
-		}
-		
+	<link href="/resources/include/css/clientRecipeDetail.css" rel="stylesheet">
 	
-	</style>
 	<script type="text/javascript">
 	
 		function like_up(){

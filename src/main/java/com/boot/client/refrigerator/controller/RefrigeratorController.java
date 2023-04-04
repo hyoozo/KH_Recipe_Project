@@ -100,6 +100,17 @@ public class RefrigeratorController {
 		return list;
 	}
 	
+	@GetMapping("/memoSelect")
+	@ResponseBody
+	public Memo meemoSelect(Memo memo, @SessionAttribute("login")  MemberVO member) {
+		memo.setMember(member);
+		memo.getMember().setM_num(member.getM_num());
+		
+		memo = fridgeService.memoSelect(memo);
+		
+		return memo;
+	}
+	
 	@PostMapping("/memoUpdate")
 	@ResponseBody
 	public String memoUpdate(Memo memo, @SessionAttribute("login")  MemberVO member) {
@@ -114,27 +125,23 @@ public class RefrigeratorController {
 		
 		return memo.getMemo_content();
 	}
-	
-	@GetMapping("/memoSelect")
-	@ResponseBody
-	public Memo meemoSelect(Memo memo, @SessionAttribute("login")  MemberVO member) {
-		memo.setMember(member);
-		memo.getMember().setM_num(member.getM_num());
-		
-		memo = fridgeService.memoSelect(memo);
-		
-		return memo;
-	}
-	
+
 	@PostMapping("/memoInsert")
 	@ResponseBody
-	public Memo memoInsert(Memo memo, @SessionAttribute("login")  MemberVO member) {
+	public String memoInsert(Memo memo, @SessionAttribute("login")  MemberVO member) {
 		memo.setMember(member);
 		memo.getMember().setM_num(member.getM_num());
 		
-		memo = fridgeService.memoInsert(memo);
+		fridgeService.memoInsert(memo);
 		
-		return memo;
+		return memo.getMemo_content();
+	}
+	
+	@PostMapping("/memoDelete")
+	@ResponseBody
+	public int memoDelete(@SessionAttribute("login")  MemberVO vo) {
+		System.out.println(vo.getM_num());
+		return fridgeService.memoDelete(vo);
 	}
 	
 }

@@ -43,7 +43,7 @@ public class AdminRecipeManageController {
 	}
 	
 	@GetMapping("InsertForm")
-	public String insertForm(RecipeVO rvo, Model model) {
+	public String insertForm() {
 		log.info("insertForm() 호출");
 		return "admin/recipe/recipeInsertForm";
 	}

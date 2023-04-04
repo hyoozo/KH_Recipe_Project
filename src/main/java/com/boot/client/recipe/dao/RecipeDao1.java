@@ -23,7 +23,6 @@ public interface RecipeDao1 {
 	public int likeCnt(RecipeVO rvo);
 	
 	// 관리자
-	
 	public int recipeInsert(RecipeVO rvo);
 	public int recipeManualInsert(RecipeManualVO cvo);
 	public int recipeUpdate(RecipeVO rvo);
@@ -31,6 +30,7 @@ public interface RecipeDao1 {
 	public int recipeDelete(RecipeVO rvo);
 	public int recipeManualDelete(RecipeManualVO cvo);
 	public int recipeLikeDelete(RecipeVO rvo);
+	
 	 
 	
 	//public RecLikeVO getLike();

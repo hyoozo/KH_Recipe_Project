@@ -20,7 +20,6 @@ public interface RecipeService1 {
 	public int likeCnt(RecipeVO rvo);
 	
 	//public RecLikeVO getLike();
-	
 	public int recipeInsert(RecipeVO rvo, RecipeManualVO cvo) throws Exception;
 	public int recipeUpdate(RecipeVO rvo, RecipeManualVO cvo) throws Exception;
 	public int recipeDelete(RecipeVO rvo, RecipeManualVO cvo) throws Exception;

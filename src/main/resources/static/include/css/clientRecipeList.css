@@ -1,0 +1,37 @@
+.recipeList{
+	display: inline-block;
+	width: 370px;
+	height: 500px;
+	margin: 2px;
+	overflow: hidden;
+}
+
+.image-box{
+	width:380px;
+	height:370px;
+	overflow: hidden;
+	margin:0 auto;
+}
+
+.recipeImg{
+	display: inline-block;
+	width: 368px;
+	height: 100%;
+	overflow: hidden;
+	object-fit: cover;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.from-group{
+	margin: 0px 0px 20px 0px;
+}
+
+.recipeText {
+	display: flex;
+	align-items: center;
+}
+.sl{
+	width:30px;
+	margin-left: 220px;
+}
