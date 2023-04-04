@@ -22,7 +22,8 @@ public interface FridgeDAO {
 	public int memberIgrDelete(@Param("igr_num") int igr_num, @Param("m_num") int m_num);
 	public int fridgeSelect(@Param("igr_num") int igr_num, @Param("m_num") int m_num);
 	public List<RecipeVO> selectRecommend(ArrayList<Integer> array);
-	public int memoUpdate(Memo memo);
 	public Memo memoSelect(Memo memo);
-	public Memo memoInsert(Memo memo);
+	public int memoUpdate(Memo memo);
+	public int memoInsert(Memo memo);
+	public int memoDelete(MemberVO vo);
 }

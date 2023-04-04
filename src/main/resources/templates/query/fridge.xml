@@ -14,14 +14,12 @@
 		<id property="member.m_num" column="m_num"/>
 	</resultMap>
 	
-	
 	<select id="igrList" resultType="ingredient">
 	/* 재료 리스트 */
 		select igr_num, igr_name
 		from ingredient
 		order by igr_name
 	</select>
-	
 	<select id="searchIgr" resultType="ingredient" parameterType="ingredient">
 	/* 재료 검색 */
 		select igr_num, igr_name
@@ -60,7 +58,6 @@
 		on f.igr_num = i.igr_num
 		where f.igr_num = #{igr_num} and f.m_num = #{m_num}
 	</select>
-	
 	<select id="selectRecommend" resultType="recipe">
 	/* 회원 냉장고 재료로 레시피 검색 (중복데이터 제거) */
 		select DISTINCT r.rcp_seq as rcp_seq , r.rcp_nm as rcp_nm, r.att_file_no_mk, r.info_eng, r.rcp_parts_dtls
@@ -73,7 +70,11 @@
 		</foreach>
 			
 	</select>
-	
+	<select id="memoSelect" resultType="memo" parameterType="memo">
+	/* 회원 냉장고 메모 출력 */
+		select memo_content from memo
+		where m_num = #{member.m_num}
+	</select>
 	<update id="memoUpdate" parameterType="memo" >
 	/* 회원 냉장고 메모 작성 */
 		update memo 
@@ -81,15 +82,12 @@
 		memo_content = #{memo_content}
 		where m_num = #{member.m_num}
 	</update>
-	
-	<select id="memoSelect" resultType="memo" parameterType="memo">
-	/* 회원 냉장고 메모 출력 */
-		select memo_content from memo
-		where m_num = #{member.m_num}
-	</select>
-	
 	<insert id="memoInsert" parameterType="memo">
 		insert into MEMO (memo_num, memo_content, m_num)
 		values (SEQ_MEMO.nextval, #{memo_content}, #{member.m_num})
 	</insert>
+	
+	<delete id="memoDelete" parameterType="MemberVO">
+		DELETE FROM memo where m_num = #{m_num}
+	</delete>
 </mapper>

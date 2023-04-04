@@ -80,19 +80,25 @@ public class FridgeServiceImpl implements FridgeService {
 	}
 
 	@Override
-	public int memoUpdate(Memo memo) {
-		return fridgeDAO.memoUpdate(memo);
-	}
-
-	@Override
 	public Memo memoSelect(Memo memo) {
 		return fridgeDAO.memoSelect(memo);
 	}
 
 	@Override
-	public Memo memoInsert(Memo memo) {
+	public int memoUpdate(Memo memo) {
+		return fridgeDAO.memoUpdate(memo);
+	}
+
+	@Override
+	public int memoInsert(Memo memo) {
 		return fridgeDAO.memoInsert(memo);
 	}
+
+	@Override
+	public int memoDelete(MemberVO vo) {
+		return fridgeDAO.memoDelete(vo);
+	}
+	
 	
 	
 

@@ -139,6 +139,9 @@ label {
     display: flex;
     justify-content: center;
 }
+.memo-none{
+	display: none;
+}
 .memo-bg:hover{
     background-color: rgba(0,0,0,0.3);
     border-radius: 5px;

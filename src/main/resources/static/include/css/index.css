@@ -65,6 +65,10 @@ body, ul, a, p {
     margin: auto;
     display: flex;
 }
+.center > h1 {
+	color: #fff;
+	font-size: 50px;
+}
 .nav{
     height: 50px;
     width: 100%;
