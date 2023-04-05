@@ -62,7 +62,8 @@
         		
         		$("#saleBtn").click(function(){
             		
-        			$("#myBarChart").html();
+        			$("#myBarChart").remove();
+        			$("#saleChart").append("<canvas id='myBarChart' width='100%' height='50'>");
         			
         			if(!chkData("#sale_start", "날짜")) return;
         			else if(!chkData("#sale_end", "날짜")) return;
@@ -153,7 +154,8 @@
         		}
         		
         		$("#cntBtn").click(function(){
-					$("#myPieChart").html();
+					$("#myPieChart").remove();
+					$("#countChart").append("<canvas id='myPieChart' width='100%' height='50'>");
         			
         			if(!chkData("#cnt_start", "날짜")) return;
         			else if(!chkData("#cnt_end", "날짜")) return;
@@ -206,7 +208,7 @@
 		                            <input type="button" id="saleBtn" value="조회"/>
 	                             </form>                   
 	                         </div>
-	                         <div class="card-body">
+	                         <div class="card-body" id="saleChart">
 	                         	<canvas id="myBarChart" width="100%" height="50"></canvas>
 	                         </div>
 	                         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
@@ -224,7 +226,7 @@
 		                            <input type="button" id="cntBtn" value="조회"/>
 	                             </form>                     
 	                         </div>
-	                         <div class="card-body">
+	                         <div class="card-body" id="countChart">
 	                         	<canvas id="myPieChart" width="100%" height="50"></canvas>
 	                         </div>
 	                         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>

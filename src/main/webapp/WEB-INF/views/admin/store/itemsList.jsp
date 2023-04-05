@@ -149,7 +149,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<h2>주문 내역</h2>
+			<h2>제품 관리</h2>
 			<hr>
 			
 			<form id="f_item">
