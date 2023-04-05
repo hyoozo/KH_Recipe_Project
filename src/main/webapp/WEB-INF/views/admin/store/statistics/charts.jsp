@@ -25,14 +25,14 @@
         
         <script type="text/javascript">
         	$(function(){
-        		var salelabels = [];
+        		var saleLabels = [];
         		var price = [];
         		
-        		var countlabels = [];
+        		var countLabels = [];
         		var percent = [];
         		
         		function saleChart(){
-        			salelabels = [];
+        			saleLabels = [];
             		price = [];
         			
         			var def = new $.Deferred();
@@ -44,7 +44,7 @@
     					success : function(data){
     						//console.log(data);
     						$(data).each(function(){
-    							salelabels.push(this.i_parts);
+    							saleLabels.push(this.i_parts);
     							//console.log(this.i_parts);
     							price.push(Number(this.sum));
     							
@@ -79,7 +79,7 @@
                         		var myLineChart = new Chart(ctx, {
                         		  type: 'bar',
                         		  data: {
-                        		    labels: salelabels,
+                        		    labels: saleLabels,
                         		    datasets: [{
                         		      label: "Revenue",
                         		      backgroundColor: "rgba(2,117,216,1)",
@@ -125,7 +125,7 @@
         		});
         		
         		function countChart(){
-        			countlabels = [];
+        			countLabels = [];
         			percent = [];
         			
         			var def = new $.Deferred();
@@ -137,7 +137,7 @@
     					success : function(data){
     						//console.log(data);
     						$(data).each(function(){
-    							countlabels.push(this.i_parts);
+    							countLabels.push(this.i_parts);
     							//console.log(this.i_parts);
     							percent.push(Number(this.percent));
     							
@@ -169,7 +169,7 @@
         						var myPieChart = new Chart(ctx, {
         						  type: 'pie',
         						  data: {
-        						    labels: countlabels,
+        						    labels: countLabels,
         						    datasets: [{
         						      data: percent,
         						      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
