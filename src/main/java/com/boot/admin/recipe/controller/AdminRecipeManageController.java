@@ -2,6 +2,8 @@ package com.boot.admin.recipe.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +32,12 @@ public class AdminRecipeManageController {
 	private RecipeService1 recipeService1;
 	
 	@GetMapping("recipeList")
-	public String recipeList(@ModelAttribute RecipeVO rvo, Model model) {
+	public String recipeList(@ModelAttribute RecipeVO rvo, Model model, HttpSession session) {
+		
+		if (session.getAttribute("adminLogin") == null) {
+	        return "redirect:/admin/loginForm";
+	    }
+		
 		log.info("recipeList() 호출");
 		
 		List<RecipeVO> recipeList = recipeService1.recipeList(rvo);
@@ -43,7 +50,10 @@ public class AdminRecipeManageController {
 	}
 	
 	@GetMapping("InsertForm")
-	public String insertForm() {
+	public String insertForm(HttpSession session) {
+		if (session.getAttribute("adminLogin") == null) {
+	        return "redirect:/admin/loginForm";
+	    }
 		log.info("insertForm() 호출");
 		return "admin/recipe/recipeInsertForm";
 	}
@@ -74,7 +84,12 @@ public class AdminRecipeManageController {
 	}
 	
 	@GetMapping("recipeDetail")
-	public String recipeDetail(@ModelAttribute RecipeVO rvo, Model model) {
+	public String recipeDetail(@ModelAttribute RecipeVO rvo, Model model, HttpSession session) {
+		
+		if (session.getAttribute("adminLogin") == null) {
+	        return "redirect:/admin/loginForm";
+	    }
+		
 		log.info("recipeDetail() 호출");
 		
 		RecipeVO detail = recipeService1.recipeDetail(rvo);
@@ -87,7 +102,12 @@ public class AdminRecipeManageController {
 	}
 	
 	@GetMapping("updateForm")
-	public String updateForm(@ModelAttribute RecipeVO rvo, Model model) {
+	public String updateForm(@ModelAttribute RecipeVO rvo, Model model, HttpSession session) {
+		
+		if (session.getAttribute("adminLogin") == null) {
+	        return "redirect:/admin/loginForm";
+	    }
+		
 		log.info("updateForm() 호출");
 		
 		RecipeVO detail = recipeService1.recipeDetail(rvo);
