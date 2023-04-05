@@ -167,21 +167,33 @@ public class RecipeService1Imlp implements RecipeService1 {
 
 	@Override
 	public int recipeDelete(RecipeVO rvo, RecipeManualVO cvo) throws Exception {
-		int result = 0;
-		FileUploadUtil.fileDelete(rvo.getAtt_file_no_mk());
-		FileUploadUtil.fileDelete(cvo.getManual_img01());
-		FileUploadUtil.fileDelete(cvo.getManual_img02());
-		FileUploadUtil.fileDelete(cvo.getManual_img03());
-		FileUploadUtil.fileDelete(cvo.getManual_img04());
-		FileUploadUtil.fileDelete(cvo.getManual_img05());
-		FileUploadUtil.fileDelete(cvo.getManual_img06());
-		
-		
-		result = recipeDao1.recipeManualDelete(cvo);
-		result += recipeDao1.recipeDelete(rvo);
-		result += recipeDao1.recipeLikeDelete(rvo);
-		
-		return result ;
-	}	
+	    int result = 0;
+	    FileUploadUtil.fileDelete(rvo.getAtt_file_no_mk());
+	    
+		    if (cvo.getManual_img01() != null && !cvo.getManual_img01().equals("")) {
+		        FileUploadUtil.fileDelete(cvo.getManual_img01());
+		    }
+		    if (cvo.getManual_img02() != null && !cvo.getManual_img02().equals("")) {
+		        FileUploadUtil.fileDelete(cvo.getManual_img02());
+		    }
+		    if (cvo.getManual_img03() != null && !cvo.getManual_img03().equals("")) {
+		        FileUploadUtil.fileDelete(cvo.getManual_img03());
+		    }
+		    if (cvo.getManual_img04() != null && !cvo.getManual_img04().equals("")) {
+		        FileUploadUtil.fileDelete(cvo.getManual_img04());
+		    }
+		    if (cvo.getManual_img05() != null && !cvo.getManual_img05().equals("")) {
+		        FileUploadUtil.fileDelete(cvo.getManual_img05());
+		    }
+		    if (cvo.getManual_img06() != null && !cvo.getManual_img06().equals("")) {
+		        FileUploadUtil.fileDelete(cvo.getManual_img06());
+		    }
+
+		result += recipeDao1.recipeManualDelete(cvo);
+	    result += recipeDao1.recipeDelete(rvo);
+	    result += recipeDao1.recipeLikeDelete(rvo);
+
+	    return result;
+	}
 	
 }
