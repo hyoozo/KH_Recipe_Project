@@ -51,7 +51,7 @@
 				   
 				   
 				   IMP.request_pay({
-			            pg : 'kakaopay',
+			            pg : 'kcp',
 			            pay_method : 'card',
 			            merchant_uid: o_num,
 			            name : name,

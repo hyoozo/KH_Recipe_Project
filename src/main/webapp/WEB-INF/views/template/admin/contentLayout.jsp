@@ -14,6 +14,8 @@
         <link href="/resources/include/dist/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <style type="text/css">
+        	a{color: #000; text-decoration: none; outline: none}
+			a:hover, a:active {text-decoration: none; color:#000;}
         	#logout{
 				border: 1px solid skyblue;
 				color: white;
@@ -33,8 +35,7 @@
 			#managerInfo{
 				color:white;
 			}
-			a {color: #000; text-decoration: none; outline: none}
-			a:hover, a:active {text-decoration: none; color:#000;}
+			
         </style>
     </head>
     <body class="sb-nav-fixed">
@@ -78,8 +79,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">제품 관리</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">주문 관리</a>
+                                    <a class="nav-link" href="/admin/store/itemsList">제품 관리</a>
+                                    <a class="nav-link" href="/admin/store/statistics/chart">통계</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -97,7 +98,7 @@
                             
                         </div>
                     </div>
-                    
+                   
                 </nav>
             </div>
             
@@ -111,9 +112,9 @@
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright <a href="/">&copy;</a> Your Website 2023</div>
                             <div>
-                                <a href="#">Privacy Policy</a>
+                               Privacy Policy
                                 &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                                Terms &amp; Conditions
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,8 @@ package com.boot.admin.user.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +26,18 @@ public class AdminUserManageController {
 	private ManagerService managerService;
 	
 	@GetMapping("userList")
-	public String userList(@ModelAttribute MemberVO mvo, Model model) {
+	public String userList(@ModelAttribute MemberVO mvo, Model model, HttpSession session) {
 		
-		 log.info("userList() 호출");
-		 List<MemberVO> memberList = managerService.userList(mvo);
-		 model.addAttribute("memberList", memberList);
+		if (session.getAttribute("adminLogin") == null) {
+	        return "redirect:/admin/loginForm";
+	    }
+		
+		log.info("userList() 호출");
+		List<MemberVO> memberList = managerService.userList(mvo);
+		model.addAttribute("memberList", memberList);
 		 
-		 int total = managerService.memberCnt(mvo);
-		 model.addAttribute("pageMaker", new PageDTO(mvo, total));
+		int total = managerService.memberCnt(mvo);
+		model.addAttribute("pageMaker", new PageDTO(mvo, total));
 		 
 		return "admin/user/userList";
 	}

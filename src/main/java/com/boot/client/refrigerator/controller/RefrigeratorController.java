@@ -95,7 +95,6 @@ public class RefrigeratorController {
 	@ResponseBody
 	@RequestMapping(value = "selectRecommend", method = RequestMethod.POST)
 	public List<RecipeVO> selectRecommend(@RequestParam(value="arr") ArrayList<Integer> arr){
-		System.out.println("selectRecommend 컨트롤러 실행 =========");
 		List<RecipeVO> list = fridgeService.selectRecommend(arr);
 		return list;
 	}
@@ -117,10 +116,6 @@ public class RefrigeratorController {
 		System.out.println("===========MEMO 컨트롤러 실행 =========");
 		memo.setMember(member);
 		memo.getMember().setM_num(member.getM_num());
-		
-		//memo.setM_num(member.getM_num());
-		
-		// 쿼리 실행 실패시 0 , 성공시 1 반환됨
 		fridgeService.memoUpdate(memo);
 		
 		return memo.getMemo_content();

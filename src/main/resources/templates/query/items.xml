@@ -12,8 +12,8 @@
 	</sql>
 
 	<select id="itemsList" parameterType="items" resultType="items">
-		select i_num, i_parts, i_name, i_price, i_quan, i_img
-		from (select /*+ index_desc(items PK_ITEMS) */ 
+		select rnum, i_num, i_parts, i_name, i_price, i_quan, i_img
+		from (select 
 				rownum as rnum, i_num, i_parts, i_name, i_price, i_quan, i_img
       		  from items
       		  where
@@ -54,5 +54,19 @@
 		where i_num = #{i_num}
 	</update>
 	
+	<select id="itemsCnt" resultType="int">
+		select count(*)
+		from items
+	</select>
 	
+	<update id="updateItem" parameterType="items">
+		update items
+		set i_name = #{i_name}, i_price = #{i_price}, i_quan = #{i_quan}, i_img = #{i_img}
+		where i_num = #{i_num}
+	</update>
+	
+	<delete id="deleteItem" parameterType="items">
+		delete from items
+		where i_num = #{i_num}
+	</delete>
 </mapper>

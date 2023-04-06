@@ -41,12 +41,12 @@
 				<form id="updateForm">
 					<input type="hidden" id="rcp_seq" name="rcp_seq" />
 					<input type="hidden" id="att_file_no_mk" name="att_file_no_mk" value="${detail.att_file_no_mk}"/>
-					<input type="hidden" id="manual_img01" name="manual_img01" value="${detail.manual_img01}"/>
-					<input type="hidden" id="manual_img02" name="manual_img02" value="${detail.manual_img02}"/>
-					<input type="hidden" id="manual_img03" name="manual_img03" value="${detail.manual_img03}"/>
-					<input type="hidden" id="manual_img04" name="manual_img04" value="${detail.manual_img04}"/>
-					<input type="hidden" id="manual_img05" name="manual_img05" value="${detail.manual_img05}"/>
-					<input type="hidden" id="manual_img06" name="manual_img06" value="${detail.manual_img06}"/>
+					<input type="hidden" id="manual_img01" name="manual_img01" value="${detail.manual_img01 != null ? detail.manual_img01 : ''}"/>
+					<input type="hidden" id="manual_img02" name="manual_img02" value="${detail.manual_img02 != null ? detail.manual_img02 : ''}"/>
+					<input type="hidden" id="manual_img03" name="manual_img03" value="${detail.manual_img03 != null ? detail.manual_img03 : ''}"/>
+					<input type="hidden" id="manual_img04" name="manual_img04" value="${detail.manual_img04 != null ? detail.manual_img04 : ''}"/>
+					<input type="hidden" id="manual_img05" name="manual_img05" value="${detail.manual_img05 != null ? detail.manual_img05 : ''}"/>
+					<input type="hidden" id="manual_img06" name="manual_img06" value="${detail.manual_img06 != null ? detail.manual_img06 : ''}"/>
 				</form>
 				<table class="table table-bordered">
 					<colgroup>

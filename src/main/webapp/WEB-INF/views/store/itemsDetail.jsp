@@ -54,7 +54,7 @@
 					   let amount=$("#payPrice").html();
 					    
 					   IMP.request_pay({
-				            pg : 'kakaopay',
+				            pg : 'kcp',
 				            pay_method : 'card',
 				            merchant_uid: ${login.m_num} + "_" + new Date().getTime(), 
 				            name : i_name,

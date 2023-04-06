@@ -2,6 +2,8 @@ package com.boot.admin.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +29,12 @@ public class AdminManageController {
 	private ManagerService managerService;
 	
 	@GetMapping("adminList")
-	public String adminList(@ModelAttribute ManagerVO mvo, Model model ) {
+	public String adminList(@ModelAttribute ManagerVO mvo, Model model, HttpSession session) {
 		log.info("adminList() 호출");
+		
+		if (session.getAttribute("adminLogin") == null) {
+	        return "redirect:/admin/loginForm";
+	    }
 		
 		List<ManagerVO> adminList = managerService.adminList(mvo);
 		log.info("adminList 값 : " + adminList.toString());
@@ -41,7 +47,11 @@ public class AdminManageController {
 	}
 	
 	@GetMapping("insertForm")
-	public String insertForm() {
+	public String insertForm(HttpSession session) {
+		if (session.getAttribute("adminLogin") == null) {
+	        return "redirect:/admin/loginForm";
+	    }
+		
 		return "admin/main/insertForm";
 	}
 	

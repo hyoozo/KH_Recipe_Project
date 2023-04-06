@@ -210,7 +210,6 @@ function memoSelect(){
 			$('#content-memo').html("메모를 불러올 수 없습니다. 관리자에게 문의하세요.");
 		},
 		success: function(data){
-			console.log(data.memo_content+"?")
 			if(data.memo_content == null){
 				$('.memo-bg').removeClass('memo-none');
 			}else {

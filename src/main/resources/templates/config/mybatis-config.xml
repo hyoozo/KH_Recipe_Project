@@ -23,5 +23,7 @@
 		
 		<typeAlias type="com.boot.admin.vo.ManagerVO" alias="admin"/>
 		<typeAlias type="com.boot.admin.community.vo.CommunityManagerVO" alias="comMng"/>
+		
+		<typeAlias type="com.boot.common.vo.StatisticsDTO" alias="statistics"/>
 	</typeAliases>
 </configuration>

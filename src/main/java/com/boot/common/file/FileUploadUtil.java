@@ -57,7 +57,7 @@ public class FileUploadUtil {
 		boolean result = false; 
 		String startDirName = "", docRoot = "";
 		String dirName = fileName.substring(0, fileName.indexOf("_"));
-		
+		log.info(dirName);
 		if(dirName.equals("thumbnail")) {
 			startDirName = fileName.substring(dirName.length()+1, fileName.indexOf("_", dirName.length()+1));
 			docRoot = "C://uploadStorage//"+startDirName+"//"+dirName;
