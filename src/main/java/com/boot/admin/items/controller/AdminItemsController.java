@@ -2,6 +2,8 @@ package com.boot.admin.items.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,19 +18,21 @@ import com.boot.store.items.service.ItemsService;
 import com.boot.store.items.vo.ItemsVO;
 
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/admin/store/")
-@Slf4j
 public class AdminItemsController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private ItemsService itemsService;
 	
 	@GetMapping("/itemsList")
-	public String getItemsList(@ModelAttribute ItemsVO ivo, Model model) {
-		log.info(ivo.toString());
+	public String getItemsList(@ModelAttribute ItemsVO ivo, Model model, HttpSession session) {
+		//log.info(ivo.toString());
+		
+		if (session.getAttribute("adminLogin") == null) {
+	        return "redirect:/admin/loginForm";
+	    }
 		
 		List<ItemsVO> list = itemsService.itemsList(ivo);
 		
@@ -42,7 +46,10 @@ public class AdminItemsController {
 	}
 	
 	@GetMapping("/insertForm")
-	public String insertForm() {
+	public String insertForm(HttpSession session) {
+		if (session.getAttribute("adminLogin") == null) {
+	        return "redirect:/admin/loginForm";
+	    }
 		
 		return "admin/store/insertForm";
 	}
@@ -56,7 +63,10 @@ public class AdminItemsController {
 	}
 	
 	@GetMapping("/updateForm")
-	public String updateForm(ItemsVO ivo, Model model) {
+	public String updateForm(ItemsVO ivo, Model model, HttpSession session) {
+		if (session.getAttribute("adminLogin") == null) {
+	        return "redirect:/admin/loginForm";
+	    }
 		
 		ItemsVO item = itemsService.itemsDetail(ivo);
 		
