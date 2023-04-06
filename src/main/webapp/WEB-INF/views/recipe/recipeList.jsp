@@ -238,7 +238,7 @@
 								<div>
 									<h4 class="recipeText name">${recipe.rcp_nm}</h4>
 									<p class="recipeText kcal">${recipe.info_eng} kcal<img src="/resources/image/heart.png" class="sl"/><span class="likeCnt"></span></p>
-								</div>
+								</div> 
 							</div>
 						</div>
 					</c:forEach>

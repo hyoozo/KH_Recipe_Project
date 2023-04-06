@@ -11,14 +11,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.boot.client.community.reply.vo.ReplyVO;
 import com.boot.client.member.service.MemberService;
 import com.boot.client.member.vo.MemberVO;
 import com.boot.recipe.info.vo.RecipeVO;
@@ -98,17 +101,13 @@ class MemberController {
 
 	}
 	
-	@GetMapping("/myPage")
-	public String myPage(@ModelAttribute MemberVO mvo,Model model) {
-		log.info("myPage 호출 성공");
-		log.info("model:"+model);
-
-		return "member/myPage";
-	}
-	
 	@RequestMapping("/updateForm")
 	public String updateForm() {
 		return "member/updateForm";
+	}
+	@RequestMapping("/myPage")
+	public String myPage() {
+		return "member/myPage";
 	}
 	
 	@PostMapping("/updatePwdConfirm")
@@ -182,8 +181,6 @@ class MemberController {
 	}
 	
 	
-	
-	
 	@PostMapping(value = "/joinProcess",consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String joinProess(@RequestBody MemberVO mvo) {
 		log.info("회원가입성공");
@@ -196,17 +193,6 @@ class MemberController {
 		return (result == 1) ? "SUCCESS": "FAILURE";
 	}
 	
-	
-	@PostMapping(value = "/recipeCheck/{m_num}",consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
-	public String recipeCheck(@RequestBody MemberVO mvo) {
-		log.info("조회");
-		
-		List<RecipeVO> result = null;
-		result = memberService.recipeCheck(mvo);
-		
-		return (result != null) ? "SUCCESS": "FAILURE";
-	}
-
 }
 
 		
