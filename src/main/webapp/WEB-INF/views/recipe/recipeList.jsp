@@ -16,7 +16,7 @@
 	
 	<script type="text/javascript">
 		$(function(){
-			let rcp_seq_arr = [];
+			/* let rcp_seq_arr = [];
 			$(".recipeList").each(function(){
 				rcp_seq_arr.push($(this).attr("data-num"));
 			}); // 1페이지의 12개 레시피 번호를 배열로 저장.
@@ -38,14 +38,9 @@
 					}
 						
 					}
-				})
+				}) */
 				updateLikeCount();
 			
-			/*$(".paginate_button a").click(function(e) {
-				e.preventDefault();
-				$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
-				goPage();
-			});*/
             let pageNum=2;
 			
 			$(window).scroll(function(){
@@ -55,7 +50,6 @@
 				let isBottom = scrollTop + windowHeight + 10 >= documentHeight;
 				
 				if(isBottom) {
-					//console.log($("#keyword").val());
 					$.ajax({
 						url : "/recipe/scroll",
 						type : "get",
@@ -68,14 +62,12 @@
 							alert('시스템 오류. 관리자에게 문의하세요.');
 						},
 						success : function(data){
-							//console.log(data);
 							appendRecipeList(data);
 							updateLikeCount();
 							pageNum++;
-							//console.log(pageNum);
 							
 							if (data.length === 0) {
-						        $(window).off('scroll'); // 더이상 받아온 데이터가 없으면 스크롤 이벤트 제거.
+						        $(window).off('scroll');
 						        return;
 						    }
 						 }

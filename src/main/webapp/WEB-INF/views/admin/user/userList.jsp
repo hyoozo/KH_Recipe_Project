@@ -127,7 +127,7 @@
 							<c:when test="${not empty memberList}" >
 								<c:forEach var="member" items="${memberList}" varStatus="status">
 									<tr data-num="${member.m_num}">
-										<td>${member.m_num}</td>
+										<td>${member.rnum}</td>
 										<td class="name">${member.m_name}</td>
 										<td class="id">${member.m_id}</td>
 										<td class="email">${member.m_email}</td>

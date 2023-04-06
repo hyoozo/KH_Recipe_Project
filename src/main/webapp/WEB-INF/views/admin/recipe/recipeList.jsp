@@ -59,7 +59,6 @@
 			$(".detail").click(function(){
 				let rcp_seq = $(this).parents("tr").attr("data-num");
 				$("#rcp_seq").val(rcp_seq);
-				//console.log("레시피 번호 : " + rcp_seq);
 				$("#detailForm").attr({
 					"method" : "get",
 					"action" : "/admin/recipe/recipeDetail"

@@ -19,7 +19,6 @@
 			
 			$("#checkId").click(function(){
 				let mngId=$("#mng_id").val();
-				//console.log(mngId);
 				if($("#mng_id").val()==""){
 					alert("아이디를 입력해주세요.")
 				} else{

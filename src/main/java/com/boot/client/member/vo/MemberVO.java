@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper=false)
 public class MemberVO extends CommonVO{
+	private int rnum;
 	private int m_num; // 회원번호
 	private String m_name; // 이름
 	private String m_id; // 아이디

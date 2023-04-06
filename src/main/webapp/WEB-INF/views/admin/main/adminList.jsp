@@ -146,7 +146,7 @@
 							<c:when test="${not empty adminList}">
 								<c:forEach var="admin" items="${adminList}" varStatus="status">
 									<tr data-num="${admin.mng_num}">
-										<td>${admin.mng_num}</td>
+										<td>${admin.rnum}</td>
 										<td class="name">${admin.mng_name}</td>
 										<td>${admin.mng_phone}
 										<td class="lev" data-value="${admin.mng_lev}">${admin.mng_lev}</td>

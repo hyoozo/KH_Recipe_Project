@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper=false)
 public class ManagerVO extends CommonVO{
+	private int rnum;
 	private int mng_num; // 관리자 번호
 	private String mng_id; // 관리자 아이디
 	private String mng_pwd; // 관리자 비밀번호

@@ -11,7 +11,6 @@
 		$("#updateBtn").click(function(){
 			let rcp_seq = ${detail.rcp_seq}
 			$("#rcp_seq").val(rcp_seq);
-			//console.log(rcp_seq);
 			$("#updateForm").attr({
 				"method" : "get",
 				"action" : "/admin/recipe/updateForm"
@@ -23,7 +22,6 @@
 			if(confirm("정말 삭제하시겠습니까?\n삭제하신 데이터는 복구할 수 없습니다.")){
 			let rcp_seq = ${detail.rcp_seq}
 			$("#rcp_seq").val(rcp_seq);
-			//console.log(rcp_seq);
 			$("#updateForm").attr({
 				"method" : "get",
 				"action" : "/admin/recipe/recipeDelete"

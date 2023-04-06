@@ -136,9 +136,9 @@ public class AdminRecipeManageController {
 		result = recipeService1.recipeUpdate(rvo, cvo);
 		
 		if(result >= 1) {
-			url = "recipeList";
+			url = "/admin/recipe/recipeList";
 		} else {
-			url = "admin/recipe/updateForm";
+			url = "/admin/recipe/updateForm";
 		}
 		
 		return "redirect:"+url;

@@ -5,12 +5,8 @@
 
 <script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
+<link href="/resources/include/css/adminRecipeDetail.css" rel="stylesheet">
 
-<style type="text/css">
-	.more{
-		width: 400px;
-	}
-</style>
 
 <script type="text/javascript">
 	$(function(){
@@ -140,9 +136,9 @@
 					</table>
 					
 					<div>
-						<input type="button" value="레시피 등록" id="insertBtn"/>
-						<input type="button" value="취소" id="cancelBtn"/>
-						<input type="button" value="목록" id="listBtn"/>
+						<input type="button" value="등록" id="insertBtn" class="btnCss">
+						<input type="button" value="취소" id="cancelBtn" class="btnCss"/>
+						<input type="button" value="목록" id="listBtn" class="btnCss"/>
 					</div>
 				</form>
 			</div>
