@@ -1,0 +1,104 @@
+.insertForm {
+	text-align: center;
+	display:inline-block;
+}
+.block-center {
+	margin:auto;
+	text-align:center;
+}
+.block-form{
+	margin: auto 50px;
+}
+.textComment {
+	width: 516px;
+    height: 214px;
+}
+
+.td1 {
+    width: 100px;
+    height: 64px;
+}
+.td2 {
+	width: 500px;
+}
+.td3 {
+	width: 500px;
+}
+.labelControl {
+	text-align:left;
+}
+.btnFon {
+	background-color:#976b54;
+	color:white;
+	border: 1px solid #976b54;
+	
+	width: 100px;
+    height: 30px;
+}
+
+.btnFonRe {
+	background-color:white;
+	color:#976b54;
+	border: 1px solid white;
+	
+	cursor: pointer;
+}
+
+.bor-rad3 {
+	border-radius: 3px;
+}
+	
+#search {
+	width: 70px;
+    height: 35px;
+    text-align: center;
+}
+#keyword {
+	width: 200px;
+    height: 35px;
+
+}
+#comSearchBtn {
+	height: 35px;
+
+}
+.inline-box {
+	float:right;
+}
+
+.list-list {
+	margin:20px;
+}
+
+.pageBox {
+	text-align: center;
+}
+.pageUl {
+	 justify-content : center;
+	 align-items: center;
+	 display: flex;
+}
+.paginateBtn {
+	display: flex;
+	justify-content: center;
+}
+.paginateBtn > a {
+	color: black; 
+	text-decoration: none; 
+	outline: none;
+	float: left;
+	display:inline;
+	
+	padding:4px;
+	margin-right:4px;
+	width:18px;
+
+	font:bold 15px tahoma;
+	border:1px solid #eee;
+	text-align:center;
+	text-decoration:none;
+}
+
+.goDetail1, .goDetail2 {
+	cursor:pointer;
+}

@@ -5,6 +5,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
+<link href="/resources/include/css/community.css" rel="stylesheet">
+<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.min.css" >
 
 <script type="text/javascript">
 	$(function() {
@@ -27,7 +31,7 @@
 </script>
 </head>
 <body>
-	<form id="detailSubmit">
+	<form id="detailSubmit"  class="detail-container">
 		<input type="hidden" id="c_no" name="c_no" value="${postDetail.c_no}" />
 		<input type="hidden" name="c_img" value="${postDetail.c_img}" />
 	</form>

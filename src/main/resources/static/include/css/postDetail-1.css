@@ -110,3 +110,7 @@
 .reBtnHide {
 	display : hidden;
 }
+
+#detail-update, #postDelete, #detail-list {
+	cursor:pointer;
+}

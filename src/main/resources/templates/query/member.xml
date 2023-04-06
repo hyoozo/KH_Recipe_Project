@@ -51,4 +51,14 @@
 	</delete>
 	
 	
+	<select id="recipeCheck" resultType="recipe" parameterType="MemberVO">
+		select rcp_nm , rcp_pat2 , info_eng , rcp_parts_dtls 
+		from MEMBER
+		where RECIPE
+		(select *
+		from MEMBER
+		where m_num = #{m_num})
+	</select>
+	
+	
 </mapper>

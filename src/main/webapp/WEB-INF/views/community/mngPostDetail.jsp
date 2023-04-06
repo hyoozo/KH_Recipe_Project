@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
+<script src="https://kit.fontawesome.com/ccd4ff9cee.js" crossorigin="anonymous"></script>
+<link href="/resources/include/css/postDetail-1.css" rel="stylesheet">
+<link href="/resources/include/css/community.css" rel="stylesheet">
 
 <script type="text/javascript">
 	$(function() {

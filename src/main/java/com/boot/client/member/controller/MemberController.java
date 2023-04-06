@@ -1,6 +1,8 @@
 package com.boot.client.member.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.boot.client.member.service.MemberService;
 import com.boot.client.member.vo.MemberVO;
+import com.boot.recipe.info.vo.RecipeVO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -193,6 +196,16 @@ class MemberController {
 		return (result == 1) ? "SUCCESS": "FAILURE";
 	}
 	
+	
+	@PostMapping(value = "/recipeCheck/{m_num}",consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String recipeCheck(@RequestBody MemberVO mvo) {
+		log.info("조회");
+		
+		List<RecipeVO> result = null;
+		result = memberService.recipeCheck(mvo);
+		
+		return (result != null) ? "SUCCESS": "FAILURE";
+	}
 
 }
 

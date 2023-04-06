@@ -10,7 +10,7 @@
 		$("#detail-update").click(function() {
 			$("#detailSubmit").attr({
 				"medtho":"get",
-				"action":"/admin/community/updateForm"
+				"action":"/community/updateForm"
 			})
 			$("#detailSubmit").submit();
 		})

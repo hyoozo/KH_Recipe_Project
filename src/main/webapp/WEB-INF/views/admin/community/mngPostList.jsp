@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<link href="/resources/include/css/insertListForm1.css" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
@@ -138,12 +140,13 @@ $(function() {
 		</form>
 	</div>
 
-	<table>
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th id="cm_no">글 번호</th>
 				<th id="cm_title">제 목</th>
 				<th id="cm_writer">작성자</th>
+				<th><span></span></th>
 				<th id="cm_reg_date">등록일</th>
 				<th id="cm_readcnt">조회수</th>
 			</tr>
@@ -158,6 +161,7 @@ $(function() {
 								<td>${MngList.cm_no}</td>
 								<td class="goDetail2">${MngList.cm_title}</td>
 								<td class="listWriter">${MngList.cm_writer}</td>
+								<td><span></span></td>
 								<td>${MngList.cm_reg_date}</td>
 								<td>${MngList.cm_readcnt}</td>
 							</tr>
@@ -174,8 +178,8 @@ $(function() {
 	</table>
 
 
-	<div>
-		<ul>
+	<div id="pageBox">
+		<ul class="pageUl">
 			<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
 			<c:if test="${pageMaker2.prev}">
 				<li class="paginateBtn"><a href="${pageMaker2.startPage-1}">Previous</a>

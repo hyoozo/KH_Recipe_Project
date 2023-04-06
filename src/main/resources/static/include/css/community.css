@@ -1,1 +1,45 @@
-@charset "UTF-8";
+/* 전체 컨테이너 스타일 */
+.detail-container {
+  max-width: 800px;
+  margin: 0 2% 2% 2%;
+  padding: 20px;
+}
+
+.detail-bth{
+	padding-left: 50px;
+}
+
+/* 게시물 제목 스타일 */
+.detail-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* 게시물 작성자 스타일 */
+.detail-writer {
+  font-size: 18px;
+  margin-top: 10px;
+  color: gray;
+}
+
+/* 게시물 날짜/조회수 스타일 */
+.detail-date {
+  font-size: 16px;
+  margin-top: 10px;
+  color: gray;
+}
+
+/* 게시물 이미지 스타일 */
+.contentImg img {
+  max-width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* 게시물 내용 스타일 */
+.content-comment p {
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.5;
+  white-space: pre-line;
+}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<link href="/resources/include/css/insertListForm1.css" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
@@ -135,7 +136,7 @@
 <body>
 <div>
 		
-	<div>
+	<div class="list-list">
 		<input type="button" id="postList-mngPostList" value="공지사항">
 		<input type="button" id="postList-PostList" value="사용자게시판">
 	</div>
@@ -163,7 +164,7 @@
 					</form>
 				</div>
 
-				<table>
+				<table class="table table-striped">
 					<thead>
 						<tr>
 							<th id="b_num">글 번호</th>
@@ -172,7 +173,6 @@
 							<th id="b_categori">카테고리</th>
 							<th id="b_date">등록일</th>
 							<th id="b_views">조회수</th>
-							<th id="b_rek">추천</th>
 						</tr>
 					</thead>
 
@@ -189,7 +189,6 @@
 											<td>${postList.c_category}</td>
 											<td>${postList.c_reg_date}</td>
 											<td>${postList.c_readcnt}</td>
-											<td>추천</td>
 										</tr>
 									</c:forEach>
 								</c:when>
@@ -204,8 +203,8 @@
 				</table>
 
 
-				<div>
-					<ul>
+				<div id="pageBox">
+					<ul class="pageUl">
 						<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
 						<c:if test="${pageMaker1.prev}">
 							<li class="paginateBtn"><a href="${pageMaker1.startPage-1}">Previous</a>
@@ -215,8 +214,7 @@
 						<!-- 바로가기 번호 출력 -->
 						<c:forEach var="num" begin="${pageMaker1.startPage}"
 							end="${pageMaker1.endPage}">
-							<li
-								class="paginateBtn ${pageMaker1.cvo.pageNum == num ?'active':''}">
+							<li class="paginateBtn ${pageMaker1.cvo.pageNum == num ?'active':''}">
 								<a href="${num}">${num}</a>
 							</li>
 						</c:forEach>

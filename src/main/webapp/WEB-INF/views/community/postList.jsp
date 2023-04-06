@@ -7,6 +7,7 @@
 <link href="/resources/include/css/community.css" rel="stylesheet">
 
 
+
 <script type="text/javascript">
 	$(function() {
 		
@@ -217,7 +218,6 @@
 						<th id="b_categori">카테고리</th>
 						<th id="b_date">등록일</th>
 						<th id="b_views">조회수</th>
-						<th id="b_rek">추천</th>
 					</tr>
 				</thead>
 
@@ -226,14 +226,13 @@
 				<c:choose>
 					<c:when test="${not empty MngPostList}">
 						<c:forEach var="MngPostList" items="${MngPostList}" varStatus="status">
-							<tr  data-num="${MngPostList.cm_no}">
-								<td>${MngPostList.mng_num}</td>
-								<td class="mngDetail">${MngPostList.cm_title}</td>
-								<td>${MngPostList.cm_writer}</td>
-								<td>공지</td>
-								<td>${MngPostList.cm_reg_date}</td>
-								<td>${MngPostList.cm_readcnt}</td>
-								<td>추천</td>
+							<tr  data-num="${MngPostList.cm_no}" style="background-color: blue;">
+								<td class="fontRR">공지시항</td>
+								<td class="mngDetail fontR">${MngPostList.cm_title}</td>
+								<td class="fontR">${MngPostList.cm_writer}</td>
+								<td class="fontR">공지</td>
+								<td class="fontR">${MngPostList.cm_reg_date}</td>
+								<td class="fontR">${MngPostList.cm_readcnt}</td>
 							</tr>
 						</c:forEach>
 					</c:when>
@@ -249,7 +248,6 @@
 									<td>${postList.c_category}</td>
 									<td>${postList.c_reg_date}</td>
 									<td>${postList.c_readcnt}</td>
-									<td>추천</td>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -263,8 +261,8 @@
 			</table>
 		</div>
 	
-		<div>
-			<ul>
+		<div id="pageBox">
+			<ul class="pageUl">
 				<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인 -->
 				<c:if test="${pageMaker.prev}">
 					<li class="paginateBtn">

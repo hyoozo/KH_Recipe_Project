@@ -1,8 +1,11 @@
 package com.boot.client.member.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.boot.client.member.vo.MemberVO;
+import com.boot.recipe.info.vo.RecipeVO;
 
 @Mapper
 public interface MemberDao {
@@ -19,5 +22,6 @@ public interface MemberDao {
 	public int memberUpdate(MemberVO mvo);
 	
 	public int memberDelete(MemberVO mvo);
-
+	
+	public List<RecipeVO> recipeCheck(MemberVO mvo);
 }

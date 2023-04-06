@@ -33,7 +33,7 @@
 }
 #keyword {
 	width: 200px;
-    height: 30px;
+    height: 35px;
 }
 #c_search #comSearchBtn::before{
 	content: "\f002";
@@ -70,8 +70,10 @@ button {
 	height: 100%;
     text-align: center;
 }*/
-.goDetail {
+.goDetail , .mngDetail{
 	text-align: left;
+	
+	cursor:pointer;
 }
 .board-table {
 	border: 1px #a39485 solid;
@@ -101,15 +103,16 @@ td {
 	border-bottom: 1px solid rgba(0,0,0,.1);
 	background: #fff;
 }
-.pageBox {
-	list-style:none;
-	float:left;
-	display:inline;
-}
-.pageBox > li {
-float:left;
-}
 
+.pageBox {
+	text-align: center;
+	
+}
+.pageUl {
+	 justify-content : center;
+	 align-items: center;
+	 display: flex;
+}
 .paginateBtn {
 	display: flex;
 	justify-content: center;
@@ -120,12 +123,31 @@ float:left;
 	outline: none;
 	float: left;
 	display:inline;
+	
+	padding:4px;
+	margin-right:4px;
+	width:18px;
+
+	font:bold 15px tahoma;
+	border:1px solid #eee;
+	text-align:center;
+	text-decoration:none;
 }
 
  .paginateBtn > a:hover, .paginateBtn > a:active {
  	text-decoration: none; 
  	color:#fff; 
  	background-color:#f59000;
+ }
+ 
+  .fontRR {
+	color:red;
+ }
+  .fontR {
+	color:#ed3535bd;
+ }
+ .mngDetail {
+ 	cursor:pointer;
  }
   
 @media all and (max-width: 768px) {

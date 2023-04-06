@@ -1,7 +1,10 @@
 package com.boot.client.member.service;
 
 
+import java.util.List;
+
 import com.boot.client.member.vo.MemberVO;
+import com.boot.recipe.info.vo.RecipeVO;
 
 public interface MemberService {
 	public MemberVO loginProcess(MemberVO mvo);
@@ -19,4 +22,6 @@ public interface MemberService {
 	public int memberDelete(MemberVO mvo);
 	
 	public int insertForm(MemberVO mvo);
+	
+	public List<RecipeVO> recipeCheck(MemberVO mvo);
 }

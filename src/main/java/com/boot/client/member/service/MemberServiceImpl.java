@@ -1,11 +1,14 @@
 package com.boot.client.member.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boot.client.member.dao.MemberDao;
 import com.boot.client.member.vo.MemberVO;
+import com.boot.recipe.info.vo.RecipeVO;
 
 import lombok.Setter;
 
@@ -69,6 +72,18 @@ public class MemberServiceImpl implements MemberService {
 		result = memberDao.memberDelete(mvo);
 		return result;
 	}
+
+	
+	@Override
+	public List<RecipeVO> recipeCheck(MemberVO mvo) {
+		List<RecipeVO> list = null;
+		
+		list = memberDao.recipeCheck(mvo);
+		
+		return list;
+	}
+
+	
 	
 	
 }

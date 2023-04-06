@@ -4,73 +4,58 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<link href="/resources/include/css/member.css" rel="stylesheet">
-<%@ include file="/WEB-INF/views/common/common.jspf" %>
 
-<style type="text/css">
-	.page1 {
-		width: 312px;
-		height: 155px;
+<script type="text/javascript">
+	$(function() {
+
 		
-		display: grid;
-    	grid-template-columns: 380px auto;
-    	grid-template-rows: 155pxpx;
-    	
-    	text-align:center;
-	}
-	
-	.maPage{
-		grid-row: 1 / 3;
-   			grid-row-start: 1;
-    		grid-row-end: 3;
-	}
-	
-	.reciGood {
-		width:192px;
-		height:90px;
-		
-	}
-	
-	.storeGood {
-		width:192px;
-		height:90px;
+		$(document).on("click","#reciGood",function() {
 
-		float:right;
-	}
-	
-	.comGood {
-		width:192px;
-		height:90px;
+			let m_num = $("#m_num").val();
+			
+			function listRecipe(m_num) {
+				
+				let url = "/member/recipeCheck/" + c_no;
 
-	}
-	
-	.orderList {
-		width:275px;
-		height:23px;
+				$.getJSON(url, function(data) {
+					$(data).each(function() {
+						let rcp_nm = this.rcp_nm;
+						let rcp_pat2 = this.rcp_pat2;
+						let info_eng = this.info_eng;
+						let rcp_parts_dtls = this.rcp_parts_dtls;
+						template(rcp_nm,rcp_pat2,info_eng,rcp_parts_dtls);
+					});
+				}).fail(function() {
+					alert("댓글 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.");
+				});
+			}
+			
+			
+			
+		})
+	})
+</script>
 
-	}
-	
-	.insertList {
-		width:275px;
-		height:23px;
-	}
-</style>
 <body>
+	
 	<div class="myPage-container">
 		<div class="myPage-top1">
+			<form id="myPageSubmit">
 			<div class="page1">
 				<div class="myPage"  style="background-color:red;">
-					<h5>${login.m_name} 님</h5>
+					<h5><span>${login.m_name} 님</span></h5>
+					<input type="hidden" name="n_num" value="${login.m_num}">
 					<input type="button" value="냉장고" />
 					<input type="button" class="myPage-update" value="수정" />
 				</div>
-				<div class="reciGood" style="background-color:blue;">레시피 좋아요</div>
-				<div class="storeGood" style="background-color:yellow;">스토어 좋아요</div>
-				<div class="comGood" style="background-color:green;">커뮤니티 좋아요</div>
+				<div id="reciGood" style="background-color:blue;">레시피 좋아요</div>
+				<div id="storeGood" style="background-color:yellow;">스토어 좋아요</div>
 				<div style="background-color:pink;" onclick="location.href='/order/orderList'">주문 내역</div>
-				<div class="insertList" style="background-color:#92B3B7;">작성한 글 조회</div>
+				<div id="insertList" style="background-color:#92B3B7;">작성한 글 조회</div>
 			</div>
+			</form>
 		</div>
+
 		
 		<div>
 		
