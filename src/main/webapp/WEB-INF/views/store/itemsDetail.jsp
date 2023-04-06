@@ -7,12 +7,22 @@
 				background-color: #81c147;
 				color: white;
 			}
+			#detail{
+				overflow: auto;
+			}
 		</style>
 
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 		
 		<script type="text/javascript">
 		    $(function(){
+		    	$(".relateDetail").click(function(){
+		    		console.log(1);
+				    let i_num = $(this).attr("data-num");
+					let i_parts= $(this).children(".parts").html();
+					location.href="/store/itemsDetail?i_num="+i_num+"&i_parts="+i_parts; 
+			   });
+		    	
 		       $("#payWindow").css("display", "none");
 		    	
 		       let i_num = $("#i_num").val();
@@ -193,6 +203,7 @@
 				   
 				   $("#payPrice").html(result.toLocaleString('ko-KR'));
 			   };
+			   
 		    });
 		    
 		</script>
@@ -216,58 +227,78 @@
 				<input type="hidden" name="mvo.m_num" id="loginUser" value="${login.m_num}"/>
 				<input type="hidden" name="b_quan" id="b_quan" value=""/>
 			</form>
-			<div class="col-md-6">
-				<img src="${detail.i_img }">
-			</div>
-			<div class="col-md-6 text-center">
-				<table class="table table-bordered">
-					<tr>
-						<td>제품 분류</td>
-						<td id="i_parts">${detail.i_parts }</td>
-					</tr>
-					<tr>
-						<td>제품명</td>
-						<td id="i_name">${detail.i_name }</td>
-					</tr>
-					<tr>
-						<td>제품 가격</td>
-						<td id="i_price">${detail.i_price }</td>
-					</tr>
-				</table>
-				
-				<button type="button" id="goBascket">장바구니</button>
-				<button type="button" id="openPay">주문</button>
-				
-				<br/>
-				<br/>
-				
-				<div id="payWindow">
+			<div id="detail">
+				<div class="col-md-6">
+					<img src="${detail.i_img }">
+				</div>
+				<div class="col-md-6 text-center">
 					<table class="table table-bordered">
 						<tr>
-							<td>${detail.i_name }</td>
-							<td>${detail.i_price }</td>
-							<td>
-								<button type="button" id="cntUp">+</button>
-								<button type="button" id="cntDown">-</button>
-							</td>
+							<td>제품 분류</td>
+							<td id="i_parts">${detail.i_parts }</td>
 						</tr>
 						<tr>
-							<td colspan="3">
-								${detail.i_name } x <span id="cnt">1</span>
-							</td>
+							<td>제품명</td>
+							<td id="i_name">${detail.i_name }</td>
 						</tr>
 						<tr>
-							<td colspan="3" id="payPrice">
-								${detail.i_price }
-							</td>
-						</tr>
-						<tr>
-							<td colspan="3" id="requestPay">
-								결제
-							</td>
+							<td>제품 가격</td>
+							<td id="i_price">${detail.i_price }</td>
 						</tr>
 					</table>
+					
+					<button type="button" id="goBascket">장바구니</button>
+					<button type="button" id="openPay">주문</button>
+					
+					<br/>
+					<br/>
+					
+					<div id="payWindow">
+						<table class="table table-bordered">
+							<tr>
+								<td>${detail.i_name }</td>
+								<td>${detail.i_price }</td>
+								<td>
+									<button type="button" id="cntUp">+</button>
+									<button type="button" id="cntDown">-</button>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									${detail.i_name } x <span id="cnt">1</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3" id="payPrice">
+									${detail.i_price }
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3" id="requestPay">
+									결제
+								</td>
+							</tr>
+						</table>
+					</div>
 				</div>
+			</div>
+			<hr>
+			<div class="jumbotron jumbotron-fluid">
+			  <div class="container">
+			    <h1 class="display-4">주의 사항</h1>
+			    <p class="lead">배송은 3일 정도 걸립니다. 배송사의 사정에 따라 변동될 수 있습니다.</p>
+			  </div>
+			</div>
+			<hr>
+			<div>
+				<c:forEach var="relate" items="${relate }">
+					<div class="col-md-2 relateDetail" data-num="${relate.i_num }">
+						<img style="width:150px; height:150px;" src="${relate.i_img }"/>
+						<p>${relate.i_name}</p>
+						<p class="parts">${relate.i_parts }</p>
+						<p>${relate.i_price }</p>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</body>

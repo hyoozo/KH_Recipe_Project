@@ -88,4 +88,10 @@ public class ItemsServiceImpl implements ItemsService {
 		result = itemsDao.deleteItem(ivo);
 		return result;
 	}
+	
+	@Override
+	public List<ItemsVO> relatedItems(ItemsVO ivo){
+		
+		return itemsDao.relatedItems(ivo);
+	}
 }
