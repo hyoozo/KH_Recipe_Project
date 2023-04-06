@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page trimDirectiveWhitespaces="true" %>
+<%@ include file="/WEB-INF/views/common/common.jspf" %>
 <!-- fontawesome -->
 <script src="https://kit.fontawesome.com/ccd4ff9cee.js" crossorigin="anonymous"></script>
 <link href="/resources/include/css/postList-1.css" rel="stylesheet">
 <link href="/resources/include/css/community.css" rel="stylesheet">
-<script src="/resources/include/js/community.js"></script>
+
 
 <script type="text/javascript">
 	$(function() {
+		
+		ytbShow();
+
 		
 		//디테일 페이지 이동
 		$(".goDetail").click(function() {
@@ -53,7 +54,7 @@
 		let value = "";
 		if(word!="") {
 			$("#keyword").val("<c:out value='${communityVO.keyword}' />");
-			$("#search").val("<c:out value='${communityVO.keyword}' />");
+			$("#search").val("<c:out value='${communityVO.search}' />");
 			
 			if($("#search").val() != 'c_comment') {
 				if($("#search").val == 'c_title') value = "#list tr td.goDetail";
@@ -106,6 +107,8 @@
 			$("#c_search").submit();
 		}
 		
+		
+		// 페이징
 		$(".paginateBtn a").click(function(e) {
 			e.preventDefault();
 			$("#c_search").find("input[name='pageNum']").val($(this).attr("href"));
@@ -126,14 +129,6 @@
 		}
 		
 		function ytbShow() {
-			
-			let url = "/ComYtb";
-			
-		}
-		
-		ytbShow();
-		
-		function ytbShow() {
 			console.log("확인1");
 			
 			let url = "/ComYtb";
@@ -146,9 +141,28 @@
 				
 			})
 		}
+		
+		//디테일 페이지 이동
+		$(".mngDetail").click(function() {
+			let cm_no = $(this).parents("tr").attr("data-num");
+			$("#cm_no").val(cm_no);
 
+			$("#detailForm").attr({
+				"method":"get",
+				"action":"/community/mngPostDetail"
+			})
+			$("#detailForm").submit();
+		})
+		
+		
+		$(".paginateBtn a").click(function(e) {
+			e.preventDefault();
+			$("#c_search")
+		})
+		
 	});
 </script>
+
 </head>
 <body>
 	<div>
@@ -156,6 +170,7 @@
 
 		<form id="detailForm">
 			<input type="hidden" id="c_no" name="c_no">
+			<input type="hidden" id="cm_no" name="cm_no">
 		</form>
 	
 		<div class="youtube-container">
@@ -205,8 +220,25 @@
 						<th id="b_rek">추천</th>
 					</tr>
 				</thead>
-	
+
 				<tbody id="list">
+				
+				<c:choose>
+					<c:when test="${not empty MngPostList}">
+						<c:forEach var="MngPostList" items="${MngPostList}" varStatus="status">
+							<tr  data-num="${MngPostList.cm_no}">
+								<td>${MngPostList.mng_num}</td>
+								<td class="mngDetail">${MngPostList.cm_title}</td>
+								<td>${MngPostList.cm_writer}</td>
+								<td>공지</td>
+								<td>${MngPostList.cm_reg_date}</td>
+								<td>${MngPostList.cm_readcnt}</td>
+								<td>추천</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+				</c:choose>
+
 					<c:choose>
 						<c:when test="${not empty postList}">
 							<c:forEach var="postList" items="${postList}" varStatus="status">
@@ -227,7 +259,6 @@
 							</tr>
 						</c:otherwise>
 					</c:choose>
-	
 				</tbody>
 			</table>
 		</div>

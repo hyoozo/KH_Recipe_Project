@@ -85,8 +85,16 @@
 	
 	
 	<insert id="postInsert" parameterType="comVO">
-		insert into COMMUNITY (c_no,c_title,c_category,c_writer,c_comment,c_img,c_readcnt,c_reg_date,m_num)
-		values(SEQ_COMMUNITY.nextval,#{c_title},#{c_category},#{c_writer},#{c_comment},#{c_img},1,to_date(sysdate,'yyyy.mm.dd'),#{m_num})
+		insert into COMMUNITY (c_no,c_title,c_category,c_writer,c_comment,
+
+		c_img,
+
+		c_readcnt,c_reg_date,m_num)
+		values(SEQ_COMMUNITY.nextval,#{c_title},#{c_category},#{c_writer},#{c_comment},
+
+		#{c_img},
+
+		1,to_date(sysdate,'yyyy.mm.dd'),#{m_num})
 	</insert>
 	
 	

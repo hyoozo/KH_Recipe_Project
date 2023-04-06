@@ -18,5 +18,9 @@
 	<definition name="admin/user/*" extends="basic">
 		<put-attribute name="main" value="/WEB-INF/views/admin/user/{1}.jsp" />
 	</definition>
+					
+	<definition name="admin/community/*" extends="basic">
+		<put-attribute name="main" value="/WEB-INF/views/admin/community/{1}.jsp" />
+	</definition>
 	
 </tiles-definitions>

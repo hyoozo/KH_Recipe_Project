@@ -26,5 +26,5 @@ public interface CommunityDao {
 	public int c_readcnt(CommunityVO cvo);
 	
 	public int comListCnt(CommunityVO cvo);
-
+	
 }

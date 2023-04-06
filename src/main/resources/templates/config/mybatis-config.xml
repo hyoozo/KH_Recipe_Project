@@ -22,5 +22,6 @@
 		<typeAlias type="com.boot.client.community.youtube.vo.Commu_YtbVO" alias="comYtb"/>
 		
 		<typeAlias type="com.boot.admin.vo.ManagerVO" alias="admin"/>
+		<typeAlias type="com.boot.admin.community.vo.CommunityManagerVO" alias="comMng"/>
 	</typeAliases>
 </configuration>

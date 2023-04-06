@@ -45,7 +45,6 @@
 				success : function(result) {
 					if(result == "SUCCESS") {
 						alert("댓글 등록이 완료되었습니다.");
-						reset($("#insertWriter"));
 						reset($("#insertContent"));
 						$("#replyList").html("")
 						listAll(c_no);

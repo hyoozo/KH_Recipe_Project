@@ -11,13 +11,15 @@ import com.boot.client.member.vo.MemberVO;
 import com.boot.common.file.FileUploadUtil;
 
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class CommunityServiceImpl implements CommunityService {
 
 	@Setter(onMethod_ = @Autowired)
 	private CommunityDao communityDao;
-
+	
 	@Override
 	public List<CommunityVO> postList(CommunityVO cvo) {
 		List<CommunityVO> list = null;
@@ -91,10 +93,15 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public int postInsert(CommunityVO cvo) throws Exception{
 		int insert = 0;
-		
-		if(cvo.getFile().getSize() > 0){
+		log.info("cvo" + cvo);
+		if(!cvo.getFile().isEmpty()) {			//새롭게 업로드할 파일이 존재하면
+			if(!cvo.getC_img().isEmpty()) {		//기존 파일이 존재하면
+				FileUploadUtil.fileDelete(cvo.getC_img());
+			}
+			
 			String fileName = FileUploadUtil.fileUpload(cvo.getFile(), "board");
 			cvo.setC_img(fileName);
+			log.info("error:" + fileName);
 		}
 	  
 		insert = communityDao.postInsert(cvo);	
@@ -110,6 +117,6 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		return listCnt;
 	}
-	
+		
 
 }

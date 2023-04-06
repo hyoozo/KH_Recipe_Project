@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.admin.community.dao.CommunityManagerDao">
+	
+	<select id="mngPostList" resultType="comMng" parameterType="comMng">
+		SELECT 	cm_no , cm_title ,cm_writer , cm_comment , cm_img , cm_readcnt,
+				to_char(cm_reg_date,'YYYY-MM-DD') as cm_reg_date , mng_num
+  		FROM (SELECT *
+           	FROM COMMUNITY_MANAGER
+          	ORDER BY cm_no DESC )
+ 		WHERE ROWNUM <![CDATA[<=]]> 3
+	</select>
+	
+	<select id="mngList" resultType="comMng" parameterType="comMng">
+		<![CDATA[
+			SELECT *
+			FROM (
+				select
+					rownum as rnum, cm_no , cm_title ,cm_writer , cm_comment , cm_img , cm_readcnt,
+					to_char(cm_reg_date,'YYYY-MM-DD') as cm_reg_date , mng_num
+				FROM (
+					select *
+					FROM COMMUNITY_MANAGER
+					order by cm_no desc)
+				where ]]>
+			<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+				<if test="search=='cm_title'">
+					<![CDATA[c_title LIKE '%' || #{keyword} || '%']]>
+				</if>
+				<if test="search=='cm_writer'">
+					<![CDATA[c_writer LIKE '%' || #{keyword} || '%']]>
+				</if>
+				<if test="search=='cm_comment'">
+					<![CDATA[c_comment LIKE '%' || #{keyword} || '%']]>
+				</if>
+			</trim>
+ 				<![CDATA[ rownum <= #{pageNum} * #{amount})
+ 				]]>
+ 			WHERE rnum > (#{pageNum} - 1) * #{amount}	
+	</select> 
+	
+	<select id="mngComListCnt" parameterType="comMng" resultType="int">
+	 	select count(*) from COMMUNITY_MANAGER
+	 	<trim prefix="where (" suffix= ")" >
+	 		<include refid = "mngComSearch"></include>
+	 	</trim>
+	</select>
+	
+	<sql id="mngComSearch">
+		<if test="search=='c_title'">
+			<![CDATA[c_title LIKE '%' || #{keyword} || '%']]>
+		</if>
+		<if test="search=='c_writer'">
+			<![CDATA[c_writer LIKE '%' || #{keyword} || '%']]>
+		</if>
+		<if test="search=='c_comment'">
+			<![CDATA[c_comment LIKE '%' || #{keyword} || '%']]>
+		</if>
+	</sql>
+	
+	<update id="mngCm_readcnt" parameterType="comMng">
+		UPDATE COMMUNITY_MANAGER
+		SET cm_readcnt = cm_readcnt + 1
+		WHERE cm_no = #{cm_no}
+	</update>
+ 
+ 	<select id="mngPostDetail" resultType="comMng" parameterType="comMng">
+		SELECT cm_no , cm_title ,cm_writer , cm_comment , cm_img , cm_readcnt,
+		to_char(cm_reg_date,'YYYY-MM-DD') as cm_reg_date , mng_num
+		FROM COMMUNITY_MANAGER
+		where cm_no = #{cm_no}
+	</select>
+	
+	<insert id="mngPostInsert" parameterType="comMng">
+		insert into COMMUNITY_MANAGER (cm_no , cm_title ,cm_writer , cm_comment ,cm_img ,cm_readcnt, cm_reg_date , mng_num)
+		values(SEQ_COMMU_MANAGER.nextval,#{cm_title},#{cm_writer},#{cm_comment},#{cm_img},1,to_date(sysdate,'YYYY-MM-DD'),#{mng_num})
+	</insert>
+	
+	<select id="mngUpdateForm" resultType="comMng" parameterType="comMng">
+		SELECT *
+		FROM COMMUNITY_MANAGER
+		where cm_no = #{cm_no}
+	</select>
+	
+	<update id="mngPostUpdate" parameterType="comMng">
+		UPDATE COMMUNITY_MANAGER
+		SET cm_title = #{cm_title},
+			cm_comment = #{cm_comment},
+			cm_img = #{cm_img},
+			cm_reg_date = to_date(sysdate,'yyyy-mm-dd')
+		WHERE cm_no = #{cm_no}	
+	</update>
+	
+	<delete id="mngPostDelete" parameterType="comMng">
+		DELETE FROM COMMUNITY_MANAGER
+		WHERE cm_no = #{cm_no}
+	</delete>
+	
+</mapper>

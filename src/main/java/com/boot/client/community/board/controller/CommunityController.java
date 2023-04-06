@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.boot.admin.community.service.CommunityManagerService;
+import com.boot.admin.community.vo.CommunityManagerVO;
 import com.boot.client.community.board.service.CommunityService;
 import com.boot.client.community.board.vo.CommunityVO;
 import com.boot.client.member.vo.MemberVO;
@@ -21,8 +23,6 @@ import com.boot.common.vo.PageDTO;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-
-@SessionAttributes("postList")
 @RequestMapping("/community/*")
 @Slf4j
 @Controller
@@ -31,14 +31,20 @@ public class CommunityController {
 	@Setter(onMethod_ = @Autowired)
 	private CommunityService communityService;
 	
+	@Setter(onMethod_ = @Autowired)
+	private CommunityManagerService communityManagerService;
+	
 	@GetMapping("/postList")
-	public String postList(@ModelAttribute CommunityVO cvo,Model model) {
+	public String postList(@ModelAttribute CommunityVO cvo, @ModelAttribute CommunityManagerVO cmvo, Model model) {
 		
 		List<CommunityVO> resultList = communityService.postList(cvo);
 		model.addAttribute("postList", resultList);
 		
 		int total = communityService.comListCnt(cvo);
 		model.addAttribute("pageMaker",new PageDTO(cvo,total));
+		
+		List<CommunityManagerVO> result = communityManagerService.mngPostList(cmvo);
+		model.addAttribute("MngPostList", result);
 		log.info("짜잔:" + cvo );
 		
 		return "community/postList";
@@ -138,4 +144,15 @@ public class CommunityController {
 		return "redirect:" + path;
 	}	
 	
+	
+	//공지사항
+	@GetMapping("/mngPostDetail")
+	public String mngPostDetail(@ModelAttribute CommunityManagerVO cmvo, Model model) {
+		log.info("postDetail 호출 성공");
+		
+		CommunityManagerVO postDetail = communityManagerService.mngPostDetail(cmvo);
+		model.addAttribute("mngPostDetail",postDetail);
+		
+		return "community/mngPostDetail";
+	}
 }

@@ -101,6 +101,15 @@ td {
 	border-bottom: 1px solid rgba(0,0,0,.1);
 	background: #fff;
 }
+.pageBox {
+	list-style:none;
+	float:left;
+	display:inline;
+}
+.pageBox > li {
+float:left;
+}
+
 .paginateBtn {
 	display: flex;
 	justify-content: center;
@@ -108,7 +117,9 @@ td {
 .paginateBtn > a {
 	color: black; 
 	text-decoration: none; 
-	outline: none
+	outline: none;
+	float: left;
+	display:inline;
 }
 
  .paginateBtn > a:hover, .paginateBtn > a:active {
