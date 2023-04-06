@@ -28,6 +28,10 @@
 				text-align: right;
 				margin: 0px 0px 20px 0px;
 			}
+			img{
+				width: 100px;
+				height: 100px;
+			}
  		</style>
 		
 		<script type="text/javascript">
@@ -188,6 +192,7 @@
 							<thead>
 								<tr>
 									<th class="text-center">번호</th>
+									<th class="text-center">제품 이미지</th> 
 									<th class="text-center">제품명</th>
 									<th class="text-center">제품 분류</th>
 									<th class="text-center">제품 가격</th>
@@ -201,10 +206,17 @@
 									<c:when test="${not empty items }">
 										<c:forEach var="list" items="${items }">
 											<tr class="text-center">
-												<td style="display:none;" class="i_img">${list.i_img }</td>
 												<td class="i_num">
 													<span class="num">${list.i_num}</span>
 													<span class="rnum">${list.rnum}</span>
+												</td>
+												<td class="i_img">
+													<c:if test="${fn:contains(list.i_img, 'https://') }">
+														<img src="${list.i_img }"/>
+													</c:if>
+													<c:if test="${not fn:contains(list.i_img, 'https://') }">
+														<img src="/resources/item/${list.i_img }"/>
+													</c:if>			
 												</td>
 												<td>
 													${list.i_name}

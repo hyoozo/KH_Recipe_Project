@@ -10,17 +10,19 @@
 		inner join orders o
 		on ol.imp_uid = o.imp_uid
 		where order_day between to_date(#{start}, 'YY/MM/DD') and to_date(#{end}, 'YY/MM/DD')
+		and ol_state = '결제 완료'
 		group by i_parts
 	</select>
 	
 	<select id="countStatistics" parameterType="statistics" resultType="statistics">
-		select i_parts, round(count(*) / (select count(*) from order_list) * 100, 1)  as percent
+		select i_parts, round(count(*) / (select count(*) from order_list where ol_state = '결제 완료') * 100, 1)  as percent
 		from items i
 		inner join order_list ol
 		on i.i_num = ol.i_num
 		inner join orders o
 		on ol.imp_uid = o.imp_uid
 		where order_day between to_date(#{start}, 'YY/MM/DD') and to_date(#{end}, 'YY/MM/DD')
+		and ol_state = '결제 완료'
 		group by i_parts
 	</select>
 	

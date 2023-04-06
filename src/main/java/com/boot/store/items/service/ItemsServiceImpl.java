@@ -10,8 +10,10 @@ import com.boot.store.items.dao.ItemsDao;
 import com.boot.store.items.vo.ItemsVO;
 
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class ItemsServiceImpl implements ItemsService {
 	
 	@Setter(onMethod_ = @Autowired)
@@ -66,7 +68,7 @@ public class ItemsServiceImpl implements ItemsService {
 		int result = 0;
 		
 		if(!ivo.getFile().isEmpty()) {
-			if(!ivo.getI_img().isEmpty()) {
+			if(!ivo.getI_img().isEmpty() && !ivo.getI_img().contains("https://")) {
 				FileUploadUtil.fileDelete(ivo.getI_img());
 			}
 			String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "item");
@@ -80,10 +82,9 @@ public class ItemsServiceImpl implements ItemsService {
 	@Override
 	public int deleteItem(ItemsVO ivo) throws Exception{
 		int result = 0;
-		if(!ivo.getI_img().isEmpty()) {
+		if(!ivo.getI_img().isEmpty() && !ivo.getI_img().contains("https://")) {
 			FileUploadUtil.fileDelete(ivo.getI_img());
 		}
-		
 		result = itemsDao.deleteItem(ivo);
 		return result;
 	}
