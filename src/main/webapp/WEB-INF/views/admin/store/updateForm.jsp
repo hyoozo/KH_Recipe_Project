@@ -55,6 +55,7 @@
 				</h2>
 				<form id="updateForm" class="form-horizontal">
 				  <input type="hidden" name="i_img" id="i_img" value="${item.i_img }"/>
+				  <input type="hidden" name="i_num" id="i_num" value="${item.i_num }"/>
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">제품명</label>
 				    <div class="col-sm-10">

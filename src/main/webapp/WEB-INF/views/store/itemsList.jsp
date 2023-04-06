@@ -31,7 +31,13 @@
 							if(Number(this.i_quan) > 0){
 								//console.log(1);
 								let $div = $("<div class='col-md-4 goDetail item' data-num='" + this.i_num + "'>");
-								$div.append($("<img style='width:350px; height:350px;'>").attr("src", this.i_img));
+								
+								if(this.i_img.indexOf("https://")==0){
+									$div.append($("<img style='width:350px; height:350px;'>").attr("src", this.i_img));
+								} else {
+									$div.append($("<img style='width:350px; height:350px;'>").attr("src", "/resources/item/"+this.i_img));
+								}
+								
 								let $info = $("<div class='info'>");
 								$info.append($("<p>").append(this.i_name));
 								$info.append($("<p>").append(this.i_price));
