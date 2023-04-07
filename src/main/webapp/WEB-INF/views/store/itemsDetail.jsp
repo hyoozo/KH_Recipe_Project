@@ -152,7 +152,7 @@
 									location.href="/bascket/bascketList";
 								}
 							} else{
-								alert("시스템 오류가 발생했습니다. 잠시 후 이용해 주세요.");
+								alert("장바구니에 이미 담은 상품입니다.");
 							}
 						},
 						error : function(){
@@ -290,6 +290,8 @@
 			  </div>
 			</div>
 			<hr>
+			<h2>추천 상품</h2>
+			<br>
 			<div>
 				<c:forEach var="relate" items="${relate }">
 					<div class="col-md-2 relateDetail" data-num="${relate.i_num }">

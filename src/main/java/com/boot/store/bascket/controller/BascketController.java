@@ -44,8 +44,13 @@ public class BascketController {
 		
 		String str = "성공";
 		int result = 0;
+		int dupl = 0;
+		
 		if(vo!=null) {
-			result = bascketService.insertBascket(vo);
+			dupl = bascketService.duplicatedBascket(vo);
+			if(dupl==0) {
+				result = bascketService.insertBascket(vo);
+			}
 		}
 		
 		if(result != 0) {

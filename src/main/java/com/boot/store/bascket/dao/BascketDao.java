@@ -12,4 +12,5 @@ public interface BascketDao {
 	public List<BascketVO> bascketList(MemberVO vo);
 	public int insertBascket(BascketVO vo);
 	public int deleteBascket(BascketVO vo);
+	public int duplicatedBascket(BascketVO vo);
 }
