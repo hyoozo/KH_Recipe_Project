@@ -69,4 +69,13 @@
 		delete from items
 		where i_num = #{i_num}
 	</delete>
+	
+	<select id="relatedItems" parameterType="items" resultType="items">
+		select i_num, i_parts, i_name, i_price, i_quan, i_img
+		from items 
+		where i_parts= #{i_parts} 
+		and <![CDATA[rownum <= 5 ]]>
+		and i_num != #{i_num}
+		order by dbms_random.value
+	</select>
 </mapper>

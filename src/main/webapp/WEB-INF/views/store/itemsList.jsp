@@ -31,18 +31,22 @@
 							if(Number(this.i_quan) > 0){
 								//console.log(1);
 								let $div = $("<div class='col-md-4 goDetail item' data-num='" + this.i_num + "'>");
-								$div.append($("<img style='width:350px; height:350px;'>").attr("src", this.i_img));
+								
+								if(this.i_img.indexOf("https://")==0){
+									$div.append($("<img style='width:350px; height:350px;'>").attr("src", this.i_img));
+								} else {
+									$div.append($("<img style='width:350px; height:350px;'>").attr("src", "/resources/item/"+this.i_img));
+								}
+								
 								let $info = $("<div class='info'>");
 								$info.append($("<p>").append(this.i_name));
 								$info.append($("<p>").append(this.i_price));
+								$info.append($("<p class='parts'>").append(this.i_parts));
 								
 								$("#itemsList").append($div.append($info));
 							} 
 							
 						});	
-					} else if(data.length == 0) {
-						alert("검색어가 부적합 합니다.")
-						location.href="/store/itemsList";
 					}
 				}
 			});
@@ -69,6 +73,7 @@
 					
 					getItems(pageNum, search, keyword);
 				}
+				
 			});
 			
 			$("#keyword").bind("keydown", function(event){
@@ -127,8 +132,8 @@
 				//console.log($(this).attr("data-num"));
 				
 				let i_num = $(this).attr("data-num");
-				
-				location.href="/store/itemsDetail?i_num="+i_num;
+				let i_parts= $(this).children(".info").children(".parts").html();
+				location.href="/store/itemsDetail?i_num="+i_num+"&i_parts="+i_parts;
 				
 			});
 			

@@ -44,6 +44,10 @@ public class ItemsController {
 		
 		model.addAttribute("detail", detail);
 		
+		List<ItemsVO> relate = itemsService.relatedItems(vo);
+		
+		model.addAttribute("relate", relate);
+		
 		return "store/itemsDetail";
 	}
 	
