@@ -393,3 +393,39 @@
     	
     	cursor:pointer;
 	}
+	
+.mPageList > .ReceipeContainer {
+	margin-top: 3%;
+	margin-left: 5%;
+}
+
+.myPage-top1 {
+	margin-left: 5%;
+}
+
+.thm1 {
+	width: 15%;
+}
+.thm2 {
+	width: 15%;
+}
+.thm3 {
+	width: 15%;
+}
+.thm4 {
+	width: 40%;
+}
+
+
+.tdm12, .tdm22 {
+	width: 50%;
+	height: 10%;
+	
+	vertical-align: middle !important;
+}
+.tdm12 {
+border-right-width: 0.8px;
+    border-right-style: solid;
+    border-right-color: rgb(221,221,221);
+}
+

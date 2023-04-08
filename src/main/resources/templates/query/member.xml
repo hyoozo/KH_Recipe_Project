@@ -51,13 +51,18 @@
 	</delete>
 	
 	
-	<select id="recipeCheck" resultType="recipe" parameterType="int">
-		select rcp_seq, rcp_nm , rcp_pat2 , info_eng , rcp_parts_dtls
-		from recipe
-		where rcp_seq = (select rcp_seq
-    		from REC_LIKE
-   			 where m_num = #{m_num})
+	<select id="recipeCheck" resultType="com.boot.client.member.vo.MypageVO" parameterType="int">
+		SELECT recipe.rcp_seq, recipe.rcp_nm , recipe.rcp_pat2 , recipe.info_eng , recipe.rcp_parts_dtls
+		FROM recipe
+		INNER JOIN rcp_like ON recipe.rcp_seq = rcp_like.rcp_seq
+		INNER JOIN member ON member.m_num = rcp_like.m_num
+		WHERE member.m_num = #{m_num}
 	</select>
 	
-	
+	<select id="commCheck" resultType="comVO" parameterType="int">
+		select c_no, c_title , C_CATEGORY ,C_READCNT , to_char(c_reg_date,'YYYY-MM-DD') as c_reg_date
+		FROM COMMUNITY
+		WHERE M_NUM = #{m_num}
+	</select>
+		
 </mapper>

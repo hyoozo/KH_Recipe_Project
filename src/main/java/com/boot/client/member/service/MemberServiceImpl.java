@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boot.client.community.board.vo.CommunityVO;
 import com.boot.client.member.dao.MemberDao;
 import com.boot.client.member.vo.MemberVO;
 import com.boot.recipe.info.vo.RecipeVO;
@@ -89,10 +90,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public List<OrderListVO> orderCheck(Integer m_num) {
-		List<OrderListVO> list = null;
+	public List<CommunityVO> commCheck(Integer m_num) {
+		List<CommunityVO> list = null;
 		
-		list = memberDao.orderCheck(m_num);
+		list = memberDao.commCheck(m_num);
 		
 		return list;
 	}

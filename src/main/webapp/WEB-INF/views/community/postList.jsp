@@ -28,6 +28,7 @@
 			$("#detailForm").submit();
 		})
 		
+		//페이징
 		$(".paginateBtn a").click(function(e) {
 			e.preventDefault();
 			$("#c_search")

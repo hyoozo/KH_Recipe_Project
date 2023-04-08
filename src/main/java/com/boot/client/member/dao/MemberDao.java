@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.boot.client.community.board.vo.CommunityVO;
 import com.boot.client.member.vo.MemberVO;
 import com.boot.recipe.info.vo.RecipeVO;
 import com.boot.store.orderList.vo.OrderListVO;
@@ -25,5 +26,5 @@ public interface MemberDao {
 	public int memberDelete(MemberVO mvo);
 	
 	public List<RecipeVO> recipeCheck(Integer m_num);
-	public List<OrderListVO> orderCheck(Integer m_num);
+	public List<CommunityVO> commCheck(Integer m_num);
 }

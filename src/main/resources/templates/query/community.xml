@@ -94,7 +94,7 @@
 
 		#{c_img},
 
-		1,to_date(sysdate,'yyyy.mm.dd'),#{m_num})
+		1,sysdate,#{m_num})
 	</insert>
 	
 	

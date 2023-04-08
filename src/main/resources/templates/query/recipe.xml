@@ -14,8 +14,7 @@
 		values(
 			#{rcp_seq},
 			#{manual01}, #{manual_img01}, #{manual02}, #{manual_img02}, #{manual03}, #{manual_img03}, #{manual04}, #{manual_img04},
-			#{manual05}, #{manual_img05}, #{manual06}, #{manual_img06}, #{manual07}, #{manual_img07}, #{manual08}, #{manual_img08},
-			#{manual09}, #{manual_img09}, #{manual10}, #{manual_img10}
+			#{manual05}, #{manual_img05}, #{manual06}, #{manual_img06}
 		)
 	</insert>
 	

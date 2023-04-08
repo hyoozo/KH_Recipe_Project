@@ -44,10 +44,10 @@ public class MemberMypageController {
 		return recipe;
 	}
 	
-	@GetMapping(value="/orderCheck/{m_num}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<OrderListVO> orderCheck(@PathVariable("m_num") Integer m_num) {
+	@GetMapping(value="/commCheck/{m_num}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<CommunityVO> commCheck(@PathVariable("m_num") Integer m_num) {
 		log.info("야호 성공");
-		List<OrderListVO> order = memberService.orderCheck(m_num);
+		List<CommunityVO> order = memberService.commCheck(m_num);
 		log.info("에러:" + order);
 		return order;
 	}
