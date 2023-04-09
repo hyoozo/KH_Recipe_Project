@@ -16,6 +16,9 @@
         <style type="text/css">
         	a {color: #000; text-decoration: none; outline: none}
 			a:hover, a:active {text-decoration: none; color:#000;}
+			#textRight{
+				text-align:right;
+			}
         </style>
         <script type="text/javascript">
         	$(function(){
@@ -58,8 +61,7 @@
                                                 <input class="form-control" type="password" id="mng_pwd" name="mng_pwd"/>
                                                 <label for="mng_pwd">Password</label>
                                             </div>
-                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="password.html"></a>
+                                            <div id="textRight">
                                                 <button class="btn btn-primary" type="button" id="loginBtn">Login</button>
                                             </div>
                                         </form>

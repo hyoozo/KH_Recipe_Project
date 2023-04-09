@@ -38,4 +38,10 @@ public class BascketServiceImpl implements BascketService {
 		return result;
 	}
 
+	@Override
+	public int duplicatedBascket(BascketVO vo) {
+		int result = 0;
+		result = bascketDao.duplicatedBascket(vo);
+		return result;
+	}
 }

@@ -47,9 +47,19 @@
 			
 			$("#searchData").click(function(){
 				if($("#search").val() != "all"){
-					if(!chkData("#keyword","검색어를")) return;
+					if(!chkData("#keyword","검색어를")) {
+						return;
+					} else {
+						goPage();
+					}
+				} else{
+					pageNum = 1;
+					search = $("#search").val();
+					keyword = "";
+					
+					location.href="/admin/recipe/recipeList?=pageNum="+pageNum+"&search="+search+"&keyword="+keyword;
 				}
-				goPage();
+				
 			});
 			
 			$("#insertRecipe").click(function(){
@@ -59,7 +69,6 @@
 			$(".detail").click(function(){
 				let rcp_seq = $(this).parents("tr").attr("data-num");
 				$("#rcp_seq").val(rcp_seq);
-				//console.log("레시피 번호 : " + rcp_seq);
 				$("#detailForm").attr({
 					"method" : "get",
 					"action" : "/admin/recipe/recipeDetail"

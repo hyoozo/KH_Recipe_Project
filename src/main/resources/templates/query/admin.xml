@@ -39,9 +39,9 @@
 	
 	<select id="adminList" parameterType="admin" resultType="admin">
 		<![CDATA[
-		SELECT mng_num, mng_id, mng_pwd, mng_name, mng_lev, mng_email, mng_phone
+		SELECT rnum, mng_num, mng_id, mng_pwd, mng_name, mng_lev, mng_email, mng_phone
 		FROM (
-			SELECT /*+ INDEX_DESC(manager pk_manager) */
+			SELECT
 			rownum as rnum, mng_num, mng_id, mng_pwd, mng_name, mng_lev, mng_email, mng_phone
 			FROM manager
 			WHERE ]]>
@@ -80,9 +80,9 @@
 	
 	<select id="userList" parameterType="MemberVO" resultType="MemberVO">
 		<![CDATA[
-		SELECT m_num, m_name, m_id, m_pwd, m_phone, m_email, m_address, to_char(m_reg_day, 'YYYY-MM-DD')AS m_reg_day, m_rec_day, m_zip
+		SELECT rnum, m_num, m_name, m_id, m_pwd, m_phone, m_email, m_address, to_char(m_reg_day, 'YYYY-MM-DD')AS m_reg_day, m_rec_day, m_zip
 		FROM (
-			SELECT /*+ INDEX_DESC(member pk_member) */
+			SELECT 
 			rownum as rnum, m_num, m_name, m_id, m_pwd, m_phone, m_email, m_address, m_reg_day, m_rec_day, m_zip
 			FROM member
 			WHERE ]]>
@@ -93,6 +93,11 @@
 				) userList
 				WHERE rnum > (#{pageNum}-1) * #{amount}
 			]]>
+	</select>
+	
+	<select id="userCnt" resultType="int">
+		SELECT count(*)
+		FROM member
 	</select>
 	
 	<delete id="userDelete" parameterType="MemberVO">

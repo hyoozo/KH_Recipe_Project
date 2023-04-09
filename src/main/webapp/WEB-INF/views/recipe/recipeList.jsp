@@ -5,9 +5,9 @@
 
 	<link href="/resources/include/css/index.css" rel="stylesheet">
 	<link href="/resources/include/css/clientRecipeList.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/ccd4ff9cee.js" crossorigin="anonymous"></script>
 	
-	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.min.css" />
+	
 	
 	<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 	<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
@@ -16,7 +16,7 @@
 	
 	<script type="text/javascript">
 		$(function(){
-			let rcp_seq_arr = [];
+			/* let rcp_seq_arr = [];
 			$(".recipeList").each(function(){
 				rcp_seq_arr.push($(this).attr("data-num"));
 			}); // 1페이지의 12개 레시피 번호를 배열로 저장.
@@ -38,14 +38,9 @@
 					}
 						
 					}
-				})
+				}) */
 				updateLikeCount();
 			
-			/*$(".paginate_button a").click(function(e) {
-				e.preventDefault();
-				$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
-				goPage();
-			});*/
             let pageNum=2;
 			
 			$(window).scroll(function(){
@@ -55,7 +50,6 @@
 				let isBottom = scrollTop + windowHeight + 10 >= documentHeight;
 				
 				if(isBottom) {
-					//console.log($("#keyword").val());
 					$.ajax({
 						url : "/recipe/scroll",
 						type : "get",
@@ -68,14 +62,12 @@
 							alert('시스템 오류. 관리자에게 문의하세요.');
 						},
 						success : function(data){
-							//console.log(data);
 							appendRecipeList(data);
 							updateLikeCount();
 							pageNum++;
-							//console.log(pageNum);
 							
 							if (data.length === 0) {
-						        $(window).off('scroll'); // 더이상 받아온 데이터가 없으면 스크롤 이벤트 제거.
+						        $(window).off('scroll');
 						        return;
 						    }
 						 }
@@ -193,7 +185,7 @@
 	</script>
 	</head>
 	<body>
-		<h3>냉장고 레시피</h3>
+		<h2>냉장고 레시피</h2>
 		<div class="contentContainer container">
 		
 			<form id="detailForm">
@@ -205,15 +197,14 @@
 				<form id="f_search" name="f_search" class="form-inline">
 					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
 					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
-					<div class="from-group">
-						<label>검색조건</label>
+					<div class="inline-box">
 						<select id="search" name="search" class="form-control">
 								<option value="all">전제</option>
 								<option value="rcp_nm">메뉴명</option>
 								<option value="info_eng">칼로리</option>
 						</select>
 						<input type="text" name="keyword" id="keyword" value="전체 레시피를 조회합니다." class="form-control" />
-						<button type="button" id="searchData" class="btn btn-success">검색</button>
+						<button type="button" id="searchData"></button>
 					</div>
 				</form>
 			</div>
@@ -236,9 +227,9 @@
 									</c:if>
 								</div>
 								<div>
-									<h4 class="recipeText name">${recipe.rcp_nm}</h4>
-									<p class="recipeText kcal">${recipe.info_eng} kcal<img src="/resources/image/heart.png" class="sl"/><span class="likeCnt"></span></p>
-								</div> 
+									<h3 class="recipeText name">${recipe.rcp_nm}</h3>
+									<h4 class="recipeText kcal">${recipe.info_eng} kcal<img src="/resources/image/heart.png" class="sl"/><span class="likeCnt"></span></h4>
+								</div>
 							</div>
 						</div>
 					</c:forEach>

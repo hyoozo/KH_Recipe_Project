@@ -73,6 +73,13 @@ public class ManagerServiceImpl implements ManagerService {
 		result = managerDao.userDelete(mvo);
 		return result;
 	}
+
+	@Override
+	public int userCnt() {
+		int result = 0;
+		result = managerDao.userCnt();
+		return result;
+	}
 	
 	
 

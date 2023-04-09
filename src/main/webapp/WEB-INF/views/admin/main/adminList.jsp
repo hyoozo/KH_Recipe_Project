@@ -48,9 +48,19 @@
 		
 		$("#searchData").click(function(){
 			if($("#search").val() != "all"){
-				if(!chkData("#keyword","검색어를")) return;
+				if(!chkData("#keyword","검색어를")) {
+					return;
+				} else {
+					goPage();
+				}
+			} else{
+				pageNum = 1;
+				search = $("#search").val();
+				keyword = "";
+				
+				location.href="/admin/admin/adminList?=pageNum="+pageNum+"&search="+search+"&keyword="+keyword;
 			}
-			goPage();
+			
 		});
 		
 		$("#insertManager").click(function(){
@@ -146,7 +156,7 @@
 							<c:when test="${not empty adminList}">
 								<c:forEach var="admin" items="${adminList}" varStatus="status">
 									<tr data-num="${admin.mng_num}">
-										<td>${admin.mng_num}</td>
+										<td>${admin.rnum}</td>
 										<td class="name">${admin.mng_name}</td>
 										<td>${admin.mng_phone}
 										<td class="lev" data-value="${admin.mng_lev}">${admin.mng_lev}</td>

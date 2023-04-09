@@ -9,6 +9,12 @@
 <script type="text/javascript">
 	$(function(){
 		
+		$(".paginate_button a").click(function(e) {
+			 e.preventDefault();
+			 $("#m_search").find("input[name='pageNum']").val($(this).attr("href"));
+			 goPage();
+		});
+		
 		let word="<c:out value='${memberVO.keyword}' />";
 		let value="";
 		if(word!=""){
@@ -44,9 +50,19 @@
 		
 		$("#searchData").click(function(){
 			if($("#search").val() != "all"){
-				if(!chkData("#keyword","검색어를")) return;
+				if(!chkData("#keyword","검색어를")) {
+					return;
+				} else {
+					goPage();
+				}
+			} else{
+				pageNum = 1;
+				search = $("#search").val();
+				keyword = "";
+				
+				location.href="/admin/user/userList?=pageNum="+pageNum+"&search="+search+"&keyword="+keyword;
 			}
-			goPage();
+			
 		});
 		
 		$(".deleteBtn").click(function(){
@@ -78,7 +94,7 @@
 	</head>
 	<body>
 		<div class="contentContainer container">
-			<h3>회원 계정 관리</h3>
+			<h3>회원 계정 관리</h3><h5>총 회원 수 : ${userCnt}</h5>
 			<form id="deleteMember">
 				<input type="hidden" id="m_num" name="m_num" />
 			</form>
@@ -127,7 +143,7 @@
 							<c:when test="${not empty memberList}" >
 								<c:forEach var="member" items="${memberList}" varStatus="status">
 									<tr data-num="${member.m_num}">
-										<td>${member.m_num}</td>
+										<td>${member.rnum}</td>
 										<td class="name">${member.m_name}</td>
 										<td class="id">${member.m_id}</td>
 										<td class="email">${member.m_email}</td>

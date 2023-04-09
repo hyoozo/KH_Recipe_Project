@@ -34,4 +34,11 @@
 		delete from bascket 
 		where b_num = #{b_num}
 	</delete>
+	
+	<select id="duplicatedBascket" parameterType="bascket" resultType="int">
+		select count(*)
+		from bascket
+		where i_num = #{ivo.i_num}
+		and m_num = #{mvo.m_num}
+	</select>
 </mapper>
