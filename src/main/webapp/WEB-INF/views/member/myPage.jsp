@@ -39,20 +39,19 @@ $(function() {
 			let url = '/mypage/recipeCheck/' + m_num;
 			
 			reset();
-			
 			$.getJSON(url, function(data) {
+				if(data == "") {
+					receipeResultFail();
+				} else {
 					$(data).each(function() {
-						if(this.rcp_seq == null) {
-							receipeResultFail();
-						} else {
 						let rcp_seq = this.rcp_seq;
 						let rcp_nm = this.rcp_nm;
 						let rcp_pat2 = this.rcp_pat2;
 						let info_eng = this.info_eng;
 						let rcp_parts_dtls = this.rcp_parts_dtls;
 						receipeResult(rcp_seq,rcp_nm,rcp_pat2,info_eng,rcp_parts_dtls);
-						}
-				});
+					})
+				};
 			}).fail(function() {
 				alert("정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.");
 			});
@@ -110,18 +109,18 @@ $(function() {
 			reset();
 			
 			$.getJSON(url, function(data) {
+				if(data == "") {
+					communityResultFail();
+				} else {
 					$(data).each(function() {
-						if(this.c_no == null) {
-							communityResultFail();
-						} else {
 						let c_no = this.c_no;
 						let c_title = this.c_title;
 						let c_category = this.c_category;
 						let c_readcnt = this.c_readcnt;
 						let c_reg_date = this.c_reg_date;
 						communityResult(c_no,c_title,c_category,c_readcnt,c_reg_date);
-						}
-				});
+					})
+				};
 			}).fail(function() {
 				alert("정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.");
 			});
@@ -159,7 +158,7 @@ $(function() {
 	function communityResultFail() {
 		let $tb = $("#commTb");
 		
-		let con = '<tr id="data" data-num = "' + c_no + '">'
+		let con = '<tr id="data" data-num = "">'
 		let conn =
 				'<p>정보가 없습니다</p>'
 			'</tr>';
