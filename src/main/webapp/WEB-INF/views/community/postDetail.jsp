@@ -4,6 +4,9 @@
 <script src="https://kit.fontawesome.com/ccd4ff9cee.js" crossorigin="anonymous"></script>
 <link href="/resources/include/css/postDetail-1.css" rel="stylesheet">
 <link href="/resources/include/css/community.css" rel="stylesheet">
+<script src="/resources/include/js/member.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript">
 	$(function() {
@@ -80,9 +83,11 @@
 		</div>
 		
 		<div class="detail-content">
-			<div class="contentImg">
-			<img src="/uploadStorage/board/${postDetail.c_img}" />
-			</div>
+			<c:if test="${not empty postDetail.c_img}">
+				<div class="contentImg">
+					<img src="/uploadStorage/board/${postDetail.c_img}" />
+				</div>
+			</c:if>
 			<div class="content-comment">
 				<p>${postDetail.c_comment}
 				<!-- 내용은 오른쪽 정렬. -->

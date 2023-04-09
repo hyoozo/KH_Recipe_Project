@@ -56,7 +56,7 @@
 		FROM recipe
 		INNER JOIN rcp_like ON recipe.rcp_seq = rcp_like.rcp_seq
 		INNER JOIN member ON member.m_num = rcp_like.m_num
-		WHERE member.m_num = #{m_num}
+		WHERE member.m_num = #{m_num} AND rcp_like.RCPLIKE_STATUS = 1
 	</select>
 	
 	<select id="commCheck" resultType="comVO" parameterType="int">

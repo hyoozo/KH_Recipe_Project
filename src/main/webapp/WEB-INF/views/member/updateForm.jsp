@@ -9,9 +9,9 @@
 
 <script type="text/javascript">
 	$(function() {
-		
-		let name = "${login.m_name}";
-		let pwd = "${login.m_pwd}";
+		let m_id = "${login.m_id}";
+		let m_name = "${login.m_name}";
+		let m_pwd = "${login.m_pwd}";
 		let m_phone = "${login.m_phone}";
 		let m_email = "${login.m_email}";
 		let m_zip = "${login.m_zip}";
@@ -64,34 +64,26 @@
 		})
 		
 		$("#update").click(function() {
+			if($("input[name='m_id']").val().length == 0) {		
+				$("input[name='m_id]").val(m_id);	
+			}
 			
 			if($("input[name='m_name']").val().length == 0) {		
-				
-				$("input[name='m_name']").val(name);
-				
+				$("input[name='m_name']").val(m_name);	
 			}
 			if($("input[name='m_pwd']").val().length == 0) {
-				
-				$("input[name='m_pwd']").val(pwd);
-				
+				$("input[name='m_pwd']").val(m_pwd);	
 			}
 			if($("input[name='m_pwdConfirm']").val().length == 0) {
-				
-				$("input[name='m_pwdConfirm']").val(pwd);
-				
+				$("input[name='m_pwdConfirm']").val(m_pwd);	
 			}
 			if($("input[name='m_phone']").val().length == 0) {
-				
 				$("input[name='m_phone']").val(m_phone);
-				
 			}
 			if($("input[name='m_email']").val().length == 0) {
-				
 				$("input[name='m_email']").val(m_email);
-				
 			}
 			if($("input[name='m_zip']").val().length == 0) {
-				
 				$("input[name='m_zip']").val(m_zip);
 			}
 			
@@ -106,9 +98,9 @@
 			if($(".address1").val().length == 0 || $(".address2").val().length == 0) {
 				$("input[name='m_address']").val(m_address);
 				
-			} else if((".address1").val().length == 0){
+			} else if($(".address1").val().length == 0){
 				return alert("주소를 입력해주세요.");
-			} else if((".address2").val().length == 0) {
+			} else if($(".address2").val().length == 0){
 				return alert("상세주소를 입력해주세요.");
 			}
 
@@ -231,8 +223,8 @@ function sample6_execDaumPostcode() {
 					</div>
 				</div>
 			</div>
-			<button type="button" id="updatePwdBtn" class="upPwdBtn bor-rad4">확인</button>
-			<button type="button" id="updatePwdBtn-cancel" class="upPwdBtn bor-rad4">취소</button>
+			<button type="button" id="updatePwdBtn" class="upPwdBtn bor-rad4 po">확인</button>
+			<button type="button" id="updatePwdBtn-cancel" class="upPwdBtn bor-rad4 po">취소</button>
 			<span class="msg input-font14"></span>
 		</div>
 	</form>
@@ -254,7 +246,7 @@ function sample6_execDaumPostcode() {
 					<input type="text" class="update-num" name="m_num" value="${login.m_num}">
 					<div class="update-label"><label>아이디</label></div>
 					<input type="text" id="update_id" class="update-input input-font14 join-input bor-rad2" name="m_id"
-					placeholder="${login.m_id}" disabled/>
+					placeholder="${login.m_id}" readonly/>
 				</div>
 				<div class="update-div">
 					<div class="update-label"><label>이름</label></div>
@@ -292,8 +284,8 @@ function sample6_execDaumPostcode() {
 				</div>
 				
 				<div>
-					<button type="button" id="update" class="updateBtn btnGreen bor-rad3">수정하기</button>
-					<input type="button" id="update_cancel" class="update_cancelBtn btnGreen bor-rad3" value="취소" />
+					<button type="button" id="update" class="updateBtn btnGreen bor-rad3 po">수정하기</button>
+					<input type="button" id="update_cancel" class="update_cancelBtn btnGreen bor-rad3 po" value="취소" />
 				</div>
 			</div>
 		</div>

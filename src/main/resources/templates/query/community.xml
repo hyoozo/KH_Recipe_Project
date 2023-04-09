@@ -86,14 +86,14 @@
 	
 	<insert id="postInsert" parameterType="comVO">
 		insert into COMMUNITY (c_no,c_title,c_category,c_writer,c_comment,
-
-		c_img,
-
+		<if test="c_img != ''">
+			c_img,
+		</if>
 		c_readcnt,c_reg_date,m_num)
 		values(SEQ_COMMUNITY.nextval,#{c_title},#{c_category},#{c_writer},#{c_comment},
-
-		#{c_img},
-
+		<if test="c_img != ''">
+			#{c_img},
+		</if>	
 		1,sysdate,#{m_num})
 	</insert>
 	

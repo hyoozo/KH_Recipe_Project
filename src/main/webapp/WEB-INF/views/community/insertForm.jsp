@@ -14,7 +14,7 @@
 		$("#insert-list").click(function() {
 			if(!chkRemain($("#c_title"),"제목을")) return;
 			else if(!chkRemain($("#c_comment"),"내용을")) return;
-			else if(!chkRemain($("#file"),"이미지를")) return;
+			//else if(!chkRemain($("#file"),"이미지를")) return;
 			else if($("#file").val()!=""){ 
 					if (!chkFile($("#file"))) return;
 				}
@@ -62,8 +62,8 @@
 
 		<form id="insertSubmit" class="form-horizontal insertForm">
 
-			<input type="hidden" name="m_num" value="${login.m_num}"> <input
-				type="hidden" name="c_img" id="c_img">
+			<input type="hidden" name="m_num" value="${login.m_num}">
+			<input type="hidden" name="c_img" id="c_img">
 
 			<table class="table">
 				<tbody>

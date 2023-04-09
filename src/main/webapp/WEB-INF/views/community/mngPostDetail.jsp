@@ -4,6 +4,9 @@
 <script src="https://kit.fontawesome.com/ccd4ff9cee.js" crossorigin="anonymous"></script>
 <link href="/resources/include/css/postDetail-1.css" rel="stylesheet">
 <link href="/resources/include/css/community.css" rel="stylesheet">
+<script src="/resources/include/js/member.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript">
 	$(function() {
@@ -40,7 +43,7 @@
 		
 		<div class="detail-content">
 			<div class="contentImg">
-			<img src="/uploadStorage/board/${mngPostDetail.cm_img}" />
+				<img src="/uploadStorage/board/${mngPostDetail.cm_img}" />
 			</div>
 			<div class="content-comment">
 				<p>${mngPostDetail.cm_comment}

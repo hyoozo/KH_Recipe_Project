@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.boot.client.community.board.controller.ComReplyController;
 import com.boot.client.community.board.service.ComReplyService;
+import com.boot.client.community.board.service.CommunityService;
 import com.boot.client.community.board.vo.CommunityVO;
 import com.boot.client.member.service.MemberService;
 import com.boot.client.member.vo.MemberVO;
+import com.boot.common.vo.PageDTO;
 import com.boot.recipe.info.vo.RecipeVO;
 import com.boot.store.orderList.vo.OrderListVO;
 
@@ -35,10 +37,14 @@ public class MemberMypageController {
 	@Setter(onMethod_ = @Autowired)
 	private MemberService memberService;
 	
+	@Setter(onMethod_ = @Autowired)
+	private CommunityService communityService;
+	
 	
 	@GetMapping(value="/recipeCheck/{m_num}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<RecipeVO> recipeCheck(@PathVariable("m_num") Integer m_num) {
+	public List<RecipeVO> recipeCheck(@PathVariable("m_num") Integer m_num,Model model) {
 		List<RecipeVO> recipe = memberService.recipeCheck(m_num);
+		
 		return recipe;
 	}
 	

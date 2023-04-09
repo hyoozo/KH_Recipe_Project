@@ -9,6 +9,7 @@
 
 <script type="text/javascript">
 	$(function() {
+		console.log("error" + $("#file").val());
 		$("#updateCancel").click(function() {
 			$("#updateSubmit").attr({
 				"method":"get",
@@ -22,16 +23,17 @@
 			
 			if(!chkRemain($("#c_title"),"제목을")) return;
 			else if(!chkRemain($("#c_comment"),"내용을")) return;
-			else if(!chkRemain($("#file"),"이미지를")) return;
-			else if($("#file").val()!=""){ 
+			//else if(!chkRemain($("#file"),"이미지를")) return;
+			else if($("#file").val()!=""){
 					if (!chkFile($("#file"))) return;
-			
+			}
 				$("#updateSubmit").attr({
 					"method":"post",
 					"enctype":"multipart/form-data",
 					"action":"/community/postUpdate"
 				})
 				$("#updateSubmit").submit();
+			
 		})
 		
 		function chkFile(item){
@@ -45,6 +47,16 @@
 			}
 		}	
 		
+		function chkRemain(item3,msg) {
+			if(item3.val() != "") {
+				return true;
+			} else {
+				alert(msg + " 입력해주세요.");
+				$(item3).val("");
+				$(item3).focus()
+				return false;
+			}
+		}
 	})
 </script>
 <body>
@@ -72,12 +84,11 @@
 					</tr>
 					<tr>
 						<td class="td1"><labeL>제목</labeL></td>
-						<td class="td2"><input type="text" name="c_title" class="form-control"
-							value="${updateForm.c_title}" /></td>
+						<td class="td2"><input type="text" name="c_title" class="form-control" value="${updateForm.c_title}" ></td>
 					</tr>
 					<tr>
 						<td class="td1"><labeL>이미지</labeL></td>
-						<td class="td2"><input type="file" name="file" id="file" /></td>
+						<td class="td2"><input type="file" name="file" id="file" value="${updateForm.c_img}"></td>
 					</tr>
 					<tr>
 						<td class="td1"><labeL>내용</labeL></td>

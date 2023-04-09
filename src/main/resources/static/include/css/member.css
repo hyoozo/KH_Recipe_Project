@@ -12,6 +12,12 @@
 		border-radius: 4px;
 	}
 	
+	/* 커버서 클릭*/
+	.po {
+	cursor: pointer;	
+	}
+	
+	
 	.btnGreen {
 		background-color: #976b54;
 		font-family: "Open Sans", sans-serif;
