@@ -174,7 +174,7 @@
 			    html += '</div>';
 			    html += '<div>';
 			    html += '<h4 class="recipeText name">' + recipe.rcp_nm + '</h4>';
-			    html += '<p class="recipeText kcal">' + recipe.info_eng + ' kcal<img src="/resources/image/heart.png" class="sl"/><span class="likeCnt"></span></p>';
+			    html += '<p class="recipeText kcal">' + recipe.info_eng + ' kcal<span class="sl">좋아요</span><span class="likeCnt"></span></p>';
 			    html += '</div>';
 			    html += '</div>';
 			    html += '</div>';
@@ -228,7 +228,7 @@
 								</div>
 								<div>
 									<h3 class="recipeText name">${recipe.rcp_nm}</h3>
-									<h4 class="recipeText kcal">${recipe.info_eng} kcal<img src="/resources/image/heart.png" class="sl"/><span class="likeCnt"></span></h4>
+									<h4 class="recipeText kcal">${recipe.info_eng} kcal<span class="sl">좋아요</span><span class="likeCnt"></span></h4>
 								</div>
 							</div>
 						</div>
