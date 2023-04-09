@@ -29,7 +29,6 @@
 			
 			$(".cancelPay").click(function(){
 				let ol_num = $(this).parent().parent().children(".order_num").children(".num").html();
-				console.log(ol_num);
 				let imp_uid = $(this).parent().parent().children(".order_num").children(".imp_uid").html();
 				console.log(imp_uid);
 				let amount = $(this).parent().parent().children(".price").html().replace(/,/g, "");

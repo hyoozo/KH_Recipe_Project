@@ -35,7 +35,6 @@ public class Commu_YtbController {
 	public List<Commu_YtbVO> ytb() {	
 		
 		List<Commu_YtbVO> resultYtb = commu_YtbService.Ytb();
-		log.info("YTB result : " + resultYtb);
 		
 		return resultYtb;
 	}

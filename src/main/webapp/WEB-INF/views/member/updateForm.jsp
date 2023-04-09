@@ -16,14 +16,6 @@
 		let m_email = "${login.m_email}";
 		let m_zip = "${login.m_zip}";
 		let m_address = "${login.m_address}";
-		console.log("name : " + name);
-		console.log("pwd : " + pwd);
-		console.log("m_phone : " + m_phone);
-		console.log("m_email : " + m_email);
-		console.log("m_zip : " + m_zip);
-		console.log("m_address : " + m_address);
-		
-		
 		
 		$("form[name='updateForm']").hide();
 		
@@ -45,7 +37,6 @@
 							alert('시스템 오류 입니다. 관리자에게 문의 하세요');
 					}, 
 					success : function(resultData){ 
-						console.log("resultData : "+resultData);
 						if(resultData == 0){
 							msg.addClass("msg_error");
 							msg.text("비밀번호가 일치하지 않습니다.");
@@ -53,7 +44,6 @@
 							$("form[name='updateForm']").show();
 							$("form[name='updatePwdChk']").hide();
 							
-
 							//주소 나누기
 							/* var address = ${login.m_address}.val();
 							var address01 = str.split(" ");
@@ -62,7 +52,6 @@
 							
 							$(".address1").attr('placeholder','address01[0]');
 							$(".address2").attr('placeholder','address01[1]'); */
-							
 						}
 					}
 				});
@@ -75,7 +64,6 @@
 		})
 		
 		$("#update").click(function() {
-			console.log($("input[name='m_phone']").val().length);
 			
 			if($("input[name='m_name']").val().length == 0) {		
 				

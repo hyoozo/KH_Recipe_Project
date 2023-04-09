@@ -1,8 +1,5 @@
 package com.boot.client.member.service;
 
-
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +9,6 @@ import com.boot.client.community.board.vo.CommunityVO;
 import com.boot.client.member.dao.MemberDao;
 import com.boot.client.member.vo.MemberVO;
 import com.boot.recipe.info.vo.RecipeVO;
-import com.boot.store.orderList.vo.OrderListVO;
 
 import lombok.Setter;
 

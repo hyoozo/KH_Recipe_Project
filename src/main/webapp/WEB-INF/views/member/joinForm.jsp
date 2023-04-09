@@ -36,7 +36,15 @@ $(function() {
 					return;
 				} else {
 					if(result == "SUCCESS"){
-						inputM_id.css("background-color","#90fe6c");
+						if(regId.test($("#join_id").val())){
+							inputM_id.css("background-color","#90fe6c");
+						} else {
+							inputM_id.val("");
+							inputM_id.css("background-color","red");
+							inputM_id.css("color","white");
+							inputM_id.addClass('placeColorW');
+							inputM_id.attr("placeholder","사용불가능한 아이디입니다");
+						}
 						return;
 					} else if(result == "FAILURE"){
 						inputM_id.val("");

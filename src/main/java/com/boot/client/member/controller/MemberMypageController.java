@@ -38,17 +38,13 @@ public class MemberMypageController {
 	
 	@GetMapping(value="/recipeCheck/{m_num}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<RecipeVO> recipeCheck(@PathVariable("m_num") Integer m_num) {
-		log.info("야호 성공");
 		List<RecipeVO> recipe = memberService.recipeCheck(m_num);
-		log.info("에러:" + recipe);
 		return recipe;
 	}
 	
 	@GetMapping(value="/commCheck/{m_num}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<CommunityVO> commCheck(@PathVariable("m_num") Integer m_num) {
-		log.info("야호 성공");
 		List<CommunityVO> order = memberService.commCheck(m_num);
-		log.info("에러:" + order);
 		return order;
 	}
 

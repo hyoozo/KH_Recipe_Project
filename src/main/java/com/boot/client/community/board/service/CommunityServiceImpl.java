@@ -14,7 +14,6 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
 public class CommunityServiceImpl implements CommunityService {
 
 	@Setter(onMethod_ = @Autowired)
@@ -93,7 +92,6 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public int postInsert(CommunityVO cvo) throws Exception{
 		int insert = 0;
-		log.info("cvo" + cvo);
 		if(!cvo.getFile().isEmpty()) {			//새롭게 업로드할 파일이 존재하면
 			if(!cvo.getC_img().isEmpty()) {		//기존 파일이 존재하면
 				FileUploadUtil.fileDelete(cvo.getC_img());
@@ -101,7 +99,6 @@ public class CommunityServiceImpl implements CommunityService {
 			
 			String fileName = FileUploadUtil.fileUpload(cvo.getFile(), "board");
 			cvo.setC_img(fileName);
-			log.info("error:" + fileName);
 		}
 	  
 		insert = communityDao.postInsert(cvo);	

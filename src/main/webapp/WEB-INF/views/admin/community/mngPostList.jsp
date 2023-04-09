@@ -92,7 +92,6 @@ $(function() {
 		//디테일 페이지 이동
 		$(".goDetail2").click(function() {
 			let cm_no = $(this).parents("tr").attr("data-num");
-			console.log("cm_no" + cm_no);
 			$("#cm_no").val(cm_no);
 	
 			$("#mngDetailForm").attr({

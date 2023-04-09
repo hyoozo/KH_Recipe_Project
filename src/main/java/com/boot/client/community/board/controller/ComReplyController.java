@@ -30,7 +30,6 @@ public class ComReplyController {
 	
 	@GetMapping(value="/replyList/{c_no}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<ReplyVO> replyList(@PathVariable("c_no") Integer c_no) {
-		log.info("replyList 성공");
 		
 		List<ReplyVO> result = comReplyService.replyList(c_no);
 		
@@ -39,7 +38,6 @@ public class ComReplyController {
 	
 	@PostMapping(value="/replyInsert", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String replyInsert(@RequestBody  ReplyVO rvo) {
-		log.info("replyInsert 호출 성공");
 		
 		int result = comReplyService.replyInsert(rvo);
 		
@@ -49,7 +47,6 @@ public class ComReplyController {
 	
 	@PostMapping(value="/replyUpdate", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String replyUpdate(@RequestBody ReplyVO rvo) {
-		log.info("수정 폼 호출");
 		
 		int result = comReplyService.replyUpdate(rvo);
 
@@ -58,16 +55,9 @@ public class ComReplyController {
 	
 	@DeleteMapping(value = "/replyDelete/{cr_no}")
 	public String replyDelete(@PathVariable("cr_no") int cr_no) {
-		log.info("댓글 삭제 호출");
-		log.info("cr_no : " + cr_no);
 		
 		int result = comReplyService.replyDelete(cr_no);
 		
-		log.info("후 : " + result);
-		
 		return (result == 1) ? "SUCCESS": "FAILURE";
-	}
-	
-	
-	
+	}	
 }

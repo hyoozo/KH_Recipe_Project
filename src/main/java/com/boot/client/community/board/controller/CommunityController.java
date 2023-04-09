@@ -45,14 +45,12 @@ public class CommunityController {
 		
 		List<CommunityManagerVO> result = communityManagerService.mngPostList(cmvo);
 		model.addAttribute("MngPostList", result);
-		log.info("짜잔:" + cvo );
 		
 		return "community/postList";
 	}
 	
 	@GetMapping("/postDetail")
 	public String postDetail(@ModelAttribute CommunityVO cvo, Model model) {
-		log.info("postDetail 호출 성공");
 		
 		CommunityVO postDetail = communityService.postDetail(cvo);
 		model.addAttribute("postDetail",postDetail);
@@ -62,7 +60,6 @@ public class CommunityController {
 	
 	@GetMapping("/updateForm")
 	public String updateForm(@ModelAttribute CommunityVO cvo, Model model) {
-		log.info("updateForm 호출 성공, c_no : " + cvo.getC_no());		
 		
 		CommunityVO result = communityService.updateForm(cvo);
 		
@@ -73,7 +70,6 @@ public class CommunityController {
 	
 	@PostMapping("/postUpdate")
 	public String postUpdate(@ModelAttribute CommunityVO cvo, Model model) throws Exception{
-		log.info("postUpdate 호출 성공");
 		
 		int result = 0;
 		String path = "";
@@ -91,7 +87,6 @@ public class CommunityController {
 	
 	@GetMapping("/postDelete")
 	public String postDelete(@ModelAttribute CommunityVO cvo, Model model) throws Exception {
-		log.info("postDelete 호출 성공");
 		
 		int result = 0;
 		String path = "";
@@ -109,7 +104,6 @@ public class CommunityController {
 	
 	@GetMapping("/insertForm")
 	public String insertForm(@SessionAttribute(name = "login", required = false)MemberVO mvo,Model model, RedirectAttributes ras) {
-		log.info("글쓰기 화면 출력 성공");
 		
 		String path = "";
 		
@@ -127,13 +121,9 @@ public class CommunityController {
 	public String postInsert(@ModelAttribute CommunityVO cvo) throws Exception {
 		
 		int result = 0;
-		String path = "";
+		String path = ""; 
 		
-		log.info("cvo : " + cvo ); 
-		
-		result = communityService.postInsert(cvo);
-		
-		log.info("result : " + result ); 
+		result = communityService.postInsert(cvo); 
 		
 		if(result == 1) {
 			path = "/community/postList";
@@ -148,7 +138,6 @@ public class CommunityController {
 	//공지사항
 	@GetMapping("/mngPostDetail")
 	public String mngPostDetail(@ModelAttribute CommunityManagerVO cmvo, Model model) {
-		log.info("postDetail 호출 성공");
 		
 		CommunityManagerVO postDetail = communityManagerService.mngPostDetail(cmvo);
 		model.addAttribute("mngPostDetail",postDetail);

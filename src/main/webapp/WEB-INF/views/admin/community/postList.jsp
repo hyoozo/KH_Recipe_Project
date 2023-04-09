@@ -13,9 +13,8 @@
 		//디테일 페이지 이동
 		$(".goDetail1").click(function() {
 			let c_no = $(this).parents("tr").attr("data-num");
-			console.log("c_no1 : " + c_no);
 			$("#c_no").val(c_no);
-			console.log("c_no2 : " + c_no);
+
 			
 			$("#detailForm").attr({
 				"method":"get",
@@ -96,7 +95,6 @@
 		$(".paginateBtn a").click(function(e) {
 			e.preventDefault();
 			$("#c_search").find("input[name='pageNum']").val($(this).attr("href"));
-			//console.log($(this).attr("href"))
 			goPage();
 			
 		})

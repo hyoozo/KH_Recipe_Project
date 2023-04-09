@@ -12,8 +12,6 @@
 		let c_no = ${postDetail.c_no};
 		listAll(c_no);
 		
-		console.log("c_no:" + ${postDetail.c_no});
-		
 		//글 입력
 		$(document).on("click","#replyInsertBtn",function() {
 			let insertURL = "/comReply/replyInsert";
@@ -111,7 +109,6 @@
 		
 		function replyHide() {
 			let comNum = $("#reListM_num").val();
-			
 			let memNum = $("input[name=m_num]").val();
 			
 			$(".reBtnHide").hide();

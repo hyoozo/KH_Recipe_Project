@@ -17,9 +17,7 @@
 		//디테일 페이지 이동
 		$(".goDetail").click(function() {
 			let c_no = $(this).parents("tr").attr("data-num");
-			console.log("c_no1 : " + c_no);
 			$("#c_no").val(c_no);
-			console.log("c_no2 : " + c_no);
 			
 			$("#detailForm").attr({
 				"method":"get",
@@ -41,7 +39,7 @@
 		
 		//글쓰기 버튼 클릭 (로그인 유무 확인)
  		let useAfter = "${useAfter}";
-		console.log("useAfter:" + useAfter);
+
 		if (useAfter == "error") {
 			useAfter = "";
 			if(confirm("로그인 후에 이용가능합니다. 로그인 하시겠습니까?") == true) {
@@ -131,7 +129,6 @@
 		}
 		
 		function ytbShow() {
-			console.log("확인1");
 			
 			let url = "/ComYtb";
 

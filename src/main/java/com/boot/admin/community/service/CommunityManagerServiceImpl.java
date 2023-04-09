@@ -40,11 +40,9 @@ public class CommunityManagerServiceImpl implements CommunityManagerService {
 		CommunityManagerVO detail = null;
 		
 		communityManagerDao.mngCm_readcnt(cmvo);
-		
-		log.info("error : "  + cmvo);
 
 		detail = communityManagerDao.mngPostDetail(cmvo);
-		log.info("error2 : "  + detail);
+
 		if (detail != null) {
 			detail.setCm_comment(detail.getCm_comment().toString().replaceAll("\n", "<br />"));
 		}

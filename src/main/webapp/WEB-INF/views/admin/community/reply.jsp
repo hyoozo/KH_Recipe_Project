@@ -13,11 +13,8 @@
 		let c_no = ${postDetail.c_no};
 		listAll(c_no);
 		
-		console.log("c_no:" + ${postDetail.c_no});
-		
 		//댓글 보여주기 1
 		function listAll(c_no) {
-			console.log("확인1");
 			
 			let url = "/comReply/replyList/" + c_no;
 
@@ -88,7 +85,6 @@
 						alert(textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")");
 					},
 					success : function(result) {
-						console.log("delete result: " + result);
 						if (result == 'SUCCESS') {
 							alert("댓글 삭제가 완료되었습니다.");
 							$("#replyList").html("")

@@ -1,7 +1,5 @@
 package com.boot.client.member.controller;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,12 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -44,7 +41,6 @@ class MemberController {
 	
 	@GetMapping("/loginForm")
 	public String loginForm() {
-		log.info("로그인 화면 호출");
 		return "member/loginForm";
 		
 	}
@@ -54,37 +50,31 @@ class MemberController {
 	public String loginProcess(MemberVO mvo, Model model,RedirectAttributes ras) {
 		String url = "";
 		MemberVO memberLogin = memberService.loginProcess(mvo);
-		log.info("memberLogin:"+memberLogin);
 		
 		if(memberLogin != null) {
 			model.addAttribute("login",memberLogin);
 			url = "/";
-			log.info("성공");
 		} else {
 			ras.addFlashAttribute("loginError","로그인실패");
 			url = "/member/loginForm";
-			log.info("실패");
 		}
 		return "redirect:"+url;
 	}
 	
 	@RequestMapping("/logout")
 	public String logout(SessionStatus sessionStatus) {
-		log.info("로그아웃");
 		sessionStatus.setComplete();
 		return "redirect:/";
 	}
 	
 	@RequestMapping("/joinForm")
 	public String joinForm() {
-		log.info("회원가입화면 호출");
 		return "member/joinForm";
 	}
 	
 	
 	@PostMapping("/joinProcess")
 	public String joinProcess(MemberVO mvo) {
-		log.info("회원가입성공");;
 		
 		int result = 0;
 		result = memberService.joinProcess(mvo);
@@ -101,17 +91,16 @@ class MemberController {
 	}
 	
 	@RequestMapping("/updateForm")
-	public String updateForm() {
+	public String updateForm(@SessionAttribute(name = "login", required = false)MemberVO mvo) {
 		return "member/updateForm";
 	}
 	@RequestMapping("/myPage")
-	public String myPage() {
+	public String myPage(@SessionAttribute(name = "login", required = false)MemberVO mvo) {
 		return "member/myPage";
 	}
 	
 	@PostMapping("/updatePwdConfirm")
 	public ResponseEntity<String> updatePwdConfirm(MemberVO mvo) {
-		log.info("updatePwdConfirm 호출 성공");
 		
 		ResponseEntity<String> entity = null;
 		int result = 0;
@@ -124,8 +113,6 @@ class MemberController {
 	
 	@PostMapping("/memberUpdate")
 	public String memberUpdate(@ModelAttribute MemberVO mvo,Model model) {
-		log.info("수정완료 호출");
-		log.info("mvo: " + mvo);
 		int result = 0;
 		
 		result = memberService.memberUpdate(mvo);
@@ -147,11 +134,8 @@ class MemberController {
 	public String idChk(@RequestBody MemberVO mvo) {
 		int result = 0;
 		try {
-		log.info("아이디 중복체크 확인");
 		
 		result = memberService.idChk(mvo);
-		
-		log.info("result : " + result);
 		
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -162,12 +146,10 @@ class MemberController {
 	
 	@GetMapping("/memberDelete")
 	public String memberDelete(SessionStatus sessionStatus, MemberVO mvo) {
-		log.info("회원계정 삭제 호출");
 		
 		int result = 0;
 		result = memberService.memberDelete(mvo);
 		String path = "";
-		log.info("result:"+result);
 		
 		if(result == 1) {
 			sessionStatus.setComplete();
@@ -182,12 +164,9 @@ class MemberController {
 	
 	@PostMapping(value = "/joinProcess",consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String joinProess(@RequestBody MemberVO mvo) {
-		log.info("회원가입성공");
 		
 		int result = 0;
 		result = memberService.joinProcess(mvo);
-		
-		log.info("result : " + result);
 		
 		return (result == 1) ? "SUCCESS": "FAILURE";
 	}
