@@ -5,8 +5,7 @@
 
 	<link rel="stylesheet" href="/resources/include/css/clientRecipeDetail.css"/>
 	
-	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.min.css" />
+	
 	
 	<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 	<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
@@ -59,7 +58,7 @@
 	</script>
 	</head>
 	<body>
-		<h3>${detail.rcp_nm} 만들기</h3>
+		<h2 id="recipe1">${detail.rcp_nm} 만들기</h2>
 		<div class="contentContainer container">
 			<div class="image-box" data-num="${detail.rcp_seq}">
 				<c:if test="${fn:contains(detail.att_file_no_mk, 'foodsafetykorea')}">
@@ -90,7 +89,7 @@
 			</div>
 			<hr width="99%"/>
 			
-				<h4>레시피</h4>
+				<h2>레시피</h2>
 				<c:choose>
 					<c:when test="${not empty detail}">
 						<c:if test="${not empty detail.manual_img01}">
@@ -103,11 +102,11 @@
 								</c:if>
 							</article>
 							<hgroup class="main-articles">
-								<h4>&nbsp;&nbsp;Step1</h4>
+								<h3>&nbsp;&nbsp;Step1</h3>
 							</hgroup>
 							<hr width="49%"/>
 							<hgroup>
-								<h5>&nbsp;&nbsp;${detail.manual01}</h5>
+								<h4>&nbsp;&nbsp;${detail.manual01}</h4>
 							</hgroup>
 							<div class="clean"></div>
 						</c:if>
@@ -121,11 +120,11 @@
 								</c:if>
 							</article>
 							<hgroup class="main-articles">
-								<h4>&nbsp;&nbsp;Step2</h4>
+								<h3>&nbsp;&nbsp;Step2</h3>
 							</hgroup>
 							<hr width="49%"/>
 							<hgroup>
-								<h5>&nbsp;&nbsp;${detail.manual02}</h5>
+								<h4>&nbsp;&nbsp;${detail.manual02}</h4>
 							</hgroup>
 							<div class="clean"></div>
 						</c:if>
@@ -139,11 +138,11 @@
 								</c:if>
 							</article>
 							<hgroup class="main-articles">
-								<h4>&nbsp;&nbsp;Step3</h4>
+								<h3>&nbsp;&nbsp;Step3</h3>
 							</hgroup>
 							<hr width="49%"/>
 							<hgroup>
-								<h5>&nbsp;&nbsp;${detail.manual03}</h5>
+								<h4>&nbsp;&nbsp;${detail.manual03}</h4>
 							</hgroup>
 							<div class="clean"></div>
 						</c:if>
@@ -157,11 +156,11 @@
 								</c:if>
 							</article>
 							<hgroup class="main-articles">
-								<h4>&nbsp;&nbsp;Step4</h4>
+								<h3>&nbsp;&nbsp;Step4</h3>
 							</hgroup>
 							<hr width="49%"/>
 							<hgroup>
-								<h5>&nbsp;&nbsp;${detail.manual04}</h5>
+								<h4>&nbsp;&nbsp;${detail.manual04}</h4>
 							</hgroup>
 							<div class="clean"></div>
 						</c:if>
@@ -175,11 +174,11 @@
 								</c:if>
 							</article>
 							<hgroup class="main-articles">
-								<h4>&nbsp;&nbsp;Step5</h4>
+								<h3>&nbsp;&nbsp;Step5</h3>
 							</hgroup>
 							<hr width="49%"/>
 							<hgroup>
-								<h5>&nbsp;&nbsp;${detail.manual05}</h5>
+								<h4>&nbsp;&nbsp;${detail.manual05}</h4>
 							</hgroup>
 							<div class="clean"></div>
 						</c:if>
@@ -193,11 +192,11 @@
 								</c:if>
 							</article>
 							<hgroup class="main-articles">
-								<h4>&nbsp;&nbsp;Step6</h4>
+								<h3>&nbsp;&nbsp;Step6</h3>
 							</hgroup>
 							<hr width="49%"/>
 							<hgroup>
-								<h5>&nbsp;&nbsp;${detail.manual06}</h5>
+								<h4>&nbsp;&nbsp;${detail.manual06}</h4>
 							</hgroup>
 							<div class="clean"></div>
 						</c:if>

@@ -48,9 +48,19 @@
 		
 		$("#searchData").click(function(){
 			if($("#search").val() != "all"){
-				if(!chkData("#keyword","검색어를")) return;
+				if(!chkData("#keyword","검색어를")) {
+					return;
+				} else {
+					goPage();
+				}
+			} else{
+				pageNum = 1;
+				search = $("#search").val();
+				keyword = "";
+				
+				location.href="/admin/admin/adminList?=pageNum="+pageNum+"&search="+search+"&keyword="+keyword;
 			}
-			goPage();
+			
 		});
 		
 		$("#insertManager").click(function(){

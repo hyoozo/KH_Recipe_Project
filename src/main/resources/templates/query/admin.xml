@@ -95,6 +95,11 @@
 			]]>
 	</select>
 	
+	<select id="userCnt" resultType="int">
+		SELECT count(*)
+		FROM member
+	</select>
+	
 	<delete id="userDelete" parameterType="MemberVO">
 		DELETE FROM member where m_num = #{m_num}
 	</delete>

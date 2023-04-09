@@ -47,9 +47,19 @@
 			
 			$("#searchData").click(function(){
 				if($("#search").val() != "all"){
-					if(!chkData("#keyword","검색어를")) return;
+					if(!chkData("#keyword","검색어를")) {
+						return;
+					} else {
+						goPage();
+					}
+				} else{
+					pageNum = 1;
+					search = $("#search").val();
+					keyword = "";
+					
+					location.href="/admin/recipe/recipeList?=pageNum="+pageNum+"&search="+search+"&keyword="+keyword;
 				}
-				goPage();
+				
 			});
 			
 			$("#insertRecipe").click(function(){

@@ -5,9 +5,9 @@
 
 	<link href="/resources/include/css/index.css" rel="stylesheet">
 	<link href="/resources/include/css/clientRecipeList.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/ccd4ff9cee.js" crossorigin="anonymous"></script>
 	
-	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.min.css" />
+	
 	
 	<script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 	<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
@@ -185,7 +185,7 @@
 	</script>
 	</head>
 	<body>
-		<h3>냉장고 레시피</h3>
+		<h2>냉장고 레시피</h2>
 		<div class="contentContainer container">
 		
 			<form id="detailForm">
@@ -197,15 +197,14 @@
 				<form id="f_search" name="f_search" class="form-inline">
 					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
 					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
-					<div class="from-group">
-						<label>검색조건</label>
+					<div class="inline-box">
 						<select id="search" name="search" class="form-control">
 								<option value="all">전제</option>
 								<option value="rcp_nm">메뉴명</option>
 								<option value="info_eng">칼로리</option>
 						</select>
 						<input type="text" name="keyword" id="keyword" value="전체 레시피를 조회합니다." class="form-control" />
-						<button type="button" id="searchData" class="btn btn-success">검색</button>
+						<button type="button" id="searchData"></button>
 					</div>
 				</form>
 			</div>
@@ -228,8 +227,8 @@
 									</c:if>
 								</div>
 								<div>
-									<h4 class="recipeText name">${recipe.rcp_nm}</h4>
-									<p class="recipeText kcal">${recipe.info_eng} kcal<img src="/resources/image/heart.png" class="sl"/><span class="likeCnt"></span></p>
+									<h3 class="recipeText name">${recipe.rcp_nm}</h3>
+									<h4 class="recipeText kcal">${recipe.info_eng} kcal<img src="/resources/image/heart.png" class="sl"/><span class="likeCnt"></span></h4>
 								</div>
 							</div>
 						</div>

@@ -1,6 +1,6 @@
 .recipeList{
 	display: inline-block;
-	width: 370px;
+	width: 392px;
 	height: 500px;
 	margin: 2px;
 	overflow: hidden;
@@ -13,6 +13,33 @@
 	margin:0 auto;
 }
 
+#f_search #searchData::before{
+	content: "\f002";
+    font-family: "FontAwesome";
+    font-size: 25px;
+}
+
+#search{
+	width:80px;
+	height: 30px;
+	border-radius: 4px;
+}
+
+#keyword{
+	height: 26px;
+	border-radius: 4px;	
+}
+
+.form-inline{
+	text-align: right;
+}
+
+#searchData{
+	margin: 5px 30px 9px 0px;
+	background-color:white;
+	border:none;
+}
+
 .recipeImg{
 	display: inline-block;
 	width: 368px;
@@ -21,9 +48,28 @@
 	object-fit: cover;
 	border-radius: 5px;
 	cursor: pointer;
+	border:0px;
+	opacity: 1.0;
+	filter:alpha(opacity=100);
 }
 
-.from-group{
+.recipeImg:hover{
+	border:0px;
+	opacity:0.7;
+	filter:alpha(opacity=70);
+}
+
+#recipeSearch {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.inline-box{
+	align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    width: 350px;
 	margin: 0px 0px 20px 0px;
 }
 

@@ -32,6 +32,9 @@ public class AdminUserManageController {
 	        return "redirect:/admin/loginForm";
 	    }
 		
+		int userCnt = managerService.userCnt();
+		model.addAttribute("userCnt", userCnt);
+		
 		log.info("userList() 호출");
 		List<MemberVO> memberList = managerService.userList(mvo);
 		model.addAttribute("memberList", memberList);
