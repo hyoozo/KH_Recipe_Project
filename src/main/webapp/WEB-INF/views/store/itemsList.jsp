@@ -41,14 +41,12 @@
 								let $info = $("<div class='info'>");
 								$info.append($("<p>").append(this.i_name));
 								$info.append($("<p>").append(this.i_price));
+								$info.append($("<p class='parts'>").append(this.i_parts));
 								
 								$("#itemsList").append($div.append($info));
 							} 
 							
 						});	
-					} else if(data.length == 0) {
-						alert("검색어가 부적합 합니다.")
-						location.href="/store/itemsList";
 					}
 				}
 			});
@@ -75,6 +73,7 @@
 					
 					getItems(pageNum, search, keyword);
 				}
+				
 			});
 			
 			$("#keyword").bind("keydown", function(event){
@@ -133,8 +132,8 @@
 				//console.log($(this).attr("data-num"));
 				
 				let i_num = $(this).attr("data-num");
-				
-				location.href="/store/itemsDetail?i_num="+i_num;
+				let i_parts= $(this).children(".info").children(".parts").html();
+				location.href="/store/itemsDetail?i_num="+i_num+"&i_parts="+i_parts;
 				
 			});
 			

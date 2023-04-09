@@ -31,7 +31,89 @@
         		var countLabels = [];
         		var percent = [];
         		
-        		function saleChart(){
+        		var date = new Date();
+        		var startMonth = date.getMonth();
+        		var endMonth = date.getMonth() + 1;
+        		
+        		var startDate = date.getFullYear() + '/' + startMonth + '/' + date.getDate();
+        		var endDate = date.getFullYear() + '/' + endMonth + '/' + date.getDate();
+        		console.log(endDate);
+        		$.when(saleChart(startDate, endDate)).done(function(result){
+					if(result == '성공'){
+						// Set new default font family and font color to mimic Bootstrap's default styling
+                		Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+                		Chart.defaults.global.defaultFontColor = '#292b2c';
+
+                		// Bar Chart Example
+                		var ctx = document.getElementById("myBarChart");
+                		var myLineChart = new Chart(ctx, {
+                		  type: 'bar',
+                		  data: {
+                		    labels: saleLabels,
+                		    datasets: [{
+                		      label: "Revenue",
+                		      backgroundColor: "rgba(2,117,216,1)",
+                		      borderColor: "rgba(2,117,216,1)",
+                		      data: price,
+                		    }],
+                		  },
+                		  options: {
+                		    scales: {
+                		      xAxes: [{
+                		        time: {
+                		          unit: 'month'
+                		        },
+                		        gridLines: {
+                		          display: false
+                		        },
+                		        ticks: {
+                		          maxTicksLimit: 6
+                		        }
+                		      }],
+                		      yAxes: [{
+                		        ticks: {
+                		          min: 0,
+                		          max: 500000,
+                		          maxTicksLimit: 5
+                		        },
+                		        gridLines: {
+                		          display: true
+                		        }
+                		      }],
+                		    },
+                		    legend: {
+                		      display: false
+                		    }
+                		  }
+                		});
+					} else {
+						alert("시스템 오류");
+					}
+				});
+        		
+        		$.when(countChart(startDate, endDate)).done(function(result){
+					if(result == '성공'){
+						Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+						Chart.defaults.global.defaultFontColor = '#292b2c';
+
+						// Pie Chart Example
+						var ctx = document.getElementById("myPieChart");
+						var myPieChart = new Chart(ctx, {
+						  type: 'pie',
+						  data: {
+						    labels: countLabels,
+						    datasets: [{
+						      data: percent,
+						      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+						    }],
+						  },
+						});
+					} else {
+						alert("시스템 오류");
+					}
+				});
+        		
+        		function saleChart(start, end){
         			saleLabels = [];
             		price = [];
         			
@@ -39,7 +121,10 @@
         			$.ajax({
     					url : "/admin/store/statistics/saleChart",
     					type : "post",
-    					data : $("#sale").serialize(),
+    					data : {
+    						start: start,
+    						end: end
+    					},
     					dataType : "json",
     					success : function(data){
     						//console.log(data);
@@ -68,8 +153,9 @@
         			if(!chkData("#sale_start", "날짜")) return;
         			else if(!chkData("#sale_end", "날짜")) return;
         			else {
-        				
-        				$.when(saleChart()).done(function(result){
+        				let start = $("#sale_start").val();
+        				let end = $("#sale_end").val();
+        				$.when(saleChart(start,end)).done(function(result){
         					if(result == '성공'){
         						// Set new default font family and font color to mimic Bootstrap's default styling
                         		Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -125,7 +211,7 @@
         			}
         		});
         		
-        		function countChart(){
+        		function countChart(start, end){
         			countLabels = [];
         			percent = [];
         			
@@ -133,7 +219,10 @@
         			$.ajax({
     					url : "/admin/store/statistics/countChart",
     					type : "post",
-    					data : $("#count").serialize(),
+    					data : {
+    						start: start,
+    						end: end
+    					},
     					dataType : "json",
     					success : function(data){
     						//console.log(data);
@@ -160,8 +249,9 @@
         			if(!chkData("#cnt_start", "날짜")) return;
         			else if(!chkData("#cnt_end", "날짜")) return;
         			else {
-        				
-        				$.when(countChart()).done(function(result){
+        				let start = $("#cnt_start").val();
+        				let end = $("#cnt_end").val();
+        				$.when(countChart(start, end)).done(function(result){
         					if(result == '성공'){
         						Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
         						Chart.defaults.global.defaultFontColor = '#292b2c';

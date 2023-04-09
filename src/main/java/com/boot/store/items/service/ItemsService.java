@@ -13,4 +13,5 @@ public interface ItemsService {
 	public int insertItem(ItemsVO vo) throws Exception;
 	public int updateItem(ItemsVO vo) throws Exception;
 	public int deleteItem(ItemsVO vo) throws Exception;
+	public List<ItemsVO> relatedItems(ItemsVO ivo);
 }

@@ -14,4 +14,6 @@ public interface ItemsDao {
 	public int itemsCnt();
 	public int updateItem(ItemsVO vo);
 	public int deleteItem(ItemsVO vo);
+	
+	public List<ItemsVO> relatedItems(ItemsVO ivo);
 }
