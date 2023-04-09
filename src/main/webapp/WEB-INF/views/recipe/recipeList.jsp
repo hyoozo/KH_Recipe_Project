@@ -199,7 +199,7 @@
 					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
 					<div class="inline-box">
 						<select id="search" name="search" class="form-control">
-								<option value="all">전제</option>
+								<option value="all">전체</option>
 								<option value="rcp_nm">메뉴명</option>
 								<option value="info_eng">칼로리</option>
 						</select>
