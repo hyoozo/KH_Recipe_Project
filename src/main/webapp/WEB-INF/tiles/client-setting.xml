@@ -56,7 +56,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/community/{1}.jsp" />
 	</definition>
 
-
+	<definition name="error/*" extends="content">
+		<put-attribute name="title" value="에러" /> 
+		<put-attribute name="body" value="/WEB-INF/views/error/{1}.jsp" />
+	</definition>
 	<!-- 메뉴가 추가될때 마다 위의 내용을 정의한다 -->
 	
 </tiles-definitions>
