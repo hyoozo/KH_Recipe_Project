@@ -1,23 +1,16 @@
 $(function(){
-	console.log("페이지2");
 	init();
-	
 	$('#listBtn').on('click', function(){
 		history.go(-1);
 	});
-	
 	$('#rcpBtn').on('click', function(){
 		location.href = '/recipe/recipeList';
 	})
-	
-	
 }); /** *************상당 function 종료 *************** **/
-
 async function init() {
 	const memberIgrListPromise = await memberIgrList();
 	selectRecommend(memberIgrListPromise);
 }
-
 function memberIgrList(){
 	return new Promise((resolve, reject) => {
 		$.ajax({
@@ -36,7 +29,6 @@ function memberIgrList(){
 		})
 	})
 }
-
 function selectRecommend(memberIgrList){
 	$.ajax({
 		url: "/refrigerator/selectRecommend",

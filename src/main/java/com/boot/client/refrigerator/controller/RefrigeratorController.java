@@ -54,7 +54,6 @@ public class RefrigeratorController {
 		ResponseEntity<String> entity = null;
 		int result = 0;
 		result = fridgeService.fridgeIgrInsert(m_num, igr_num);
-		log.info("fridgeIgrInsert result======" + result);
 		entity = new ResponseEntity<String>(String.valueOf(result), HttpStatus.OK);
 		return entity;
 	}
@@ -88,7 +87,6 @@ public class RefrigeratorController {
 	
 	@GetMapping("/recomView")
 	public String recomView(Model model) {
-		log.info("recomView 화면 호출");
 		return "refrigerator/refrigerator_recipe"; 
 	}
 
@@ -104,20 +102,16 @@ public class RefrigeratorController {
 	public Memo meemoSelect(Memo memo, @SessionAttribute("login")  MemberVO member) {
 		memo.setMember(member);
 		memo.getMember().setM_num(member.getM_num());
-		
 		memo = fridgeService.memoSelect(memo);
-		
 		return memo;
 	}
 	
 	@PostMapping("/memoUpdate")
 	@ResponseBody
 	public String memoUpdate(Memo memo, @SessionAttribute("login")  MemberVO member) {
-		System.out.println("===========MEMO 컨트롤러 실행 =========");
 		memo.setMember(member);
 		memo.getMember().setM_num(member.getM_num());
 		fridgeService.memoUpdate(memo);
-		
 		return memo.getMemo_content();
 	}
 
@@ -126,9 +120,7 @@ public class RefrigeratorController {
 	public String memoInsert(Memo memo, @SessionAttribute("login")  MemberVO member) {
 		memo.setMember(member);
 		memo.getMember().setM_num(member.getM_num());
-		
 		fridgeService.memoInsert(memo);
-		
 		return memo.getMemo_content();
 	}
 	
