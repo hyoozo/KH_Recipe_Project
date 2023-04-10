@@ -41,7 +41,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">냉장고 레시피</a>
+            <a class="navbar-brand ps-3" href="/admin/admin/adminList">냉장고 레시피</a>
             <div id="managerInfo">
             <c:choose>
             	<c:when test="${adminLogin.mng_lev eq '마스터'}">
