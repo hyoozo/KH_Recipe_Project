@@ -6,7 +6,7 @@
 }
 
 .detail-bth{
-	padding-left: 50px;
+	margin-right: 27%;
 }
 
 /* 게시물 제목 스타일 */
@@ -42,4 +42,17 @@
   font-size: 18px;
   line-height: 1.5;
   white-space: pre-line;
+}
+
+#updateSubmit {
+	margin: 7%;
+	width: 70%;
+}
+
+tr {
+	height: 5%;
+}
+
+.form-control {
+	width: 50%;
 }

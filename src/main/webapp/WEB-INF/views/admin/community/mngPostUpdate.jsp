@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<link href="/resources/include/css/community.css" rel="stylesheet">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
@@ -48,7 +49,7 @@
 	<form id="updateSubmit">
 		<input type="hidden" name="cm_no" value="${mngUpdateForm.cm_no}">
 		<input type="hidden" name="cm_img" value="${mngUpdateForm.cm_img}" />
-	<table>
+	<table class="table ">
 		<tbody>
 			<tr>
 				<td>작성자 : </td>
@@ -56,15 +57,15 @@
 			</tr>
 			<tr>
 				<td>제목 : </td>
-				<td><input type="text" name="cm_title" value="${mngUpdateForm.cm_title}" /></td>
+				<td><input type="text" name="cm_title" class="form-control" value="${mngUpdateForm.cm_title}" /></td>
 			</tr>
 			<tr>
 				<td>이미지 : </td>
-				<td><input type="file" name="file" id="file" value="${mngUpdateForm.file}" /></td>
+				<td><input type="file" name="file" class="form-control" id="file" value="${mngUpdateForm.file}" /></td>
 			</tr>
 			<tr>
 				<td>내용 : </td>
-				<td><textarea name="cm_comment">${mngUpdateForm.cm_comment}</textarea></td>
+				<td><textarea name="cm_comment"  class="form-control">${mngUpdateForm.cm_comment}</textarea></td>
 			</tr>
 		</tbody>
 	</table>

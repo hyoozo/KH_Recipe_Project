@@ -6,9 +6,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="/resources/include/js/jquery-3.6.3.min.js"></script>
 <link href="/resources/include/css/community.css" rel="stylesheet">
-<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.min.css" >
 
 <script type="text/javascript">
 	$(function() {
@@ -61,9 +58,11 @@
 		</div>
 		
 		<div class="detail-content">
-			<div class="contentImg">
-			<img src="/uploadStorage/board/${postDetail.c_img}" />
-			</div>
+			<c:if test="${not empty postDetail.c_img}">
+				<div class="contentImg">
+					<img src="/uploadStorage/board/${postDetail.c_img}" />
+				</div>
+			</c:if>
 			<div class="content-comment">
 				<p>${postDetail.c_comment}
 				<!-- 내용은 오른쪽 정렬. -->

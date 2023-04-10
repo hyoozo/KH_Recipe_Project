@@ -14,7 +14,6 @@
 		$(".goDetail1").click(function() {
 			let c_no = $(this).parents("tr").attr("data-num");
 			$("#c_no").val(c_no);
-
 			
 			$("#detailForm").attr({
 				"method":"get",
@@ -124,6 +123,17 @@
 		$("#postList-PostList").click(function() {
 			$(data2).remove();
 			$("#containber").append(data1);
+			
+			$(".goDetail1").click(function() {
+				let c_no = $(this).parents("tr").attr("data-num");
+				$("#c_no").val(c_no);
+				
+				$("#detailForm").attr({
+					"method":"get",
+					"action":"/admin/community/postDetail"
+				})
+				$("#detailForm").submit();
+			})
 		})
 		
 

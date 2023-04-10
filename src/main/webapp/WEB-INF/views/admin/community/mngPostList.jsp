@@ -73,7 +73,6 @@ $(function() {
 			$("#c_search").find("input[name='pageNum']").val($(this).attr("href"));
 			//console.log($(this).attr("href"))
 			goPage();
-			
 		})
 		
 		
