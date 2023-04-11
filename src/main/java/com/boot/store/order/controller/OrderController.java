@@ -153,7 +153,7 @@ public class OrderController {
 		result = orderService.addOrder(ovo);
 		
 		if(result != 0) {
-			url = "redirect:/store/itemsDetail?i_num="+olvo.getIvo().getI_num();
+			url = "redirect:/store/itemsDetail?i_num="+olvo.getIvo().getI_num()+"&i_parts="+olvo.getIvo().getI_parts();
 			orderListService.addOrderList(olvo);
 			
 			ItemsVO ivo = olvo.getIvo();
