@@ -1,11 +1,11 @@
 $(function(){
-	let ingredientData = []; // 재료 
+	let ingredientData = [];
 	let memberNum = Number($("#sessionId").val());
 	
 	memoSelect();
 	
 	$.getJSON("/igr/igrList", function(data){
-		ingredientData = data;   // 재료 리스트
+		ingredientData = data;
 		if(ingredientData.length === 0){
 			let $div = $('.ingredient-container');
 				$div.html("현재 준비된 재료가 없습니다.").css({'display':'flex','justify-content': 'center',

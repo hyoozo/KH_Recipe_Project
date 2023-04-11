@@ -36,26 +36,27 @@ $(function() {
 	
 	//레시피 보여주기
 	function showRecipe(m_num) {
-			let url = '/mypage/recipeCheck/' + m_num;
-			
-			reset();
-			$.getJSON(url, function(data) {
-				if(data == "") {
-					receipeResultFail();
-				} else {
-					$(data).each(function() {
-						let rcp_seq = this.rcp_seq;
-						let rcp_nm = this.rcp_nm;
-						let rcp_pat2 = this.rcp_pat2;
-						let info_eng = this.info_eng;
-						let rcp_parts_dtls = this.rcp_parts_dtls;
-						receipeResult(rcp_seq,rcp_nm,rcp_pat2,info_eng,rcp_parts_dtls);
-					})
-				};
-			}).fail(function() {
-				alert("정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.");
-			});
-		}
+		let url = '/mypage/recipeCheck/' + m_num;
+		
+		reset();
+		$.getJSON(url, function(data) {
+			if(data == "") {
+				receipeResultFail();
+			} else {
+				$(data).each(function() {
+					let rcp_seq = this.rcp_seq;
+					let rcp_nm = this.rcp_nm;
+					let rcp_pat2 = this.rcp_pat2;
+					let info_eng = this.info_eng;
+					let rcp_parts_dtls = this.rcp_parts_dtls;
+					receipeResult(rcp_seq,rcp_nm,rcp_pat2,info_eng,rcp_parts_dtls);
+				})
+			};
+		}).fail(function() {
+			alert("정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.");
+		});
+	}
+	
 		function receipeResult(rcp_seq,rcp_nm,rcp_pat2,info_eng,rcp_parts_dtls) {	
 			let $tb = $("#commTb");
 			
