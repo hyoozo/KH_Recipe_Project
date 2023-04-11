@@ -43,7 +43,7 @@
 		
 		<div class="detail-content">
 			<div class="contentImg">
-				<img src="/uploadStorage/board/${mngPostDetail.cm_img}" />
+				<img src="/uploadStorage/board/${mngPostDetail.cm_img}" onerror="this.onerror=null; this.src='${mngPostDetail.cm_img}';">
 			</div>
 			<div class="content-comment">
 				<p>${mngPostDetail.cm_comment}
