@@ -60,7 +60,6 @@
 				if($("#search").val == 'c_title') value = "#list tr td.goDetail";
 				else if($("#search").val() == 'c_writer') value = "#list tr td.listWriter";
 				
-	
 				$(value+":contains('" + word + "')").each(function() {
 					let regex = new RegExp(word,'gi');
 					$(this).html($(this).html().replace(regex,"<span class='required'>" + word + "</span>"));

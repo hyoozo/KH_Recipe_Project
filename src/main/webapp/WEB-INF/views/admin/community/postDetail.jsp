@@ -60,7 +60,7 @@
 		<div class="detail-content">
 			<c:if test="${not empty postDetail.c_img}">
 				<div class="contentImg">
-					<img src="/uploadStorage/board/${postDetail.c_img}" />
+					<img src="/uploadStorage/board/${postDetail.c_img}" onerror="this.onerror=null; this.src='${postDetail.c_img}';">
 				</div>
 			</c:if>
 			<div class="content-comment">
