@@ -33,31 +33,31 @@
 </div>
 
 
-## 📍 프로젝트 사용 기술
+## 📍 프로젝트 시연 UI
 
 <div align="center">
-  1. 메인 페이지 시연 <br/>
+  <p>1. 메인 페이지 시연 </p>
   <img width="850" height="400" alt="1" src="https://github.com/hyoozo/KH_Recipe_Project/assets/110451636/7cf51114-c86c-4e01-b67b-404836a289cd">
-  
-  2. 홈페이지 사용 설명 <br/>
+  <br/>
+  <p>2. 홈페이지 사용 설명 </p>
   <img width="850" height="400" alt="2" src="https://github.com/hyoozo/KH_Recipe_Project/assets/110451636/6f344695-d3d6-442c-afb3-6ccfc2e5651a">
-  
-  3. 회원 냉장고 재료 추가 시연 <br/>
+  <br/>
+  <p>3. 회원 냉장고 재료 추가 시연 </p>
   <img width="850" height="400" alt="3" src="https://github.com/hyoozo/KH_Recipe_Project/assets/110451636/34c6a4ed-264c-4929-b049-6ebd13f0388c">
-  
-  4. 회원 냉장고 내료 검색 시연 <br/>
+  <br/>
+  <p>4. 회원 냉장고 내료 검색 시연 </p>
   <img width="850" height="400" alt="4" src="https://github.com/hyoozo/KH_Recipe_Project/assets/110451636/75a071cc-9916-4814-8cae-182ea7e13774">
-  
-  5. 회원 냉장고 재료 삭제 시연 <br/>
+  <br/>
+  <p>5. 회원 냉장고 재료 삭제 시연</p>
   <img width="850" height="400" alt="5" src="https://github.com/hyoozo/KH_Recipe_Project/assets/110451636/d54c88fa-fbc1-41a1-9046-e4480950fe2f">
-  
-  6. 회원 냉장고 재료에 알맞는 추천 레시피 리스트 시연 <br/>
+  <br/>
+  <p>6. 회원 냉장고 재료에 알맞는 추천 레시피 리스트 시연 </p>
   <img width="850" height="400" alt="6" src="https://github.com/hyoozo/KH_Recipe_Project/assets/110451636/16fd1912-0e54-4060-a098-b223e939d11f">
-  
-  7. 회원 냉장고 메모장 (내용 무) <br/>
+  <br/>
+  <p>7. 회원 냉장고 메모장 (내용 무) </p>
   <img width="850" height="400" alt="7" src="https://github.com/hyoozo/KH_Recipe_Project/assets/110451636/4a10d838-26ac-4a1f-9c43-eac5a02a6833">
-  
-  8. 회원 냉장고 메모장 (내용 유) <br/>
+  <br/>
+  <p>8. 회원 냉장고 메모장 (내용 유) </p>
   <img width="850" height="400" alt="8" src="https://github.com/hyoozo/KH_Recipe_Project/assets/110451636/60f4a96f-d45e-4d18-8f3c-2e4e419cf447">
   
 
