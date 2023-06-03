@@ -32,6 +32,16 @@
   <img width="850" height="400" alt="스크린샷 2023-05-25 오후 7 27 05" src="https://github.com/hyoozo/KH_Recipe_Project/assets/110451636/8563800f-2551-42cd-b6b8-8e605607964a">
 </div>
 
+## 📍 DB설계 모델링
+<div align="center">
+  <img width="850" height="400" alt="스크린샷 2023-05-25 오후 7 27 05" src="https://github.com/hyoozo/KH_Recipe_Project/assets/110451636/2a438407-d670-480a-a332-2537f9117b19">
+  <h6> 전체 DB 물리적 모델링</h6>
+  
+  <img width="850" height="400" alt="스크린샷 2023-05-25 오후 7 27 05" src="https://github.com/hyoozo/KH_Recipe_Project/assets/110451636/adf3f7be-d3e3-4b4a-9505-8ab45399d969">
+  <h6> 냉장고 관리에 대한 DB설계 </h6>
+  
+</div>
+
 ## 📍 프로젝트 시연 UI & 설명
 
 <div align="center">
